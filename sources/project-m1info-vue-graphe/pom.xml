@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>fr.edu.bp.m1info</groupId>
+  <artifactId>project-m1info-vue-graphe</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <name>project-m1info-vue-graphe</name>
+  <url>http://maven.apache.org</url>
+  
+  <modules>
+    <module>m1info-graphe-structure</module>
+    <module>m1info-graphe-logique</module>
+    <module>m1info-graphe-swing</module>
+    <module>m1info-graphe-mvp</module>
+  </modules>
+</project>
