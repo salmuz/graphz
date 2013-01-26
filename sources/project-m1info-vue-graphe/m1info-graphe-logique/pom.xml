@@ -19,5 +19,10 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+        <dependency>
+            <groupId>fr.edu.bp.m1info</groupId>
+            <artifactId>m1info-graphe-structure</artifactId>
+            <version>1.0.0</version>
+        </dependency>
   </dependencies>
 </project>
