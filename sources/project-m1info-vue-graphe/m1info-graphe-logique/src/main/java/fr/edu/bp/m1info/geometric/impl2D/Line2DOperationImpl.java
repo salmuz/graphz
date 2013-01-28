@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 23/01/13 : Version 01;
@@ -43,23 +43,31 @@ import fr.edu.bp.m1info.geometric.LineOperation;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
-
+         /*cette class Line2OperationImpl est implementé dans la class LineOperation*/
 public class Line2DOperationImpl implements LineOperation{
 
+             /* @ return elle retourn a un point
+              *@ parameter Line  elle contient comme parameter une ligne
+              * cette methode est implementé dans la class LineOperation */
     public Point calculateMidPoint(Line line) {
+                               /* Declaraion d'un nouveau point avec deux coordonnée (x,y)*/
         Point midPoint = new Point2D(0.0,0.0);
-
+          /* ces instruction suivantes permettent de calculer le milieux d'une ligne avec les corrdonnée (Line,Line)
+                  *   */
         double midX = (line.getStart().getX() + line.getEnd().getX()) /2;
         double midY = (line.getStart().getY() + line.getEnd().getY()) /2;
 
-        midPoint.setX(midX);
+        midPoint.setX(midX);  /*le coordonnée du nouveaux point sera midPoint=(midX,midY)*/
         midPoint.setY(midY);
 
         return midPoint;
     }
 
+         /* @ return elle retourn la taille ou la distance d'un point
+              *@ parameter Line
+              * cette methode est implementé dans la class LineOperation */
     public double calculateSize(Line line) {
-
+                  /*on declare une variable size qui va contenir la taille de la droite */
         double size = Math.sqrt(Math.pow(line.getStart().getX() - line.getEnd().getX(),2) +
                                 Math.pow(line.getStart().getY() - line.getEnd().getY(),2));
 

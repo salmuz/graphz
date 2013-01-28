@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -43,43 +43,53 @@ import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.graph.VertexShapeGraph;
-
+      /*nous avons une class appelle Rectangle et qui herite certaine methode de la class ShapeGeometric
+      * et qui sera implementé dans la class VertexShapeGraph*/
 public class Rectangle extends ShapeGeometric implements VertexShapeGraph {
 
     private Point point;
     private double width;
     private double height;
 
+    /*@parameter Point point, double width, double height cette methode contient 3 parameter
+           */
     public Rectangle(Point point, double width, double height) {
         this.point = point;
         this.width = width;
         this.height = height;
     }
-
+       /*  @return elle retourn point
+        * cette methode permette de recupére le contenu du variable point*/
     public Point getPoint() {
         return point;
     }
-
+            /* @parameter point
+   * cette methode permette de modifier le contenu du variable point*/
     public void setPoint(Point point) {
         this.point = point;
     }
-
+     /*  @return elle retourn width
+        * cette methode permette de recupére le contenu du variable width*/
     public double getWidth() {
         return width;
     }
-
+         /* @parameter width
+   * cette methode permette de modifier le contenu du variable width*/
     public void setWidth(double width) {
         this.width = width;
     }
-
+         /*  @return elle retourn height
+        * cette methode permette de recupére le contenu du variable height*/
     public double getHeight() {
         return height;
     }
-
+      /* @parameter height
+   * cette methode permette de modifier le contenu du variable height*/
     public void setHeight(double height) {
         this.height = height;
     }
-
+      /*@graphic
+      * permettent de mettre le poid la longueur et le point sur la graphic*/
     @Override
     public void draw(Graphics graphics) {
         graphics.draw(this);

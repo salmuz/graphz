@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -41,10 +41,13 @@ package fr.edu.bp.m1info.structure;
 
 import fr.edu.bp.m1info.structure.graph.EdgeShapeGraph;
 
+/*ici nous avons une classe abstract et qui herite certaine methode de la class EdgeShapeGraph */
 public abstract class AbstractEdge<Shape extends EdgeShapeGraph> {
 
-    private Shape shapeGraph;
+    private Shape shapeGraph;  /*on declare une variable privée shape */
 
+    /*@parameter shape  shapeGraph
+    *c'est une methode ou un constructeur proteger qui contienne une parameter  */
     protected AbstractEdge(Shape shapeGraph) {
         this.shapeGraph = shapeGraph;
     }

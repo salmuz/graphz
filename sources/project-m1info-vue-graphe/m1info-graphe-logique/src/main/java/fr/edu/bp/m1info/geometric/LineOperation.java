@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                   Aden Nouh Abdirazak
  * Changes
  * -------
  * 23/01/13 : Version 01;
@@ -42,11 +42,16 @@ package fr.edu.bp.m1info.geometric;
 
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
+/*Interface qui contient deux methode qui serons implementé dans la class Line2DOperationImpl*/
 
 public interface LineOperation {
 
+   /*Une methode qui permette de calculer le milieu de la ligne
+   * @parameter Line elle contient une  parameter*/
     public Point calculateMidPoint(Line line);
 
+    /*Une methode qui permette de calculer la taille d'une ligne
+   * @parameter Line;elle contient une  parameter*/
     public double calculateSize(Line line);
 
 }

@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 21/01/13 : Version 01;
@@ -42,8 +42,13 @@ package fr.edu.bp.m1info.structure.design;
 import fr.edu.bp.m1info.structure.geometric.plane.*;
 
 //Visitor, le client va appeler seulement le methode draw et il aura son travail
+/*cette interface qui contient quatre methode et ces methode seront appeller par d'autre class
+*  pour dessiner une graphe */
 public interface Graphics {
 
+    /* @ parameter dans chaque methode on a une parameter
+    -Line line -Circle circle  - LineArrow lineArrow -Rectangle rectangle - Curve curve
+    * et ces methodes permette de dessiner la graphe*/
     public void draw(Line line);
 
     public void draw(Circle circle);

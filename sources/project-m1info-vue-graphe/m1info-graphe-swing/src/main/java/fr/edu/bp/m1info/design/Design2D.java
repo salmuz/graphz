@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 21/01/13 : Version 01;
@@ -50,15 +50,19 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 import java.awt.*;
 import java.awt.geom.*;
 
+ /*nous avons une class appelle Design2D et qui sera implementé dans la class Graphics*/
 public class Design2D implements Graphics {
-
+     /*ici nous avons declarer deux variable de type  Graphics2D et de LineOperation et qui serons privée*/
     private Graphics2D graphics2D;
     private LineOperation operation = new Line2DOperationImpl();
 
+     /*@parameter Graphics2D graphics2D
+     * permette de designer la graphe */
     public Design2D(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
     }
-
+      /*@parameter Line line
+     * permette de designer les ligne  */
     public void draw(Line line) {
         graphics2D.setColor(line.getColor());
         Stroke strokeDefault = graphics2D.getStroke();
@@ -67,7 +71,8 @@ public class Design2D implements Graphics {
                 line.getEnd().getX(), line.getEnd().getY()));
         graphics2D.setStroke(strokeDefault);
     }
-
+           /*@parameter Circle circle
+     * permette de designer les cercle  */
     public void draw(Circle circle) {
         Shape shape = new Ellipse2D.Double(circle.getCenter().getX(), circle.getCenter().getY(), circle.getRadio(), circle.getRadio());
         graphics2D.setColor(circle.getColor());
@@ -75,7 +80,8 @@ public class Design2D implements Graphics {
         graphics2D.setPaint(circle.getBackground());
         graphics2D.fill(shape);
     }
-
+              /*@parameter Curve curve
+     * permette de designer les courbe  */
     public void draw(Curve curve) {
         Shape shape = new CubicCurve2D.Double(curve.getStart().getX(), curve.getStart().getY(),
                 curve.getFirstCurve().getX(), curve.getSecondCurve().getY(),
@@ -84,7 +90,8 @@ public class Design2D implements Graphics {
         graphics2D.setColor(curve.getColor());
         graphics2D.draw(shape);
     }
-
+         /*@parameter Rectangle rectangle
+     * permette de designer un rectangle  */
     public void draw(Rectangle rectangle) {
         graphics2D.setColor(rectangle.getBackground());
         graphics2D.fillRoundRect((int) rectangle.getPoint().getX(), (int) rectangle.getPoint().getY(), (int) rectangle.getWidth(),
@@ -93,7 +100,9 @@ public class Design2D implements Graphics {
         graphics2D.drawRoundRect((int) rectangle.getPoint().getX(), (int) rectangle.getPoint().getY(), (int) rectangle.getWidth(),
                 (int) rectangle.getHeight(), 10, 10);
     }
-
+          /*@parameter LineArrow lineArrow
+          * permette de dessiner les fleche dans chaque ligne et de determiner l'endroit ou la taille de
+          * la fleche*/
     public void draw(LineArrow lineArrow) {
 
         //Angle de la fleche

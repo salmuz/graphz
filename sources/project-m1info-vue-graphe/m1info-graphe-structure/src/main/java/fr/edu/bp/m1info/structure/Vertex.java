@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -40,14 +40,17 @@
 package fr.edu.bp.m1info.structure;
 
 import fr.edu.bp.m1info.structure.graph.VertexShapeGraph;
-
+      /*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
 public class Vertex<Shape extends VertexShapeGraph> {
     private Shape shapeGraph;
 
+         /* @ return shapeGraph
+          *  permette de modifier le contenu de la variable shapeGraph */
     public Shape getShapeGraph() {
         return shapeGraph;
     }
-
+        /*@parameter Shape shapeGraph
+        * permette de modifier le contenu de la variable shapeGraph */
     public void setShapeGraph(Shape shapeGraph) {
         this.shapeGraph = shapeGraph;
     }

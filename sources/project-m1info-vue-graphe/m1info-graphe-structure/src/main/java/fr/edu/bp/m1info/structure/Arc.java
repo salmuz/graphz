@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -42,8 +42,12 @@ package fr.edu.bp.m1info.structure;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.graph.EdgeShapeGraph;
 
+/*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
+*et de la class AbstractEdge<Shape>*/
 public class Arc<Shape extends EdgeShapeGraph> extends AbstractEdge<Shape>{
 
+     /*@parameter shape  shapeGraph
+    *c'est une methode ou un constructeur  qui contienne une parameter  */
     public Arc(Shape shapeGraph) {
         super(shapeGraph);
     }

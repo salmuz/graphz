@@ -38,7 +38,7 @@
  *
  */
 package fr.edu.bp.m1info.structure.geometric;
-
+          /*ici nous avons une interface qui contient une methode public */
 public interface Arrow  {
     public enum PLACE_OF_ARROW {
 		 MIDDLE, END

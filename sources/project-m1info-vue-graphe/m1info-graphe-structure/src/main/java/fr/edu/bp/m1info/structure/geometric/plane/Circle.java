@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -44,33 +44,45 @@ import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.graph.VertexShapeGraph;
-
+       /*nous avons une class appelle circle et qui herite certaine methode de la class ShapeGeometric
+       et elle est implementé dans la class VertexShapeGraph*/
 public class Circle extends ShapeGeometric implements VertexShapeGraph {
+
+           /*on a declare deux variable privée une etant un point et l'autre contient un reel*/
 
     private Point center;
     private double radio;
 
+           /*@parameter center et radio cette methode contient deux parameter un point et un reel*/
     public Circle(Point center, double radio) {
         this.center = center;
         this.radio = radio;
     }
-
+        /*  @return elle retourn le point center
+        * cette methode permette de recupére le contenu du variable center*/
     public Point getCenter() {
         return center;
     }
 
+   /* @parameter center
+   * cette methode permette de modifier le contenu du variable center*/
     public void setCenter(Point center) {
         this.center = center;
     }
 
+           /*  @return elle retourn un type reel radio
+        * cette methode permette de recupére le contenu du variable radio*/
     public double getRadio() {
         return radio;
     }
 
+     /* @parameter radio
+   * cette methode permette de modifier le contenu du variable radio*/
     public void setRadio(double radio) {
         this.radio = radio;
     }
 
+           /*cette methode permettent de dessiner la graphic */
     @Override
     public void draw(Graphics graphics) {
        graphics.draw(this);

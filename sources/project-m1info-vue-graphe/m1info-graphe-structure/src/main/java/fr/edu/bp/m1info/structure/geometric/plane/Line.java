@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -43,33 +43,42 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.graph.EdgeShapeGraph;
-
+        /*nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
+       et elle est implementé dans la class EdgeShapeGraph*/
 public class Line extends ShapeGeometric implements EdgeShapeGraph{
 
+            /*on a declare deux variable de type point et protegé  */
     protected Point start;
     protected Point end;
 
+            /*@parameter start,end, cette methode contient 2 parameter
+           * et ces point serons herité de la class ShapeGeometric*/
     public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
     }
-
+       /*  @return elle retourn le point start
+        * cette methode permette de recupére le contenu du variable start*/
     public Point getStart() {
         return start;
     }
-
+         /* @parameter start
+   * cette methode permette de modifier le contenu du variable start*/
     public void setStart(Point start) {
         this.start = start;
     }
-
+      /*  @return elle retourn le point end
+        * cette methode permette de recupére le contenu du variable end*/
     public Point getEnd() {
         return end;
     }
-
+       /* @parameter end
+   * cette methode permette de modifier le contenu du variable end*/
     public void setEnd(Point end) {
         this.end = end;
     }
-
+      /*@parameter graphics
+     cette methode permettent de dessiner la graphic */
     @Override
     public void draw(Graphics graphics) {
         graphics.draw(this);

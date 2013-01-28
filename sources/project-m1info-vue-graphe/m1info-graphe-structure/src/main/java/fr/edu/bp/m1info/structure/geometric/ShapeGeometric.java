@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *
+ *                   Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -43,26 +43,38 @@ package fr.edu.bp.m1info.structure.geometric;
 import fr.edu.bp.m1info.structure.design.Graphics;
 
 import java.awt.Color;
-
+  /*nous avons une class abstract qui permettra de la forme du graphe*/
 public abstract class ShapeGeometric {
+      /*on a declare deux attribut pour la couleur des ligne et du fond de la fenetre */
     protected Color color = Color.BLACK;
     protected Color background = Color.black;
 
+      /*@ return elle retourn la couleur de la ligne
+  et cette methode getcolor permettent de recupéré la couleur des ligne qui se trouve dans la variable
+   color*/
     public Color getColor() {
         return color;
     }
 
+       /*@ parameter  elle contient deux parameter Color color
+  et cette methode setcolor permettent  de modifier la couleur qui se trouve dans la variable color */
     public void setColor(Color color) {
         this.color = color;
     }
 
+       /*@ return  elle retourn la couleur du fond de la fenetre
+  et cette methode getBackground permettent de recupéré la couleur du fond de la fenetre qui
+  se trouve dans la variable background*/
     public Color getBackground() {
         return background;
     }
 
+      /*@ parameter  elle contient une  parameter Color background
+  et cette methode setBackground permettent de modifier  la couleur qui se trouve dans la variable background */
     public void setBackground(Color background) {
         this.background = background;
     }
 
+      /*cette methode permettent de dessiner la graphic */
     public abstract void draw(Graphics graphics);
 }
