@@ -37,10 +37,9 @@
  * 21/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric.test;
+package fr.edu.bp.m1info.swing.test;
 
-import fr.edu.bp.m1info.design.Design2D;
-import fr.edu.bp.m1info.structure.geometric.Arrow;
+import fr.edu.bp.m1info.swing.design.Design2D;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.plane.*;

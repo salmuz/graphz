@@ -37,10 +37,10 @@
  * 21/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.design;
+package fr.edu.bp.m1info.swing.design;
 
-import fr.edu.bp.m1info.geometric.LineOperation;
-import fr.edu.bp.m1info.geometric.impl2D.Line2DOperationImpl;
+import fr.edu.bp.m1info.logique.geometric.LineOperation;
+import fr.edu.bp.m1info.logique.geometric.impl2D.Line2DOperationImpl;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.plane.*;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;

@@ -37,7 +37,7 @@
  * 23/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.geometric;
+package fr.edu.bp.m1info.logique.geometric;
 
 
 import fr.edu.bp.m1info.structure.geometric.Point;
