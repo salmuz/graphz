@@ -37,18 +37,23 @@
  * 20/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure;
+package fr.edu.bp.m1info.structure.graph.vertex;
 
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.graph.EdgeShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 
-/*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
-*et de la class AbstractEdge<Shape>*/
-public class Arc<Shape extends EdgeShapeGraph> extends AbstractEdge<Shape>{
+/*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
+public class Vertex<Shape extends VertexShapeGraph> {
 
-     /*@parameter shape  shapeGraph
-    *c'est une methode ou un constructeur  qui contienne une parameter  */
-    public Arc(Shape shapeGraph) {
-        super(shapeGraph);
+    private Shape shapeGraph;
+
+         /* @ return shapeGraph
+          *  permette de modifier le contenu de la variable shapeGraph */
+    public Shape getShapeGraph() {
+        return shapeGraph;
+    }
+        /*@parameter Shape shapeGraph
+        * permette de modifier le contenu de la variable shapeGraph */
+    public void setShapeGraph(Shape shapeGraph) {
+        this.shapeGraph = shapeGraph;
     }
 }

@@ -31,13 +31,14 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
+ *                  Aben Nouh Abdirazak 
  *
  * Changes
  * -------
- * 20/01/13 : Version 01;
+ * 12/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.graph;
+package fr.edu.bp.m1info.structure.geometric.graph;
 
-public interface VertexShapeGraph {
+public interface ArcShapeGraph {
 }

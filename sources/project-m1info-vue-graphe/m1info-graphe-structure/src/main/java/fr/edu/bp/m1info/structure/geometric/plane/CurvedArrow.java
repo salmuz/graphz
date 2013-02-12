@@ -42,9 +42,11 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 import fr.edu.bp.m1info.structure.geometric.*;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
-      /*nous avons une class appelle CurvedArrow et qui herite certaine methode de la class Curve
-       et elle est implementé dans la class Arrow*/
-public class CurvedArrow extends Curve implements Arrow {
+import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
+
+/*nous avons une class appelle CurvedArrow et qui herite certaine methode de la class Curve
+et elle est implementé dans la class Arrow*/
+public class CurvedArrow extends Curve implements Arrow,ArcShapeGraph{
 
            /*@parameter start,end,firstCurve,secondCurve cette methode contient 4 parameter
            * et ces point serons herité de la class curve */

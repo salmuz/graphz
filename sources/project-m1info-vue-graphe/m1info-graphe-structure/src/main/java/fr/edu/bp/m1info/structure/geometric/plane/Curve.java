@@ -42,9 +42,10 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 
-     /*nous avons une class appelle curve et qui herite certaine methode de la class ShapeGeometric*/
-public class Curve extends ShapeGeometric{
+/*nous avons une class appelle curve et qui herite certaine methode de la class ShapeGeometric*/
+public class Curve extends ShapeGeometric implements EdgeShapeGraph{
 
 /*on a declare quatre variable privée les quatre etant des points */
 

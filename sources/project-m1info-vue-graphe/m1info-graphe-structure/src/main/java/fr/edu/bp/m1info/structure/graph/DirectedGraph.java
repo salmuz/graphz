@@ -31,13 +31,28 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
+ *                  Aben Nouh Abdirazak 
  *
  * Changes
  * -------
- * 21/01/13 : Version 01;
+ * 12/02/13 : Version 01;
  *
  */
 package fr.edu.bp.m1info.structure.graph;
 
-public interface EdgeShapeGraph {
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
+import fr.edu.bp.m1info.structure.graph.edge.Arc;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+
+import java.util.HashSet;
+
+public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph, ShapeVertex extends VertexShapeGraph>
+        extends Graph<Arc<ShapeEdge>,Vertex<ShapeVertex>>{
+
+    public DirectedGraph() {
+        edgeSet = new HashSet<Arc<ShapeEdge>>();
+        vertexSet = new HashSet<Vertex<ShapeVertex>>();
+    }
 }

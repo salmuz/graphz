@@ -31,25 +31,40 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *                   Aden Nouh Abdirazak
+ *                  Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure;
+package fr.edu.bp.m1info.structure.graph.edge;
 
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-import fr.edu.bp.m1info.structure.graph.EdgeShapeGraph;
+/*ici nous avons une classe abstract et qui herite certaine methode de la class EdgeShapeGraph */
+public abstract class AbstractEdge<Shape extends ShapeGeometric> {
 
-/*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
-*et de la class AbstractEdge<Shape>*/
-public class Edge<Shape extends EdgeShapeGraph> extends AbstractEdge<Shape>{
+    private Shape edge;  /*on declare une variable privée shape */
+    private Vertex source;
+    private Vertex target;
 
-    /* /*@parameter shape  shapeGraph
-    *c'est une methode qui contienne une parameter
-    */
-    public Edge(Shape shapeGraph) {
-        super(shapeGraph);
+    /**
+     * C'est une methode ou un constructeur proteger qui contienne une parameter
+     *
+     * @parameter shape  shapeGraph
+     *
+     */
+    protected AbstractEdge(Vertex source, Vertex target) {
+        this.source = source;
+        this.target = target;
+    }
+
+    public Shape getEdge() {
+        return edge;
+    }
+
+    public void setEdge(Shape edge) {
+        this.edge = edge;
     }
 }

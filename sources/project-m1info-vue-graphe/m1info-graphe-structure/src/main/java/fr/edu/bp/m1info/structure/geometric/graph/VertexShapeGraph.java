@@ -31,53 +31,13 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *                  Aben Nouh Abdirazak 
  *
  * Changes
  * -------
- * 31/01/13 : Version 01;
+ * 20/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.mvp.presenter;
+package fr.edu.bp.m1info.structure.geometric.graph;
 
-import fr.edu.bp.m1info.mvp.common.Presenter;
-import fr.edu.bp.m1info.mvp.common.factory.Factory;
-import fr.edu.bp.m1info.mvp.model.EdgeRepository;
-import fr.edu.bp.m1info.mvp.view.UIMainPrueba;
-import fr.edu.bp.m1info.structure.geometric.plane.Circle;
-import fr.edu.bp.m1info.structure.geometric.plane.Line;
-import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
-
-import java.awt.*;
-
-public class MainPresenter extends Presenter<UIMainPrueba> {
-
-    public GraphNoOrient<Line,Circle> graph;
-
-    @Override
-    protected void createrView() {
-        super.view = new UIMainPrueba(new Frame(),true);
-    }
-
-    @Override
-    protected void createrRepository() {
-        super.repository = Factory.getRp(EdgeRepository.class);
-    }
-
-    @Override
-    protected void initComponent() {
-
-    }
-
-    @Override
-    public void startUp() {
-        super.startUp();
-        view.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        MainPresenter main = new MainPresenter();
-        main.startUp();
-    }
-
+public interface VertexShapeGraph {
 }

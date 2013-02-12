@@ -43,8 +43,9 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.graph.VertexShapeGraph;
-       /*nous avons une class appelle circle et qui herite certaine methode de la class ShapeGeometric
+import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
+
+/*nous avons une class appelle circle et qui herite certaine methode de la class ShapeGeometric
        et elle est implementé dans la class VertexShapeGraph*/
 public class Circle extends ShapeGeometric implements VertexShapeGraph {
 

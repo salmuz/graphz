@@ -35,49 +35,26 @@
  *
  * Changes
  * -------
- * 31/01/13 : Version 01;
+ * 13/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.mvp.presenter;
+package fr.edu.bp.m1info.structure.graph.edge;
 
-import fr.edu.bp.m1info.mvp.common.Presenter;
-import fr.edu.bp.m1info.mvp.common.factory.Factory;
-import fr.edu.bp.m1info.mvp.model.EdgeRepository;
-import fr.edu.bp.m1info.mvp.view.UIMainPrueba;
-import fr.edu.bp.m1info.structure.geometric.plane.Circle;
-import fr.edu.bp.m1info.structure.geometric.plane.Line;
-import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
 
-import java.awt.*;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-public class MainPresenter extends Presenter<UIMainPrueba> {
+public class EdgeFactory {
 
-    public GraphNoOrient<Line,Circle> graph;
+    public static AbstractEdge createEdge(Class clazz,Vertex source, Vertex target){
 
-    @Override
-    protected void createrView() {
-        super.view = new UIMainPrueba(new Frame(),true);
+        AbstractEdge edge = null;
+
+        if(clazz.isInstance(Edge.class)){
+            edge = new Edge(source,target);
+        }else{
+            edge = new Arc(source,target);
+        }
+
+        return edge;
     }
-
-    @Override
-    protected void createrRepository() {
-        super.repository = Factory.getRp(EdgeRepository.class);
-    }
-
-    @Override
-    protected void initComponent() {
-
-    }
-
-    @Override
-    public void startUp() {
-        super.startUp();
-        view.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        MainPresenter main = new MainPresenter();
-        main.startUp();
-    }
-
 }

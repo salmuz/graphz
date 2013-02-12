@@ -41,10 +41,12 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.*;
-import fr.edu.bp.m1info.structure.graph.EdgeShapeGraph;
-           /*nous avons une class appelle LineArrow et qui herite certaine methode de la class Line
+import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+
+/*nous avons une class appelle LineArrow et qui herite certaine methode de la class Line
        et elle est implementé dans la class  Arrow et  EdgeShapeGraph*/
-public class LineArrow extends Line implements Arrow, EdgeShapeGraph {
+public class LineArrow extends Line implements Arrow, ArcShapeGraph {
 
     private PLACE_OF_ARROW placeOfArrow;
 

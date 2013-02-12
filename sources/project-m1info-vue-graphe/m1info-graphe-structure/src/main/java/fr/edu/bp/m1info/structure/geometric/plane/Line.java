@@ -42,10 +42,11 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.graph.EdgeShapeGraph;
-        /*nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
+import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+
+/*nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
        et elle est implementé dans la class EdgeShapeGraph*/
-public class Line extends ShapeGeometric implements EdgeShapeGraph{
+public class Line extends ShapeGeometric implements EdgeShapeGraph {
 
             /*on a declare deux variable de type point et protegé  */
     protected Point start;

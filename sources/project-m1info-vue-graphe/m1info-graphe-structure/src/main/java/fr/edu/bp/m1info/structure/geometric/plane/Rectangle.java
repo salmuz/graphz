@@ -42,8 +42,9 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.graph.VertexShapeGraph;
-      /*nous avons une class appelle Rectangle et qui herite certaine methode de la class ShapeGeometric
+import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
+
+/*nous avons une class appelle Rectangle et qui herite certaine methode de la class ShapeGeometric
       * et qui sera implementé dans la class VertexShapeGraph*/
 public class Rectangle extends ShapeGeometric implements VertexShapeGraph {
 

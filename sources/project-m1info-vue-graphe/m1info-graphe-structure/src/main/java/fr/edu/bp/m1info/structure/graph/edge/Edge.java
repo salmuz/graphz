@@ -31,27 +31,31 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *                  Aden Nouh Abdirazak
+ *                   Aden Nouh Abdirazak
  * Changes
  * -------
  * 20/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure;
+package fr.edu.bp.m1info.structure.graph.edge;
 
-import fr.edu.bp.m1info.structure.graph.VertexShapeGraph;
-      /*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
-public class Vertex<Shape extends VertexShapeGraph> {
-    private Shape shapeGraph;
 
-         /* @ return shapeGraph
-          *  permette de modifier le contenu de la variable shapeGraph */
-    public Shape getShapeGraph() {
-        return shapeGraph;
-    }
-        /*@parameter Shape shapeGraph
-        * permette de modifier le contenu de la variable shapeGraph */
-    public void setShapeGraph(Shape shapeGraph) {
-        this.shapeGraph = shapeGraph;
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+
+/*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
+*et de la class AbstractEdge<Shape>*/
+public class Edge<Shape extends ShapeGeometric & EdgeShapeGraph> extends AbstractEdge<Shape>{
+
+
+    /**
+     * C'est une methode qui contienne une parameter
+     *
+     * @parameter shape  shapeGraph
+     *
+     */
+    public Edge(Vertex source, Vertex target) {
+        super(source, target);
     }
 }

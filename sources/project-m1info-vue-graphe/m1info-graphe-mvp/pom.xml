@@ -24,5 +24,10 @@
             <artifactId>m1info-graphe-swing</artifactId>
             <version>1.0.0</version>
         </dependency>
+      <dependency>
+            <groupId>fr.edu.bp.m1info</groupId>
+            <artifactId>m1info-graphe-structure</artifactId>
+            <version>1.0.0</version>
+        </dependency>
   </dependencies>
 </project>
