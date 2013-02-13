@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ *                  Kalil DAHER MOHAMED
  *                  Aden Nouh Abdirazak
  * Changes
  * -------
@@ -51,10 +51,10 @@ import java.awt.*;
 import java.awt.geom.*;
 
  /**
-  * Nous avons une class appelle Design2D et
+  * Nous avons une class appelle DesignGeometric2D et
   * qui sera implementé dans la class Graphics
   */
-public class Design2D implements Graphics {
+public class DesignGeometric2D implements Graphics {
 
     private Graphics2D graphics2D;
     private LineOperation operation = new Line2DOperationImpl();
@@ -65,7 +65,7 @@ public class Design2D implements Graphics {
      * @parameter Graphics2D graphics2D
      *
      */
-    public Design2D(Graphics2D graphics2D) {
+    public DesignGeometric2D(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
     }
 

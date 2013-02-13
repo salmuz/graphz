@@ -39,7 +39,7 @@
  */
 package fr.edu.bp.m1info.swing.test;
 
-import fr.edu.bp.m1info.swing.design.Design2D;
+import fr.edu.bp.m1info.swing.design.DesignGeometric2D;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.plane.*;
@@ -71,10 +71,10 @@ public class DesignTest {
                 frame.setBackground(Color.white);
                 frame.add(new JPanel() {
                     public void paintComponent(Graphics g) {
-                        arrowsLargo.draw(new Design2D((Graphics2D) g));
-                        arrowsRecto.draw(new Design2D((Graphics2D) g));
-                        arrowsizq.draw(new Design2D((Graphics2D) g));
-                        arrowsder.draw(new Design2D((Graphics2D) g));
+                        arrowsLargo.draw(new DesignGeometric2D((Graphics2D) g));
+                        arrowsRecto.draw(new DesignGeometric2D((Graphics2D) g));
+                        arrowsizq.draw(new DesignGeometric2D((Graphics2D) g));
+                        arrowsder.draw(new DesignGeometric2D((Graphics2D) g));
 
                     }
                 }

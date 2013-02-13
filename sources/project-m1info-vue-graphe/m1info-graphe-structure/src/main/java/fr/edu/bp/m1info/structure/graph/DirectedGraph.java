@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aben Nouh Abdirazak 
  *
  * Changes
@@ -48,7 +48,7 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.HashSet;
 
-public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph, ShapeVertex extends VertexShapeGraph>
+public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph, ShapeVertex extends ShapeGeometric & VertexShapeGraph>
         extends Graph<Arc<ShapeEdge>,Vertex<ShapeVertex>>{
 
     public DirectedGraph() {

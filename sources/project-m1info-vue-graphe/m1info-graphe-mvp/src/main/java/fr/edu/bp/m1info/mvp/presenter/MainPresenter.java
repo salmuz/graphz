@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aben Nouh Abdirazak 
  *
  * Changes
@@ -46,13 +46,21 @@ import fr.edu.bp.m1info.mvp.model.EdgeRepository;
 import fr.edu.bp.m1info.mvp.view.UIMainPrueba;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
+import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
+import fr.edu.bp.m1info.structure.graph.edge.Edge;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import fr.edu.bp.m1info.swing.design.GraphCanvas;
+import fr.edu.bp.m1info.swing.events.AddVertexListener;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 
 public class MainPresenter extends Presenter<UIMainPrueba> {
 
-    public GraphNoOrient<Line,Circle> graph;
+    private Graph<Edge<Line>,Vertex<Circle>> graph;
+    private GraphCanvas<Edge<Line>,Vertex<Circle>> canvas;
 
     @Override
     protected void createrView() {
@@ -66,7 +74,16 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
     @Override
     protected void initComponent() {
+        graph = new GraphNoOrient<Line, Circle>();
+        canvas = new GraphCanvas<Edge<Line>,Vertex<Circle>>(graph);
+        this.view.getjScrollPane1().setViewportView(canvas);
+    }
 
+    @Override
+    protected void initAcctions() {
+        super.initAcctions();
+        MouseAdapter mouseNewVertex = new AddVertexListener(canvas);
+        canvas.addMouseListener(mouseNewVertex);
     }
 
     @Override

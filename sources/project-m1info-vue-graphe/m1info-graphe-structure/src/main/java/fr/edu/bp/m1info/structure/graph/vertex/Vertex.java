@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aden Nouh Abdirazak
  * Changes
  * -------
@@ -39,21 +39,28 @@
  */
 package fr.edu.bp.m1info.structure.graph.vertex;
 
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 
 /*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
-public class Vertex<Shape extends VertexShapeGraph> {
+public class Vertex<Shape extends ShapeGeometric & VertexShapeGraph> {
 
-    private Shape shapeGraph;
+    private Shape vertex;
 
-         /* @ return shapeGraph
-          *  permette de modifier le contenu de la variable shapeGraph */
-    public Shape getShapeGraph() {
-        return shapeGraph;
+    /**
+     * Permette de modifier le contenu de la variable shapeGraph
+     * @return shapeGraph
+     */
+    public Shape getVertex() {
+        return vertex;
     }
-        /*@parameter Shape shapeGraph
-        * permette de modifier le contenu de la variable shapeGraph */
-    public void setShapeGraph(Shape shapeGraph) {
-        this.shapeGraph = shapeGraph;
+
+    /**
+     * Permette de modifier le contenu de la variable shapeGraph
+     * @parameter Shape shapeGraph
+     */
+    public void setVertex(Shape vertex) {
+        this.vertex = vertex;
     }
 }
+

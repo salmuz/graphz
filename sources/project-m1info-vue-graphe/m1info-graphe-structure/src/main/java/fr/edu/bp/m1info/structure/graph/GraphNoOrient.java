@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aben Nouh Abdirazak 
  *
  * Changes
@@ -48,7 +48,8 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.HashSet;
 
-public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph, ShapeVertex extends VertexShapeGraph>
+public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph,
+                           ShapeVertex extends  ShapeGeometric & VertexShapeGraph>
         extends Graph<Edge<ShapeEdge>,Vertex<ShapeVertex>>{
 
     public GraphNoOrient() {

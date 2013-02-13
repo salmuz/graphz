@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aben Nouh Abdirazak 
  *
  * Changes
@@ -49,7 +49,7 @@ public class EdgeFactory {
 
         AbstractEdge edge = null;
 
-        if(clazz.isInstance(Edge.class)){
+        if(clazz.isAssignableFrom(Edge.class)){
             edge = new Edge(source,target);
         }else{
             edge = new Arc(source,target);

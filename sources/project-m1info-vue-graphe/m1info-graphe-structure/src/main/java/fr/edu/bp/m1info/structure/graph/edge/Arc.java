@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aden Nouh Abdirazak
  * Changes
  * -------
@@ -41,7 +41,6 @@ package fr.edu.bp.m1info.structure.graph.edge;
 
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 /*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>

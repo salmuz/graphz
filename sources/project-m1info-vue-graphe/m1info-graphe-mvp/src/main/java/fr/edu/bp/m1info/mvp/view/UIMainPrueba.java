@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aben Nouh Abdirazak 
  *
  * Changes
@@ -41,6 +41,8 @@
 package fr.edu.bp.m1info.mvp.view;
 
 import fr.edu.bp.m1info.mvp.common.View;
+
+import javax.swing.*;
 
 public class UIMainPrueba extends javax.swing.JDialog implements View {
 
@@ -121,15 +123,8 @@ public class UIMainPrueba extends javax.swing.JDialog implements View {
         pack();
     }// </editor-fold>
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UIMainPrueba(new javax.swing.JFrame(), true).setVisible(true);
-            }
-        });
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
     }
 
     // Variables declaration - do not modify

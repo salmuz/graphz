@@ -31,21 +31,17 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Kalil DAHER MOHAMED
+ *                  Aben Nouh Abdirazak 
  *
  * Changes
  * -------
- * 22/01/13 : Version 01;
+ * 13/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric.solid;
+package fr.edu.bp.m1info.structure.geometric;
 
-import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+public class ConstantsGeometric {
 
-public class Sphere extends ShapeGeometric{
-
-    @Override
-    public void draw(Graphics graphics) {
-        throw new UnsupportedOperationException();
-    }
+    // Circle
+    public static double RADIO = 20;
 }

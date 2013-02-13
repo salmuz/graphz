@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aden Nouh Abdirazak
  * Changes
  * -------
@@ -54,8 +54,14 @@ public class Point2D implements Point {
         this.x = x;
         this.y = y;
     }
-        /*  @return elle retourn  x
-        * cette methode permette de recupére le contenu du variable x*/
+
+     public Point2D(int x, int y) {
+         this.x = x;
+         this.y = y;
+     }
+
+     /*  @return elle retourn  x
+* cette methode permette de recupére le contenu du variable x*/
     public double getX() {
         return x;
     }

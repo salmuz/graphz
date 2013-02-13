@@ -35,75 +35,51 @@
  *
  * Changes
  * -------
- * 12/02/13 : Version 01;
+ * 13/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.graph;
+package fr.edu.bp.m1info.swing.design;
 
+import fr.edu.bp.m1info.structure.design.Graphics;
+import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
-import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-import java.util.Set;
+import java.awt.*;
 
-public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
 
-    protected Class<Edge> clazz;
-    protected Set<Edge> edgeSet;
-    protected Set<Node> vertexSet;
+public class GraphCanvas<Edge extends AbstractEdge,Node extends Vertex> extends Canvas {
 
-    public Set<Edge> getEdgeSet() {
-        return edgeSet;
+    private Graph<Edge,Node> graph;
+
+    public GraphCanvas(Graph<Edge,Node> graph) {
+        super();
+        this.graph = graph;
     }
 
-    public Set<Node> getVertexSet() {
-        return vertexSet;
+    public Graph<Edge, Node> getGraph() {
+        return graph;
     }
 
-    public Edge addEdge(Node source, Node target){
-        Edge edge = (Edge) EdgeFactory.createEdge(clazz,source, target);
-        edgeSet.add(edge);
-        return edge;
-    }
+    @Override
+    public void update(java.awt.Graphics g) {
+        Graphics2D  g2D = (Graphics2D)g;
+        Graphics graphics = new DesignGeometric2D(g2D);
 
-    public boolean addEdge(Edge edge){
-        if(edgeSet.contains(edge)){
-            return false;
+        for (Edge e : graph.getEdgeSet()) {
+            e.getEdge().draw(graphics);
         }
-        edgeSet.add(edge);
-        return true;
-    }
 
-    public boolean addVertex(Node vertex){
-        if(vertexSet.contains(vertex)){
-            return false;
+        for (Node n : graph.getVertexSet()) {
+            n.getVertex().draw(graphics);
         }
-        vertexSet.add(vertex);
-        return true;
     }
 
-    public boolean containsEdge(Node source, Node target){
-        throw new UnsupportedOperationException();
+    @Override
+    public void paint(java.awt.Graphics g) {
+        super.paint(g);
+        g.setColor(Color.white);
+        g.fillRect(0, 0, getWidth(), getHeight());
+        repaint();
     }
-
-    public boolean containsEdge(Edge edge){
-       return edgeSet.contains(edge);
-    }
-
-    public boolean containsVertex(Node vertex){
-       return vertexSet.contains(vertex);
-    }
-
-    public Edge removeEdge(Node source, Node target){
-         throw new UnsupportedOperationException();
-    }
-
-    public boolean removeEdge(Edge edge){
-        return edgeSet.remove(edge);
-    }
-
-    public boolean removeVertex(Node vertex){
-        return vertexSet.remove(vertex);
-    }
-
 }

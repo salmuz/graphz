@@ -31,21 +31,34 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Kalil DAHER MOHAMED
+ *                  Aben Nouh Abdirazak 
  *
  * Changes
  * -------
- * 22/01/13 : Version 01;
+ * 13/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric.solid;
+package fr.edu.bp.m1info.structure.geometric.plane;
 
-import fr.edu.bp.m1info.structure.design.Graphics;
+import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 
-public class Sphere extends ShapeGeometric{
+public class ShapePlaneFactory {
 
-    @Override
-    public void draw(Graphics graphics) {
-        throw new UnsupportedOperationException();
+    public static ShapeGeometric createShape(Class<? extends ShapeGeometric> clazz,double ...coordinate){
+        ShapeGeometric shape = null;
+
+        if(clazz.isAssignableFrom(Circle.class)){
+            double x = coordinate[0];
+            double y = coordinate[1];
+            shape = new Circle(new Point2D(x,y), ConstantsGeometric.RADIO);
+        }
+
+
+        if(shape == null){
+            throw new UnsupportedOperationException("Shape Unsupported");
+        }
+
+        return shape;
     }
 }

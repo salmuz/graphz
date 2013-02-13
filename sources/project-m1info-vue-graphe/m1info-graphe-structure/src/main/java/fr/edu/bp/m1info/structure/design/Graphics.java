@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aden Nouh Abdirazak
  * Changes
  * -------
@@ -58,5 +58,6 @@ public interface Graphics {
     public void draw(Rectangle rectangle);
 
     public void draw(Curve curve);
+
 
 }
