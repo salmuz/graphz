@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aben Nouh Abdirazak 
  *
  * Changes
@@ -46,26 +46,79 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.Set;
 
-public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
+/**
+ *
+ * C'est une interface qui heritent lui aussi des autres classes comme AbstractEdge
+ * elle permet de definir la propriete d'un graphe donc c'est quel rassemble les elements commun de deux classes DirecedGraph et GraphNoOrient
+ * elle possede de type de variables Edge et node
+ *
+ * @param <Edge>   cette parametre c'est l'aret
+ * @param <Node>   cette parametre c'est le sommet
+ *
+ */
 
+public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
+   /**
+     * ce sont les variables de la classe Graph
+     *
+     * @param clazz est de type Class<Edge>
+     * @param edgeSet est de type Set<Edge>
+     * @param vertexSet est de type Set<Node
+     */
     public Class<Edge> clazz;
     public Set<Edge> edgeSet;
     public Set<Node> vertexSet;
 
+    /**
+     *
+     * c'est une methode qui permet de modifier  l'Edge(arrete)du graphe
+     *
+     * pas de paremetre pour la methode get
+     *
+     * @return    la methode retourne de type  Set<Edge>
+     *
+     */
     public Set<Edge> getEdgeSet() {
         return edgeSet;
     }
 
+    /**
+     *  c'est une methode qui permet d'afficher la valeur du VertexSetdu graphe
+     *
+     * pas de paremetre pour la methode get
+     *
+     * @return   : la methode retourne de type  Set<Node>
+     *
+     */
     public Set<Node> getVertexSet() {
         return vertexSet;
     }
 
+    /**
+     * C'est une methdode qui permet d'ajouter une Edge(arrete) au graphe qui relie entre deux Node (sommet)
+     *
+     * @param source: c'est le premier Node
+     *
+     * @param target: C'est le seconde Node
+     *
+     * @return: cette methode retourne un Edge(arrete)
+     */
     public Edge addEdge(Node source, Node target){
         Edge edge = (Edge) EdgeFactory.createEdge(clazz,source, target);
         edgeSet.add(edge);
         return edge;
     }
 
+    /**
+     * Cette methode permet de verifier si on peut ajouter une edge(arrete)
+     * au graphe c'est a dire elle verifie dans le graphe si cet edge(arrete) existe
+     * sinon elle rajoute
+     *
+     * @param edge: c'est l'edge(arrete)  que vous avez definis pour verifier si il est dans le graphe ou pas
+     *
+     * @return  :la methode retourne de type boolean     si la methode return true vous pouvez ajouter
+     * ce Edge au graphe sinon vous pouvez pas
+     */
     public boolean addEdge(Edge edge){
         if(edgeSet.contains(edge)){
             return false;
@@ -73,6 +126,15 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
         edgeSet.add(edge);
         return true;
     }
+
+    /**
+     * C'est methode aussi verifie si on peut ajouter une Node au graphe de meme si on a
+     * pas dans le graphe ce type de Node definis pour ajouter alors
+     * rajoute dans le graphe sino return false pour ajouter un tel Node
+     *
+     * @param vertex  : C'est une parametre qui verifie avant d'ajouter le Node si il existe ou pas
+     * @return
+     */
 
     public boolean addVertex(Node vertex){
         if(vertexSet.contains(vertex)){

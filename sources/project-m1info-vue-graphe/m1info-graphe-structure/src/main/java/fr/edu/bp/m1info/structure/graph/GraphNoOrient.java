@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Moussa Kalil 
+ * 					Kalil DAHER MOHAMED
  *                  Aben Nouh Abdirazak 
  *
  * Changes
@@ -48,9 +48,21 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.HashSet;
 
+/**
+ * classe GraphNoOrient qui herite des plusieur classe comme ShapeGeometric elle est specialise pour definir un graphe non oriente
+ *
+ * @param <ShapeEdge>  c'est une variable qui definit l'arrete du graphe
+ * @param <ShapeVertex> c'est une variables qui definit le sommet du graphe
+ *
+ */
 public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph, ShapeVertex extends VertexShapeGraph>
         extends Graph<Edge<ShapeEdge>,Vertex<ShapeVertex>>{
 
+    /**
+     *
+     * c'est un constructeur de la classe GraphNoOrient il permet d'initialiser les variables de ce classe
+     *
+     */
     public GraphNoOrient() {
         edgeSet = new HashSet<Edge<ShapeEdge>>();
         vertexSet = new HashSet<Vertex<ShapeVertex>>();
