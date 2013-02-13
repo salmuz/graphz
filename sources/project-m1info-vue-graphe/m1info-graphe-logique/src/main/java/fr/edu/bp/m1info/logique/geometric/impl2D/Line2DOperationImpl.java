@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
+ * 					Moussa Kalil 
  *                  Aden Nouh Abdirazak
  * Changes
  * -------
@@ -46,8 +46,7 @@ import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
          /*cette class Line2OperationImpl est implementé dans la class LineOperation*/
 public class Line2DOperationImpl implements LineOperation{
 
-    /**
-     *  @return elle retourn a un point
+             /* @ return elle retourn a un point
               *@ parameter Line  elle contient comme parameter une ligne
               * cette methode est implementé dans la class LineOperation */
     public Point calculateMidPoint(Line line) {

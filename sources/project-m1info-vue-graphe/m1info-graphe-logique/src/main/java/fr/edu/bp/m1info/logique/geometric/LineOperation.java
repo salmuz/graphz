@@ -30,7 +30,7 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
+ * 					Moussa Kalil 
  *                   Aden Nouh Abdirazak
  * Changes
  * -------
@@ -50,12 +50,8 @@ public interface LineOperation {
    * @parameter Line elle contient une  parameter*/
     public Point calculateMidPoint(Line line);
 
-    /**
-     * Une methode qui permette de calculer la taille d'une ligne
-     *
-     * @parameter Line;elle contient une  parameter
-     *
-     */
+    /*Une methode qui permette de calculer la taille d'une ligne
+   * @parameter Line;elle contient une  parameter*/
     public double calculateSize(Line line);
 
 }
