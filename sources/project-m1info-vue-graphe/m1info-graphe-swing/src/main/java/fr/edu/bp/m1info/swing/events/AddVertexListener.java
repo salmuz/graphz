@@ -61,7 +61,7 @@ public class AddVertexListener extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         Point p = e.getPoint();
         Vertex  vertex = new Vertex();
-        vertex.setVertex(ShapePlaneFactory.createShape(Circle.class,p.getX(),p.getY()));
+        vertex.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(),p.getX(),p.getY()));
         canvas.getGraph().getVertexSet().add(vertex);
         canvas.repaint();
     }

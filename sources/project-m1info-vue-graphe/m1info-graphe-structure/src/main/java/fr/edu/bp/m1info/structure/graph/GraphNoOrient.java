@@ -53,8 +53,11 @@ public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph,
         extends Graph<Edge<ShapeEdge>,Vertex<ShapeVertex>>{
 
     public GraphNoOrient() {
+        super();
         edgeSet = new HashSet<Edge<ShapeEdge>>();
         vertexSet = new HashSet<Vertex<ShapeVertex>>();
     }
+
 }
+
 

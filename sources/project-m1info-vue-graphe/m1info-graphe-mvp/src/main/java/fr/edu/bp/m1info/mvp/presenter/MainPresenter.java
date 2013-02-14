@@ -53,7 +53,6 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.events.AddVertexListener;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 
@@ -74,7 +73,7 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
     @Override
     protected void initComponent() {
-        graph = new GraphNoOrient<Line, Circle>();
+        graph = new GraphNoOrient<Line, Circle>(){};
         canvas = new GraphCanvas<Edge<Line>,Vertex<Circle>>(graph);
         this.view.getjScrollPane1().setViewportView(canvas);
     }

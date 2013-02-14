@@ -51,8 +51,14 @@ import java.util.HashSet;
 public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph, ShapeVertex extends ShapeGeometric & VertexShapeGraph>
         extends Graph<Arc<ShapeEdge>,Vertex<ShapeVertex>>{
 
+    private Class<ShapeEdge> shapeEdge;
+    private Class<ShapeVertex> shapeVertex;
+
+
     public DirectedGraph() {
+        super();
         edgeSet = new HashSet<Arc<ShapeEdge>>();
         vertexSet = new HashSet<Vertex<ShapeVertex>>();
     }
+
 }
