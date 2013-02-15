@@ -84,5 +84,4 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
     public void draw(Graphics graphics) {
         graphics.draw(this);
     }
-
 }

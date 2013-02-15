@@ -90,12 +90,14 @@ public class DesignGeometric2D implements Graphics {
      * @parameter Circle circle
      *
      */
-    public void draw(Circle circle) {
-        Shape shape = new Ellipse2D.Double(circle.getCenter().getX(), circle.getCenter().getY(), circle.getRadio(), circle.getRadio());
+    public Shape draw(Circle circle) {
+        Shape shape = new Ellipse2D.Double(circle.getCenter().getX()-circle.getRadio(), circle.getCenter().getY()-circle.getRadio(),
+                                           2*circle.getRadio(), 2*circle.getRadio());
         graphics2D.setColor(circle.getColor());
         graphics2D.draw(shape);
         graphics2D.setPaint(circle.getBackground());
         graphics2D.fill(shape);
+        return shape;
     }
 
     /**

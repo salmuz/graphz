@@ -46,6 +46,7 @@ import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -141,4 +142,20 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
     public Class<? extends ShapeGeometric> getClazzVertexShape() {
         return clazzVertexShape;
     }
+
+
+    public Node getVertexShape(double x,double y){
+
+       Iterator<Node> it = getVertexSet().iterator();
+       while(it.hasNext()){
+          Node node = it.next();
+          if(node.getVertex().contains(x,y)){
+              return node;
+          }
+       }
+
+       return null;
+
+    }
+
 }

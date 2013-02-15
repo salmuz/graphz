@@ -35,52 +35,74 @@
  *
  * Changes
  * -------
- * 13/02/13 : Version 01;
+ * 15/02/13 : Version 01;
  *
  */
 package fr.edu.bp.m1info.swing.events;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
-import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
+import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
+import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
 
-public class AddVertexListener extends MouseAdapter {
+public class AddEdgeListener extends MouseAdapter {
 
     private GraphCanvas canvas;
+    private double x0;
+    private double y0;
+    private double x1;
+    private double y1;
+    private boolean isSelection;
+    private Vertex vertex0;
 
-    public AddVertexListener(GraphCanvas canvas) {
+    public AddEdgeListener(GraphCanvas canvas) {
         super();
         this.canvas = canvas;
+        this.isSelection = false;
     }
 
-    public void mouseClicked(MouseEvent e) {
-        Point p = e.getPoint();
-        Vertex  vertex = new Vertex();
-        vertex.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), p.getX(), p.getY()));
+    @Override
+    public void mousePressed(MouseEvent e) {
+        x0 = e.getPoint().getX();
+        y0 = e.getPoint().getY();
 
-        Iterator<Vertex> it = canvas.getGraph().getVertexSet().iterator();
-        boolean exist = false;
-        while(it.hasNext()){
-            Vertex item = it.next();
-            if(item.getVertex().intersect(vertex.getVertex())){
-                exist = true;
-                break;
-            }
+        vertex0 = canvas.getGraph().getVertexShape(x0, y0);
+        if (vertex0 != null) {
+            this.isSelection = true;
         }
 
-        if(!exist){
-            canvas.getGraph().addVertex(vertex);
+    }
+
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        x1 = e.getPoint().getX();
+        y1 = e.getPoint().getY();
+
+        Vertex vertex1 = canvas.getGraph().getVertexShape(x1, y1);
+        if (vertex0 !=null && vertex1 != null && !vertex1.equals(vertex0)) {
+            AbstractEdge edge = canvas.getGraph().addEdge(vertex0,vertex1);
+            edge.setEdge(ShapePlaneFactory.createShape(canvas.getGraph().getClazzEdgeShape(),
+                    vertex0.getVertex().centreShape().getX(),vertex0.getVertex().centreShape().getY(),
+                    vertex1.getVertex().centreShape().getX(),vertex1.getVertex().centreShape().getY()));
+            canvas.getGraph().getEdgeSet().add(edge);
             canvas.repaint();
         }
+
+        x0 = -1; y0 = -1;
+        x1 = -1; y1 = -1;
+        vertex0 = null;
+
     }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
 }

@@ -40,6 +40,9 @@
 package fr.edu.bp.m1info.structure.design;
 
 import fr.edu.bp.m1info.structure.geometric.plane.*;
+import fr.edu.bp.m1info.structure.geometric.plane.Rectangle;
+
+import java.awt.*;
 
 //Visitor, le client va appeler seulement le methode draw et il aura son travail
 /*cette interface qui contient quatre methode et ces methode seront appeller par d'autre class
@@ -51,7 +54,7 @@ public interface Graphics {
     * et ces methodes permette de dessiner la graphe*/
     public void draw(Line line);
 
-    public void draw(Circle circle);
+    public Shape draw(Circle circle);
 
     public void draw(LineArrow lineArrow);
 

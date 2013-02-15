@@ -51,9 +51,12 @@ import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
+import fr.edu.bp.m1info.swing.events.AddEdgeListener;
 import fr.edu.bp.m1info.swing.events.AddVertexListener;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 
 public class MainPresenter extends Presenter<UIMainPrueba> {
@@ -81,8 +84,25 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
     @Override
     protected void initAcctions() {
         super.initAcctions();
-        MouseAdapter mouseNewVertex = new AddVertexListener(canvas);
-        canvas.addMouseListener(mouseNewVertex);
+
+        this.view.getjButton1().addActionListener(
+               new AbstractAction() {
+                   public void actionPerformed(ActionEvent e) {
+                       MouseAdapter mouseNewVertex = new AddVertexListener(canvas);
+                       canvas.addMouseListener(mouseNewVertex);
+               }
+         });
+
+        this.view.getjButton2().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                       MouseAdapter mouseNewVertex = new AddEdgeListener(canvas);
+                       canvas.addMouseListener(mouseNewVertex);
+                    }
+                }
+        );
+
+
     }
 
     @Override

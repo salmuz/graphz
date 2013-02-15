@@ -49,9 +49,11 @@ public class ShapePlaneFactory {
         ShapeGeometric shape = null;
 
         if(clazz.isAssignableFrom(Circle.class)){
-            double x = coordinate[0];
-            double y = coordinate[1];
-            shape = new Circle(new Point2D(x,y), ConstantsGeometric.RADIO);
+            shape = new Circle(new Point2D(coordinate[0],coordinate[1]), ConstantsGeometric.RADIO);
+        }else{
+            if(clazz.isAssignableFrom(Line.class)){
+                shape = new Line(new Point2D(coordinate[0],coordinate[1]), new Point2D(coordinate[2],coordinate[3]));
+            }
         }
 
 

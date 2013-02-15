@@ -42,12 +42,14 @@ package fr.edu.bp.m1info.structure.geometric;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
 
-import java.awt.Color;
-  /*nous avons une class abstract qui permettra de la forme du graphe*/
+import java.awt.*;
+
+/*nous avons une class abstract qui permettra de la forme du graphe*/
 public abstract class ShapeGeometric {
       /*on a declare deux attribut pour la couleur des ligne et du fond de la fenetre */
     protected Color color = Color.BLACK;
     protected Color background = Color.black;
+    protected Shape shape;
 
       /*@ return elle retourn la couleur de la ligne
   et cette methode getcolor permettent de recupéré la couleur des ligne qui se trouve dans la variable
@@ -77,4 +79,17 @@ public abstract class ShapeGeometric {
 
       /*cette methode permettent de dessiner la graphic */
     public abstract void draw(Graphics graphics);
+
+    public boolean intersect(ShapeGeometric shapeGeometric) {
+        return false;
+    }
+
+    public Point centreShape(){
+        throw new UnsupportedOperationException("Method not implement");
+    }
+
+    public boolean contains(double x, double y){
+        return false;
+    }
+
 }

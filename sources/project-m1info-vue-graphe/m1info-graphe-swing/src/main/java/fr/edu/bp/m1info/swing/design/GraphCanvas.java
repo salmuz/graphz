@@ -63,6 +63,14 @@ public class GraphCanvas<Edge extends AbstractEdge,Node extends Vertex> extends 
 
     @Override
     public void update(java.awt.Graphics g) {
+        // super.update(g); clear et call method paint
+       paint(g);
+    }
+
+    @Override
+    public void paint(java.awt.Graphics g) {
+        g.setColor(Color.white);
+        g.fillRect(0, 0, getWidth(), getHeight());
         Graphics2D  g2D = (Graphics2D)g;
         Graphics graphics = new DesignGeometric2D(g2D);
 
@@ -73,13 +81,5 @@ public class GraphCanvas<Edge extends AbstractEdge,Node extends Vertex> extends 
         for (Node n : graph.getVertexSet()) {
             n.getVertex().draw(graphics);
         }
-    }
-
-    @Override
-    public void paint(java.awt.Graphics g) {
-        super.paint(g);
-        g.setColor(Color.white);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        repaint();
     }
 }

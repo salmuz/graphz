@@ -31,23 +31,14 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Kalil DAHER MOHAMED
+ *                  Aben Nouh Abdirazak 
  *
  * Changes
  * -------
- * 22/01/13 : Version 01;
+ * 15/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric.solid;
+package fr.edu.bp.m1info.swing.events;
 
-import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-
-public class Sphere extends ShapeGeometric{
-
-    @Override
-    public void draw(Graphics graphics) {
-        throw new UnsupportedOperationException();
-    }
-
+public class ClearGraphAction {
 }

@@ -45,47 +45,121 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 
-/*nous avons une class appelle circle et qui herite certaine methode de la class ShapeGeometric
-       et elle est implementé dans la class VertexShapeGraph*/
-public class Circle extends ShapeGeometric implements VertexShapeGraph {
+import java.awt.*;
+import java.awt.geom.Area;
 
-           /*on a declare deux variable privée une etant un point et l'autre contient un reel*/
+/**
+ * nous avons une class appelle circle et qui herite certaine methode de la class ShapeGeometric
+ * et elle est implementé dans la class VertexShapeGraph
+ */
+public class Circle extends ShapeGeometric implements VertexShapeGraph {
 
     private Point center;
     private double radio;
 
-           /*@parameter center et radio cette methode contient deux parameter un point et un reel*/
-    public Circle(Point center, double radio) {
+    /**
+     * Cette methode contient deux parameter un point et un reel
+     *
+     * @parameter center et radio
+     */
+     public Circle(Point center, double radio) {
         this.center = center;
         this.radio = radio;
     }
-        /*  @return elle retourn le point center
-        * cette methode permette de recupére le contenu du variable center*/
+
+    /**
+     * Cette methode permette de recupére le contenu du variable center
+     *
+     * @return elle retourn le point center
+     *
+     */
     public Point getCenter() {
         return center;
     }
 
-   /* @parameter center
-   * cette methode permette de modifier le contenu du variable center*/
+    /**
+     * Cette methode permette de modifier le contenu du variable center
+     *
+     * @parameter center
+     */
     public void setCenter(Point center) {
         this.center = center;
     }
 
-           /*  @return elle retourn un type reel radio
-        * cette methode permette de recupére le contenu du variable radio*/
+    /**
+     * cette methode permette de recupére le contenu du variable radio
+     *
+     * @return elle retourn un type reel radio
+     *
+     */
     public double getRadio() {
         return radio;
     }
 
-     /* @parameter radio
-   * cette methode permette de modifier le contenu du variable radio*/
+    /**
+     * Cette methode permette de modifier le contenu du variable radio
+     *
+     *  @parameter radio
+     */
     public void setRadio(double radio) {
         this.radio = radio;
     }
 
-           /*cette methode permettent de dessiner la graphic */
+    /**
+     * Cette methode permettent de dessiner la graphic
+     */
     @Override
     public void draw(Graphics graphics) {
-       graphics.draw(this);
+       this.shape = graphics.draw(this);
+    }
+
+    @Override
+    public boolean contains(double x, double y) {
+        return this.shape.contains(x,y);
+    }
+
+    @Override
+    public Point centreShape() {
+        return this.getCenter();
+    }
+
+    @Override
+    public boolean intersect(ShapeGeometric shapeGeometric) {
+        Circle circle = (Circle)shapeGeometric;
+        return this.shape.intersects(circle.getCenter().getX()-circle.getRadio(),
+                circle.getCenter().getY()-circle.getRadio(),
+                2*circle.getRadio(),
+                2*circle.getRadio());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Circle circle = (Circle) o;
+
+        if (Double.compare(circle.radio, radio) != 0) return false;
+        if (center != null ? !center.equals(circle.center) : circle.center != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = center != null ? center.hashCode() : 0;
+        temp = radio != +0.0d ? Double.doubleToLongBits(radio) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "center=" + center +
+                ", radio=" + radio +
+                '}';
     }
 }

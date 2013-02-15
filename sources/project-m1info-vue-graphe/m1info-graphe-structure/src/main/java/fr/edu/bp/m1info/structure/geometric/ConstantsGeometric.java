@@ -42,6 +42,5 @@ package fr.edu.bp.m1info.structure.geometric;
 
 public class ConstantsGeometric {
 
-    // Circle
-    public static double RADIO = 20;
+    public static double RADIO = 10;
 }
