@@ -40,14 +40,31 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
+import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.plane.Line;
+import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
+import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
+import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
+import fr.edu.bp.m1info.structure.graph.edge.Edge;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
+import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Iterator;
+import java.util.Set;
 
-public class MoveVertexListener extends MouseMotionAdapter {
+public class MoveVertexListener extends MouseAdapter {
 
     private GraphCanvas canvas;
+    private Vertex vertex0;
+    private boolean isSelection;
+    private double x0;
+    private double y0;
+
 
     public MoveVertexListener(GraphCanvas canvas) {
         super();
@@ -55,9 +72,65 @@ public class MoveVertexListener extends MouseMotionAdapter {
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+    public void mousePressed(MouseEvent e) {
+        x0 = e.getPoint().getX();
+        y0 = e.getPoint().getY();
 
+        vertex0 = canvas.getGraph().getVertexShape(x0, y0);
+        if (vertex0 != null) {
+            this.isSelection = true;
+        }
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        double x1 = e.getPoint().getX();
+        double y1 = e.getPoint().getY();
+
+        if (this.isSelection) {
+            Vertex vertex1 = new Vertex();
+            vertex1.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), x1, y1));
+             if(!canvas.getGraph().isVertexSamePlace(vertex1,vertex0)){
+                moveShapes(x1,y1,Color.BLACK);
+             }else{
+                moveShapes(x0,y0,Color.BLACK);
+             }
+             canvas.repaint();
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        double x1 = e.getPoint().getX();
+        double y1 = e.getPoint().getY();
+
+        if (this.isSelection) {
+            moveShapes(x1,y1,Color.RED);
+            canvas.repaint();
+        }
+    }
+
+    private void moveShapes(double x1,double y1,Color color) {
+        vertex0.getVertex().setBackground(color);
+        VertexShapeGraph v0 = (VertexShapeGraph) vertex0.getVertex();
+        Iterator<AbstractEdge> itEdges = canvas.getGraph().getEdgesOfVertex(vertex0).iterator();
+        while (itEdges.hasNext()) {
+            AbstractEdge edge = itEdges.next();
+            EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+            edge.getEdge().setColor(color);
+            if (e0.getPointEnd().equals(v0.centreShape())) {
+                e0.getPointEnd().setX(x1);
+                e0.getPointEnd().setY(y1);
+            } else {
+                if(e0.getPointStart().equals(v0.centreShape())){
+                    e0.getPointStart().setX(x1);
+                    e0.getPointStart().setY(y1);
+                }
+            }
+        }
+        // the new center of circle
+        v0.centreShape().setX(x1);
+        v0.centreShape().setY(y1);
     }
 }

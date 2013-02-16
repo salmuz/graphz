@@ -51,9 +51,10 @@ import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 
-public class AddVertexListener extends MouseAdapter {
+public class AddVertexListener implements MouseListener {
 
     private GraphCanvas canvas;
 
@@ -67,20 +68,18 @@ public class AddVertexListener extends MouseAdapter {
         Vertex  vertex = new Vertex();
         vertex.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), p.getX(), p.getY()));
 
-        Iterator<Vertex> it = canvas.getGraph().getVertexSet().iterator();
-        boolean exist = false;
-        while(it.hasNext()){
-            Vertex item = it.next();
-            if(item.getVertex().intersect(vertex.getVertex())){
-                exist = true;
-                break;
-            }
-        }
-
-        if(!exist){
+        if(!canvas.getGraph().isVertexSamePlace(vertex)){
             canvas.getGraph().addVertex(vertex);
             canvas.repaint();
         }
     }
+
+    public void mousePressed(MouseEvent e) { }
+
+    public void mouseEntered(MouseEvent e) { }
+
+    public void mouseReleased(MouseEvent e) { }
+
+    public void mouseExited(MouseEvent e) { }
 
 }

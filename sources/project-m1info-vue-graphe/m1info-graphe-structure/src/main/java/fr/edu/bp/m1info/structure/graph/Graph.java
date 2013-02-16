@@ -46,6 +46,7 @@ import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -155,7 +156,38 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
        }
 
        return null;
-
     }
 
+    public boolean isVertexSamePlace(Node vertex,Node ... excludes){
+        Iterator<Node> it = getVertexSet().iterator();
+        while(it.hasNext()){
+            Node item = it.next();
+            boolean exclude = false;
+            for(int i=0;i<excludes.length;i++){
+                if(excludes[i].equals(item)){
+                   exclude=true;break;
+                }
+            }
+            if(!exclude && item.getVertex().intersect(vertex.getVertex())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Set<Edge> getEdgesOfVertex(Vertex vertex0){
+        Set<Edge> edges = new HashSet<Edge>();
+        Iterator<Edge> it = edgeSet.iterator();
+        while(it.hasNext()){
+            Edge edge = it.next();
+            if(edge.getSource().equals(vertex0)){
+               edges.add(edge);
+            }else{
+               if(edge.getTarget().equals(vertex0)){
+                  edges.add(edge);
+               }
+            }
+        }
+        return edges;
+    }
 }

@@ -84,9 +84,6 @@ public abstract class ShapeGeometric {
         return false;
     }
 
-    public Point centreShape(){
-        throw new UnsupportedOperationException("Method not implement");
-    }
 
     public boolean contains(double x, double y){
         return false;

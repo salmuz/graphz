@@ -53,20 +53,24 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.events.AddEdgeListener;
 import fr.edu.bp.m1info.swing.events.AddVertexListener;
+import fr.edu.bp.m1info.swing.events.MoveVertexListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MainPresenter extends Presenter<UIMainPrueba> {
 
-    private Graph<Edge<Line>,Vertex<Circle>> graph;
-    private GraphCanvas<Edge<Line>,Vertex<Circle>> canvas;
+    private Graph<Edge<Line>, Vertex<Integer, Circle>> graph;
+    private GraphCanvas<Edge<Line>, Vertex<Integer, Circle>> canvas;
 
     @Override
     protected void createrView() {
-        super.view = new UIMainPrueba(new Frame(),true);
+        super.view = new UIMainPrueba(new Frame(), true);
     }
 
     @Override
@@ -76,33 +80,53 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
     @Override
     protected void initComponent() {
-        graph = new GraphNoOrient<Line, Circle>(){};
-        canvas = new GraphCanvas<Edge<Line>,Vertex<Circle>>(graph);
+        graph = new GraphNoOrient<Line, Circle>() {
+        };
+        canvas = new GraphCanvas<Edge<Line>, Vertex<Integer, Circle>>(graph);
         this.view.getjScrollPane1().setViewportView(canvas);
     }
 
     @Override
     protected void initAcctions() {
         super.initAcctions();
-
-        this.view.getjButton1().addActionListener(
-               new AbstractAction() {
-                   public void actionPerformed(ActionEvent e) {
-                       MouseAdapter mouseNewVertex = new AddVertexListener(canvas);
-                       canvas.addMouseListener(mouseNewVertex);
-               }
-         });
+        final MouseAdapter vertexAction = new AddEdgeListener(canvas);
+        final MouseAdapter movedAction = new MoveVertexListener(canvas);
+        final MouseListener edgeAction = new AddVertexListener(canvas);
 
         this.view.getjButton2().addActionListener(
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
-                       MouseAdapter mouseNewVertex = new AddEdgeListener(canvas);
-                       canvas.addMouseListener(mouseNewVertex);
+                        canvas.removeMouseMotionListener(movedAction);
+                        canvas.removeMouseMotionListener(vertexAction);
+                        canvas.removeMouseListener(vertexAction);
+                        canvas.removeMouseListener(movedAction);
+                        canvas.addMouseListener(edgeAction);
+                    }
+                });
+
+        this.view.getjButton1().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        canvas.removeMouseListener(edgeAction);
+                        canvas.removeMouseListener(movedAction);
+                        canvas.removeMouseMotionListener(movedAction);
+                        canvas.addMouseMotionListener(vertexAction);
+                        canvas.addMouseListener(vertexAction);
                     }
                 }
         );
 
-
+        this.view.getjButton3().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        canvas.removeMouseMotionListener(vertexAction);
+                        canvas.removeMouseListener(vertexAction);
+                        canvas.removeMouseListener(edgeAction);
+                        canvas.addMouseMotionListener(movedAction);
+                        canvas.addMouseListener(movedAction);
+                    }
+                }
+        );
     }
 
     @Override

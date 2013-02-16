@@ -40,5 +40,23 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
-public class ClearGraphAction {
+import com.sun.tools.internal.xjc.reader.gbind.Graph;
+import fr.edu.bp.m1info.swing.design.GraphCanvas;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+
+public class ClearGraphAction extends AbstractAction {
+
+    private GraphCanvas canvas;
+
+    public ClearGraphAction(GraphCanvas canvas) {
+        this.canvas = canvas;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        this.canvas.getGraph().getEdgeSet().clear();
+        this.canvas.getGraph().getVertexSet().clear();
+        this.canvas.repaint();
+    }
 }

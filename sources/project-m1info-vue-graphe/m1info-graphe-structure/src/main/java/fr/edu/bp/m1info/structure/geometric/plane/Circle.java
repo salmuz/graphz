@@ -118,7 +118,6 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
         return this.shape.contains(x,y);
     }
 
-    @Override
     public Point centreShape() {
         return this.getCenter();
     }

@@ -73,15 +73,59 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
     public Point getEnd() {
         return end;
     }
-       /* @parameter end
-   * cette methode permette de modifier le contenu du variable end*/
+
+    /**
+     * Cette methode permette de modifier le contenu du variable end
+     *
+     * @parameter end
+     */
     public void setEnd(Point end) {
         this.end = end;
     }
-      /*@parameter graphics
-     cette methode permettent de dessiner la graphic */
+
+    /**
+     * Cette methode permettent de dessiner la graphic
+     *
+     * @parameter graphics
+     */
     @Override
     public void draw(Graphics graphics) {
         graphics.draw(this);
+    }
+
+    public Point getPointStart() {
+        return this.start;
+    }
+
+    public Point getPointEnd() {
+        return this.end;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Line line = (Line) o;
+
+        if (end != null ? !end.equals(line.end) : line.end != null) return false;
+        if (start != null ? !start.equals(line.start) : line.start != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = start != null ? start.hashCode() : 0;
+        result = 31 * result + (end != null ? end.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Line{" +
+                "start=" + start +
+                ", end=" + end +
+                '}';
     }
 }

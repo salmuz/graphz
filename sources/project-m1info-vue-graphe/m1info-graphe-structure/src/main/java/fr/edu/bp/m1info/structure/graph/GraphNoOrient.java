@@ -50,12 +50,12 @@ import java.util.HashSet;
 
 public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph,
                            ShapeVertex extends  ShapeGeometric & VertexShapeGraph>
-        extends Graph<Edge<ShapeEdge>,Vertex<ShapeVertex>>{
+        extends Graph<Edge<ShapeEdge>,Vertex<Integer,ShapeVertex>>{
 
     public GraphNoOrient() {
         super();
         edgeSet = new HashSet<Edge<ShapeEdge>>();
-        vertexSet = new HashSet<Vertex<ShapeVertex>>();
+        vertexSet = new HashSet<Vertex<Integer,ShapeVertex>>();
     }
 
 }

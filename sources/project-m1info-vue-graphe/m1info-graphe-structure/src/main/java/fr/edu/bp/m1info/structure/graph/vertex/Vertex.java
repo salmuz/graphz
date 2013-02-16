@@ -43,9 +43,10 @@ import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 
 /*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
-public class Vertex<Shape extends ShapeGeometric & VertexShapeGraph> {
+public class Vertex<Value extends Object,Shape extends ShapeGeometric & VertexShapeGraph> {
 
     private Shape vertex;
+    private Value value;
 
     /**
      * Permette de modifier le contenu de la variable shapeGraph
@@ -61,6 +62,38 @@ public class Vertex<Shape extends ShapeGeometric & VertexShapeGraph> {
      */
     public void setVertex(Shape vertex) {
         this.vertex = vertex;
+    }
+
+    public Value getValue() {
+        return value;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vertex vertex1 = (Vertex) o;
+
+        if (vertex != null ? !vertex.equals(vertex1.vertex) : vertex1.vertex != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return vertex != null ? vertex.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Vertex{" +
+                "ShapeV=" + vertex +
+                '}';
     }
 }
 

@@ -45,7 +45,7 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 /*ici nous avons une classe abstract et qui herite certaine methode de la class EdgeShapeGraph */
 public abstract class AbstractEdge<Shape extends ShapeGeometric> {
 
-    private Shape edge;  /*on declare une variable privée shape */
+    private Shape edge;
     private Vertex source;
     private Vertex target;
 
@@ -66,5 +66,50 @@ public abstract class AbstractEdge<Shape extends ShapeGeometric> {
 
     public void setEdge(Shape edge) {
         this.edge = edge;
+    }
+
+    public Vertex getSource() {
+        return source;
+    }
+
+    public void setSource(Vertex source) {
+        this.source = source;
+    }
+
+    public Vertex getTarget() {
+        return target;
+    }
+
+    public void setTarget(Vertex target) {
+        this.target = target;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AbstractEdge edge = (AbstractEdge) o;
+
+        if (source != null ? !source.equals(edge.source) : edge.source != null) return false;
+        if (target != null ? !target.equals(edge.target) : edge.target != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = source != null ? source.hashCode() : 0;
+        result = 31 * result + (target != null ? target.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractEdge{" +
+                "ShapeEdge=" + edge +
+                ", source=" + source +
+                ", target=" + target +
+                '}';
     }
 }

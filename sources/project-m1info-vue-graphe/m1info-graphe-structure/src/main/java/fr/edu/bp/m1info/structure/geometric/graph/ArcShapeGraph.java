@@ -40,5 +40,5 @@
  */
 package fr.edu.bp.m1info.structure.geometric.graph;
 
-public interface ArcShapeGraph {
+public interface ArcShapeGraph  extends EdgeShapeGraph{
 }

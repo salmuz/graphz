@@ -97,15 +97,31 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
     public Point getEnd() {
         return end;
     }
-       /* @parameter end
-   * cette methode permette de modifier le contenu du variable end*/
+
+    /**
+     * Cette methode permette de modifier le contenu du variable end
+     *
+     * @parameter end
+     */
     public void setEnd(Point end) {
         this.end = end;
     }
-     /*@parameter graphic
-     cette methode permettent de dessiner la graphic */
+
+    /**
+     * Cette methode permettent de dessiner la graphic
+     *
+     * @parameter graphic
+     */
     @Override
     public void draw(Graphics graphics) {
        graphics.draw(this);
+    }
+
+    public Point getPointStart() {
+        return this.start;
+    }
+
+    public Point getPointEnd() {
+        return this.end;
     }
 }

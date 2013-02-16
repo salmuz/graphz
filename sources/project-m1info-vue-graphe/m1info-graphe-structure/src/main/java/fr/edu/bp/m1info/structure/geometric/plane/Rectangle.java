@@ -96,4 +96,7 @@ public class Rectangle extends ShapeGeometric implements VertexShapeGraph {
         graphics.draw(this);
     }
 
+    public Point centreShape(){
+        throw new UnsupportedOperationException("Method not implement");
+    }
 }

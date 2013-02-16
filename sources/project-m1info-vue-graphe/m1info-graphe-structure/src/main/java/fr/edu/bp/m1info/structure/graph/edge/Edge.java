@@ -58,4 +58,6 @@ public class Edge<Shape extends ShapeGeometric & EdgeShapeGraph> extends Abstrac
     public Edge(Vertex source, Vertex target) {
         super(source, target);
     }
+
+
 }

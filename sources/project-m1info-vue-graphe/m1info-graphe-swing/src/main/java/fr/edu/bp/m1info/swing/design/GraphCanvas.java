@@ -63,7 +63,7 @@ public class GraphCanvas<Edge extends AbstractEdge,Node extends Vertex> extends 
 
     @Override
     public void update(java.awt.Graphics g) {
-        // super.update(g); clear et call method paint
+       // super.update(g); clear et call method paint
        paint(g);
     }
 

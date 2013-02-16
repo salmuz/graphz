@@ -39,5 +39,11 @@
  */
 package fr.edu.bp.m1info.structure.geometric.graph;
 
+import fr.edu.bp.m1info.structure.geometric.Point;
+
 public interface EdgeShapeGraph {
+
+    public Point getPointStart();
+
+    public Point getPointEnd();
 }
