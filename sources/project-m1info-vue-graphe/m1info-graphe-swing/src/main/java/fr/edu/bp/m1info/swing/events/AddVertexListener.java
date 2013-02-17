@@ -40,19 +40,13 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
-import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Iterator;
 
 public class AddVertexListener implements MouseListener {
 
@@ -67,6 +61,8 @@ public class AddVertexListener implements MouseListener {
         Point p = e.getPoint();
         Vertex  vertex = new Vertex();
         vertex.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), p.getX(), p.getY()));
+        vertex.getVertex().setColor(Color.ORANGE);
+        vertex.getVertex().setBackground(Color.ORANGE);
 
         if(!canvas.getGraph().isVertexSamePlace(vertex)){
             canvas.getGraph().addVertex(vertex);

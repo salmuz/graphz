@@ -165,7 +165,7 @@ public class DesignGeometric2D implements Graphics {
         path.lineTo(0, 0);
         path.lineTo(-arrowLength*Math.cos(angleArrow),-arrowLength*Math.sin(angleArrow));
 
-        graphics2D.setColor(Color.BLUE);
+        graphics2D.setColor(lineArrow.getCfecha());
         graphics2D.fill(transform.createTransformedShape(path));
 
     }

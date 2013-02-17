@@ -42,20 +42,15 @@ package fr.edu.bp.m1info.swing.events;
 
 import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.plane.Line;
-import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.util.Iterator;
-import java.util.Set;
 
 public class MoveVertexListener extends MouseAdapter {
 
@@ -92,11 +87,12 @@ public class MoveVertexListener extends MouseAdapter {
             Vertex vertex1 = new Vertex();
             vertex1.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), x1, y1));
              if(!canvas.getGraph().isVertexSamePlace(vertex1,vertex0)){
-                moveShapes(x1,y1,Color.BLACK);
+                moveShapes(x1,y1,Color.ORANGE,Color.BLUE);
              }else{
-                moveShapes(x0,y0,Color.BLACK);
+                moveShapes(x0, y0, Color.ORANGE, Color.BLUE);
              }
-             canvas.repaint();
+            canvas.repaint();
+            this.isSelection=false;
         }
     }
 
@@ -106,19 +102,19 @@ public class MoveVertexListener extends MouseAdapter {
         double y1 = e.getPoint().getY();
 
         if (this.isSelection) {
-            moveShapes(x1,y1,Color.RED);
+            moveShapes(x1,y1,Color.RED,Color.RED);
             canvas.repaint();
         }
     }
 
-    private void moveShapes(double x1,double y1,Color color) {
-        vertex0.getVertex().setBackground(color);
+    private void moveShapes(double x1,double y1,Color vertex,Color edgec) {
+        vertex0.getVertex().setBackground(vertex);
         VertexShapeGraph v0 = (VertexShapeGraph) vertex0.getVertex();
         Iterator<AbstractEdge> itEdges = canvas.getGraph().getEdgesOfVertex(vertex0).iterator();
         while (itEdges.hasNext()) {
             AbstractEdge edge = itEdges.next();
             EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
-            edge.getEdge().setColor(color);
+            edge.getEdge().setColor(edgec);
             if (e0.getPointEnd().equals(v0.centreShape())) {
                 e0.getPointEnd().setX(x1);
                 e0.getPointEnd().setY(y1);

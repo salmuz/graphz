@@ -40,6 +40,7 @@
  */
 package fr.edu.bp.m1info.structure.geometric.plane;
 
+import fr.edu.bp.m1info.structure.geometric.Arrow;
 import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 
@@ -53,12 +54,17 @@ public class ShapePlaneFactory {
         }else{
             if(clazz.isAssignableFrom(Line.class)){
                 shape = new Line(new Point2D(coordinate[0],coordinate[1]), new Point2D(coordinate[2],coordinate[3]));
+            }else{
+               if(clazz.isAssignableFrom(LineArrow.class)){
+                shape = new LineArrow(new Point2D(coordinate[0],coordinate[1]),
+                        new Point2D(coordinate[2],coordinate[3]), Arrow.PLACE_OF_ARROW.MIDDLE);
+               }
             }
         }
 
 
         if(shape == null){
-            throw new UnsupportedOperationException("Shape Unsupported");
+            throw new UnsupportedOperationException("Shape "+clazz.getName()+" Unsupported");
         }
 
         return shape;

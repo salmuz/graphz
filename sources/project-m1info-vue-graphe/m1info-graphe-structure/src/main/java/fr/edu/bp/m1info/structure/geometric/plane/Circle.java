@@ -125,6 +125,11 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
     @Override
     public boolean intersect(ShapeGeometric shapeGeometric) {
         Circle circle = (Circle)shapeGeometric;
+
+        if(this.shape == null){
+          return false;
+        }
+
         return this.shape.intersects(circle.getCenter().getX()-circle.getRadio(),
                 circle.getCenter().getY()-circle.getRadio(),
                 2*circle.getRadio(),

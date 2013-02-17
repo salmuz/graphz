@@ -35,64 +35,57 @@
  *
  * Changes
  * -------
- * 13/02/13 : Version 01;
+ * 16/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.swing.design;
+package fr.edu.bp.m1info.structure.test;
 
-import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.graph.Graph;
+
+import fr.edu.bp.m1info.structure.geometric.plane.Circle;
+import fr.edu.bp.m1info.structure.geometric.plane.Line;
+import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
+import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import junit.framework.TestCase;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-public class GraphCanvas<Edge extends AbstractEdge,Node extends Vertex> extends Canvas {
+public class TestTestCollectionSetEdge extends TestCase{
 
-    private Graph<Edge,Node> graph;
-    private List<Edge> draftEdge;
+    public void testSetCollection(){
+        Set<AbstractEdge>  edgeSet = new HashSet<AbstractEdge> ();
 
-    public GraphCanvas(Graph<Edge,Node> graph) {
-        super();
-        this.graph = graph;
-        this.draftEdge = new ArrayList<Edge>();
+        Vertex<Integer,Circle> v0 = new Vertex<Integer, Circle>();
+        v0.setVertex(new Circle(new Point2D(196,154),10));
+        Vertex<Integer,Circle> v1 = new Vertex<Integer, Circle>();
+        v1.setVertex(new Circle(new Point2D(290,83),10));
+
+        Edge<Line> e0 = new Edge<Line>(v0,v1);
+        e0.setEdge(new Line(new Point2D(196,154),new Point2D(290,83)));
+
+        Edge<Line> e1 = new Edge<Line>(v0,v1);
+        e1.setEdge(new Line(new Point2D(100,154),new Point2D(290,83)));
+
+        edgeSet.add(e0);
+        edgeSet.add(e1);
+        e1.getEdge().getStart().setX(196);
+        System.out.println(e0.hashCode() == e1.hashCode());
+        System.out.println(edgeSet.contains(e1));
+        System.out.println(edgeSet.size());
+        assertEquals(edgeSet.size(), 1);
     }
 
-    public Graph<Edge, Node> getGraph() {
-        return graph;
+    public int countTestCases() {
+        return 0;
     }
+
 
     @Override
-    public void update(java.awt.Graphics g) {
-       // super.update(g); clear et call method paint
-       paint(g);
-    }
-
-    @Override
-    public void paint(java.awt.Graphics g) {
-        g.setColor(Color.white);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        Graphics2D  g2D = (Graphics2D)g;
-        Graphics graphics = new DesignGeometric2D(g2D);
-
-
-        for (Edge e: draftEdge){
-            e.getEdge().draw(graphics);
-        }
-
-        for (Edge e : graph.getEdgeList()) {
-            e.getEdge().draw(graphics);
-        }
-
-        for (Node n : graph.getVertexList()) {
-            n.getVertex().draw(graphics);
-        }
-
-    }
-
-    public List<Edge> getDraftEdge() {
-        return draftEdge;
+    public void setUp() throws Exception {
+        super.setUp();    //To change body of overridden methods use File | Settings | File Templates.
     }
 }
+     

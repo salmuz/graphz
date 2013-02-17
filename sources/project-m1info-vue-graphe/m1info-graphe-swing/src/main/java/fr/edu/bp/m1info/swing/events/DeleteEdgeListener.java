@@ -35,31 +35,55 @@
  *
  * Changes
  * -------
- * 12/02/13 : Version 01;
+ * 16/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.graph;
+package fr.edu.bp.m1info.swing.events;
 
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
-public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
-                           ShapeVertex extends ShapeGeometric & VertexShapeGraph>
-        extends Graph<Arc<ShapeEdge>,Vertex<Integer,ShapeVertex>>{
+public class DeleteEdgeListener extends AddEdgeListener {
 
-    private Class<ShapeEdge> shapeEdge;
-    private Class<ShapeVertex> shapeVertex;
-
-
-    public DirectedGraph() {
-        super();
-        edgeList = new ArrayList<Arc<ShapeEdge>> ();
-        vertexList = new ArrayList<Vertex<Integer,ShapeVertex>>();
+    public DeleteEdgeListener(GraphCanvas canvas) {
+        super(canvas);
+        super.dragged = Color.BLACK;
     }
 
+    @Override
+    public void mousePressed(MouseEvent e) {
+        super.mousePressed(e);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        double x1 = e.getPoint().getX();
+        double y1 = e.getPoint().getY();
+
+        if (this.isSelection) {
+            Vertex vertex1 = canvas.getGraph().getVertexShape(x1, y1);
+            if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
+                edge.setTarget(vertex1);
+                if (canvas.getGraph().containsEdge(edge)) {
+                    canvas.getGraph().removeEdge(vertex0, vertex1);
+                }
+            }
+            canvas.repaint();
+        }
+
+        x1 = -1;
+        y1 = -1;
+        vertex0 = null;
+        edge = null;
+        isSelection = false;
+        canvas.getDraftEdge().clear();
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        super.mouseDragged(e);
+    }
 }

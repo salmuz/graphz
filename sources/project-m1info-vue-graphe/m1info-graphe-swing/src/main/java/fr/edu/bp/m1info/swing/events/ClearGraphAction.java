@@ -40,7 +40,6 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
-import com.sun.tools.internal.xjc.reader.gbind.Graph;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 import javax.swing.*;
@@ -55,8 +54,8 @@ public class ClearGraphAction extends AbstractAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        this.canvas.getGraph().getEdgeSet().clear();
-        this.canvas.getGraph().getVertexSet().clear();
+        this.canvas.getGraph().getEdgeList().clear();
+        this.canvas.getGraph().getVertexList().clear();
         this.canvas.repaint();
     }
 }

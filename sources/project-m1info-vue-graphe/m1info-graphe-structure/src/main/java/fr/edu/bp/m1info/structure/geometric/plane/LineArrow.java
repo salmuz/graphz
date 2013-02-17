@@ -41,20 +41,25 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.*;
+import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
 import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+
+import java.awt.*;
 
 /*nous avons une class appelle LineArrow et qui herite certaine methode de la class Line
        et elle est implementé dans la class  Arrow et  EdgeShapeGraph*/
 public class LineArrow extends Line implements Arrow, ArcShapeGraph {
 
     private PLACE_OF_ARROW placeOfArrow;
+    private Color cfecha;
 
                /*@parameter start,end,placeOfArrow cette methode contient 3 parameter
            * et les deux premier  points serons herité de la class curve */
     public LineArrow(Point start, Point end, PLACE_OF_ARROW placeOfArrow) {
         super(start, end);
         this.placeOfArrow = placeOfArrow;
+        this.color = Color.BLACK;
     }
 
         /*  @return elle retourn placeOfArrow
@@ -67,8 +72,17 @@ public class LineArrow extends Line implements Arrow, ArcShapeGraph {
     public void setPlaceOfArrow(PLACE_OF_ARROW placeOfArrow) {
         this.placeOfArrow = placeOfArrow;
     }
-           /*@parameter graphics
-     cette methode permettent de dessiner le ligne et le fleche  */
+
+    public Color getCfecha() {
+        return cfecha;
+    }
+
+    public void setCfecha(Color cfecha) {
+        this.cfecha = cfecha;
+    }
+
+    /*@parameter graphics
+cette methode permettent de dessiner le ligne et le fleche  */
     @Override
     public void draw(Graphics graphics) {
         super.draw(graphics);  // designer le ligne                           ss

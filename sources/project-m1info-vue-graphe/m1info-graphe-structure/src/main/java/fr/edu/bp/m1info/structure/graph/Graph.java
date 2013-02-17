@@ -48,6 +48,7 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -63,8 +64,8 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
     protected final Class<Vertex> clazzVertex;
     protected final Class<? extends ShapeGeometric> clazzVertexShape;
 
-    protected Set<Edge> edgeSet;
-    protected Set<Node> vertexSet;
+    protected List<Edge> edgeList;
+    protected List<Node> vertexList;
 
     protected Graph() {
         this.clazzEdgeShape = (Class<? extends ShapeGeometric>) Reflection.getParamGenericOfSuperCLass(this.getClass(), 0);
@@ -74,33 +75,37 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
         this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(),1);
     }
 
-    public Set<Edge> getEdgeSet() {
-        return edgeSet;
+    public List<Edge> getEdgeList() {
+        return edgeList;
     }
 
-    public Set<Node> getVertexSet() {
-        return vertexSet;
+    public List<Node> getVertexList() {
+        return vertexList;
+    }
+
+    public Edge createEdge(Node source, Node target){
+       return (Edge) EdgeFactory.createEdge(clazzEdge,source, target);
     }
 
     public Edge addEdge(Node source, Node target){
         Edge edge = (Edge) EdgeFactory.createEdge(clazzEdge,source, target);
-        edgeSet.add(edge);
+        edgeList.add(edge);
         return edge;
     }
 
     public boolean addEdge(Edge edge){
-        if(edgeSet.contains(edge)){
+        if(edgeList.contains(edge)){
             return false;
         }
-        edgeSet.add(edge);
+        edgeList.add(edge);
         return true;
     }
 
     public boolean addVertex(Node vertex){
-        if(vertexSet.contains(vertex)){
+        if(vertexList.contains(vertex)){
             return false;
         }
-        vertexSet.add(vertex);
+        vertexList.add(vertex);
         return true;
     }
 
@@ -109,23 +114,30 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
     }
 
     public boolean containsEdge(Edge edge){
-       return edgeSet.contains(edge);
+       return edgeList.contains(edge);
     }
 
     public boolean containsVertex(Node vertex){
-       return vertexSet.contains(vertex);
+       return vertexList.contains(vertex);
     }
 
-    public Edge removeEdge(Node source, Node target){
-         throw new UnsupportedOperationException();
+    public void removeEdge(Node source, Node target){
+        for (int i = 0; i < edgeList.size(); i++) {
+            Edge edge = edgeList.get(i);
+            Vertex v0 = edge.getSource();
+            Vertex v1 = edge.getTarget();
+            if ((v0.equals(source) && v1.equals(target))) {
+                edgeList.remove(edge);
+            }
+        }
     }
 
     public boolean removeEdge(Edge edge){
-        return edgeSet.remove(edge);
+        return edgeList.remove(edge);
     }
 
     public boolean removeVertex(Node vertex){
-        return vertexSet.remove(vertex);
+        return vertexList.remove(vertex);
     }
 
     public Class<AbstractEdge> getClazzEdge() {
@@ -147,7 +159,7 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
 
     public Node getVertexShape(double x,double y){
 
-       Iterator<Node> it = getVertexSet().iterator();
+       Iterator<Node> it = getVertexList().iterator();
        while(it.hasNext()){
           Node node = it.next();
           if(node.getVertex().contains(x,y)){
@@ -159,7 +171,7 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
     }
 
     public boolean isVertexSamePlace(Node vertex,Node ... excludes){
-        Iterator<Node> it = getVertexSet().iterator();
+        Iterator<Node> it = getVertexList().iterator();
         while(it.hasNext()){
             Node item = it.next();
             boolean exclude = false;
@@ -177,7 +189,7 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
 
     public Set<Edge> getEdgesOfVertex(Vertex vertex0){
         Set<Edge> edges = new HashSet<Edge>();
-        Iterator<Edge> it = edgeSet.iterator();
+        Iterator<Edge> it = edgeList.iterator();
         while(it.hasNext()){
             Edge edge = it.next();
             if(edge.getSource().equals(vertex0)){

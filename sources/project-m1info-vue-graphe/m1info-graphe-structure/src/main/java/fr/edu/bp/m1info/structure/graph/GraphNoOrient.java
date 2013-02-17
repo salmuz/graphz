@@ -46,18 +46,47 @@ import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph,
-                           ShapeVertex extends  ShapeGeometric & VertexShapeGraph>
-        extends Graph<Edge<ShapeEdge>,Vertex<Integer,ShapeVertex>>{
+        ShapeVertex extends ShapeGeometric & VertexShapeGraph>
+        extends Graph<Edge<ShapeEdge>, Vertex<Integer, ShapeVertex>> {
 
     public GraphNoOrient() {
         super();
-        edgeSet = new HashSet<Edge<ShapeEdge>>();
-        vertexSet = new HashSet<Vertex<Integer,ShapeVertex>>();
+        edgeList = new ArrayList<Edge<ShapeEdge>>();
+        vertexList = new ArrayList<Vertex<Integer, ShapeVertex>>();
     }
 
+    @Override
+    public boolean containsEdge(Edge<ShapeEdge> shapeEdgeEdge) {
+        Iterator<Edge<ShapeEdge>> it = edgeList.iterator();
+        while (it.hasNext()) {
+            Edge edge = it.next();
+            Vertex v0 = edge.getSource();
+            Vertex v1 = edge.getTarget();
+            if ((v0.equals(shapeEdgeEdge.getSource()) && v1.equals(shapeEdgeEdge.getTarget())) ||
+                    (v0.equals(shapeEdgeEdge.getTarget()) && v1.equals(shapeEdgeEdge.getSource()))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void removeEdge(Vertex<Integer, ShapeVertex> source, Vertex<Integer, ShapeVertex> target) {
+        for (int i = 0; i < edgeList.size(); i++) {
+            Edge edge = edgeList.get(i);
+            Vertex v0 = edge.getSource();
+            Vertex v1 = edge.getTarget();
+            if ((v0.equals(source) && v1.equals(target)) ||
+                    (v0.equals(target) && v1.equals(source))) {
+                edgeList.remove(edge);
+            }
+        }
+    }
 }
 
 

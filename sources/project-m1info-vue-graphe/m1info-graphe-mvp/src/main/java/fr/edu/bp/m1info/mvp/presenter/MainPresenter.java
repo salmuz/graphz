@@ -53,6 +53,7 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.events.AddEdgeListener;
 import fr.edu.bp.m1info.swing.events.AddVertexListener;
+import fr.edu.bp.m1info.swing.events.DeleteEdgeListener;
 import fr.edu.bp.m1info.swing.events.MoveVertexListener;
 
 import javax.swing.*;
@@ -80,8 +81,7 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
     @Override
     protected void initComponent() {
-        graph = new GraphNoOrient<Line, Circle>() {
-        };
+        graph = new GraphNoOrient<Line, Circle>() { };
         canvas = new GraphCanvas<Edge<Line>, Vertex<Integer, Circle>>(graph);
         this.view.getjScrollPane1().setViewportView(canvas);
     }
@@ -92,6 +92,7 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         final MouseAdapter vertexAction = new AddEdgeListener(canvas);
         final MouseAdapter movedAction = new MoveVertexListener(canvas);
         final MouseListener edgeAction = new AddVertexListener(canvas);
+        final MouseAdapter deEdgeAction = new DeleteEdgeListener(canvas);
 
         this.view.getjButton2().addActionListener(
                 new AbstractAction() {
@@ -100,6 +101,9 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
                         canvas.removeMouseMotionListener(vertexAction);
                         canvas.removeMouseListener(vertexAction);
                         canvas.removeMouseListener(movedAction);
+                        canvas.removeMouseMotionListener(deEdgeAction);
+                        canvas.removeMouseListener(deEdgeAction);
+
                         canvas.addMouseListener(edgeAction);
                     }
                 });
@@ -110,6 +114,9 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
                         canvas.removeMouseListener(edgeAction);
                         canvas.removeMouseListener(movedAction);
                         canvas.removeMouseMotionListener(movedAction);
+                        canvas.removeMouseMotionListener(deEdgeAction);
+                        canvas.removeMouseListener(deEdgeAction);
+
                         canvas.addMouseMotionListener(vertexAction);
                         canvas.addMouseListener(vertexAction);
                     }
@@ -122,12 +129,31 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
                         canvas.removeMouseMotionListener(vertexAction);
                         canvas.removeMouseListener(vertexAction);
                         canvas.removeMouseListener(edgeAction);
+                        canvas.removeMouseMotionListener(deEdgeAction);
+                        canvas.removeMouseListener(deEdgeAction);
+
                         canvas.addMouseMotionListener(movedAction);
                         canvas.addMouseListener(movedAction);
                     }
                 }
         );
+
+        this.view.getjButton4().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        canvas.removeMouseMotionListener(vertexAction);
+                        canvas.removeMouseListener(vertexAction);
+                        canvas.removeMouseListener(edgeAction);
+                        canvas.removeMouseListener(movedAction);
+                        canvas.removeMouseMotionListener(movedAction);
+
+                        canvas.addMouseMotionListener(deEdgeAction);
+                        canvas.addMouseListener(deEdgeAction);
+                    }
+                }
+        );
     }
+
 
     @Override
     public void startUp() {
