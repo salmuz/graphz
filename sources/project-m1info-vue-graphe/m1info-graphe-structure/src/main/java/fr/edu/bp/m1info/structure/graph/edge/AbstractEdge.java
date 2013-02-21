@@ -49,41 +49,80 @@ public abstract class AbstractEdge<Shape extends ShapeGeometric> {
     private Vertex source;
     private Vertex target;
 
-    /**
-     * C'est une methode ou un constructeur proteger qui contienne une parameter
+     /**
+     * C'est une methode ou un constructeur proteger qui contienne deux  parameter
+     * pour crer l'objet et a initialisés en meme temps
      *
-     * @parameter shape  shapeGraph
+     * @parameter sources et target permet de passe a l'objet d'intialisé
      *
      */
     protected AbstractEdge(Vertex source, Vertex target) {
         this.source = source;
         this.target = target;
     }
-
+     /**
+     * un methode trival pour les classes qui permet d'acceder au contenu du variable de la classe
+     *
+     * @return la methode doit nous renvoyer un shape qui est le type d'un Edge
+     */
     public Shape getEdge() {
         return edge;
     }
-
+    /**
+     * methode trivale aussi pour les classe elle permet de modifier le variable Edge
+     *
+     * @param edge pour la modifier il vaut une nouvel valeur elle se valeur et echange contre l'ancien valeur
+     * de l'objet
+     */
     public void setEdge(Shape edge) {
         this.edge = edge;
     }
 
+    /**
+     * C'est une methode qui permet d'afficher le variable Source
+     *
+     * @return elle retourne un meme type que source qui est Vertex
+     */
     public Vertex getSource() {
         return source;
     }
 
+    /**
+     * C'est une methode qui permet de modifier le source
+     *
+     * Cet parametre sera remplace par l'ancien
+     * @param source
+     */
     public void setSource(Vertex source) {
         this.source = source;
     }
 
+    /**
+     * C'est une methode qui permet d'afficher le variable Target
+     *
+     * @return elle retourne un meme type que target qui est Vertex
+     */
     public Vertex getTarget() {
         return target;
     }
-
+     /**
+     * C'est une methode qui permet de modifier le variable target
+     *
+     * Cet parametre sera remplace par l'ancien target
+     * @param target
+     */
     public void setTarget(Vertex target) {
         this.target = target;
     }
 
+    /**
+     * C'est une methode  comparatif des objets
+     *
+     * @param o on verifie si cet objet est bien un AbstractEdge
+     *
+     * @return si elle est bien objet vrai sinn false
+     *
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,6 +136,11 @@ public abstract class AbstractEdge<Shape extends ShapeGeometric> {
         return true;
     }
 
+    /**
+     * cette methode nous affiche le code de variable
+     *
+     * @return elle affiche le code
+     */
     @Override
     public int hashCode() {
         int result = source != null ? source.hashCode() : 0;
@@ -104,6 +148,12 @@ public abstract class AbstractEdge<Shape extends ShapeGeometric> {
         return result;
     }
 
+    /**
+     * C'est une methode qui permet de convertir en string
+     *
+     * @return elle retourne une phrase qui definit les variables
+     *
+     */
     @Override
     public String toString() {
         return "AbstractEdge{" +
