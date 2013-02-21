@@ -61,9 +61,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EventListener;
+import java.awt.event.MouseMotionListener;
 
 public class MainPresenter extends Presenter<UIMainPrueba> {
 
