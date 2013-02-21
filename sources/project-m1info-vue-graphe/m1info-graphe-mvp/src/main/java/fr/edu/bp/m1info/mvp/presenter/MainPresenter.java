@@ -63,6 +63,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EventListener;
 
 public class MainPresenter extends Presenter<UIMainPrueba> {
 
@@ -85,6 +86,18 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         canvas = new GraphCanvas<Edge<Line>, Vertex<Integer, Circle>>(graph);
         this.view.getjScrollPane1().setViewportView(canvas);
     }
+    
+    public void removeListenerMouse(Class clazz) {
+        for (Object event : canvas.getListeners(clazz)) {
+            if (clazz == MouseListener.class) {
+               canvas.removeMouseListener((MouseListener) event);
+            }else{
+                if (clazz == MouseMotionListener.class) {
+                    canvas.removeMouseMotionListener((MouseMotionListener) event);
+                }
+            }
+        }
+    }
 
     @Override
     protected void initAcctions() {
@@ -93,16 +106,13 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         final MouseAdapter movedAction = new MoveVertexListener(canvas);
         final MouseListener edgeAction = new AddVertexListener(canvas);
         final MouseAdapter deEdgeAction = new DeleteEdgeListener(canvas);
+        final MouseAdapter coEdgeAction = new ContrationEdgeListener(canvas);
 
         this.view.getjButton2().addActionListener(
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
-                        canvas.removeMouseMotionListener(movedAction);
-                        canvas.removeMouseMotionListener(vertexAction);
-                        canvas.removeMouseListener(vertexAction);
-                        canvas.removeMouseListener(movedAction);
-                        canvas.removeMouseMotionListener(deEdgeAction);
-                        canvas.removeMouseListener(deEdgeAction);
+                        removeListenerMouse(MouseListener.class);
+                        removeListenerMouse(MouseMotionListener.class);
 
                         canvas.addMouseListener(edgeAction);
                     }
@@ -111,11 +121,8 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         this.view.getjButton1().addActionListener(
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
-                        canvas.removeMouseListener(edgeAction);
-                        canvas.removeMouseListener(movedAction);
-                        canvas.removeMouseMotionListener(movedAction);
-                        canvas.removeMouseMotionListener(deEdgeAction);
-                        canvas.removeMouseListener(deEdgeAction);
+                        removeListenerMouse(MouseListener.class);
+                        removeListenerMouse(MouseMotionListener.class);
 
                         canvas.addMouseMotionListener(vertexAction);
                         canvas.addMouseListener(vertexAction);
@@ -126,11 +133,8 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         this.view.getjButton3().addActionListener(
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
-                        canvas.removeMouseMotionListener(vertexAction);
-                        canvas.removeMouseListener(vertexAction);
-                        canvas.removeMouseListener(edgeAction);
-                        canvas.removeMouseMotionListener(deEdgeAction);
-                        canvas.removeMouseListener(deEdgeAction);
+                        removeListenerMouse(MouseListener.class);
+                        removeListenerMouse(MouseMotionListener.class);
 
                         canvas.addMouseMotionListener(movedAction);
                         canvas.addMouseListener(movedAction);
@@ -141,14 +145,23 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         this.view.getjButton4().addActionListener(
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
-                        canvas.removeMouseMotionListener(vertexAction);
-                        canvas.removeMouseListener(vertexAction);
-                        canvas.removeMouseListener(edgeAction);
-                        canvas.removeMouseListener(movedAction);
-                        canvas.removeMouseMotionListener(movedAction);
+                        removeListenerMouse(MouseListener.class);
+                        removeListenerMouse(MouseMotionListener.class);
 
                         canvas.addMouseMotionListener(deEdgeAction);
                         canvas.addMouseListener(deEdgeAction);
+                    }
+                }
+        );
+        
+        this.view.getjButton5().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        removeListenerMouse(MouseListener.class);
+                        removeListenerMouse(MouseMotionListener.class);
+
+                        canvas.addMouseMotionListener(coEdgeAction);
+                        canvas.addMouseListener(coEdgeAction);
                     }
                 }
         );
