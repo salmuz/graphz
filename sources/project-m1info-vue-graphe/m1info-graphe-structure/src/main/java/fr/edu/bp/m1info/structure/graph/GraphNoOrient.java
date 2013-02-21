@@ -48,17 +48,35 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
+/**
+ * Cette classe permet de créer des objets graphes orientés
+ *
+ * Elle possède comme parametre deux l'Edge et le Vertex qui sont des Edge
+ * pour relier les vertex et des  Vertex sont les sommets
+ * @param <ShapeEdge>
+ * @param <ShapeVertex>
+ *
+ */
 public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph,
         ShapeVertex extends ShapeGeometric & VertexShapeGraph>
         extends Graph<Edge<ShapeEdge>, Vertex<Integer, ShapeVertex>> {
-
+    /**
+     * C'est un constructeur du graphe
+     */
     public GraphNoOrient() {
         super();
         edgeList = new ArrayList<Edge<ShapeEdge>>();
         vertexList = new ArrayList<Vertex<Integer, ShapeVertex>>();
     }
 
+    /**
+     * C'est une methode qui est redefinie de la classe graphe et qui permet de verifier si un Edge existe ou pas dans le graphes
+     *
+     * c'est l'edge quand verifie
+     * @param shapeEdgeEdge
+     *
+     * @return vrai ou faux sur l'existance de l'edge dans le graphes
+     */
     @Override
     public boolean containsEdge(Edge<ShapeEdge> shapeEdgeEdge) {
         Iterator<Edge<ShapeEdge>> it = edgeList.iterator();
@@ -74,7 +92,14 @@ public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph,
 
         return false;
     }
-
+    /**
+     * C'est une methode qui est redefinie de la classe graphe et qui permet de supprimer  un Edge dans le graphes
+     *
+     * c'est l'edge quand suprime qui se trouve entre les deux sommet
+     * @param source
+     * @param target
+     *
+     */
     @Override
     public void removeEdge(Vertex<Integer, ShapeVertex> source, Vertex<Integer, ShapeVertex> target) {
         for (int i = 0; i < edgeList.size(); i++) {

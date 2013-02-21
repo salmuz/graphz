@@ -52,11 +52,13 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Cette classe graphe est une classe qui rassemble les propriétés entre GraphNoOrient et DirectedGraph
+ * pour la possibilité des client on a partager les deux classes graphNoOrienté et classe Directedgraph
  *
- * The instance of the class must be create like anonymous.
- * Graph<...> graph = new SubTypeGraph<...>(){ }
- *
+ * @param <Edge>     c'est la variable arrete du graphe
+ * @param <Node>     c'est la variables sommet
  */
+
 public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
 
     protected final Class<AbstractEdge> clazzEdge;
@@ -74,10 +76,15 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
         this.clazzEdge = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(),0);
         this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(),1);
     }
-
+    /**
+     * C'est une methode getEdgeSet qui permet d'acceder la valeur du variable Edege
+     *
+     * @return  la methode  retour une liste des edge cela veut dire que dans cette methode on peut mettre plusieur objet different
+     */
     public List<Edge> getEdgeList() {
         return edgeList;
     }
+
 
     public List<Node> getVertexList() {
         return vertexList;
@@ -92,7 +99,14 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
         edgeList.add(edge);
         return edge;
     }
-
+    /**
+     * C'est une methode qui permet de verifier si on peut ajouter une Edge dans un graphes ou non
+     * car avec deux Node qui sont deja relier tu peut pas une autre fois relier donc la methode avant a besoin cette methode
+     *et puis elle rajout dans le graph
+     * @param edge ce parametre est une edge quand teste si on peut inserer dans le graph ou pas
+     *
+     * @return  elle reourne boolean
+    */
     public boolean addEdge(Edge edge){
         if(edgeList.contains(edge)){
             return false;
@@ -101,6 +115,13 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
         return true;
     }
 
+    /**
+     * C'est une methode qui permet de tester si on peut  rajouter un node dans le graph
+     *
+     * @param vertex   c'est une variable de type node quand teste si on  rajouter dans le graph
+     *
+     * @return de type boolean
+     */
     public boolean addVertex(Node vertex){
         if(vertexList.contains(vertex)){
             return false;
@@ -108,19 +129,48 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
         vertexList.add(vertex);
         return true;
     }
-
+    /**
+     * C'est une methode qui permet de verifier si une  arrete existe ou pas entre deux nodes
+     *
+     * ce sont deux variables de types node
+     * @param source
+     * @param target
+     *
+     * @return
+     */
     public boolean containsEdge(Node source, Node target){
         throw new UnsupportedOperationException();
     }
-
+    /**
+     * C'est une methode qui permet de verifier si une  arrete existe ou pas a partir de la definition d'une arrete
+     *
+     * on verifie si cet edge appartient a graphes
+     * @param edge
+     *
+     * @return  de types boolean si elle existe ou pas
+     */
     public boolean containsEdge(Edge edge){
        return edgeList.contains(edge);
     }
-
+    /**
+     * C'est une methode qui permet verifier si un Node est dans un graphe
+     *
+     * @param vertex   on teste si ce Node appartient dans le graphe
+     *
+     * @return return boolean pour connaitre si elle est contenu dans le graphe ou pas
+     */
     public boolean containsVertex(Node vertex){
        return vertexList.contains(vertex);
     }
-
+    /**
+     * C'est une methode qui permet de supprimer un Edge dans un graphe
+     *
+     *  pour suprimer il faut suppimer un Edge qui se trouve entre ce deux sommets
+     * @param source
+     * @param target
+     *
+     * @return Elle retourne un Edge si ce impossible pour supprimer l'Edge
+     */
     public void removeEdge(Node source, Node target){
         for (int i = 0; i < edgeList.size(); i++) {
             Edge edge = edgeList.get(i);
@@ -131,32 +181,74 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
             }
         }
     }
-
+    /**
+     * C'est une methode qui permet de supprimer un Edge dans un graphe
+     *
+     *  pour suprimer il faut suppimer un Edge qui se trouve dans la liste des edges
+     *
+     * @param source
+     * @param target
+     *
+     * @return Elle retourne un boolean si ce impossible pour supprimer l'Edge ou pas
+     */
     public boolean removeEdge(Edge edge){
         return edgeList.remove(edge);
     }
-
+    /**
+     * C'est une methode qui permet de supprimer un Vertex dans un graphe
+     *
+     * pour suprimer il faut suppimer un Node il faut preciser le node
+     * @param Vertex
+     *
+     * @return Elle retourne un Edge si ce impossible pour supprimer l'Edge
+     */
     public boolean removeVertex(Node vertex){
         return vertexList.remove(vertex);
     }
 
+    /**
+     *
+     * indique la classe  de L'edge
+     *
+     * @return elle retourne la classe
+     *
+     */
     public Class<AbstractEdge> getClazzEdge() {
         return clazzEdge;
     }
-
+    /**
+     *
+     * indique la classe  de l'EdgeShape
+     *
+     * @return elle retourne la classe
+     *
+     */
     public Class<? extends ShapeGeometric> getClazzEdgeShape() {
         return clazzEdgeShape;
     }
 
+    /**
+     *
+     * @return
+     */
     public Class<Vertex> getClazzVertex() {
         return clazzVertex;
     }
 
+    /**
+     *
+     * @return
+     */
     public Class<? extends ShapeGeometric> getClazzVertexShape() {
         return clazzVertexShape;
     }
 
-
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public Node getVertexShape(double x,double y){
 
        Iterator<Node> it = getVertexList().iterator();
@@ -170,6 +262,12 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
        return null;
     }
 
+    /**
+     *
+     * @param vertex
+     * @param excludes
+     * @return
+     */
     public boolean isVertexSamePlace(Node vertex,Node ... excludes){
         Iterator<Node> it = getVertexList().iterator();
         while(it.hasNext()){
@@ -187,6 +285,11 @@ public abstract class Graph<Edge extends AbstractEdge,Node extends Vertex> {
         return false;
     }
 
+    /**
+     *
+     * @param vertex0
+     * @return
+     */
     public Set<Edge> getEdgesOfVertex(Vertex vertex0){
         Set<Edge> edges = new HashSet<Edge>();
         Iterator<Edge> it = edgeList.iterator();
