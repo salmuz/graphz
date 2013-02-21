@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Kalil DAHER MOHAMED
- *                  Aden Nouh Abdirazak
+ *                  Aben Nouh Abdirazak 
  *
  * Changes
  * -------
@@ -42,8 +42,5 @@ package fr.edu.bp.m1info.mvp.model;
 
 import fr.edu.bp.m1info.mvp.common.Repository;
 
-/**
- * cette classe EdgeRepository herite certain information de la classe repository
- */
 public class EdgeRepository extends Repository{
 }
