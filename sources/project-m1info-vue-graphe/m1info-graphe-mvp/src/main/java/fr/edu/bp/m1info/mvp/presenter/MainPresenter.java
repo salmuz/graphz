@@ -51,10 +51,7 @@ import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
-import fr.edu.bp.m1info.swing.events.AddEdgeListener;
-import fr.edu.bp.m1info.swing.events.AddVertexListener;
-import fr.edu.bp.m1info.swing.events.DeleteEdgeListener;
-import fr.edu.bp.m1info.swing.events.MoveVertexListener;
+import fr.edu.bp.m1info.swing.events.*;
 
 import javax.swing.*;
 import java.awt.*;
