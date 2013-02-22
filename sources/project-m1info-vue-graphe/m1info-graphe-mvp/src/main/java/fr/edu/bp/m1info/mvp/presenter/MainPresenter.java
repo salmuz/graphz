@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak 
+ *                  Aden Nouh Abdirazak
  *
  * Changes
  * -------
@@ -64,12 +64,18 @@ import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * cette classe MainPresenter herite certain information de la classe Presenter<UIMainPrueba>
+ */
 public class MainPresenter extends Presenter<UIMainPrueba> {
 
     private Graph<Edge<Line>, Vertex<Integer, Circle>> graph;
     private GraphCanvas<Edge<Line>, Vertex<Integer, Circle>> canvas;
 
     @Override
+    /**
+     * cette methode ne returne pas a une objet ou une valeur
+     */
     protected void createrView() {
         super.view = new UIMainPrueba(new Frame(), true);
     }

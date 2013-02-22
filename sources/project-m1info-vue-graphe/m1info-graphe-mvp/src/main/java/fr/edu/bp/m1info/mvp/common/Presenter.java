@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak 
+ *                  Aden Nouh Abdirazak
  *
  * Changes
  * -------
@@ -41,6 +41,9 @@
 package fr.edu.bp.m1info.mvp.common;
 
 import java.awt.*;
+/**
+* Ici nous avons une classe abstrait et qui ets derive de la classe Window & View>
+*/
 
 public abstract class Presenter<UI extends Window & View> {
 
@@ -57,6 +60,9 @@ public abstract class Presenter<UI extends Window & View> {
 
     protected void validateFields(){};
 
+    /**
+     * cette methode contient fait appel 5 methode
+     */
     public void startUp() {
         createrRepository();
         createrView();

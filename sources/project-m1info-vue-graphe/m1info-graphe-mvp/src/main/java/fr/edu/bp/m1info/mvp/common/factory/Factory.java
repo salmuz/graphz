@@ -31,7 +31,7 @@
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
  * 					Moussa Kalil 
- *                  Aben Nouh Abdirazak 
+ *                  Aden Nouh Abdirazak
  *
  * Changes
  * -------
@@ -44,7 +44,11 @@ import fr.edu.bp.m1info.mvp.common.Repository;
 import fr.edu.bp.m1info.mvp.model.EdgeRepository;
 
 public class Factory {
-
+    /**
+     * cette methode Repository getRp(Class<? herite certain information de la methode Repository> repository
+     * @param repository
+     * @return null
+     */
     public static Repository getRp(Class<? extends Repository> repository) {
        return null;
     }
