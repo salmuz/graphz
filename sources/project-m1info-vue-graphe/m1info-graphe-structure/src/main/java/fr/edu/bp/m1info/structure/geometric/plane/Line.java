@@ -44,32 +44,47 @@ import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 
-/*nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
-       et elle est implementé dans la class EdgeShapeGraph*/
+/**
+ * nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
+ * et elle est implementé dans la class EdgeShapeGraph
+ */
 public class Line extends ShapeGeometric implements EdgeShapeGraph {
 
-            /*on a declare deux variable de type point et protegé  */
+
     protected Point start;
     protected Point end;
 
-            /*@parameter start,end, cette methode contient 2 parameter
-           * et ces point serons herité de la class ShapeGeometric*/
+    /**
+     * C'est un constructeur
+     * @parameter start,end, cette methode contient 2 paramete
+     *  et ces point serons herité de la class ShapeGeometric
+     */
     public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
     }
-       /*  @return elle retourn le point start
-        * cette methode permette de recupére le contenu du variable start*/
+    /**
+     *  cette methode permette de recupére le contenu du variable start
+     *
+     * @return elle retourn le point star
+     *
+     */
     public Point getStart() {
         return start;
     }
-         /* @parameter start
-   * cette methode permette de modifier le contenu du variable start*/
+    /**
+     *   cette methode permette de modifier le contenu du variable start
+     *
+     *  @parameter start
+     */
     public void setStart(Point start) {
         this.start = start;
     }
-      /*  @return elle retourn le point end
-        * cette methode permette de recupére le contenu du variable end*/
+    /**
+     *  cette methode permette de recupére le contenu du variable end
+     *
+     *  @return elle retourn le point end
+     */
     public Point getEnd() {
         return end;
     }
@@ -93,14 +108,31 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
         graphics.draw(this);
     }
 
+    /**
+     * C'est une methode qui permet de recuperer le point de depart du ligne
+     *
+     * @return le point
+     */
     public Point getPointStart() {
         return this.start;
     }
 
+    /**
+     * C'est une methode qui permet de recuperer le point de fin du ligne
+     *
+     * @return
+     */
     public Point getPointEnd() {
         return this.end;
     }
 
+    /**
+     * C'est une methode pour verifier si les objets sont different
+     *
+     * @param o c'est l'objet de la classe quand verifie
+     *
+     * @return un boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,14 +145,22 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
 
         return true;
     }
-
+    /**
+     * C'est une methode qui decrit le code ou le reference de la classe
+     *
+     * @return    un code
+     */
     @Override
     public int hashCode() {
         int result = start != null ? start.hashCode() : 0;
         result = 31 * result + (end != null ? end.hashCode() : 0);
         return result;
     }
-
+    /**
+     * c'est une methode qui traduit le variable en srting
+     *
+     * @return un string avec le variable
+     */
     @Override
     public String toString() {
         return "Line{" +

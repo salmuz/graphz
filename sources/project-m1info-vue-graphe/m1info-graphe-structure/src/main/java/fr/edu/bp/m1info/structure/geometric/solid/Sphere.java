@@ -43,8 +43,14 @@ import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 
+/**
+ * C'est une classe Sphere qui herite le shapeGeometric
+ */
 public class Sphere extends ShapeGeometric{
-
+    /**
+     *
+     * @param graphics grace a l'objet graphics quand dessine
+     */
     @Override
     public void draw(Graphics graphics) {
         throw new UnsupportedOperationException();

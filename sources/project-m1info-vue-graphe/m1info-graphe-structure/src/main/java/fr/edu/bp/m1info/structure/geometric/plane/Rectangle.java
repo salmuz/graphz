@@ -44,58 +44,93 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 
-/*nous avons une class appelle Rectangle et qui herite certaine methode de la class ShapeGeometric
-      * et qui sera implementé dans la class VertexShapeGraph*/
+/**
+ * nous avons une class appelle Rectangle et qui herite certaine methode de la class ShapeGeometric
+ * et qui sera implementé dans la class VertexShapeGraph
+ *
+ */
 public class Rectangle extends ShapeGeometric implements VertexShapeGraph {
 
     private Point point;
     private double width;
     private double height;
 
-    /*@parameter Point point, double width, double height cette methode contient 3 parameter
-           */
+    /**
+     * C'est un constructeur
+     *
+     * initialistion les trois variables
+     * @param point
+     * @param width
+     * @param height
+     */
     public Rectangle(Point point, double width, double height) {
         this.point = point;
         this.width = width;
         this.height = height;
     }
-       /*  @return elle retourn point
-        * cette methode permette de recupére le contenu du variable point*/
+    /*
+     * cette methode permette de recupére le contenu du variable point
+     *
+     * @return elle retourn point
+     */
     public Point getPoint() {
         return point;
     }
-            /* @parameter point
-   * cette methode permette de modifier le contenu du variable point*/
+    /**
+     * cette methode permette de modifier le contenu du variable point
+     *
+     *  @parameter point
+     */
     public void setPoint(Point point) {
         this.point = point;
     }
-     /*  @return elle retourn width
-        * cette methode permette de recupére le contenu du variable width*/
+    /**
+      * cette methode permette de recupére le contenu du variable width
+      *
+      *  @return elle retourn width
+      */
     public double getWidth() {
         return width;
     }
-         /* @parameter width
-   * cette methode permette de modifier le contenu du variable width*/
+    /**
+     * cette methode permette de modifier le contenu du variable width
+     *
+     *  @parameter width change l'ancien
+     */
     public void setWidth(double width) {
         this.width = width;
     }
-         /*  @return elle retourn height
-        * cette methode permette de recupére le contenu du variable height*/
+    /**
+     * cette methode permette de recupére le contenu du variable height
+     *
+     * @return elle retourn height
+     */
     public double getHeight() {
         return height;
     }
-      /* @parameter height
-   * cette methode permette de modifier le contenu du variable height*/
+    /*
+     * cette methode permette de modifier le contenu du variable height
+     *
+     * @parameter height
+     */
     public void setHeight(double height) {
         this.height = height;
     }
-      /*@graphic
-      * permettent de mettre le poid la longueur et le point sur la graphic*/
+    /**
+     * permettent de mettre le poid la longueur et le point sur la graphic
+     *
+     *@graphic
+     */
     @Override
     public void draw(Graphics graphics) {
         graphics.draw(this);
     }
 
+    /**
+     * elle permet cette methode de ddeterminer le centre du ligne
+     *
+     * @return retourne un point centrale
+     */
     public Point centreShape(){
         throw new UnsupportedOperationException("Method not implement");
     }

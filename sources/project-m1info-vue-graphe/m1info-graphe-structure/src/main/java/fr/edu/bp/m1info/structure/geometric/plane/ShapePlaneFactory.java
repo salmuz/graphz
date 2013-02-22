@@ -44,6 +44,9 @@ import fr.edu.bp.m1info.structure.geometric.Arrow;
 import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 
+/**
+ * C'est une classe
+ */
 public class ShapePlaneFactory {
 
     public static ShapeGeometric createShape(Class<? extends ShapeGeometric> clazz,double ...coordinate){

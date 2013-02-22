@@ -39,5 +39,8 @@
  */
 package fr.edu.bp.m1info.structure.geometric.solid;
 
+/**
+ * c'est une classe qui Cube
+ */
 public class Cube {
 }

@@ -40,6 +40,9 @@
  */
 package fr.edu.bp.m1info.structure.geometric;
 
+/**
+ * ici nous avons une classe qui definie une variable constante
+ */
 public class ConstantsGeometric {
 
     public static double RADIO = 10;

@@ -38,7 +38,10 @@
  *
  */
 package fr.edu.bp.m1info.structure.geometric;
-          /*ici nous avons une interface qui contient une methode public */
+
+/**
+ * ici nous avons un interface Arrow qui regroupe tout les ligne
+ */
 public interface Arrow  {
     public enum PLACE_OF_ARROW {
 		 MIDDLE, END

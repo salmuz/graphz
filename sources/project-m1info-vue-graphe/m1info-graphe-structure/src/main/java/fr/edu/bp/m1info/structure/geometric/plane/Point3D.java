@@ -41,25 +41,38 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
 
-     /*nous avons une class appelle Point3D et qui herite certaine methode de la class Point2D*/
+/**
+ * nous avons une class appelle Point3D et qui herite certaine methode de la class Point2D
+ */
 public class Point3D extends Point2D {
 
     private double z;
 
-    /*@parameter double x, double y, double z cette methode contient 3 parameter
-           * et les deux premier parameter  serons herité de la class point2fD */
+
+   /**
+    * c'est un constructeur de la classe
+    *
+    * @parameter double x, double y, double z cette methode contient 3 parameter
+    * et les deux premier parameter  serons herité de la class point2fD
+    */
     public Point3D(double x, double y, double z) {
         super(x, y);
         this.z = z;
     }
 
-    /*  @return elle retourn z
-        * cette methode permette de recupére le contenu du variable z*/
+    /**
+     * cette methode permette de recupére le contenu du variable z
+     *
+     * @return elle retourn z
+     */
     public double getZ() {
         return z;
     }
-      /* @parameter z
-   * cette methode permette de modifier le contenu du variable z*/
+    /**
+     * cette methode permette de modifier le contenu du variable z
+     *
+     * @parameter z
+     */
     public void setZ(double z) {
         this.z = z;
     }

@@ -113,15 +113,37 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
        this.shape = graphics.draw(this);
     }
 
+    /**
+     * C'est un methode qui verifie si un point appartient
+     *
+     * ce le coordonnées du point
+     * @param x  origine
+     * @param y  ordonées
+     *
+     * @return  boolean
+     */
     @Override
     public boolean contains(double x, double y) {
         return this.shape.contains(x,y);
     }
 
+    /**
+     * C'est une methode qui calcule le centre d'un cercle
+     *
+     * @return un point
+     */
     public Point centreShape() {
         return this.getCenter();
     }
 
+    /**
+     * c'est la methode qui est redefinie pour le cercle intersect du cercle
+     *
+     * @param shapeGeometric     ce la variable a tester
+     *
+     *
+     * @return  un boolean
+     */
     @Override
     public boolean intersect(ShapeGeometric shapeGeometric) {
         Circle circle = (Circle)shapeGeometric;
@@ -135,7 +157,13 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
                 2*circle.getRadio(),
                 2*circle.getRadio());
     }
-
+    /**
+     *  C'est une methode qui permet de verifie qui si des objet des cette classe sont different
+     *
+     *  @param o c'est l'objet quand teste
+     *
+     * @return  un boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -148,7 +176,11 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
 
         return true;
     }
-
+    /**
+     * C'est une methode qui decrit le code ou le reference de la classe
+     *
+     * @return    un code
+     */
     @Override
     public int hashCode() {
         int result;
@@ -158,7 +190,11 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
-
+    /**
+     * c'est une methode qui traduit le variable en srting
+     *
+     * @return un string avec le variable
+     */
     @Override
     public String toString() {
         return "Circle{" +

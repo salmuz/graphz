@@ -39,13 +39,16 @@
  */
 package fr.edu.bp.m1info.structure.geometric;
 
- /* @ parameter nous avons deux parameter x et y une pour la methode setX et l'autre pour setY
-    */
+/**
+ * C'est un interface pour tout le type des point
+  */
 public interface Point{
 
-  /* @parameter on trois parameter x ,y,et z
-  et ces methodes permettent de recupéré avec la methode get ou de modifier avec la methode set*/
 
+    /**
+     * ces methodes permettent de recupéré avec la methode get ou de modifier avec la set et qui seront redefinies dans les classes
+     * qui heritent
+     */
     public double getX();
 
     public void setX(double x);

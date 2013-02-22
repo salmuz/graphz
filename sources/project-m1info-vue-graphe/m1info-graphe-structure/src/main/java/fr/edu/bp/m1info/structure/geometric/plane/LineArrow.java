@@ -47,42 +47,68 @@ import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 
 import java.awt.*;
 
-/*nous avons une class appelle LineArrow et qui herite certaine methode de la class Line
-       et elle est implementé dans la class  Arrow et  EdgeShapeGraph*/
+/**
+ * nous avons une class appelle LineArrow et qui herite certaine methode de la class Line
+ * et elle est implementé dans la class  Arrow et  EdgeShapeGraph
+ */
 public class LineArrow extends Line implements Arrow, ArcShapeGraph {
 
     private PLACE_OF_ARROW placeOfArrow;
     private Color cfecha;
 
-               /*@parameter start,end,placeOfArrow cette methode contient 3 parameter
-           * et les deux premier  points serons herité de la class curve */
+    /**
+     * C'est le constructeur de la classe
+     *
+     * @parameter start,end,placeOfArrow cette methode contient 3 parameter
+     * et les deux premier  points serons herité de la class curve
+     */
     public LineArrow(Point start, Point end, PLACE_OF_ARROW placeOfArrow) {
         super(start, end);
         this.placeOfArrow = placeOfArrow;
         this.color = Color.BLACK;
     }
 
-        /*  @return elle retourn placeOfArrow
-        * cette methode permette de recupére le contenu du variable placeOfArrow*/
+    /**
+     * cette methode permette de recupére le contenu du variable placeOfArrow
+     *
+     *  @return elle retourn placeOfArrow
+     */
     public PLACE_OF_ARROW getPlaceOfArrow() {
         return placeOfArrow;
     }
-        /* @parameter placeOfArrow
-   * cette methode permette de modifier le contenu du variable placeOfArrow*/
+    /**
+     *  cette methode permette de modifier le contenu du variable placeOfArrow
+     *
+     *  @parameter placeOfArrow
+     */
     public void setPlaceOfArrow(PLACE_OF_ARROW placeOfArrow) {
         this.placeOfArrow = placeOfArrow;
     }
 
+    /**
+     * cette methode permette de recupére le contenu du variable cfecha
+     *
+     * @return qui retoune un color
+     */
     public Color getCfecha() {
         return cfecha;
     }
 
+    /**
+     * cette methode permette de modifier le contenu du variable cfecha qui est un couleur
+     *
+     * @param cfecha      qui est un couleur
+     *
+     */
     public void setCfecha(Color cfecha) {
         this.cfecha = cfecha;
     }
 
-    /*@parameter graphics
-cette methode permettent de dessiner le ligne et le fleche  */
+    /**
+     * cette methode permettent de dessiner le ligne et le fleche
+     *
+     * @parameter graphics qui permet de tracer grace a cet objet
+     */
     @Override
     public void draw(Graphics graphics) {
         super.draw(graphics);  // designer le ligne                           ss
