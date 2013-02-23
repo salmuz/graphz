@@ -45,5 +45,7 @@ public interface EdgeShapeGraph {
 
     public Point getPointStart();
 
+    public Point geMidPoint();
+
     public Point getPointEnd();
 }

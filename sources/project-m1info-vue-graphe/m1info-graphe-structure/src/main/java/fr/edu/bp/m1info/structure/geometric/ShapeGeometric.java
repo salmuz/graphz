@@ -48,10 +48,13 @@ import java.awt.*;
  * nous avons une class abstract qui permettra de la forme du graphe
  */
 public abstract class ShapeGeometric {
+
       /*on a declare deux attribut pour la couleur des ligne et du fond de la fenetre */
     protected Color color = Color.BLACK;
     protected Color background = Color.black;
+    // Shape de AWT
     protected Shape shape;
+    protected Object value;
 
     /**
      * cette methode getcolor permettent de recupéré la couleur des ligne qui se trouve dans la variable

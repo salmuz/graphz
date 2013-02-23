@@ -52,4 +52,5 @@ public interface VertexShapeGraph {
      * @return dont le centre est un point donc retourne un point
      */
     public Point centreShape();
+
 }

@@ -35,15 +35,34 @@
  *
  * Changes
  * -------
- * 13/02/13 : Version 01;
+ * 23/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric;
+package fr.edu.bp.m1info.swing.events;
 
-/**
- * ici nous avons une classe qui definie une variable constante
- */
-public class ConstantsGeometric {
+import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
-    public static double RADIO = 15;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class SeparateVertexListener extends AddEdgeListener{
+
+    public SeparateVertexListener(GraphCanvas canvas) {
+        super(canvas);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        super.mousePressed(e);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        super.mouseReleased(e);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        super.mouseDragged(e);
+    }
 }

@@ -49,12 +49,19 @@ import java.awt.*;
 *  pour dessiner une graphe */
 public interface Graphics {
 
+<<<<<<< HEAD
     /**
      *-Line line -Circle circle  - LineArrow lineArrow -Rectangle rectangle - Curve curve
      * et ces methodes permette de dessiner la graphe
      *
      * @ parameter dans chaque methode on a une parameter de son type quand veut dessiner
      */
+=======
+    /* @ parameter dans chaque methode on a une parameter
+    -Line line -Circle circle  - LineArrow lineArrow -Rectangle rectangle - Curve curve
+    * et ces methodes permette de dessiner la graphe*/
+
+>>>>>>> Ajouter nom au sommet et poids à l'arête, event supprimer sommet et j'ameliore l'évenement contracter des arêtes
     public void draw(Line line);
 
     public Shape draw(Circle circle);
@@ -65,5 +72,5 @@ public interface Graphics {
 
     public void draw(Curve curve);
 
-
+    public void draw(Message message);
 }

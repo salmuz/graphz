@@ -35,15 +35,45 @@
  *
  * Changes
  * -------
- * 13/02/13 : Version 01;
+ * 23/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric;
+package fr.edu.bp.m1info.swing.events;
 
-/**
- * ici nous avons une classe qui definie une variable constante
- */
-public class ConstantsGeometric {
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
-    public static double RADIO = 15;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class DeleteVertexListener implements MouseListener {
+
+    private GraphCanvas canvas;
+
+    public DeleteVertexListener(GraphCanvas canvas) {
+        super();
+        this.canvas = canvas;
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        Point p = e.getPoint();
+        Vertex  vertex = canvas.getGraph().getVertexShape(p.getX(),p.getY());
+        if(vertex != null){
+            canvas.getGraph().removeVertex(vertex);
+            canvas.repaint();
+        }
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseExited(MouseEvent e) {
+    }
 }

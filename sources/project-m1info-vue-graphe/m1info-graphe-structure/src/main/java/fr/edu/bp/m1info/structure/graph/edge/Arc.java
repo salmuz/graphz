@@ -45,17 +45,17 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 /*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
 *et de la class AbstractEdge<Shape>*/
-public class Arc<Shape extends ShapeGeometric & ArcShapeGraph> extends AbstractEdge<Shape>{
+public class Arc<Value,Shape extends ShapeGeometric & ArcShapeGraph> extends AbstractEdge<Value,Shape>{
 
     /**
      * C'est une methode ou un constructeur  qui contienne une parameter
      *
-     * @parameter shape  Shape
+     * @parameter value  value
      * @parameter source Vertex
      * @parameter target  Vertex
      *
      */
-    public Arc(Vertex source, Vertex target) {
-        super(source, target);
+    public Arc(Vertex source, Vertex target, Value value) {
+        super(source, target, value);
     }
 }

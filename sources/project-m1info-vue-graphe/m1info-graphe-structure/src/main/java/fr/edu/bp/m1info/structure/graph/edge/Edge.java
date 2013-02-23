@@ -46,18 +46,18 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 /*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
 *et de la class AbstractEdge<Shape>*/
-public class Edge<Shape extends ShapeGeometric & EdgeShapeGraph> extends AbstractEdge<Shape>{
+public class Edge<Value,Shape extends ShapeGeometric & EdgeShapeGraph> extends AbstractEdge<Value,Shape>{
 
 
     /**
      * C'est une methode qui contienne une parameter
      *
-     * @parameter shape  shapeGraph
+     * @parameter value  value
+     * @parameter source Vertex
+     * @parameter target  Vertex
      *
      */
-    public Edge(Vertex source, Vertex target) {
-        super(source, target);
+    public Edge(Vertex source, Vertex target, Value value) {
+        super(source, target, value);
     }
-
-
 }

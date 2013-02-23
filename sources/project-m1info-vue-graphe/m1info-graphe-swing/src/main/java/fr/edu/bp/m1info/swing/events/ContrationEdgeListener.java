@@ -40,6 +40,8 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
+import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
@@ -47,7 +49,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ContrationEdgeListener  extends AddEdgeListener {
+public class ContrationEdgeListener extends AddEdgeListener {
 
     public ContrationEdgeListener(GraphCanvas canvas) {
         super(canvas);
@@ -69,7 +71,7 @@ public class ContrationEdgeListener  extends AddEdgeListener {
             if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
                 edge.setTarget(vertex1);
                 if (canvas.getGraph().containsEdge(edge)) {
-
+                    canvas.getGraph().contractEdge(edge);
                 }
             }
             canvas.repaint();

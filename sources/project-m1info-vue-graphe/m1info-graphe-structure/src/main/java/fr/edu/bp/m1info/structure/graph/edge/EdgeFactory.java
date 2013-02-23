@@ -45,14 +45,14 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 public class EdgeFactory {
 
-    public static AbstractEdge createEdge(Class clazz,Vertex source, Vertex target){
+    public static AbstractEdge createEdge(Class clazz,Vertex source, Vertex target,Object value){
 
         AbstractEdge edge = null;
 
         if(clazz.isAssignableFrom(Edge.class)){
-            edge = new Edge(source,target);
+            edge = new Edge(source,target,value);
         }else{
-            edge = new Arc(source,target);
+            edge = new Arc(source,target,value);
         }
 
         return edge;

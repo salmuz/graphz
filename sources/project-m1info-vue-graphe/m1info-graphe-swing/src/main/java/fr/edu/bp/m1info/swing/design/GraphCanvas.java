@@ -79,15 +79,15 @@ public class GraphCanvas<Edge extends AbstractEdge,Node extends Vertex> extends 
 
 
         for (Edge e: draftEdge){
-            e.getEdge().draw(graphics);
+            e.draw(graphics);
         }
 
         for (Edge e : graph.getEdgeList()) {
-            e.getEdge().draw(graphics);
+            e.draw(graphics);
         }
 
         for (Node n : graph.getVertexList()) {
-            n.getVertex().draw(graphics);
+            n.draw(graphics);
         }
 
     }

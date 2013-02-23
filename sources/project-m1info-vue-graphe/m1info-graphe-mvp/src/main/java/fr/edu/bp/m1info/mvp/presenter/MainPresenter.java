@@ -62,8 +62,8 @@ import java.awt.event.MouseMotionListener;
 
 public class MainPresenter extends Presenter<UIMainPrueba> {
 
-    private Graph<Edge<Line>, Vertex<Integer, Circle>> graph;
-    private GraphCanvas<Edge<Line>, Vertex<Integer, Circle>> canvas;
+    private Graph<Edge<Integer,Line>, Vertex<Integer, Circle>> graph;
+    private GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>> canvas;
 
     @Override
     protected void createrView() {
@@ -77,8 +77,8 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
     @Override
     protected void initComponent() {
-        graph = new GraphNoOrient<Line, Circle>() { };
-        canvas = new GraphCanvas<Edge<Line>, Vertex<Integer, Circle>>(graph);
+        graph = new GraphNoOrient<Line, Circle,Integer,Integer>() { };
+        canvas = new GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>>(graph);
         this.view.getjScrollPane1().setViewportView(canvas);
     }
     
@@ -102,6 +102,7 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         final MouseListener edgeAction = new AddVertexListener(canvas);
         final MouseAdapter deEdgeAction = new DeleteEdgeListener(canvas);
         final MouseAdapter coEdgeAction = new ContrationEdgeListener(canvas);
+        final MouseListener deVertexAction = new DeleteVertexListener(canvas);
 
         this.view.getjButton2().addActionListener(
                 new AbstractAction() {
@@ -157,6 +158,17 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
                         canvas.addMouseMotionListener(coEdgeAction);
                         canvas.addMouseListener(coEdgeAction);
+                    }
+                }
+        );
+
+        this.view.getjButton6().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        removeListenerMouse(MouseListener.class);
+                        removeListenerMouse(MouseMotionListener.class);
+
+                        canvas.addMouseListener(deVertexAction);
                     }
                 }
         );

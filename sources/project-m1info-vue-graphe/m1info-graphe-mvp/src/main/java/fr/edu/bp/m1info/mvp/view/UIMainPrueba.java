@@ -67,7 +67,7 @@ public class UIMainPrueba extends javax.swing.JDialog implements View {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jButton1.setText("add  Edge");
 
         jButton2.setText("add Vertex");

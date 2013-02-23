@@ -58,8 +58,8 @@ import java.util.ArrayList;
  *
  */
 public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
-                           ShapeVertex extends ShapeGeometric & VertexShapeGraph>
-        extends Graph<Arc<ShapeEdge>,Vertex<Integer,ShapeVertex>>{
+                           ShapeVertex extends ShapeGeometric & VertexShapeGraph,ValueEdge, ValueVertex>
+        extends Graph<Arc<ValueEdge,ShapeEdge>,Vertex<ValueVertex,ShapeVertex>>{
 
 
     private Class<ShapeEdge> shapeEdge;
@@ -73,8 +73,8 @@ public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
      */
     public DirectedGraph() {
         super();
-        edgeList = new ArrayList<Arc<ShapeEdge>> ();
-        vertexList = new ArrayList<Vertex<Integer,ShapeVertex>>();
+        edgeList = new ArrayList<Arc<ValueEdge,ShapeEdge>> ();
+        vertexList = new ArrayList<Vertex<ValueVertex,ShapeVertex>>();
     }
 
 }

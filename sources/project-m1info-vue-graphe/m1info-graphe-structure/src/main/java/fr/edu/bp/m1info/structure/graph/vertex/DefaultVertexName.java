@@ -35,15 +35,17 @@
  *
  * Changes
  * -------
- * 13/02/13 : Version 01;
+ * 23/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric;
+package fr.edu.bp.m1info.structure.graph.vertex;
 
-/**
- * ici nous avons une classe qui definie une variable constante
- */
-public class ConstantsGeometric {
+public class DefaultVertexName {
 
-    public static double RADIO = 15;
+    public static Integer nameVertex = 0;
+
+    public static Integer getNextName(){
+        nameVertex++;
+        return nameVertex;
+    }
 }

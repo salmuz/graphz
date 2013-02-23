@@ -161,4 +161,8 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
     public Point getPointEnd() {
         return this.end;
     }
+
+    public Point geMidPoint() {
+        return null;
+    }
 }

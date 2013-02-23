@@ -44,6 +44,7 @@ import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
+import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
@@ -78,7 +79,7 @@ public class AddEdgeListener extends MouseAdapter {
         vertex0 = canvas.getGraph().getVertexShape(x0, y0);
         if (vertex0 != null) {
             this.isSelection = true;
-            edge = canvas.getGraph().createEdge(vertex0,null);
+            edge = EdgeFactory.createEdge(canvas.getGraph().getClazzEdge(),vertex0, null,null);
             canvas.getDraftEdge().add(edge);
         }
 

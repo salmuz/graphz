@@ -156,11 +156,24 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
         result = 31 * result + (end != null ? end.hashCode() : 0);
         return result;
     }
+<<<<<<< HEAD
     /**
      * c'est une methode qui traduit le variable en srting
      *
      * @return un string avec le variable
      */
+=======
+
+    public Point geMidPoint() {
+        Point midPoint = new Point2D(0.0,0.0);
+        double midX = (start.getX() + end.getX()) /2;
+        double midY = (start.getY() + end.getY()) /2;
+        midPoint.setX(midX);
+        midPoint.setY(midY);
+        return midPoint;
+    }
+
+>>>>>>> Ajouter nom au sommet et poids à l'arête, event supprimer sommet et j'ameliore l'évenement contracter des arêtes
     @Override
     public String toString() {
         return "Line{" +

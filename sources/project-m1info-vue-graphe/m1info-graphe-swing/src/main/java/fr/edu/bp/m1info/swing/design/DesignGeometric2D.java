@@ -50,10 +50,10 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 import java.awt.*;
 import java.awt.geom.*;
 
- /**
-  * Nous avons une class appelle DesignGeometric2D et
-  * qui sera implementé dans la class Graphics
-  */
+/**
+ * Nous avons une class appelle DesignGeometric2D et
+ * qui sera implementé dans la class Graphics
+ */
 public class DesignGeometric2D implements Graphics {
 
     private Graphics2D graphics2D;
@@ -63,7 +63,6 @@ public class DesignGeometric2D implements Graphics {
      * Permette de designer la graphe
      *
      * @parameter Graphics2D graphics2D
-     *
      */
     public DesignGeometric2D(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
@@ -73,7 +72,6 @@ public class DesignGeometric2D implements Graphics {
      * Permette de designer les ligne
      *
      * @parameter Line line
-     *
      */
     public void draw(Line line) {
         graphics2D.setColor(line.getColor());
@@ -88,11 +86,11 @@ public class DesignGeometric2D implements Graphics {
      * Permette de designer les cercle
      *
      * @parameter Circle circle
-     *
      */
     public Shape draw(Circle circle) {
-        Shape shape = new Ellipse2D.Double(circle.getCenter().getX()-circle.getRadio(), circle.getCenter().getY()-circle.getRadio(),
-                                           2*circle.getRadio(), 2*circle.getRadio());
+        Shape shape = new Ellipse2D.Double(circle.getCenter().getX() - circle.getRadio(),
+                circle.getCenter().getY() - circle.getRadio(),
+                2 * circle.getRadio(), 2 * circle.getRadio());
         graphics2D.setColor(circle.getColor());
         graphics2D.draw(shape);
         graphics2D.setPaint(circle.getBackground());
@@ -104,7 +102,6 @@ public class DesignGeometric2D implements Graphics {
      * Permette de designer les courbe
      *
      * @parameter Curve curve
-     *
      */
     public void draw(Curve curve) {
         Shape shape = new CubicCurve2D.Double(curve.getStart().getX(), curve.getStart().getY(),
@@ -119,7 +116,6 @@ public class DesignGeometric2D implements Graphics {
      * Permette de designer un rectangle
      *
      * @parameter Rectangle rectangle
-     *
      */
     public void draw(Rectangle rectangle) {
         graphics2D.setColor(rectangle.getBackground());
@@ -135,7 +131,6 @@ public class DesignGeometric2D implements Graphics {
      * de determiner l'endroit ou la taille de la fleche.
      *
      * @parameter LineArrow lineArrow
-     *
      */
     public void draw(LineArrow lineArrow) {
 
@@ -144,14 +139,16 @@ public class DesignGeometric2D implements Graphics {
         double angleRotation = Math.atan2(lineArrow.getEnd().getY() - lineArrow.getStart().getY(),
                 lineArrow.getEnd().getX() - lineArrow.getStart().getX());
         // taille de la fleche
-        double arrowLength = operation.calculateSize(lineArrow)*0.18;
+        double arrowLength = operation.calculateSize(lineArrow) * 0.18;
 
-        Point pointArrow = new Point2D(0.0,0.0);
+        Point pointArrow = new Point2D(0.0, 0.0);
         //endroit de la fleche
-        switch ( lineArrow.getPlaceOfArrow() ){
-            case END: pointArrow = lineArrow.getEnd();
+        switch (lineArrow.getPlaceOfArrow()) {
+            case END:
+                pointArrow = lineArrow.getEnd();
                 break;
-            case MIDDLE: pointArrow =  operation.calculateMidPoint(lineArrow);
+            case MIDDLE:
+                pointArrow = operation.calculateMidPoint(lineArrow);
                 break;
         }
 
@@ -161,9 +158,9 @@ public class DesignGeometric2D implements Graphics {
 
         // dessin de la fleche
         Path2D.Double path = new Path2D.Double();
-        path.moveTo(-arrowLength*Math.cos(angleArrow),arrowLength*Math.sin(angleArrow));
+        path.moveTo(-arrowLength * Math.cos(angleArrow), arrowLength * Math.sin(angleArrow));
         path.lineTo(0, 0);
-        path.lineTo(-arrowLength*Math.cos(angleArrow),-arrowLength*Math.sin(angleArrow));
+        path.lineTo(-arrowLength * Math.cos(angleArrow), -arrowLength * Math.sin(angleArrow));
 
         graphics2D.setColor(lineArrow.getCfecha());
         graphics2D.fill(transform.createTransformedShape(path));
@@ -171,4 +168,12 @@ public class DesignGeometric2D implements Graphics {
     }
 
 
+    public void draw(Message message) {
+        graphics2D.setColor(message.getColor());
+        Font fonts = new Font("TimesRoman ",Font.BOLD,12);
+        message.setFont(fonts);
+        graphics2D.setFont(message.getFont());
+        graphics2D.drawString(message.getMessage(),(float) message.getPoint().getX(),
+                (float)message.getPoint().getY());
+    }
 }
