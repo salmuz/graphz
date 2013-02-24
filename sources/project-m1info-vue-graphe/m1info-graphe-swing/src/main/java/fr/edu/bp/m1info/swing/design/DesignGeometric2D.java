@@ -134,12 +134,14 @@ public class DesignGeometric2D implements Graphics {
      */
     public void draw(LineArrow lineArrow) {
 
+        graphics2D.setColor(lineArrow.getCfecha());
+
         //Angle de la fleche
         double angleArrow = Math.asin(0.3);
         double angleRotation = Math.atan2(lineArrow.getEnd().getY() - lineArrow.getStart().getY(),
                 lineArrow.getEnd().getX() - lineArrow.getStart().getX());
         // taille de la fleche
-        double arrowLength = operation.calculateSize(lineArrow) * 0.18;
+        double arrowLength = 22;
 
         Point pointArrow = new Point2D(0.0, 0.0);
         //endroit de la fleche
@@ -162,7 +164,6 @@ public class DesignGeometric2D implements Graphics {
         path.lineTo(0, 0);
         path.lineTo(-arrowLength * Math.cos(angleArrow), -arrowLength * Math.sin(angleArrow));
 
-        graphics2D.setColor(lineArrow.getCfecha());
         graphics2D.fill(transform.createTransformedShape(path));
 
     }

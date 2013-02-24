@@ -44,10 +44,17 @@ import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 
+<<<<<<< HEAD
 /**
  * nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
  * et elle est implementé dans la class EdgeShapeGraph
  */
+=======
+import java.awt.*;
+
+/*nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
+       et elle est implementé dans la class EdgeShapeGraph*/
+>>>>>>> Ajouter event Separe Sommets
 public class Line extends ShapeGeometric implements EdgeShapeGraph {
 
 
@@ -62,6 +69,8 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
     public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
+        this.color = Color.BLUE;
+        this.background = Color.BLUE;
     }
     /**
      *  cette methode permette de recupére le contenu du variable start

@@ -35,42 +35,25 @@
  *
  * Changes
  * -------
- * 23/02/13 : Version 01;
+ * 24/02/13 : Version 01;
  *
  */
 package fr.edu.bp.m1info.swing.events;
 
-import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 
-public class SeparateVertexListener implements MouseListener {
+public class GenerateGrapheAction extends AbstractAction {
 
     private GraphCanvas canvas;
 
-    public SeparateVertexListener(GraphCanvas canvas) {
-        super();
+    public GenerateGrapheAction(GraphCanvas canvas) {
         this.canvas = canvas;
     }
 
-    public void mouseClicked(MouseEvent e) {
-        Point p = e.getPoint();
-        Vertex vertex = canvas.getGraph().getVertexShape(p.getX(),p.getY());
-        if(vertex != null){
-            canvas.getGraph().separateVertex(vertex);
-            canvas.repaint();
-        }
+    public void actionPerformed(ActionEvent e) {
+
     }
-
-    public void mousePressed(MouseEvent e) { }
-
-    public void mouseReleased(MouseEvent e) { }
-
-    public void mouseEntered(MouseEvent e) { }
-
-    public void mouseExited(MouseEvent e) { }
 }

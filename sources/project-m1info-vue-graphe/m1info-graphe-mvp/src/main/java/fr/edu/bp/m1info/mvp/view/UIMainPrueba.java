@@ -44,10 +44,11 @@ import fr.edu.bp.m1info.mvp.common.View;
 
 import javax.swing.*;
 
-public class UIMainPrueba extends javax.swing.JDialog implements View {
-/** Creates new form UIMainPrueba */
-    public UIMainPrueba(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+public class UIMainPrueba extends JFrame implements View {
+
+    /** Creates new form UIMainPrueba */
+    public UIMainPrueba() {
+        super();
         initComponents();
     }
 
@@ -66,8 +67,10 @@ public class UIMainPrueba extends javax.swing.JDialog implements View {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jButton1.setText("add  Edge");
 
         jButton2.setText("add Vertex");
@@ -99,6 +102,10 @@ public class UIMainPrueba extends javax.swing.JDialog implements View {
 
         jButton6.setText("Separer");
 
+        jButton7.setText("Del Vertex");
+
+        jButton8.setText("Automatic");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,11 +126,15 @@ public class UIMainPrueba extends javax.swing.JDialog implements View {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(15, 15, 15))
             .addGroup(layout.createSequentialGroup()
-                .addGap(183, 183, 183)
+                .addGap(58, 58, 58)
                 .addComponent(jButton5)
-                .addGap(54, 54, 54)
+                .addGap(22, 22, 22)
                 .addComponent(jButton6)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jButton7)
+                .addGap(15, 15, 15)
+                .addComponent(jButton8)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,8 +147,10 @@ public class UIMainPrueba extends javax.swing.JDialog implements View {
                     .addComponent(jButton4))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(jButton5)
                     .addComponent(jButton6)
-                    .addComponent(jButton5))
+                    .addComponent(jButton7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(26, 26, 26))
@@ -169,6 +182,18 @@ public class UIMainPrueba extends javax.swing.JDialog implements View {
         return jButton6;
     }
 
+    public JButton getjButton7() {
+        return jButton7;
+    }
+
+    public JButton getjButton8() {
+        return jButton8;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
     public JScrollPane getjScrollPane1() {
         return jScrollPane1;
     }
@@ -180,6 +205,8 @@ public class UIMainPrueba extends javax.swing.JDialog implements View {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
 }

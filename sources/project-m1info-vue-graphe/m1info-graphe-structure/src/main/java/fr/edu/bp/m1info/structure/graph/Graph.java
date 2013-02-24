@@ -203,6 +203,7 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
      * @return Elle retourne un Edge si ce impossible pour supprimer l'Edge
      */
     public boolean removeVertex(Node vertex) {
+        removeEdgeAll(getEdgesOfVertex(vertex));
         return vertexList.remove(vertex);
     }
 
@@ -345,26 +346,54 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
         Vertex vertex01 = new Vertex();
         Vertex vertex02 = new Vertex();
         Point point = ((VertexShapeGraph) node.getVertex()).centreShape();
-        Point pointV0 = new Point2D(point.getX() - 2 * ConstantsGeometric.RADIO, point.getY());
+        // firts vertex
+        Point pointV1 = new Point2D(point.getX() - 4 * ConstantsGeometric.RADIO, point.getY());
         vertex01.setVertex(ShapePlaneFactory.createShape(getClazzVertexShape(),
-                pointV0.getX(), pointV0.getY()));
+                pointV1.getX(), pointV1.getY()));
         vertex01.getVertex().setBackground(Color.ORANGE);
         vertex01.getVertex().setColor(Color.ORANGE);
-
-        Point pointV1 = new Point2D(point.getX() + 2 * ConstantsGeometric.RADIO, point.getY());
+        // second vertex
+        Point pointV2 = new Point2D(point.getX() + 4 * ConstantsGeometric.RADIO, point.getY());
         vertex02.setVertex(ShapePlaneFactory.createShape(getClazzVertexShape(),
-                pointV1.getX(), pointV1.getY()));
+                pointV2.getX(), pointV2.getY()));
         vertex02.getVertex().setBackground(Color.ORANGE);
         vertex02.getVertex().setColor(Color.ORANGE);
-
+        addVertex((Node) vertex01);
+        addVertex((Node) vertex02);
 
         List<Edge> edgeSources = getEdgesOfVertex(node);
-        for (Edge item : edgeSources) {
-            changeVertexOfEdge(item, node, pointV0, vertex01);
-            changeVertexOfEdge(item, node, pointV0, vertex02);
+        for (Edge edge : edgeSources) {
+            createEdgeInRelationToSource(node, (Node) vertex01, pointV1, edge);
+            createEdgeInRelationToSource(node, (Node) vertex02, pointV2, edge);
         }
 
-        addVertex(node);
+        //Edge between Vertex01 and Vertex02
+        Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, vertex01, vertex02, null);
+        newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
+                pointV1.getX(), pointV1.getY(),pointV2.getX(), pointV2.getY()));
+        addEdge(newEdge);
 
+        removeVertex(node);
+    }
+
+    private void createEdgeInRelationToSource(Node source, Node target, Point point, Edge edge) {
+        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+        if (edge.getSource().equals(source)) {
+            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, target, edge.getTarget(), null);
+            newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
+                    point.getX(), point.getY(), e0.getPointEnd().getX(), e0.getPointEnd().getY()));
+            addEdge(newEdge);
+        } else {
+            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, edge.getSource(), target, null);
+            newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
+                    e0.getPointStart().getX(), e0.getPointStart().getY(), point.getX(), point.getY()));
+            addEdge(newEdge);
+        }
+    }
+
+    protected void removeEdgeAll(Collection<Edge> edges) {
+        for (Edge edge : edges) {
+            removeEdge(edge);
+        }
     }
 }

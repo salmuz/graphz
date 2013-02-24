@@ -46,8 +46,11 @@ import fr.edu.bp.m1info.mvp.model.EdgeRepository;
 import fr.edu.bp.m1info.mvp.view.UIMainPrueba;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
+import fr.edu.bp.m1info.structure.geometric.plane.LineArrow;
+import fr.edu.bp.m1info.structure.graph.DirectedGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
+import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
@@ -62,12 +65,14 @@ import java.awt.event.MouseMotionListener;
 
 public class MainPresenter extends Presenter<UIMainPrueba> {
 
-    private Graph<Edge<Integer,Line>, Vertex<Integer, Circle>> graph;
-    private GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>> canvas;
+    //private Graph<Edge<Integer,Line>, Vertex<Integer, Circle>> graph;
+    private Graph<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> graph;
+    //private GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>> canvas;
+    private GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> canvas;
 
     @Override
     protected void createrView() {
-        super.view = new UIMainPrueba(new Frame(), true);
+        super.view = new UIMainPrueba();
     }
 
     @Override
@@ -77,8 +82,10 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
     @Override
     protected void initComponent() {
-        graph = new GraphNoOrient<Line, Circle,Integer,Integer>() { };
-        canvas = new GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>>(graph);
+        //graph = new GraphNoOrient<Line, Circle,Integer,Integer>() { };
+        graph = new DirectedGraph<LineArrow, Circle,Integer,Integer>() { };
+        //canvas = new GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>>(graph);
+        canvas = new GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>>(graph);
         this.view.getjScrollPane1().setViewportView(canvas);
     }
     
@@ -103,6 +110,7 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         final MouseAdapter deEdgeAction = new DeleteEdgeListener(canvas);
         final MouseAdapter coEdgeAction = new ContrationEdgeListener(canvas);
         final MouseListener deVertexAction = new DeleteVertexListener(canvas);
+        final MouseListener seVertexAction = new SeparateVertexListener(canvas);
 
         this.view.getjButton2().addActionListener(
                 new AbstractAction() {
@@ -163,6 +171,17 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         );
 
         this.view.getjButton6().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        removeListenerMouse(MouseListener.class);
+                        removeListenerMouse(MouseMotionListener.class);
+
+                        canvas.addMouseListener(seVertexAction);
+                    }
+                }
+        );
+
+        this.view.getjButton7().addActionListener(
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
                         removeListenerMouse(MouseListener.class);

@@ -65,7 +65,7 @@ public class LineArrow extends Line implements Arrow, ArcShapeGraph {
     public LineArrow(Point start, Point end, PLACE_OF_ARROW placeOfArrow) {
         super(start, end);
         this.placeOfArrow = placeOfArrow;
-        this.color = Color.BLACK;
+        this.cfecha = Color.GRAY;
     }
 
     /**
