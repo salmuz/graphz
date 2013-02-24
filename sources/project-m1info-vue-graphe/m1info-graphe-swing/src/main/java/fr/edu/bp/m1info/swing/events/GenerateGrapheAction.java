@@ -54,6 +54,8 @@ public class GenerateGrapheAction extends AbstractAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-
+        String nroVertex = JOptionPane.showInputDialog("Vous pouvez clavier le chiffre des sommets?");
+        canvas.getGraph().generateGraphe(Integer.parseInt(nroVertex));
+        canvas.repaint();
     }
 }

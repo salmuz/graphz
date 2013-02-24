@@ -111,6 +111,7 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
         final MouseAdapter coEdgeAction = new ContrationEdgeListener(canvas);
         final MouseListener deVertexAction = new DeleteVertexListener(canvas);
         final MouseListener seVertexAction = new SeparateVertexListener(canvas);
+        final AbstractAction geVertexAction = new GenerateGrapheAction(canvas);
 
         this.view.getjButton2().addActionListener(
                 new AbstractAction() {
@@ -191,6 +192,8 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
                     }
                 }
         );
+
+        this.view.getjButton8().addActionListener(geVertexAction);
     }
 
 

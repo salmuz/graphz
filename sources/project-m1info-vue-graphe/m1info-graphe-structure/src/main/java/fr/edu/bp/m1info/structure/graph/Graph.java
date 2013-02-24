@@ -370,7 +370,7 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
         //Edge between Vertex01 and Vertex02
         Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, vertex01, vertex02, null);
         newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
-                pointV1.getX(), pointV1.getY(),pointV2.getX(), pointV2.getY()));
+                pointV1.getX(), pointV1.getY(), pointV2.getX(), pointV2.getY()));
         addEdge(newEdge);
 
         removeVertex(node);
@@ -396,4 +396,28 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
             removeEdge(edge);
         }
     }
+
+    public void generateGraphe(int nroVertex) {
+        for (int i=0; i < nroVertex; i++) {
+            Vertex vertex = new Vertex();
+            Point point = new Point2D((int)(Math.random() * (1000-1)) + 1,(int)(Math.random() * (1000-1)) + 1);
+            vertex.setVertex(ShapePlaneFactory.createShape(getClazzVertexShape(),
+                point.getX(), point.getY()));
+            vertex.getVertex().setBackground(Color.ORANGE);
+            vertex.getVertex().setColor(Color.ORANGE);
+
+            for(Node node : vertexList){
+                VertexShapeGraph v0 = (VertexShapeGraph)node.getVertex();
+                Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, node, vertex, null);
+                newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
+                        v0.centreShape().getX(), v0.centreShape().getY(), point.getX(), point.getY()));
+                addEdge(newEdge);
+            }
+
+            addVertex((Node) vertex);
+        }
+    }
+
+
+
 }
