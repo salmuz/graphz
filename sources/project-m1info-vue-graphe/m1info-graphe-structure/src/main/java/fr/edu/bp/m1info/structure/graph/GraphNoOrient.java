@@ -108,17 +108,22 @@ public class GraphNoOrient<ShapeEdge extends ShapeGeometric & EdgeShapeGraph,
      */
     @Override
     public void removeEdge(Vertex<ValueVertex, ShapeVertex> source, Vertex<ValueVertex, ShapeVertex> target) {
+       edgeList.remove(getEdge(source,target));
+    }
+
+    @Override
+    public Edge<ValueEdge, ShapeEdge> getEdge(Vertex<ValueVertex, ShapeVertex> source, Vertex<ValueVertex, ShapeVertex> target) {
         for (int i = 0; i < edgeList.size(); i++) {
             Edge edge = edgeList.get(i);
             Vertex v0 = edge.getSource();
             Vertex v1 = edge.getTarget();
             if ((v0.equals(source) && v1.equals(target)) ||
                     (v0.equals(target) && v1.equals(source))) {
-                edgeList.remove(edge);
+                return edge;
             }
         }
+        return null;
     }
-
 }
 
 

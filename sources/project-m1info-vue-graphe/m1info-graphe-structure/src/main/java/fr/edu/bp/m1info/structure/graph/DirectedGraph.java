@@ -77,4 +77,8 @@ public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
         vertexList = new ArrayList<Vertex<ValueVertex,ShapeVertex>>();
     }
 
+    @Override
+    public Arc<ValueEdge, ShapeEdge> getEdge(Vertex<ValueVertex, ShapeVertex> source, Vertex<ValueVertex, ShapeVertex> target) {
+        throw new UnsupportedOperationException();
+    }
 }

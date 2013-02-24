@@ -65,10 +65,10 @@ import java.awt.event.MouseMotionListener;
 
 public class MainPresenter extends Presenter<UIMainPrueba> {
 
-    //private Graph<Edge<Integer,Line>, Vertex<Integer, Circle>> graph;
-    private Graph<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> graph;
-    //private GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>> canvas;
-    private GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> canvas;
+    private Graph<Edge<Integer,Line>, Vertex<Integer, Circle>> graph;
+    private GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>> canvas;
+    //private Graph<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> graph;
+    //private GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> canvas;
 
     @Override
     protected void createrView() {
@@ -82,10 +82,10 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
     @Override
     protected void initComponent() {
-        //graph = new GraphNoOrient<Line, Circle,Integer,Integer>() { };
-        graph = new DirectedGraph<LineArrow, Circle,Integer,Integer>() { };
-        //canvas = new GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>>(graph);
-        canvas = new GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>>(graph);
+        graph = new GraphNoOrient<Line, Circle,Integer,Integer>() { };
+        canvas = new GraphCanvas<Edge<Integer,Line>, Vertex<Integer, Circle>>(graph);
+        //graph = new DirectedGraph<LineArrow, Circle,Integer,Integer>() { };
+        //canvas = new GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>>(graph);
         this.view.getjScrollPane1().setViewportView(canvas);
     }
     

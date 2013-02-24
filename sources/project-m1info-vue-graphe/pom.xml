@@ -15,5 +15,6 @@
     <module>m1info-graphe-logique</module>
     <module>m1info-graphe-swing</module>
     <module>m1info-graphe-mvp</module>
+    <module>m1info-graphe-android</module>
   </modules>
 </project>

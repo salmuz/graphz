@@ -44,17 +44,14 @@ import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 
-<<<<<<< HEAD
+
+
+import java.awt.*;
+
 /**
  * nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
  * et elle est implementé dans la class EdgeShapeGraph
  */
-=======
-import java.awt.*;
-
-/*nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
-       et elle est implementé dans la class EdgeShapeGraph*/
->>>>>>> Ajouter event Separe Sommets
 public class Line extends ShapeGeometric implements EdgeShapeGraph {
 
 
@@ -165,14 +162,12 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
         result = 31 * result + (end != null ? end.hashCode() : 0);
         return result;
     }
-<<<<<<< HEAD
+
     /**
-     * c'est une methode qui traduit le variable en srting
+     * c'est une methode qui traduit le variable en String
      *
      * @return un string avec le variable
      */
-=======
-
     public Point geMidPoint() {
         Point midPoint = new Point2D(0.0,0.0);
         double midX = (start.getX() + end.getX()) /2;
@@ -182,7 +177,6 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
         return midPoint;
     }
 
->>>>>>> Ajouter nom au sommet et poids à l'arête, event supprimer sommet et j'ameliore l'évenement contracter des arêtes
     @Override
     public String toString() {
         return "Line{" +

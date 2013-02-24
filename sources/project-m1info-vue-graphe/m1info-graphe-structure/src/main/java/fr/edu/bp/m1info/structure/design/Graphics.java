@@ -45,23 +45,18 @@ import fr.edu.bp.m1info.structure.geometric.plane.Rectangle;
 import java.awt.*;
 
 //Visitor, le client va appeler seulement le methode draw et il aura son travail
-/*cette interface qui contient quatre methode et ces methode seront appeller par d'autre class
-*  pour dessiner une graphe */
+/**
+ * cette interface qui contient quatre methode et ces methode seront appeller par d'autre class
+ *  pour dessiner une graphe
+ */
 public interface Graphics {
 
-<<<<<<< HEAD
     /**
      *-Line line -Circle circle  - LineArrow lineArrow -Rectangle rectangle - Curve curve
      * et ces methodes permette de dessiner la graphe
      *
      * @ parameter dans chaque methode on a une parameter de son type quand veut dessiner
      */
-=======
-    /* @ parameter dans chaque methode on a une parameter
-    -Line line -Circle circle  - LineArrow lineArrow -Rectangle rectangle - Curve curve
-    * et ces methodes permette de dessiner la graphe*/
-
->>>>>>> Ajouter nom au sommet et poids à l'arête, event supprimer sommet et j'ameliore l'évenement contracter des arêtes
     public void draw(Line line);
 
     public Shape draw(Circle circle);

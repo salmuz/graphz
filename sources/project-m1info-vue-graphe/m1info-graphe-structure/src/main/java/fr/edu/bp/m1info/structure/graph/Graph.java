@@ -418,6 +418,6 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
         }
     }
 
-
+    public abstract Edge getEdge(Node source,Node target);
 
 }
