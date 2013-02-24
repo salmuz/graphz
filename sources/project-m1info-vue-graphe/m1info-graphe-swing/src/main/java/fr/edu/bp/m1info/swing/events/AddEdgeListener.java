@@ -59,6 +59,11 @@ public class AddEdgeListener extends MouseAdapter {
     protected AbstractEdge edge;
     protected Color dragged = Color.RED;
 
+    /**
+     * cet methode permet d'ajouter une Edge dans un liste
+     *
+     * @param canvas
+     */
     public AddEdgeListener(GraphCanvas canvas) {
         super();
         this.canvas = canvas;

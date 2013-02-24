@@ -43,7 +43,9 @@ import fr.edu.bp.m1info.logique.geometric.LineOperation;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
-         /*cette class Line2OperationImpl est implementé dans la class LineOperation*/
+/**
+ * cette class Line2OperationImpl implemente l'interface LineOperation
+ */
 public class Line2DOperationImpl implements LineOperation{
 
              /* @ return elle retourn a un point

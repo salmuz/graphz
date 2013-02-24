@@ -49,9 +49,12 @@ import java.awt.*;
 *  pour dessiner une graphe */
 public interface Graphics {
 
-    /* @ parameter dans chaque methode on a une parameter
-    -Line line -Circle circle  - LineArrow lineArrow -Rectangle rectangle - Curve curve
-    * et ces methodes permette de dessiner la graphe*/
+    /**
+     *-Line line -Circle circle  - LineArrow lineArrow -Rectangle rectangle - Curve curve
+     * et ces methodes permette de dessiner la graphe
+     *
+     * @ parameter dans chaque methode on a une parameter de son type quand veut dessiner
+     */
     public void draw(Line line);
 
     public Shape draw(Circle circle);

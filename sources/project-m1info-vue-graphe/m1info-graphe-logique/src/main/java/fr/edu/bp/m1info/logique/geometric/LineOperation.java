@@ -46,12 +46,23 @@ import fr.edu.bp.m1info.structure.geometric.plane.Line;
 
 public interface LineOperation {
 
-   /*Une methode qui permette de calculer le milieu de la ligne
-   * @parameter Line elle contient une  parameter*/
+    /**
+     * Une methode qui permette de calculer le milieu de la ligne
+     *
+     * @parameter Line elle contient une  parameter
+     *
+     * @return Line le type de retour est un point puisque le milieu d'une ligne est un point
+     */
     public Point calculateMidPoint(Line line);
 
-    /*Une methode qui permette de calculer la taille d'une ligne
-   * @parameter Line;elle contient une  parameter*/
+    /**
+     * Une methode qui permette de calculer la taille d'une ligne
+     *
+     * @parameter Line;elle contient une  parameter
+     *
+     * @return le type de retoure est un réél qui est le résultat du calculateSize
+     *
+     */
     public double calculateSize(Line line);
 
 }

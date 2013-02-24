@@ -41,7 +41,15 @@ package fr.edu.bp.m1info.structure.geometric.graph;
 
 import fr.edu.bp.m1info.structure.geometric.Point;
 
+/**
+ * c'est un interface VertexShapeGraph qui nous sert pour rassembler tout les point communs des Vertex
+ */
 public interface VertexShapeGraph {
-
+    /**
+     * C'est une methode qui est obliger a etre redefinir a tout les classes qui vont implement cet interface et
+     * elle sert pour faire le calculer le centre
+     *
+     * @return dont le centre est un point donc retourne un point
+     */
     public Point centreShape();
 }

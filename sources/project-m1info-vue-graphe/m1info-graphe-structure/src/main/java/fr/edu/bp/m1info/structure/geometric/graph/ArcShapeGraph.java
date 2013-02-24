@@ -40,5 +40,9 @@
  */
 package fr.edu.bp.m1info.structure.geometric.graph;
 
+/**
+ * C'est un interface pour tout les types des ArcShapeGraph qui sont arrete orienté herite EdgeShapeGraph normale
+ * puisqu'un arc c'est edge qui est orienté
+ */
 public interface ArcShapeGraph  extends EdgeShapeGraph{
 }

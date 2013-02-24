@@ -40,6 +40,9 @@
  */
 package fr.edu.bp.m1info.mvp.common;
 
+/**
+ * Ce le classe repository qui comme fonction de liaison avec la base des données
+ */
 public abstract class Repository {
 
 }

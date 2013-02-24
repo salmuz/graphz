@@ -82,6 +82,13 @@ public class Reflection {
 
     }
 
+    /**
+     * Cet methode permet de tester le type de classe appartient un objet dans ce projet
+     *
+     * @param type  ceci permet de tester le type quand veut savoir son classe
+     *
+     * @return   qui est une classe
+     */
     public static Class<?> getClassOfType(Type type){
         Class<?> rawType = ( ( type instanceof Class<?> )  ? (Class<?>) type :
                             (Class<?>) ((ParameterizedType) type).getRawType() );

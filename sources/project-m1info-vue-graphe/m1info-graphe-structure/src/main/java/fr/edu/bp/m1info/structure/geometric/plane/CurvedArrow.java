@@ -44,17 +44,26 @@ import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
 
-/*nous avons une class appelle CurvedArrow et qui herite certaine methode de la class Curve
-et elle est implementé dans la class Arrow*/
+/**
+ * nous avons une class appelle CurvedArrow et qui herite certaine methode de la class Curve
+ *et elle est implementé dans la class Arrow
+ */
 public class CurvedArrow extends Curve implements Arrow,ArcShapeGraph{
 
-           /*@parameter start,end,firstCurve,secondCurve cette methode contient 4 parameter
-           * et ces point serons herité de la class curve */
+    /**
+     * C'est un constructeur
+     * @parameter start,end,firstCurve,secondCurve cette methode contient 4 parameter
+     * et ces point serons herité de la class curve
+     */
     public CurvedArrow(Point start, Point end, Point firstCurve, Point secondCurve) {
         super(start, end, firstCurve, secondCurve);
     }
-        /* @parameter graphic
-        cette methode permettent de dessiner la graphic */
+    /**
+     * cette methode permettent de dessiner la graphic
+     *
+     *  @parameter graphic
+     *
+     */
     public void draw(Graphics graphic) {
         throw new UnsupportedOperationException("Il faut implementer");
     }

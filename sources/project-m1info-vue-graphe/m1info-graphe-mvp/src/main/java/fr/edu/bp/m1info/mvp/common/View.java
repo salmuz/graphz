@@ -40,5 +40,8 @@
  */
 package fr.edu.bp.m1info.mvp.common;
 
+/**
+ * C'est l'interface qui rassemble tout le type de view
+ */
 public interface View {
 }

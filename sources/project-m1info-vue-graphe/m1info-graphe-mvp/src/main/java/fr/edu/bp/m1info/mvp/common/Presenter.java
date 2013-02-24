@@ -47,16 +47,35 @@ public abstract class Presenter<UI extends Window & View> {
     protected UI view;
     protected Repository repository;
 
+    /**
+     * cette methode permet pour créer le view
+     */
     protected abstract void createrView();
 
+    /**
+     * Cet methode permet de créer repository qui fait l'enregistrement dans la base des données
+     */
     protected abstract void createrRepository();
 
+    /**
+     * Cet methode permet d'initialiser le composant
+     */
     protected abstract void initComponent();
 
+    /**
+     * Cet methode permet d'initialiser les actions
+     */
     protected void initAcctions(){};
 
+    /**
+     * Cet methode permet de valider les champs
+     */
     protected void validateFields(){};
 
+    /**
+     * cette methode rassemble plusieur methode qui succede pour réaliser certain tache du projet
+     * elle demare ce tache du projet
+     */
     public void startUp() {
         createrRepository();
         createrView();
