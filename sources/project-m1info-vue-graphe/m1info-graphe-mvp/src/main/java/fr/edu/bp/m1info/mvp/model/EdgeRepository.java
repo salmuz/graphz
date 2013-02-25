@@ -42,5 +42,8 @@ package fr.edu.bp.m1info.mvp.model;
 
 import fr.edu.bp.m1info.mvp.common.Repository;
 
+/**
+ * ce classe permet a faire les actions a faire dans une base des données pour la table Edge
+ */
 public class EdgeRepository extends Repository{
 }

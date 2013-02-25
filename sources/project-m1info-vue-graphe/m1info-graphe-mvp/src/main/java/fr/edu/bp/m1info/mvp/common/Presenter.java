@@ -42,6 +42,11 @@ package fr.edu.bp.m1info.mvp.common;
 
 import java.awt.*;
 
+/**
+ * C'est une classe qui permet de presenter notre travaille
+ *
+ * @param <UI> a partir du view quand peut presenter cad l'image
+ */
 public abstract class Presenter<UI extends Window & View> {
 
     protected UI view;
