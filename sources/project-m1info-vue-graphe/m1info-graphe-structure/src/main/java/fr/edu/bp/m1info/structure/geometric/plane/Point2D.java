@@ -44,7 +44,7 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 /**
  * nous avons une class appelle Point2D et qui herite certaine methode de la class Point
  */
-public class Point2D implements Point {
+public class Point2D implements Point, Cloneable {
 
     private double x;
     private double y;
@@ -63,36 +63,37 @@ public class Point2D implements Point {
 
     /**
      * c'est un constructeur
+     *
      * @param x
      * @param y
      */
-     public Point2D(int x, int y) {
-         this.x = x;
-         this.y = y;
-     }
+    public Point2D(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     /**
      * cette methode permette de recupére le contenu du variable x
      *
-     *  @return elle retourn  x
-     *
+     * @return elle retourn  x
      */
     public double getX() {
         return x;
     }
+
     /**
-    * cette methode permette de modifier le contenu du variable x
-    *
-    * @parameter x
-    */
+     * cette methode permette de modifier le contenu du variable x
+     *
+     * @parameter x
+     */
     public void setX(double x) {
         this.x = x;
     }
+
     /**
      * cette methode permette de recupére le contenu du variable y
      *
-     *  @return elle retourn  y
-     *
+     * @return elle retourn  y
      */
     public double getY() {
         return y;
@@ -101,12 +102,12 @@ public class Point2D implements Point {
     /**
      * cette methode permette de recupére le contenu du variable z
      *
-     *  @return elle retourn  z
-     *
+     * @return elle retourn  z
      */
     public double getZ() {
         return 0.0;
     }
+
     /**
      * cette methode permette de modifier le contenu du variable y
      *
@@ -115,6 +116,7 @@ public class Point2D implements Point {
     public void setY(double y) {
         this.y = y;
     }
+
     /**
      * c'est une methode qui traduit le variable en srting
      *
@@ -129,45 +131,55 @@ public class Point2D implements Point {
     }
 
     /**
-    * cette methode permette de modifier le contenu du variable z
-    *
-    * @parameter z
-    */
-    public void setZ(double z) {}
+     * cette methode permette de modifier le contenu du variable z
+     *
+     * @parameter z
+     */
+    public void setZ(double z) {
+    }
 
     /**
-     *  C'est une methode qui permet de verifie qui si des objet des cette classe sont different
+     * C'est une methode qui permet de verifie qui si des objet des cette classe sont different
      *
-     *  @param o c'est l'objet quand teste
-     *
-     * @return  un boolean
+     * @param o c'est l'objet quand teste
+     * @return un boolean
      */
-     @Override
-     public boolean equals(Object o) {
-         if (this == o) return true;
-         if (o == null || getClass() != o.getClass()) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-         Point2D point2D = (Point2D) o;
+        Point2D point2D = (Point2D) o;
 
-         if (Double.compare(point2D.x, x) != 0) return false;
-         if (Double.compare(point2D.y, y) != 0) return false;
+        if (Double.compare(point2D.x, x) != 0) return false;
+        if (Double.compare(point2D.y, y) != 0) return false;
 
-         return true;
-     }
+        return true;
+    }
 
     /**
      * C'est une methode qui decrit le code ou le reference de la classe
      *
-     * @return    un code
+     * @return un code
      */
-     @Override
-     public int hashCode() {
-         int result;
-         long temp;
-         temp = x != +0.0d ? Double.doubleToLongBits(x) : 0L;
-         result = (int) (temp ^ (temp >>> 32));
-         temp = y != +0.0d ? Double.doubleToLongBits(y) : 0L;
-         result = 31 * result + (int) (temp ^ (temp >>> 32));
-         return result;
-     }
- }
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = x != +0.0d ? Double.doubleToLongBits(x) : 0L;
+        result = (int) (temp ^ (temp >>> 32));
+        temp = y != +0.0d ? Double.doubleToLongBits(y) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e1) {
+            e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return null;
+    }
+}

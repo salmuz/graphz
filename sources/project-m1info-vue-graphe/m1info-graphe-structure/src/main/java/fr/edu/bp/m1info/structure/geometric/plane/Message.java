@@ -92,7 +92,6 @@ public class Message extends ShapeGeometric {
 
         Message message1 = (Message) o;
 
-        if (font != null ? !font.equals(message1.font) : message1.font != null) return false;
         if (message != null ? !message.equals(message1.message) : message1.message != null) return false;
         if (point != null ? !point.equals(message1.point) : message1.point != null) return false;
 
@@ -103,16 +102,14 @@ public class Message extends ShapeGeometric {
     public int hashCode() {
         int result = point != null ? point.hashCode() : 0;
         result = 31 * result + (message != null ? message.hashCode() : 0);
-        result = 31 * result + (font != null ? font.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Message{" +
-                "point=" + point +
-                ", message='" + message + '\'' +
-                ", font=" + font +
+                "message='" + message + '\'' +
+                ", point=" + point +
                 '}';
     }
 }

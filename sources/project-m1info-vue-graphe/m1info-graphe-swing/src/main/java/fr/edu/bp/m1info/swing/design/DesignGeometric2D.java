@@ -39,9 +39,9 @@
  */
 package fr.edu.bp.m1info.swing.design;
 
-import fr.edu.bp.m1info.logique.geometric.LineOperation;
-import fr.edu.bp.m1info.logique.geometric.impl2D.Line2DOperationImpl;
 import fr.edu.bp.m1info.structure.design.Graphics;
+import fr.edu.bp.m1info.structure.geometric.operation.LineOperation;
+import fr.edu.bp.m1info.structure.geometric.operation.impl.Line2DOperationImpl;
 import fr.edu.bp.m1info.structure.geometric.plane.*;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
 import fr.edu.bp.m1info.structure.geometric.plane.Rectangle;
@@ -73,13 +73,15 @@ public class DesignGeometric2D implements Graphics {
      *
      * @parameter Line line
      */
-    public void draw(Line line) {
+    public Shape draw(Line line) {
         graphics2D.setColor(line.getColor());
         Stroke strokeDefault = graphics2D.getStroke();
         graphics2D.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
-        graphics2D.draw(new java.awt.geom.Line2D.Double(line.getStart().getX(), line.getStart().getY(),
-                line.getEnd().getX(), line.getEnd().getY()));
+        Shape shape = new java.awt.geom.Line2D.Double(line.getStart().getX(), line.getStart().getY(),
+                line.getEnd().getX(), line.getEnd().getY());
+        graphics2D.draw(shape);
         graphics2D.setStroke(strokeDefault);
+        return shape;
     }
 
     /**

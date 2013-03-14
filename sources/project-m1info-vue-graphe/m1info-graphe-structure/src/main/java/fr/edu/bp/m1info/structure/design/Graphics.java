@@ -57,7 +57,7 @@ public interface Graphics {
      *
      * @ parameter dans chaque methode on a une parameter de son type quand veut dessiner
      */
-    public void draw(Line line);
+    public Shape draw(Line line);
 
     public Shape draw(Circle circle);
 

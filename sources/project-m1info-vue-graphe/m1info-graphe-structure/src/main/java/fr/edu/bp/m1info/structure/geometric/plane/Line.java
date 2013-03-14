@@ -39,14 +39,15 @@
  */
 package fr.edu.bp.m1info.structure.geometric.plane;
 
+import com.sun.deploy.util.SystemUtils;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 
 
-
 import java.awt.*;
+import java.awt.geom.Line2D;
 
 /**
  * nous avons une class appelle Line et qui herite certaine methode de la class ShapeGeometric
@@ -60,8 +61,9 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
 
     /**
      * C'est un constructeur
-     * @parameter start,end, cette methode contient 2 paramete
-     *  et ces point serons herité de la class ShapeGeometric
+     *
+     * @parameter start, end, cette methode contient 2 paramete
+     * et ces point serons herité de la class ShapeGeometric
      */
     public Line(Point start, Point end) {
         this.start = start;
@@ -69,27 +71,29 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
         this.color = Color.BLUE;
         this.background = Color.BLUE;
     }
+
     /**
-     *  cette methode permette de recupére le contenu du variable start
+     * cette methode permette de recupére le contenu du variable start
      *
      * @return elle retourn le point star
-     *
      */
     public Point getStart() {
         return start;
     }
+
     /**
-     *   cette methode permette de modifier le contenu du variable start
+     * cette methode permette de modifier le contenu du variable start
      *
-     *  @parameter start
+     * @parameter start
      */
     public void setStart(Point start) {
         this.start = start;
     }
+
     /**
-     *  cette methode permette de recupére le contenu du variable end
+     * cette methode permette de recupére le contenu du variable end
      *
-     *  @return elle retourn le point end
+     * @return elle retourn le point end
      */
     public Point getEnd() {
         return end;
@@ -111,7 +115,7 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
      */
     @Override
     public void draw(Graphics graphics) {
-        graphics.draw(this);
+        this.shape = graphics.draw(this);
     }
 
     /**
@@ -136,7 +140,6 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
      * C'est une methode pour verifier si les objets sont different
      *
      * @param o c'est l'objet de la classe quand verifie
-     *
      * @return un boolean
      */
     @Override
@@ -151,10 +154,11 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
 
         return true;
     }
+
     /**
      * C'est une methode qui decrit le code ou le reference de la classe
      *
-     * @return    un code
+     * @return un code
      */
     @Override
     public int hashCode() {
@@ -169,9 +173,9 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
      * @return un string avec le variable
      */
     public Point geMidPoint() {
-        Point midPoint = new Point2D(0.0,0.0);
-        double midX = (start.getX() + end.getX()) /2;
-        double midY = (start.getY() + end.getY()) /2;
+        Point midPoint = new Point2D(0.0, 0.0);
+        double midX = (start.getX() + end.getX()) / 2;
+        double midY = (start.getY() + end.getY()) / 2;
         midPoint.setX(midX);
         midPoint.setY(midY);
         return midPoint;
@@ -183,5 +187,17 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph {
                 "start=" + start +
                 ", end=" + end +
                 '}';
+    }
+
+    @Override
+    public boolean intersect(ShapeGeometric shapeGeometric) {
+        Line line = (Line) shapeGeometric;
+
+        if (this.shape == null) {
+            return false;
+        }
+
+        return ((Line2D)this.shape).intersectsLine(line.getStart().getX(),line.getStart().getY(),
+                line.getEnd().getX(),line.getEnd().getY());
     }
 }

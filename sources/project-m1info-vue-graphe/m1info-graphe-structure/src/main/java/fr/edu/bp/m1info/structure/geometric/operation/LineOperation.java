@@ -30,40 +30,41 @@
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
  * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *
+ * 					Moussa Kalil 
+ *                   Aden Nouh Abdirazak
  * Changes
  * -------
- * 20-Jan-2013 : Version 1;
+ * 23/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric;
+package fr.edu.bp.m1info.structure.geometric.operation;
 
-/**
- * C'est un interface pour tout le type des point
-  */
-public interface Point{
 
+import fr.edu.bp.m1info.structure.geometric.Point;
+import fr.edu.bp.m1info.structure.geometric.plane.Line;
+/*Interface qui contient deux methode qui serons implementé dans la class Line2DOperationImpl*/
+
+public interface LineOperation {
 
     /**
-     * ces methodes permettent de recupéré avec la methode get ou de modifier avec la set et qui seront redefinies dans les classes
-     * qui heritent
+     * Une methode qui permette de calculer le milieu de la ligne
+     *
+     * @parameter Line elle contient une  parameter
+     *
+     * @return Line le type de retour est un point puisque le milieu d'une ligne est un point
      */
-    public double getX();
+    public Point calculateMidPoint(Line line);
 
-    public void setX(double x);
+    /**
+     * Une methode qui permette de calculer la taille d'une ligne
+     *
+     * @parameter Line;elle contient une  parameter
+     *
+     * @return le type de retoure est un réél qui est le résultat du calculateSize
+     *
+     */
+    public double calculateSize(Line line);
 
-    public double getY();
-
-    public void setY(double y);
-
-    public double getZ();
-
-    public void setZ(double z);
-
-    public Object clone();
+    public Point getPointIntersectLines(Line pLine01, Line pLine02);
 
 }
-
-
-

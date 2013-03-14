@@ -56,6 +56,11 @@ public abstract class ShapeGeometric {
     protected Shape shape;
     protected Object value;
 
+
+    public Shape getShape() {
+        return shape;
+    }
+
     /**
      * cette methode getcolor permettent de recupéré la couleur des ligne qui se trouve dans la variable
      *

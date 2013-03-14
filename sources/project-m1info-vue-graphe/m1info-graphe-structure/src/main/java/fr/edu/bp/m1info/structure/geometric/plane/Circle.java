@@ -157,6 +157,16 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
                 2*circle.getRadio(),
                 2*circle.getRadio());
     }
+
+    public boolean intersect(Point point) {
+
+        if(this.shape == null){
+          return false;
+        }
+
+        return this.shape.intersects(point.getX(),point.getY(),
+                1.5*getRadio(), 1.5*getRadio());
+    }
     /**
      *  C'est une methode qui permet de verifie qui si des objet des cette classe sont different
      *
