@@ -41,7 +41,7 @@
 package fr.edu.bp.m1info.mvp.presenter;
 
 import fr.edu.bp.m1info.mvp.common.Presenter;
-import fr.edu.bp.m1info.mvp.view.UIGeometric;
+import fr.edu.bp.m1info.mvp.view.old.UIGeometric;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
@@ -52,7 +52,6 @@ import fr.edu.bp.m1info.swing.common.SwingUtils;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.design.ModelGeometric01Canvas;
 import fr.edu.bp.m1info.swing.events.geo.AddLineVVertexListener;
-import fr.edu.bp.m1info.swing.events.geo.DeleteLineVVertexListener;
 import fr.edu.bp.m1info.swing.events.geo.MoveLineVVertexListener;
 
 import javax.swing.*;

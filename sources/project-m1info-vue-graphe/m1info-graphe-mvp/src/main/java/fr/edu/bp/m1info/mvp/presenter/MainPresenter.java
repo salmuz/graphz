@@ -40,36 +40,23 @@
  */
 package fr.edu.bp.m1info.mvp.presenter;
 
-import fr.edu.bp.m1info.swing.common.SwingUtils;
+import fr.edu.bp.m1info.mvp.view.UIMain;
 import fr.edu.bp.m1info.mvp.common.Presenter;
 import fr.edu.bp.m1info.mvp.common.factory.Factory;
 import fr.edu.bp.m1info.mvp.model.EdgeRepository;
-import fr.edu.bp.m1info.mvp.view.UIMainPrueba;
-import fr.edu.bp.m1info.structure.geometric.plane.Circle;
-import fr.edu.bp.m1info.structure.geometric.plane.Line;
-import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
-import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-import fr.edu.bp.m1info.swing.design.GraphCanvas;
-import fr.edu.bp.m1info.swing.events.*;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+public class MainPresenter extends Presenter<UIMain> {
 
-public class MainPresenter extends Presenter<UIMainPrueba> {
-
-    private Graph<Edge<Integer, Line>, Vertex<Integer, Circle>> graph;
-    private GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>> canvas;
+    private GrapheAcction grapheAcction;
+    //private Graph<Edge<Integer, Line>, Vertex<Integer, Circle>> graph;
+    // private GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>> canvas;
     //private Graph<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> graph;
     //private GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> canvas;
 
     @Override
     protected void createrView() {
-        super.view = new UIMainPrueba();
+        super.view = new UIMain();
+        this.view.setTitle("Projet des Graphes - Master M1 Informatique - Version [1.0.0]");
     }
 
     @Override
@@ -79,114 +66,63 @@ public class MainPresenter extends Presenter<UIMainPrueba> {
 
     @Override
     protected void initComponent() {
-        graph = new GraphNoOrient<Line, Circle, Integer, Integer>() {
-        };
-        canvas = new GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>>(graph);
-        //graph = new DirectedGraph<LineArrow, Circle,Integer,Integer>() { };
-        //canvas = new GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>>(graph);
-        this.view.getjScrollPane1().setViewportView(canvas);
+        this.view.getJmGraphe().setEnabled(false);
+        this.view.getJmGeometric().setEnabled(false);
+        this.view.ennableBtnGraphe(false);
+        this.view.ennableBtnDroit(false);
+
+        //
+
+
     }
 
 
     @Override
     protected void initAcctions() {
         super.initAcctions();
-        final MouseAdapter vertexAction = new AddEdgeListener(canvas);
-        final MouseAdapter movedAction = new MoveVertexListener(canvas);
-        final MouseListener edgeAction = new AddVertexListener(canvas);
-        final MouseAdapter deEdgeAction = new DeleteEdgeListener(canvas);
-        final MouseAdapter coEdgeAction = new ContrationEdgeListener(canvas);
-        final MouseListener deVertexAction = new DeleteVertexListener(canvas);
-        final MouseListener seVertexAction = new SeparateVertexListener(canvas);
-        final AbstractAction geVertexAction = new GenerateGrapheAction(canvas);
 
-        this.view.getjButton2().addActionListener(
-                new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
+        this.view.getJmiNewGraph().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewGraphPresenter newGraph = new NewGraphPresenter(view);
+                newGraph.startUp();
+                grapheAcction = new GrapheAcction(view, newGraph.getOptionGraphe());
+            }
+        });
 
-                        canvas.addMouseListener(edgeAction);
-                    }
-                });
+        this.view.getJmiNewGeometric().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewGeometricPresenter newGeometricPresenter = new NewGeometricPresenter(view);
+                newGeometricPresenter.startUp();
 
-        this.view.getjButton1().addActionListener(
-                new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
+            }
+        });
 
-                        canvas.addMouseMotionListener(vertexAction);
-                        canvas.addMouseListener(vertexAction);
-                    }
-                }
-        );
+        this.view.getJmiSave().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-        this.view.getjButton3().addActionListener(
-                new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
+            }
+        });
 
-                        canvas.addMouseMotionListener(movedAction);
-                        canvas.addMouseListener(movedAction);
-                    }
-                }
-        );
+        this.view.getJmiExporte().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-        this.view.getjButton4().addActionListener(
-                new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
+            }
+        });
 
-                        canvas.addMouseMotionListener(deEdgeAction);
-                        canvas.addMouseListener(deEdgeAction);
-                    }
-                }
-        );
+        this.view.getJmiImporte().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-        this.view.getjButton5().addActionListener(
-                new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
+            }
+        });
 
-                        canvas.addMouseMotionListener(coEdgeAction);
-                        canvas.addMouseListener(coEdgeAction);
-                    }
-                }
-        );
 
-        this.view.getjButton6().addActionListener(
-                new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
-
-                        canvas.addMouseListener(seVertexAction);
-                    }
-                }
-        );
-
-        this.view.getjButton7().addActionListener(
-                new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
-
-                        canvas.addMouseListener(deVertexAction);
-                    }
-                }
-        );
-
-        this.view.getjButton8().addActionListener(geVertexAction);
     }
 
 
     @Override
     public void startUp() {
         super.startUp();
+        view.setLocationRelativeTo(view.getParent());
         view.setVisible(true);
     }
 

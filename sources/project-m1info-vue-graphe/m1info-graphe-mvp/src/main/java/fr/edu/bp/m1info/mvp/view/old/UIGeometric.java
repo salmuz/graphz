@@ -38,7 +38,7 @@
  * 12/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.mvp.view;
+package fr.edu.bp.m1info.mvp.view.old;
 
 import fr.edu.bp.m1info.mvp.common.View;
 
