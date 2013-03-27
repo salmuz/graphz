@@ -44,6 +44,8 @@ package fr.edu.bp.m1info.mvp.view;
 
 import fr.edu.bp.m1info.mvp.common.View;
 
+import javax.swing.*;
+
 public class UINewGeometric extends javax.swing.JDialog implements View {
     
     /** Creates new form UINewGraph */
@@ -145,18 +147,23 @@ public class UINewGeometric extends javax.swing.JDialog implements View {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UINewGraph(new javax.swing.JFrame(), true).setVisible(true);
-            }
-        });
+
+    public JButton getBtnCanceler() {
+        return btnCanceler;
     }
-    
+
+    public JButton getBtnAcepter() {
+        return btnAcepter;
+    }
+
+    public JRadioButton getJrbGPermutation() {
+        return jrbGPermutation;
+    }
+
+    public JRadioButton getJrbParalelo() {
+        return jrbParalelo;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgGeometric;
     private javax.swing.JButton btnAcepter;

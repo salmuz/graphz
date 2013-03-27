@@ -39,7 +39,6 @@
  */
 package fr.edu.bp.m1info.structure.geometric.plane;
 
-import com.sun.deploy.util.SystemUtils;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.design.Graphics;

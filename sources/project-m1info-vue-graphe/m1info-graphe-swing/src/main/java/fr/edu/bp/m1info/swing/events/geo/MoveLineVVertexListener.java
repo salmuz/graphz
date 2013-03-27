@@ -44,8 +44,10 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
 import fr.edu.bp.m1info.structure.graph.ModelGeometric01;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.design.ModelGeometric01Canvas;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -57,9 +59,14 @@ public class MoveLineVVertexListener extends MouseAdapter {
     private ModelGeometric01.VertexVerticalLine vertexLine;
     private boolean isSelection;
     private Point debut;
+    private GraphCanvas canvasGraphe;
+    private JScrollPane jspGraphe;
 
-    public MoveLineVVertexListener(ModelGeometric01Canvas canvas) {
+    public MoveLineVVertexListener(ModelGeometric01Canvas canvas, GraphCanvas canvasGraphe,JScrollPane jspGraphe) {
         this.canvas = canvas;
+        this.canvasGraphe = canvasGraphe;
+        this.jspGraphe = jspGraphe;
+        isSelection = false;
     }
 
     @Override
@@ -89,7 +96,7 @@ public class MoveLineVVertexListener extends MouseAdapter {
             if (canvas.getModelGeometric().isTopSearch()) {
                 if (!canvas.getModelGeometric().isVertexInSamePlaceTop(point, vertexLine)) {
                     moveShapes(x1, Color.ORANGE, Color.RED);
-                    canvas.getModelGeometric().modifyVertexVerticalLine(vertexLine);
+                    canvas.getModelGeometric().modifyVertexVerticalLine(vertexLine,jspGraphe.getBounds());
                 } else {
                     moveShapes(debut.getX(), Color.ORANGE, Color.RED);
                 }
@@ -97,7 +104,7 @@ public class MoveLineVVertexListener extends MouseAdapter {
                 if (canvas.getModelGeometric().isLowerSearch()) {
                     if (!canvas.getModelGeometric().isVertexInSamePlaceLower(point, vertexLine)) {
                         moveShapes(x1, Color.ORANGE, Color.RED);
-                        canvas.getModelGeometric().modifyVertexVerticalLine(vertexLine);
+                        canvas.getModelGeometric().modifyVertexVerticalLine(vertexLine,jspGraphe.getBounds());
                     } else {
                         moveShapes(debut.getX(), Color.ORANGE, Color.RED);
                     }
@@ -105,6 +112,7 @@ public class MoveLineVVertexListener extends MouseAdapter {
             }
 
             canvas.repaint();
+            canvasGraphe.repaint();
         }
         this.isSelection = false;
         canvas.getModelGeometric().setLowerSearch(false);

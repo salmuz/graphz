@@ -79,7 +79,7 @@ public class AddEdgeListener extends MouseAdapter {
         vertex0 = canvas.getGraph().getVertexShape(x0, y0);
         if (vertex0 != null) {
             this.isSelection = true;
-            edge = EdgeFactory.createEdge(canvas.getGraph().getClazzEdge(),vertex0, null,null);
+            edge = EdgeFactory.createEdge(canvas.getGraph().getClazzEdge(), vertex0, null, null);
             canvas.getDraftEdge().add(edge);
         }
 
@@ -93,16 +93,17 @@ public class AddEdgeListener extends MouseAdapter {
         if (this.isSelection) {
             Vertex vertex1 = canvas.getGraph().getVertexShape(x1, y1);
             if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
- 				edge.setTarget(vertex1);
+                edge.setTarget(vertex1);
+                VertexShapeGraph v0 = (VertexShapeGraph) vertex0.getVertex();
+                VertexShapeGraph v1 = (VertexShapeGraph) vertex1.getVertex();
+                EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+                e0.getPointStart().setX(v0.centreShape().getX());
+                e0.getPointStart().setY(v0.centreShape().getY());
+                e0.getPointEnd().setX(v1.centreShape().getX());
+                e0.getPointEnd().setY(v1.centreShape().getY());
+                edge.getEdge().setColor(Color.BLUE);
+                edge.createWeight();
                 if (!canvas.getGraph().containsEdge(edge)) {
-                    VertexShapeGraph v0 = (VertexShapeGraph) vertex0.getVertex();
-                    VertexShapeGraph v1 = (VertexShapeGraph) vertex1.getVertex();
-                    EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
-                    e0.getPointStart().setX(v0.centreShape().getX());
-                    e0.getPointStart().setY(v0.centreShape().getY());
-                    e0.getPointEnd().setX(v1.centreShape().getX());
-                    e0.getPointEnd().setY(v1.centreShape().getY());
-                    edge.getEdge().setColor(Color.BLUE);
                     canvas.getGraph().addEdge(edge);
                 }
 

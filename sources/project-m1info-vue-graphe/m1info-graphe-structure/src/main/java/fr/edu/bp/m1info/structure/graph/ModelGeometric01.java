@@ -52,6 +52,7 @@ import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.awt.*;
+import java.awt.Rectangle;
 import java.util.*;
 import java.util.List;
 
@@ -106,8 +107,12 @@ public class ModelGeometric01 {
 
     }
 
-    public boolean addLineVertex(Line line, String name) {
+    public boolean addLineVertex(Line line, String name, Rectangle rectangle, Point pointVertex) {
 
+        double x = rectangle.getX();
+        double y = rectangle.getY();
+        double width = rectangle.getWidth() + rectangle.getX();
+        double height = rectangle.getHeight() + rectangle.getY();
         Point point01 = operation.getPointIntersectLines(line, topLine);
         Point point02 = operation.getPointIntersectLines(line, lowerLine);
 
@@ -123,11 +128,25 @@ public class ModelGeometric01 {
         lineVertical.setLower((Circle) ShapePlaneFactory.createShape(Circle.class, point02.getX(), point02.getY()));
 
         Vertex vertex = new Vertex();
+        Point point;
+        if (pointVertex == null) {
+            point = new Point2D((int) (Math.random() * (width - x)) + 1, (int) (Math.random() * (height - y)) + 1);
+        } else {
+            point = pointVertex;
+        }
+        vertex.setVertex(ShapePlaneFactory.createShape(Circle.class, point.getX(), point.getY()));
+        vertex.getVertex().setBackground(Color.ORANGE);
+        vertex.getVertex().setColor(Color.ORANGE);
         graph.addVertex(vertex);
 
         for (VertexVerticalLine vLine : lineList) {
             if (vLine.getLine().intersect(line)) {
                 AbstractEdge<Integer, Line> edge = EdgeFactory.createEdge(Edge.class, vertex, vLine.getVertex(), null);
+                VertexShapeGraph v0 = (VertexShapeGraph) vertex.getVertex();
+                VertexShapeGraph v1 = (VertexShapeGraph) vLine.getVertex().getVertex();
+                ((Edge) edge).setEdge(ShapePlaneFactory.createShape(Line.class,
+                        v0.centreShape().getX(), v0.centreShape().getY(),
+                        v1.centreShape().getX(), v1.centreShape().getY()));
                 graph.addEdge((Edge) edge);
             }
         }
@@ -231,10 +250,11 @@ public class ModelGeometric01 {
         isTopSearch = topSearch;
     }
 
-    public boolean modifyVertexVerticalLine(VertexVerticalLine vertexLine) {
+    public boolean modifyVertexVerticalLine(VertexVerticalLine vertexLine, Rectangle rectangle) {
         Line line = new Line((Point) vertexLine.getLine().getStart().clone(), (Point) vertexLine.getLine().getEnd().clone());
+        Point point = (Point) ((VertexShapeGraph) vertexLine.getVertex().getVertex()).centreShape().clone();
         if (removeVexterVerticalLine(vertexLine)) {
-            addLineVertex(line, vertexLine.getMessageTop().getMessage());
+            addLineVertex(line, vertexLine.getMessageTop().getMessage(), rectangle, point);
             return true;
         } else {
             return false;

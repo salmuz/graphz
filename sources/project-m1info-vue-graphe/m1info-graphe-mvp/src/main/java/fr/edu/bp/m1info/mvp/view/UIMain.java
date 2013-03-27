@@ -66,6 +66,7 @@ public class UIMain extends javax.swing.JFrame implements View {
         jtbGraphe = new javax.swing.JToolBar();
         btnASommets = new javax.swing.JButton();
         btnSSommet = new javax.swing.JButton();
+        btnGAuto  = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnAArete = new javax.swing.JButton();
         btnSArete = new javax.swing.JButton();
@@ -195,6 +196,11 @@ public class UIMain extends javax.swing.JFrame implements View {
         btnEffacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/edu/bp/m1info/mvp/image/trash.png")));
         btnEffacer.setToolTipText("Effacer Graphe");
         jtbGraphe.add(btnEffacer);
+
+        btnGAuto.setBackground(new java.awt.Color(255, 255, 255));
+        btnGAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fr/edu/bp/m1info/mvp/image/gauto.png")));
+        btnGAuto.setToolTipText("Géneré Graphe");
+        jtbGraphe.add(btnGAuto);
 
         jtbGeometric.setBackground(new java.awt.Color(255, 255, 255));
         btnADroit.setBackground(new java.awt.Color(255, 255, 255));
@@ -529,6 +535,7 @@ public class UIMain extends javax.swing.JFrame implements View {
         btnSSommet.setEnabled(pFlag);
         btnSepare.setEnabled(pFlag);
         btnEffacer.setEnabled(pFlag);
+        btnGAuto.setEnabled(pFlag);
     }
 
     public void ennableBtnDroit(boolean pFlag){
@@ -537,8 +544,13 @@ public class UIMain extends javax.swing.JFrame implements View {
         btnDDroit.setEnabled(pFlag);
     }
 
+    public JButton getBtnGAuto() {
+        return btnGAuto;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSepare;
+    private javax.swing.JButton btnGAuto;
     private javax.swing.JButton btnSSommet;
     private javax.swing.JButton btnAArete;
     private javax.swing.JButton btnASommets;

@@ -54,8 +54,12 @@ public class ClearGraphAction extends AbstractAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        this.canvas.getGraph().getEdgeList().clear();
-        this.canvas.getGraph().getVertexList().clear();
-        this.canvas.repaint();
+        int op = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de supprimer le graphe?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
+
+        if (op == JOptionPane.YES_OPTION) {
+            this.canvas.getGraph().getEdgeList().clear();
+            this.canvas.getGraph().getVertexList().clear();
+            this.canvas.repaint();
+        }
     }
 }

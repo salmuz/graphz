@@ -45,19 +45,25 @@ import fr.edu.bp.m1info.mvp.view.UIMain;
 import fr.edu.bp.m1info.mvp.view.UINewGeometric;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 
 public class NewGeometricPresenter extends Presenter<UINewGeometric> {
 
     private JFrame parent;
+    private int option;
+    public static final int GEO_PERMUTATION = 1;
+    public static final int GEO_OTHERS = 2;
 
     public NewGeometricPresenter(JFrame parent) {
         this.parent = parent;
+        option = -1;
     }
 
     @Override
     protected void createrView() {
         super.view = new UINewGeometric(parent, true);
+        this.view.setTitle("Créer Nouveau Figure Géométrique");
     }
 
     @Override
@@ -68,6 +74,42 @@ public class NewGeometricPresenter extends Presenter<UINewGeometric> {
     @Override
     protected void initComponent() {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+     @Override
+    protected void initAcctions() {
+        super.initAcctions();
+        this.view.getBtnAcepter().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                         if(view.getJrbGPermutation().isSelected()){
+                              option = GEO_PERMUTATION;
+                              view.dispose();
+                         }else{
+                             if(view.getJrbParalelo().isSelected()){
+                                  option = GEO_OTHERS;
+                                  view.dispose();
+                             }else{
+                                JOptionPane.showMessageDialog(view,"Il faut seleccioner une option.","Warning",JOptionPane.WARNING_MESSAGE);
+                             }
+                         }
+
+                    }
+                }
+        );
+        this.view.getBtnCanceler().addActionListener(
+                new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        option = -1;
+                        view.dispose();
+                    }
+                }
+        );
+
+    }
+
+    public int getOption() {
+        return option;
     }
 
     @Override

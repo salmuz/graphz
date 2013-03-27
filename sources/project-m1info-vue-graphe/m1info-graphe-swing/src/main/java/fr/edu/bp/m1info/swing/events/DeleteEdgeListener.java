@@ -40,6 +40,8 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
+import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
@@ -67,6 +69,11 @@ public class DeleteEdgeListener extends AddEdgeListener {
             Vertex vertex1 = canvas.getGraph().getVertexShape(x1, y1);
             if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
                 edge.setTarget(vertex1);
+                VertexShapeGraph v1 = (VertexShapeGraph) vertex1.getVertex();
+                EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+                e0.getPointEnd().setX(v1.centreShape().getX());
+                e0.getPointEnd().setY(v1.centreShape().getY());
+                edge.createWeight();
                 if (canvas.getGraph().containsEdge(edge)) {
                     canvas.getGraph().removeEdge(vertex0, vertex1);
                 }

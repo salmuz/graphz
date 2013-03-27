@@ -144,7 +144,7 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
     }
 
 
-    private void createWeight() {
+    public void createWeight() {
         if (this.source != null && this.target != null && this.edge != null) {
             Point point = ((EdgeShapeGraph) this.edge).geMidPoint();
             if (weightShape == null) {

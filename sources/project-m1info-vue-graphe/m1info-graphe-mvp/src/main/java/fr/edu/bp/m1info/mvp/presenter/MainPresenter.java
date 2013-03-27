@@ -47,11 +47,8 @@ import fr.edu.bp.m1info.mvp.model.EdgeRepository;
 
 public class MainPresenter extends Presenter<UIMain> {
 
-    private GrapheAcction grapheAcction;
-    //private Graph<Edge<Integer, Line>, Vertex<Integer, Circle>> graph;
-    // private GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>> canvas;
-    //private Graph<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> graph;
-    //private GraphCanvas<Arc<Integer,LineArrow>, Vertex<Integer, Circle>> canvas;
+    private GrapheAction grapheAcction;
+    private GeometricAction geometricAcction;
 
     @Override
     protected void createrView() {
@@ -70,12 +67,7 @@ public class MainPresenter extends Presenter<UIMain> {
         this.view.getJmGeometric().setEnabled(false);
         this.view.ennableBtnGraphe(false);
         this.view.ennableBtnDroit(false);
-
-        //
-
-
     }
-
 
     @Override
     protected void initAcctions() {
@@ -85,7 +77,7 @@ public class MainPresenter extends Presenter<UIMain> {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NewGraphPresenter newGraph = new NewGraphPresenter(view);
                 newGraph.startUp();
-                grapheAcction = new GrapheAcction(view, newGraph.getOptionGraphe());
+                grapheAcction = new GrapheAction(view, newGraph.getOptionGraphe());
             }
         });
 
@@ -93,7 +85,7 @@ public class MainPresenter extends Presenter<UIMain> {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NewGeometricPresenter newGeometricPresenter = new NewGeometricPresenter(view);
                 newGeometricPresenter.startUp();
-
+                geometricAcction = new GeometricAction(view, newGeometricPresenter.getOption());
             }
         });
 

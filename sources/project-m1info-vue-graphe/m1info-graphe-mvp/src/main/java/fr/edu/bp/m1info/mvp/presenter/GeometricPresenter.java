@@ -91,7 +91,7 @@ public class GeometricPresenter extends Presenter<UIGeometric> {
                     public void actionPerformed(ActionEvent e) {
                         canvas = new ModelGeometric01Canvas(modeleGeometric01);
                         view.getjScrollPane1().setViewportView(canvas);
-                        MouseAdapter addLineVertex = new AddLineVVertexListener(canvas);
+                        MouseAdapter addLineVertex = new AddLineVVertexListener(canvas,canvasGraphe,null);
                         SwingUtils.removeListenerMouse(MouseListener.class, canvas);
                         SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
                         canvas.addMouseMotionListener(addLineVertex);
@@ -106,7 +106,7 @@ public class GeometricPresenter extends Presenter<UIGeometric> {
                         SwingUtils.removeListenerMouse(MouseListener.class, canvas);
                         SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
 
-                        MouseAdapter mvLineVertex = new MoveLineVVertexListener(canvas);
+                        MouseAdapter mvLineVertex = new MoveLineVVertexListener(canvas,null,null);
                         canvas.addMouseMotionListener(mvLineVertex);
                         canvas.addMouseListener(mvLineVertex);
                         //MouseListener delLineVertex = new DeleteLineVVertexListener(canvas);

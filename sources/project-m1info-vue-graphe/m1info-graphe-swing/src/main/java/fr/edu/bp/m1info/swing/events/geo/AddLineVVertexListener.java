@@ -41,21 +41,30 @@
 package fr.edu.bp.m1info.swing.events.geo;
 
 import fr.edu.bp.m1info.structure.geometric.Point;
+import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
+import fr.edu.bp.m1info.structure.graph.edge.Edge;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.design.ModelGeometric01Canvas;
 
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class AddLineVVertexListener extends MouseAdapter {
 
     private ModelGeometric01Canvas canvas;
+    private GraphCanvas canvasGraphe;
     protected boolean isSelection;
     private Line draftLine;
+    private JScrollPane jspGraphe;
 
-    public AddLineVVertexListener(ModelGeometric01Canvas canvas) {
+    public AddLineVVertexListener(ModelGeometric01Canvas canvas, GraphCanvas canvasGraphe, JScrollPane jspGraphe) {
         this.canvas = canvas;
+        this.canvasGraphe = canvasGraphe;
+        this.jspGraphe = jspGraphe;
         isSelection = false;
     }
 
@@ -78,15 +87,18 @@ public class AddLineVVertexListener extends MouseAdapter {
             draftLine.getEnd().setY(y1);
             if (canvas.getModelGeometric().intersect(draftLine)) {
                 canvas.getModelGeometric().addLineVertex(
-                        new Line((Point) draftLine.getStart().clone(), (Point) draftLine.getEnd().clone()),null);
+                        new Line((Point) draftLine.getStart().clone(), (Point) draftLine.getEnd().clone()),
+                        null, jspGraphe.getBounds(),null);
             }
+            canvas.repaint();
+            canvasGraphe.repaint();
         }
 
         x1 = -1;
         y1 = -1;
         isSelection = false;
         canvas.getDraftLine().clear();
-        canvas.repaint();
+
     }
 
     @Override

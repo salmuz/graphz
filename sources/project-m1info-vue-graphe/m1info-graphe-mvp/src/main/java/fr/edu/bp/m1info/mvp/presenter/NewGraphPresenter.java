@@ -57,6 +57,7 @@ public class NewGraphPresenter extends Presenter<UINewGraph> {
 
     public NewGraphPresenter(JFrame parent) {
         this.parent = parent;
+        optionGraphe = -1;
     }
 
     @Override
@@ -85,8 +86,8 @@ public class NewGraphPresenter extends Presenter<UINewGraph> {
                               optionGraphe = GRAPHE_ORIENTE;
                               view.dispose();
                          }else{
-                             if(view.getJrbOriente().isSelected()){
-                             optionGraphe = GRAPHE_NON_ORIENTE;
+                             if(view.getJrbNonOriente().isSelected()){
+                                  optionGraphe = GRAPHE_NON_ORIENTE;
                                   view.dispose();
                              }else{
                                 JOptionPane.showMessageDialog(view,"Il faut seleccioner une option.","Warning",JOptionPane.WARNING_MESSAGE);

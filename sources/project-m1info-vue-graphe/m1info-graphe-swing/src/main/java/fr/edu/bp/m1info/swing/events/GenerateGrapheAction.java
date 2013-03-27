@@ -48,14 +48,18 @@ import java.awt.event.ActionEvent;
 public class GenerateGrapheAction extends AbstractAction {
 
     private GraphCanvas canvas;
+    private JScrollPane spanel;
 
-    public GenerateGrapheAction(GraphCanvas canvas) {
+    public GenerateGrapheAction(GraphCanvas canvas, JScrollPane spanel) {
         this.canvas = canvas;
+        this.spanel =spanel;
     }
 
     public void actionPerformed(ActionEvent e) {
         String nroVertex = JOptionPane.showInputDialog("Vous pouvez clavier le chiffre des sommets?");
-        canvas.getGraph().generateGraphe(Integer.parseInt(nroVertex));
-        canvas.repaint();
+        if(!nroVertex.equalsIgnoreCase("")){
+            canvas.getGraph().generateGraphe(Integer.parseInt(nroVertex),spanel.getBounds());
+            canvas.repaint();
+        }
     }
 }

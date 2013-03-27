@@ -50,6 +50,7 @@ import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
+import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.awt.*;
@@ -80,6 +81,7 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
 
         this.clazzEdge = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 0);
         this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 1);
+        DefaultVertexName.nameVertex = 0;
     }
 
     /**
@@ -382,11 +384,13 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
             Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, target, edge.getTarget(), null);
             newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
                     point.getX(), point.getY(), e0.getPointEnd().getX(), e0.getPointEnd().getY()));
+            newEdge.createWeight();
             addEdge(newEdge);
         } else {
             Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, edge.getSource(), target, null);
             newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
                     e0.getPointStart().getX(), e0.getPointStart().getY(), point.getX(), point.getY()));
+            newEdge.createWeight();
             addEdge(newEdge);
         }
     }
@@ -397,10 +401,14 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
         }
     }
 
-    public void generateGraphe(int nroVertex) {
+    public void generateGraphe(int nroVertex, Rectangle rectangle) {
+        double x = rectangle.getX();
+        double y = rectangle.getY();
+        double width = rectangle.getWidth() + rectangle.getX();
+        double height = rectangle.getHeight() + rectangle.getY();
         for (int i=0; i < nroVertex; i++) {
             Vertex vertex = new Vertex();
-            Point point = new Point2D((int)(Math.random() * (1000-1)) + 1,(int)(Math.random() * (1000-1)) + 1);
+            Point point = new Point2D((int)(Math.random() * (width-x)) + 1,(int)(Math.random() * (height-y)) + 1);
             vertex.setVertex(ShapePlaneFactory.createShape(getClazzVertexShape(),
                 point.getX(), point.getY()));
             vertex.getVertex().setBackground(Color.ORANGE);
