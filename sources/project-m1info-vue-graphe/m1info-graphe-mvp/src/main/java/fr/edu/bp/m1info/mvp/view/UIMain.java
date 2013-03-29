@@ -114,6 +114,7 @@ public class UIMain extends javax.swing.JFrame implements View {
         jmHelp = new javax.swing.JMenu();
         jmiAbout = new javax.swing.JMenuItem();
         jmiAide = new javax.swing.JMenuItem();
+        jmiOpen = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jpPrincipal.setLayout(new java.awt.BorderLayout());
@@ -239,6 +240,8 @@ public class UIMain extends javax.swing.JFrame implements View {
         jmiSave.setText("Enregistrer Graphe");
         jmFichier.add(jmiSave);
 
+        jmiOpen.setText("Ouvrir un Graphe");
+        jmFichier.add(jmiOpen);
         jmFichier.add(jSeparator5);
 
         jmiImporte.setText("Importer Graphe");
@@ -538,6 +541,10 @@ public class UIMain extends javax.swing.JFrame implements View {
         btnGAuto.setEnabled(pFlag);
     }
 
+    public JMenuItem getJmiOpen() {
+        return jmiOpen;
+    }
+
     public void ennableBtnDroit(boolean pFlag){
         btnADroit.setEnabled(pFlag);
         btnSDroit.setEnabled(pFlag);
@@ -592,6 +599,7 @@ public class UIMain extends javax.swing.JFrame implements View {
     private javax.swing.JMenuItem jmiCleanGeo;
     private javax.swing.JMenuItem jmiCleanGraph;
     private javax.swing.JMenuItem jmiContrater;
+    private javax.swing.JMenuItem jmiOpen;
     private javax.swing.JMenuItem jmiDelEdge;
     private javax.swing.JMenuItem jmiDelLine;
     private javax.swing.JMenuItem jmiDelNode;

@@ -129,4 +129,11 @@ public abstract class ShapeGeometric {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "ShapeGeometric{" +
+                "background=" + background +
+                ", color=" + color +
+                '}';
+    }
 }

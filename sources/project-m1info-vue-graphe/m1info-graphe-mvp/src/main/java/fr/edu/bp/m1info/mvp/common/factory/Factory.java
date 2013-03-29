@@ -41,11 +41,11 @@
 package fr.edu.bp.m1info.mvp.common.factory;
 
 import fr.edu.bp.m1info.mvp.common.Repository;
-import fr.edu.bp.m1info.mvp.model.EdgeRepository;
+import fr.edu.bp.m1info.mvp.model.GrapheRepository;
 
 public class Factory {
 
     public static Repository getRp(Class<? extends Repository> repository) {
-       return null;
+       return new GrapheRepository();
     }
 }

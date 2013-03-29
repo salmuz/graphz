@@ -81,7 +81,8 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
 
         this.clazzEdge = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 0);
         this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 1);
-        DefaultVertexName.nameVertex = 0;
+        DefaultVertexName.nameVertex = -1;
+        ConstantsGeometric.RADIO = 15;
     }
 
     /**
@@ -110,6 +111,12 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
         if (edgeList.contains(edge)) {
             return false;
         }
+        edgeList.add(edge);
+        return true;
+    }
+
+
+    public boolean addEdgeWithoutVerification(Edge edge) {
         edgeList.add(edge);
         return true;
     }

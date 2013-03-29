@@ -132,16 +132,19 @@ public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Vertex vertex = (Vertex) o;
+        Vertex vertex1 = (Vertex) o;
 
-        if (value != null ? !value.equals(vertex.value) : vertex.value != null) return false;
+        if (value != null ? !value.equals(vertex1.value) : vertex1.value != null) return false;
+        if (vertex != null ? !vertex.equals(vertex1.vertex) : vertex1.vertex != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return value != null ? value.hashCode() : 0;
+        int result = vertex != null ? vertex.hashCode() : 0;
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        return result;
     }
 }
 

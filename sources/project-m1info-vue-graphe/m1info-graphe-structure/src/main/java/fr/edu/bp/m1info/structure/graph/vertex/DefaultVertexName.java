@@ -42,7 +42,7 @@ package fr.edu.bp.m1info.structure.graph.vertex;
 
 public class DefaultVertexName {
 
-    public static Integer nameVertex = 0;
+    public static Integer nameVertex = -1;
 
     public static Integer getNextName(){
         nameVertex++;

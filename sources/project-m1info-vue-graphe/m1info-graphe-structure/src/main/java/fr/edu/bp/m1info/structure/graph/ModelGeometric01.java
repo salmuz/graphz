@@ -128,16 +128,18 @@ public class ModelGeometric01 {
         lineVertical.setLower((Circle) ShapePlaneFactory.createShape(Circle.class, point02.getX(), point02.getY()));
 
         Vertex vertex = new Vertex();
+
         Point point;
         if (pointVertex == null) {
             point = new Point2D((int) (Math.random() * (width - x)) + 1, (int) (Math.random() * (height - y)) + 1);
         } else {
             point = pointVertex;
         }
+
         vertex.setVertex(ShapePlaneFactory.createShape(Circle.class, point.getX(), point.getY()));
         vertex.getVertex().setBackground(Color.ORANGE);
         vertex.getVertex().setColor(Color.ORANGE);
-        graph.addVertex(vertex);
+        System.out.println(graph.addVertex(vertex));
 
         for (VertexVerticalLine vLine : lineList) {
             if (vLine.getLine().intersect(line)) {

@@ -71,12 +71,14 @@ public class GeometricAction {
             jspDroits.setRightComponent(jspGauche);
 
             view.getJpPrincipal().add(jspDroits, java.awt.BorderLayout.CENTER);
-            view.pack();
+
             view.ennableBtnDroit(true);
             view.ennableBtnGraphe(false);
             view.getJmGraphe().setEnabled(false);
             view.getJmGeometric().setEnabled(true);
             view.getBtnDesplacer().setEnabled(true);
+            view.revalidate();
+            view.repaint();
             this.view = view;
             actions();
         }
@@ -142,6 +144,10 @@ public class GeometricAction {
         MouseAdapter mvLineVertex = new MoveLineVVertexListener(canvasGeo, canvasGraphe, jspGauche);
         canvasGeo.addMouseMotionListener(mvLineVertex);
         canvasGeo.addMouseListener(mvLineVertex);
+    }
+
+    public GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>> getCanvasGraphe() {
+        return canvasGraphe;
     }
 
     /*

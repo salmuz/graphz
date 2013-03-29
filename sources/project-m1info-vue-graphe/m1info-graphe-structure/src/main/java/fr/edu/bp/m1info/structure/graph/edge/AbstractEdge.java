@@ -70,9 +70,10 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
     protected AbstractEdge(Vertex source, Vertex target, Value weight) {
         this.source = source;
         this.target = target;
-        this.weight = weight;
         if(weight==null){
             this.weight = (Value)((Object) new String("0"));
+        }else{
+            this.weight = weight;
         }
     }
 
@@ -144,8 +145,12 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
     }
 
 
+    public Value getWeight() {
+        return weight;
+    }
+
     public void createWeight() {
-        if (this.source != null && this.target != null && this.edge != null) {
+        if (this.source != null && this.target != null && this.edge != null  ) {
             Point point = ((EdgeShapeGraph) this.edge).geMidPoint();
             if (weightShape == null) {
                 weightShape = (Message) ShapePlaneFactory.createShape(Message.class, point.getX(), point.getY());
@@ -153,7 +158,9 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
                 weightShape.getPoint().setX(point.getX());
                 weightShape.getPoint().setY(point.getY());
             }
-            this.weight = (Value)((Object) new String("("+source.getValue().toString()+","+target.getValue().toString()+")"));
+            if(this.weight == null)
+                this.weight = (Value)((Object) new String("("+source.getValue().toString()+","+target.getValue().toString()+")"));
+
             weightShape.setMessage(weight.toString());
         }
     }

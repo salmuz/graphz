@@ -68,7 +68,9 @@ public class GrapheAction {
             }
             view.getJmGraphe().setEnabled(true);
             view.getJmGeometric().setEnabled(false);
-            view.pack();
+
+            view.revalidate();
+            view.repaint();
             this.view = view;
             actions();
         }
@@ -244,4 +246,15 @@ public class GrapheAction {
         canvas.addMouseListener(deVertexAction);
     }
 
+    public Graph getGraph() {
+        return graph;
+    }
+
+    public GraphCanvas getCanvas() {
+        return canvas;
+    }
+
+    public JScrollPane getSpanel() {
+        return spanel;
+    }
 }

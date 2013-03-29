@@ -43,7 +43,13 @@ package fr.edu.bp.m1info.mvp.presenter;
 import fr.edu.bp.m1info.mvp.view.UIMain;
 import fr.edu.bp.m1info.mvp.common.Presenter;
 import fr.edu.bp.m1info.mvp.common.factory.Factory;
-import fr.edu.bp.m1info.mvp.model.EdgeRepository;
+import fr.edu.bp.m1info.mvp.model.GrapheRepository;
+import fr.edu.bp.m1info.mvp.xml.FiltreFichier;
+import fr.edu.bp.m1info.mvp.xml.ReadXML;
+import fr.edu.bp.m1info.mvp.xml.WriteXML;
+
+import javax.swing.*;
+import java.io.File;
 
 public class MainPresenter extends Presenter<UIMain> {
 
@@ -58,7 +64,7 @@ public class MainPresenter extends Presenter<UIMain> {
 
     @Override
     protected void createrRepository() {
-        super.repository = Factory.getRp(EdgeRepository.class);
+        super.repository = Factory.getRp(GrapheRepository.class);
     }
 
     @Override
@@ -91,19 +97,53 @@ public class MainPresenter extends Presenter<UIMain> {
 
         this.view.getJmiSave().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String name = JOptionPane.showInputDialog("Veuillez saisir le nom du Graphe?");
+                repository.enregistreGraphe(grapheAcction.getGraph(),name);
+            }
+        });
 
+         this.view.getJmiOpen().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String name = JOptionPane.showInputDialog("Veuillez saisir le nom du Graphe?");
+                grapheAcction = new GrapheAction(view, 2);
+                repository.openGraphe(grapheAcction.getGraph(),grapheAcction.getSpanel().getBounds(),name);
+                grapheAcction.getCanvas().repaint();
             }
         });
 
         this.view.getJmiExporte().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
+                JFileChooser choix = new JFileChooser(".");
+                //choix.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                choix.addChoosableFileFilter(new FiltreFichier());
+                int retour = choix.showOpenDialog(view);
+                if (retour == JFileChooser.APPROVE_OPTION) {
+                    if (grapheAcction != null) {
+                        WriteXML.getGraphe(choix.getSelectedFile().getPath(), grapheAcction.getGraph());
+                    } else {
+                        if (geometricAcction != null) {
+                            WriteXML.getGraphe(choix.getSelectedFile().getPath(), geometricAcction.getCanvasGraphe().getGraph());
+                        } else {
+                            JOptionPane.showMessageDialog(view, "Il faut crée à nouveau graph.", "Warning", JOptionPane.WARNING_MESSAGE);
+                        }
+                    }
+                }
             }
         });
 
         this.view.getJmiImporte().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
+                JFileChooser choix = new JFileChooser(".");
+                choix.addChoosableFileFilter(new FiltreFichier());
+                choix.setAcceptAllFileFilterUsed(false);
+                int retour = choix.showOpenDialog(view);
+                if (retour == JFileChooser.APPROVE_OPTION) {
+                    grapheAcction = new GrapheAction(view, 2);
+                    File file = choix.getSelectedFile();
+                    grapheAcction.getCanvas().setGraph(ReadXML.getGraphe(file.getPath(), 2, grapheAcction.getSpanel().getBounds()));
+                    grapheAcction.getCanvas().repaint();
+                }
             }
         });
 

@@ -67,7 +67,7 @@ public class GraphCanvas<Edge extends AbstractEdge,Node extends Vertex> extends 
     @Override
     public void update(java.awt.Graphics g) {
        // super.update(g); clear et call method paint
-       paint(g);
+      paint(g);
     }
 
     @Override
@@ -94,5 +94,9 @@ public class GraphCanvas<Edge extends AbstractEdge,Node extends Vertex> extends 
 
     public List<Edge> getDraftEdge() {
         return draftEdge;
+    }
+
+    public void setGraph(Graph<Edge, Node> graph) {
+        this.graph = graph;
     }
 }

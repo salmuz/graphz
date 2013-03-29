@@ -200,6 +200,7 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
+
     /**
      * c'est une methode qui traduit le variable en srting
      *
