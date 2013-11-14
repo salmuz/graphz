@@ -29,9 +29,8 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aden Nouh Abdirazak
+ * Contributor(s):  
+ *
  * Changes
  * -------
  * 20/01/13 : Version 01;

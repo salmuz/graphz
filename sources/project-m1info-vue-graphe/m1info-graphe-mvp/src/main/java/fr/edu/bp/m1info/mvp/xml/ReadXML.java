@@ -1,6 +1,5 @@
 package fr.edu.bp.m1info.mvp.xml;
 
-import fr.edu.bp.m1info.logique.InterfaceOfConverteStructureGraphe;
 import fr.edu.bp.m1info.mvp.presenter.NewGraphPresenter;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
@@ -8,11 +7,6 @@ import fr.edu.bp.m1info.structure.geometric.plane.LineArrow;
 import fr.edu.bp.m1info.structure.graph.DirectedGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
-import generated.Node;
-import graph.modelgraph.ModelManager;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,11 +28,11 @@ public class ReadXML {
             }
         }
 
-        ModelManager manager = ModelManager.getInstance();
-        int id = manager.unMarshalling(ruta);
-        graph.modelgraph.Graph graphT1 = manager.get(id);
-        InterfaceOfConverteStructureGraphe.converterGrapheT1ToGrapheT5(graphT1,graph,rectangle);
-        System.out.println(graph.getEdgeList().size());
+//        ModelManager manager = ModelManager.getInstance();
+//        int id = manager.unMarshalling(ruta);
+//        graph.modelgraph.Graph graphT1 = manager.get(id);
+//        InterfaceOfConverteStructureGraphe.converterGrapheT1ToGrapheT5(graphT1,graph,rectangle);
+//        System.out.println(graph.getEdgeList().size());
         return graph;
     }
 }

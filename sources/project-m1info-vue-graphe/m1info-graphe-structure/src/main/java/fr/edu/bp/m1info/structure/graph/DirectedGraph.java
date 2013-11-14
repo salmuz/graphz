@@ -29,13 +29,12 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak
- *
+ * Contributor(s):  
+ * 					
  * Changes
  * -------
- * 12/02/13 : Version 01;
+ * 12/02/13 : Version 01
+ * 11/11/13 : Adiction of algorithm's flow maximal
  *
  */
 package fr.edu.bp.m1info.structure.graph;

@@ -5,24 +5,13 @@
 
 package graph.algorithm;
 
-import generated.Edge;
-import generated.Node;
-import graph.exception.EdgeException;
-import graph.exception.NodeException;
-import graph.modelgraph.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Anthony
  */
 public class algorithm {
 
-        public List<Integer> BFS(Graph g,Node n){
+    /*public List<Integer> BFS(Graph g,Node n){
 
         List<Node> queue = new LinkedList();
         Node tmp;
@@ -97,7 +86,7 @@ public class algorithm {
         
         List<Node> gNodes = g.getNode();
         List<Node> adjNodes;
-        for(int i = 0; i< gNodes.size();i++)/*on creer des sommets vide*/
+        for(int i = 0; i< gNodes.size();i++)
         {
             Node tmp = new Node();
             tmp.setName(gNodes.get(i).getName());
@@ -164,8 +153,6 @@ public class algorithm {
             }
         }
         return g2;
-//        }
-//
-//        return g2;
-    }
+
+    }               */
 }

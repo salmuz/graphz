@@ -40,15 +40,10 @@
  */
 package fr.edu.bp.m1info.mvp.model;
 
-import fr.edu.bp.m1info.logique.InterfaceOfConverteStructureGraphe;
 import fr.edu.bp.m1info.mvp.common.Repository;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-import graph.modelgraph.ModelManager;
-import org.soap.graph.GetGraphResponse;
-import org.soap.graph.GraphsSOAP;
-import org.soap.graph.GraphsSOAP_Service;
 
 import java.awt.*;
 
@@ -57,50 +52,59 @@ import java.awt.*;
  */
 public class GrapheRepository extends Repository{
 
-    public boolean enregistreGraphe(Graph<AbstractEdge,Vertex> graphe,String name) {
-
-
-        GraphsSOAP_Service service=new   GraphsSOAP_Service();
-        GraphsSOAP soap = service.getGraphsSOAPPort();
-
-        soap.createGraph(false,name,"salmuz","123456");
-        for(Vertex node:graphe.getVertexList()){
-             soap.addNode(name,node.getValue().toString(),"salmuz","123456");
-        }
-
-        for(AbstractEdge edge:graphe.getEdgeList()){
-          soap.addEdgeByLabel(name,edge.getSource().getValue().toString(),
-                  edge.getTarget().getValue().toString(),
-                  Integer.valueOf(edge.getWeight().toString()),"salmuz","123456");
-        }
-
-
-
+    @Override
+    public boolean enregistreGraphe(Graph<AbstractEdge, Vertex> graphe, String name) {
         return false;
     }
 
     @Override
-    public void openGraphe(Graph grapheDesi,Rectangle rectangle,String name) {
-        GraphsSOAP_Service service=new   GraphsSOAP_Service();
-        GraphsSOAP soap = service.getGraphsSOAPPort();
-        org.soap.graph.GetGraphResponse.Return returnG = soap.getGraph(name, "salmuz", "123456");
+    public void openGraphe(Graph grapheDesi, Rectangle rectangle, String name) {
 
-
-        ModelManager manager = ModelManager.getInstance();
-
-        int idGraph = manager.createGraph(false, returnG.getName());
-
-        for(GetGraphResponse.Return.Node nodeR:returnG.getNode()){
-            manager.addNode(idGraph,nodeR.getName());
-        }
-
-        for(GetGraphResponse.Return.Node nodeR:returnG.getNode()){
-            for(GetGraphResponse.Return.Node.Edge edge: nodeR.getEdge()){
-              manager.addEdge(idGraph, String.valueOf(edge.getNodeA()), String.valueOf(edge.getNodeB()), edge.getWeight());
-            }
-        }
-
-        graph.modelgraph.Graph graphe = manager.get(idGraph);
-        InterfaceOfConverteStructureGraphe.converterGrapheT1ToGrapheT5(graphe,grapheDesi,rectangle);
     }
+
+//    public boolean enregistreGraphe(Graph<AbstractEdge,Vertex> graphe,String name) {
+//
+//        GraphsSOAP_Service service=new   GraphsSOAP_Service();
+//        GraphsSOAP soap = service.getGraphsSOAPPort();
+//
+//        soap.createGraph(false,name,"salmuz","123456");
+//        for(Vertex node:graphe.getVertexList()){
+//             soap.addNode(name,node.getValue().toString(),"salmuz","123456");
+//        }
+//
+//        for(AbstractEdge edge:graphe.getEdgeList()){
+//          soap.addEdgeByLabel(name,edge.getSource().getValue().toString(),
+//                  edge.getTarget().getValue().toString(),
+//                  Integer.valueOf(edge.getWeight().toString()),"salmuz","123456");
+//        }
+//
+//
+//
+//        return false;
+//    }
+//
+//    @Override
+//    public void openGraphe(Graph grapheDesi,Rectangle rectangle,String name) {
+//        GraphsSOAP_Service service=new   GraphsSOAP_Service();
+//        GraphsSOAP soap = service.getGraphsSOAPPort();
+//        org.soap.graph.GetGraphResponse.Return returnG = soap.getGraph(name, "salmuz", "123456");
+//
+//
+//        ModelManager manager = ModelManager.getInstance();
+//
+//        int idGraph = manager.createGraph(false, returnG.getName());
+//
+//        for(GetGraphResponse.Return.Node nodeR:returnG.getNode()){
+//            manager.addNode(idGraph,nodeR.getName());
+//        }
+//
+//        for(GetGraphResponse.Return.Node nodeR:returnG.getNode()){
+//            for(GetGraphResponse.Return.Node.Edge edge: nodeR.getEdge()){
+//              manager.addEdge(idGraph, String.valueOf(edge.getNodeA()), String.valueOf(edge.getNodeB()), edge.getWeight());
+//            }
+//        }
+//
+//        graph.modelgraph.Graph graphe = manager.get(idGraph);
+//        InterfaceOfConverteStructureGraphe.converterGrapheT1ToGrapheT5(graphe,grapheDesi,rectangle);
+//    }
 }
