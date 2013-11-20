@@ -40,16 +40,9 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
-import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
-import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ContrationEdgeListener extends AddEdgeListener {
@@ -69,21 +62,21 @@ public class ContrationEdgeListener extends AddEdgeListener {
         double x1 = e.getPoint().getX();
         double y1 = e.getPoint().getY();
 
-        if (this.isSelection) {
-            Vertex vertex1 = canvas.getGraph().getVertexShape(x1, y1);
-            if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
-                edge = canvas.getGraph().getEdge(vertex0,vertex1);
-                if (canvas.getGraph().containsEdge(edge)) {
-                    canvas.getGraph().contractEdge(edge);
-                }
-            }
-            canvas.repaint();
-        }
+//        if (this.isSelection) {
+//            Vertex vertex1 = canvas.getGraph().getVertexShape(x1, y1);
+//            if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
+//                edge = canvas.getGraph().getEdge(vertex0,vertex1);
+//                if (canvas.getGraph().containsEdge(edge)) {
+//                    canvas.getGraph().contractEdge(edge);
+//                }
+//            }
+//            canvas.repaint();
+//        }
 
         x1 = -1;
         y1 = -1;
-        vertex0 = null;
-        edge = null;
+//        vertex0 = null;
+//        edge = null;
         isSelection = false;
         canvas.getDraftEdge().clear();
     }

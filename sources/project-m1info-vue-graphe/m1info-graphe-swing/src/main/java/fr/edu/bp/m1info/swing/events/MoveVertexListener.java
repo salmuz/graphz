@@ -40,17 +40,12 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
 
 public class MoveVertexListener extends MouseAdapter {
 
@@ -71,10 +66,10 @@ public class MoveVertexListener extends MouseAdapter {
         x0 = e.getPoint().getX();
         y0 = e.getPoint().getY();
 
-        vertex0 = canvas.getGraph().getVertexShape(x0, y0);
-        if (vertex0 != null) {
-            this.isSelection = true;
-        }
+//        vertex0 = canvas.getGraph().getVertexShape(x0, y0);
+//        if (vertex0 != null) {
+//            this.isSelection = true;
+//        }
 
     }
 
@@ -83,17 +78,17 @@ public class MoveVertexListener extends MouseAdapter {
         double x1 = e.getPoint().getX();
         double y1 = e.getPoint().getY();
 
-        if (this.isSelection) {
-            Vertex vertex1 = new Vertex();
-            vertex1.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), x1, y1));
-             if(!canvas.getGraph().isVertexSamePlace(vertex1,vertex0)){
-                moveShapes(x1,y1,Color.ORANGE,Color.BLUE);
-             }else{
-                moveShapes(x0, y0, Color.ORANGE, Color.BLUE);
-             }
-            canvas.repaint();
-            this.isSelection=false;
-        }
+//        if (this.isSelection) {
+//            Vertex vertex1 = new Vertex();
+//            vertex1.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), x1, y1));
+//             if(!canvas.getGraph().isVertexSamePlace(vertex1,vertex0)){
+//                moveShapes(x1,y1,Color.ORANGE,Color.BLUE);
+//             }else{
+//                moveShapes(x0, y0, Color.ORANGE, Color.BLUE);
+//             }
+//            canvas.repaint();
+//            this.isSelection=false;
+//        }
     }
 
     @Override
@@ -108,25 +103,25 @@ public class MoveVertexListener extends MouseAdapter {
     }
 
     private void moveShapes(double x1,double y1,Color vertex,Color edgec) {
-        vertex0.getVertex().setBackground(vertex);
-        VertexShapeGraph v0 = (VertexShapeGraph) vertex0.getVertex();
-        Iterator<AbstractEdge> itEdges = canvas.getGraph().getEdgesOfVertex(vertex0).iterator();
-        while (itEdges.hasNext()) {
-            AbstractEdge edge = itEdges.next();
-            EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
-            edge.getEdge().setColor(edgec);
-            if (e0.getPointEnd().equals(v0.centreShape())) {
-                e0.getPointEnd().setX(x1);
-                e0.getPointEnd().setY(y1);
-            } else {
-                if(e0.getPointStart().equals(v0.centreShape())){
-                    e0.getPointStart().setX(x1);
-                    e0.getPointStart().setY(y1);
-                }
-            }
-        }
-        // the new center of circle
-        v0.centreShape().setX(x1);
-        v0.centreShape().setY(y1);
+//        vertex0.getVertex().setBackground(vertex);
+//        VertexShapeGraph v0 = (VertexShapeGraph) vertex0.getVertex();
+//        Iterator<AbstractEdge> itEdges = canvas.getGraph().getEdgesOfVertex(vertex0).iterator();
+//        while (itEdges.hasNext()) {
+//            AbstractEdge edge = itEdges.next();
+//            EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+//          //  edge.getEdge().setColor(edgec);
+//            if (e0.getPointEnd().equals(v0.centreShape())) {
+//                e0.getPointEnd().setX(x1);
+//                e0.getPointEnd().setY(y1);
+//            } else {
+//                if(e0.getPointStart().equals(v0.centreShape())){
+//                    e0.getPointStart().setX(x1);
+//                    e0.getPointStart().setY(y1);
+//                }
+//            }
+//        }
+//        // the new center of circle
+//        v0.centreShape().setX(x1);
+//        v0.centreShape().setY(y1);
     }
 }

@@ -22,27 +22,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library; if not, write to the Free Software Foundation,
  * Inc.,
- * 
+ *
  * ------------------
- * Point.java
+ * GraphProperties.java
  * ------------------
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak 
+ * Contributor(s):
  *
  * Changes
  * -------
- * 12/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric.graph;
 
-/**
- * C'est un interface pour tout les types des ArcShapeGraph qui sont arrete orienté herite EdgeShapeGraph normale
- * puisqu'un arc c'est edge qui est orienté
- */
-public interface ArcShapeGraph  extends EdgeShapeGraph{
+package fr.edu.bp.m1info.structure.common;
+
+import java.awt.*;
+
+public class GraphProperties {
+
+    public static final Color VERTEX_NAME_COLOR = Color.WHITE;
+
+    public static final Color VERTEX_COLOR = Color.BLUE;
+
+    public static final Color VERTEX_BACKGROUND = Color.BLUE;
 }

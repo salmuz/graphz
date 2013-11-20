@@ -42,14 +42,13 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
 
 /**
  * nous avons une class appelle Rectangle et qui herite certaine methode de la class ShapeGeometric
  * et qui sera implementé dans la class VertexShapeGraph
  *
  */
-public class Rectangle extends ShapeGeometric implements VertexShapeGraph {
+public class Rectangle extends ShapeGeometric {
 
     private Point point;
     private double width;
@@ -131,7 +130,8 @@ public class Rectangle extends ShapeGeometric implements VertexShapeGraph {
      *
      * @return retourne un point centrale
      */
-    public Point centreShape(){
+    @Override
+    public Point centre(){
         throw new UnsupportedOperationException("Method not implement");
     }
 }

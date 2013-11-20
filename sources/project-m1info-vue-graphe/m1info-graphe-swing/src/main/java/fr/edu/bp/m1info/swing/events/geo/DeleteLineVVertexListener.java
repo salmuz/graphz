@@ -60,12 +60,12 @@ public class DeleteLineVVertexListener  implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         Point p = e.getPoint();
-        ModelGeometric01.VertexVerticalLine vertex =
-                canvas.getModelGeometric().getVexterVerticalLine(p.getX(), p.getY());
-        if(vertex != null){
-            canvas.getModelGeometric().removeVexterVerticalLine(vertex);
-            canvas.repaint();
-        }
+//        ModelGeometric01.VertexVerticalLine vertex =
+//                canvas.getModelGeometric().getVexterVerticalLine(p.getX(), p.getY());
+//        if(vertex != null){
+//            canvas.getModelGeometric().removeVexterVerticalLine(vertex);
+//            canvas.repaint();
+//        }
     }
 
     public void mousePressed(MouseEvent e) {

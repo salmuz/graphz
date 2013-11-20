@@ -59,11 +59,11 @@ public class SeparateVertexListener implements MouseListener {
 
     public void mouseClicked(MouseEvent e) {
         Point p = e.getPoint();
-        Vertex vertex = canvas.getGraph().getVertexShape(p.getX(),p.getY());
-        if(vertex != null){
-            canvas.getGraph().separateVertex(vertex);
-            canvas.repaint();
-        }
+//        Vertex vertex = canvas.getGraph().getVertexShape(p.getX(),p.getY());
+//        if(vertex != null){
+//            //canvas.getGraph().separateVertex(vertex);
+//            canvas.repaint();
+//        }
     }
 
     public void mousePressed(MouseEvent e) { }

@@ -6,7 +6,7 @@ import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.geometric.plane.LineArrow;
 import fr.edu.bp.m1info.structure.graph.DirectedGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
+import fr.edu.bp.m1info.structure.graph.UnDirectedGraph;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
@@ -21,33 +21,27 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Antonio
- * Date: 19/03/13
- * Time: 11:23 PM
- * To change this template use File | Settings | File Templates.
- */
-public class GrapheAction {
+public class GraphAction {
 
     private GraphCanvas canvas;
     private Graph graph;
     private UIMain view;
     private javax.swing.JScrollPane spanel;
 
-    public GrapheAction(UIMain view, int optionGraphe) {
+    public GraphAction(UIMain view, int optionGraphe) {
 
-        if (optionGraphe == NewGraphPresenter.GRAPHE_NON_ORIENTE) {
-            graph = new GraphNoOrient<Line, Circle, Integer, Integer>() {
-            };
+        graph = new UnDirectedGraph<Edge, Vertex>() {};
+        canvas = new GraphCanvas<Edge, Vertex>(graph);
+
+       /* if (optionGraphe == NewGraphPresenter.GRAPHE_NON_ORIENTE) {
+            graph = new UnDirectedGraph<Line, Circle, Integer, Integer>() {};
             canvas = new GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>>(graph);
         } else {
             if (optionGraphe == NewGraphPresenter.GRAPHE_ORIENTE) {
-                graph = new DirectedGraph<LineArrow, Circle, Integer, Integer>() {
-                };
+                graph = new DirectedGraph<LineArrow, Circle, Integer, Integer>() {};
                 canvas = new GraphCanvas<Arc<Integer, LineArrow>, Vertex<Integer, Circle>>(graph);
             }
-        }
+        }     */
 
         if (optionGraphe != -1) {
 

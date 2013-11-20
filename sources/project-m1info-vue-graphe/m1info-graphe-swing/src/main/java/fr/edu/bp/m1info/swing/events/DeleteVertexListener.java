@@ -57,12 +57,12 @@ public class DeleteVertexListener implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        Point p = e.getPoint();
-        Vertex  vertex = canvas.getGraph().getVertexShape(p.getX(),p.getY());
-        if(vertex != null){
-            canvas.getGraph().removeVertex(vertex);
-            canvas.repaint();
-        }
+//        Point p = e.getPoint();
+//        Vertex  vertex = canvas.getGraph().getVertexShape(p.getX(),p.getY());
+//        if(vertex != null){
+//            canvas.getGraph().removeVertex(vertex);
+//            canvas.repaint();
+//        }
     }
 
     public void mousePressed(MouseEvent e) {

@@ -50,9 +50,9 @@ public class EdgeFactory {
         AbstractEdge edge = null;
 
         if(clazz.isAssignableFrom(Edge.class)){
-            edge = new Edge(source,target,value);
+            edge = new Edge(source,target);
         }else{
-            edge = new Arc(source,target,value);
+            edge = new Arc(source,target);
         }
 
         return edge;

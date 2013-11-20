@@ -40,10 +40,8 @@
 package fr.edu.bp.m1info.structure.geometric.plane;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.*;
+import fr.edu.bp.m1info.structure.geometric.Arrow;
 import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 
 import java.awt.*;
 
@@ -51,7 +49,7 @@ import java.awt.*;
  * nous avons une class appelle LineArrow et qui herite certaine methode de la class Line
  * et elle est implementé dans la class  Arrow et  EdgeShapeGraph
  */
-public class LineArrow extends Line implements Arrow, ArcShapeGraph {
+public class LineArrow extends Line implements Arrow {
 
     private PLACE_OF_ARROW placeOfArrow;
     private Color cfecha;

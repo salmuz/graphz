@@ -38,99 +38,117 @@
  */
 package fr.edu.bp.m1info.structure.graph;
 
-import fr.edu.bp.m1info.structure.common.Reflection;
-import fr.edu.bp.m1info.structure.geometric.*;
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
-import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
-import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
+import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.VertexShape;
+import fr.edu.bp.m1info.structure.geometric.plane.Circle;
+import fr.edu.bp.m1info.structure.geometric.plane.Line;
+import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
- * Cette classe graphe est une classe qui rassemble les propriétés entre GraphNoOrient et DirectedGraph
+ * Cette classe graphe est une classe qui rassemble les propriétés entre UnDirectedGraph et DirectedGraph
  * pour la possibilité des client on a partager les deux classes graphNoOrienté et classe Directedgraph
  *
  * @param <Edge> c'est la variable arrete du graphe
  * @param <Node> c'est la variables sommet
  */
 
-public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
+public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
-    protected final Class<AbstractEdge> clazzEdge;
+    protected AdjacencyBag<Edge>[] adjacencys;
+    protected List<Node> vertex;
+    protected List<Edge> edges;
+
+    public static int NOT_FOUND_KEY = -1;
+
+    //structures to do the algorithms
+
+//    protected final Class<AbstractEdge> clazzEdge;
     protected final Class<? extends ShapeGeometric> clazzEdgeShape;
-    protected final Class<Vertex> clazzVertex;
+//    protected final Class<Vertex> clazzVertex;
     protected final Class<? extends ShapeGeometric> clazzVertexShape;
 
-    protected List<Edge> edgeList;
-    protected List<Node> vertexList;
+
+    //protected List<Edge> edgeList;
+    //protected List<Node> vertexList;
 
     protected Graph() {
-        this.clazzEdgeShape = (Class<? extends ShapeGeometric>) Reflection.getParamGenericOfSuperCLass(this.getClass(), 0);
-        this.clazzVertexShape = (Class<? extends ShapeGeometric>) Reflection.getParamGenericOfSuperCLass(this.getClass(), 1);
+//        this.clazzEdgeShape = (Class<? extends ShapeGeometric>) Reflection.getParamGenericOfSuperCLass(this.getClass(), 0);
+//        this.clazzVertexShape = (Class<? extends ShapeGeometric>) Reflection.getParamGenericOfSuperCLass(this.getClass(), 1);
 
-        this.clazzEdge = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 0);
-        this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 1);
-        DefaultVertexName.nameVertex = -1;
+        this.clazzEdgeShape = Line.class;
+        this.clazzVertexShape = Circle.class;
+
+//        this.clazzEdge = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 0);
+//        this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 1);
+        DefaultVertexName.nameVertex = 0;
         ConstantsGeometric.RADIO = 15;
+        vertex = new ArrayList<Node>();
+        edges = new ArrayList<Edge>();
+        this.adjacencys = ((AdjacencyBag<Edge>[])new AdjacencyBag[100]);
+        for (int i = 0; i < 100; i++)
+            this.adjacencys[i] = new AdjacencyBag<Edge>();
+    }
+
+
+    public List<Edge> getEdges() {
+        return edges;
+    }
+
+    public List<Node> getVertex(){
+        return vertex;
+    }
+
+    public int sizeVertex(){
+        return vertex.size();
+    }
+
+     /**
+      * It just adds one direction (DirectedGraph)
+      *
+      * @param  source
+      * @param  target
+      */
+    public abstract void addEdge(Node source, Node target);
+
+    /**
+     *
+     * @param key
+     * @return
+     */
+    public int indexOfVertex(Node key) {
+        return vertex.indexOf(key);
     }
 
     /**
-     * C'est une methode getEdgelist qui permet d'acceder la valeur du variable Edege
      *
-     * @return la methode  retour une liste des edge cela veut dire que dans cette methode on peut mettre plusieur objet different
+     * @param source
+     * @return index of vertex if found
      */
-    public List<Edge> getEdgeList() {
-        return edgeList;
-    }
+    protected int newIndexOfVertex(Node source){
+        int i = vertex.indexOf(source);
 
-
-    public List<Node> getVertexList() {
-        return vertexList;
-    }
-
-    /**
-     * C'est une methode qui permet de verifier si on peut ajouter une Edge dans un graphes ou non
-     * car avec deux Node qui sont deja relier tu peut pas une autre fois relier donc la methode avant a besoin cette methode
-     * et puis elle rajout dans le graph
-     *
-     * @param edge ce parametre est une edge quand teste si on peut inserer dans le graph ou pas
-     * @return elle reourne boolean
-     */
-    public boolean addEdge(Edge edge) {
-        if (edgeList.contains(edge)) {
-            return false;
+        if(i == NOT_FOUND_KEY){
+            i = sizeVertex();
         }
-        edgeList.add(edge);
-        return true;
-    }
 
-
-    public boolean addEdgeWithoutVerification(Edge edge) {
-        edgeList.add(edge);
-        return true;
+        return i;
     }
 
     /**
      * C'est une methode qui permet de tester si on peut  rajouter un node dans le graph
      *
-     * @param vertex c'est une variable de type node quand teste si on  rajouter dans le graph
+     * @param node c'est une variable de type node quand teste si on  rajouter dans le graph
      * @return de type boolean
-     */
-    public boolean addVertex(Node vertex) {
-        if (vertexList.contains(vertex)) {
-            return false;
-        }
-        vertexList.add(vertex);
-        return true;
+    */
+    public void addVertex(Node node) {
+        vertex.add(node);
     }
 
     /**
@@ -142,9 +160,7 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
      * @param target
      * @return
      */
-    public boolean containsEdge(Node source, Node target) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract boolean containsEdge(Node source, Node target);
 
     /**
      * C'est une methode qui permet de verifier si une  arrete existe ou pas a partir de la definition d'une arrete
@@ -155,17 +171,17 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
      * @return de types boolean si elle existe ou pas
      */
     public boolean containsEdge(Edge edge) {
-        return edgeList.contains(edge);
+        throw new UnsupportedOperationException();
     }
 
     /**
      * C'est une methode qui permet verifier si un Node est dans un graphe
      *
-     * @param vertex on teste si ce Node appartient dans le graphe
+     * @param node on teste si ce Node appartient dans le graphe
      * @return return boolean pour connaitre si elle est contenu dans le graphe ou pas
      */
-    public boolean containsVertex(Node vertex) {
-        return vertexList.contains(vertex);
+    public boolean containsVertex(Node node) {
+        return vertex.contains(node);
     }
 
     /**
@@ -177,28 +193,18 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
      * @param target
      * @return Elle retourne un Edge si ce impossible pour supprimer l'Edge
      */
-    public void removeEdge(Node source, Node target) {
-        for (int i = 0; i < edgeList.size(); i++) {
-            Edge edge = edgeList.get(i);
-            Vertex v0 = edge.getSource();
-            Vertex v1 = edge.getTarget();
-            if ((v0.equals(source) && v1.equals(target))) {
-                edgeList.remove(edge);
-            }
-        }
-    }
+    public abstract void removeEdge(Node source, Node target);
 
     /**
      * C'est une methode qui permet de supprimer un Edge dans un graphe
      * <p/>
      * pour suprimer il faut suppimer un Edge qui se trouve dans la liste des edges
      *
-     * @param source
-     * @param target
+     * @param edge
      * @return Elle retourne un boolean si ce impossible pour supprimer l'Edge ou pas
      */
     public boolean removeEdge(Edge edge) {
-        return edgeList.remove(edge);
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -206,12 +212,11 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
      * <p/>
      * pour suprimer il faut suppimer un Node il faut preciser le node
      *
-     * @param Vertex
+     * @param node
      * @return Elle retourne un Edge si ce impossible pour supprimer l'Edge
      */
-    public boolean removeVertex(Node vertex) {
-        removeEdgeAll(getEdgesOfVertex(vertex));
-        return vertexList.remove(vertex);
+    public boolean removeVertex(Node node) {
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -219,9 +224,9 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
      *
      * @return elle retourne la classe
      */
-    public Class<AbstractEdge> getClazzEdge() {
-        return clazzEdge;
-    }
+//    public Class<AbstractEdge> getClazzEdge() {
+//        return clazzEdge;
+//    }
 
     /**
      * indique la classe  de l'EdgeShape
@@ -235,9 +240,9 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
     /**
      * @return
      */
-    public Class<Vertex> getClazzVertex() {
-        return clazzVertex;
-    }
+//    public Class<Vertex> getClazzVertex() {
+//        return clazzVertex;
+//    }
 
     /**
      * @return
@@ -252,11 +257,10 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
      * @return
      */
     public Node getVertexShape(double x, double y) {
-
-        Iterator<Node> it = getVertexList().iterator();
+        Iterator<Node> it = this.vertex.iterator();
         while (it.hasNext()) {
             Node node = it.next();
-            if (node.getVertex().contains(x, y)) {
+            if (node.getVertex().shape().contains(x, y)) {
                 return node;
             }
         }
@@ -264,63 +268,68 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
         return null;
     }
 
+    public Iterable<Edge> adjacencys(int v){
+        if ((v < 0) || (v >= sizeVertex())) throw new IndexOutOfBoundsException();
+        return this.adjacencys[v];
+    }
+
     /**
      * @param vertex
      * @param excludes
      * @return
      */
-    public boolean isVertexSamePlace(Node vertex, Node... excludes) {
-        Iterator<Node> it = getVertexList().iterator();
-        while (it.hasNext()) {
-            Node item = it.next();
-            boolean exclude = false;
-            for (int i = 0; i < excludes.length; i++) {
-                if (excludes[i].equals(item)) {
-                    exclude = true;
-                    break;
-                }
-            }
-            if (!exclude && item.getVertex().intersect(vertex.getVertex())) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean isVertexSamePlace(Node vertex, Node... excludes) {
+//        Iterator<Node> it = getVertexList().iterator();
+//        while (it.hasNext()) {
+//            Node item = it.next();
+//            boolean exclude = false;
+//            for (int i = 0; i < excludes.length; i++) {
+//                if (excludes[i].equals(item)) {
+//                    exclude = true;
+//                    break;
+//                }
+//            }
+//           /* if (!exclude && item.getVertex().intersect(vertex.getVertex())) {
+//                return true;
+//            }    */
+//        }
+//        return false;
+//    }
 
     /**
-     * @param vertex0
+     * @param
      * @return
      */
-    public List<Edge> getEdgesOfVertex(Vertex vertex0) {
-        List<Edge> edges = new ArrayList<Edge>();
-        Iterator<Edge> it = edgeList.iterator();
-        while (it.hasNext()) {
-            Edge edge = it.next();
-            if (edge.getSource().equals(vertex0)) {
-                edges.add(edge);
-            } else {
-                if (edge.getTarget().equals(vertex0)) {
-                    edges.add(edge);
-                }
-            }
-        }
-        return edges;
-    }
+//    public List<Edge> getEdgesOfVertex(Vertex vertex0) {
+//        List<Edge> edges = new ArrayList<Edge>();
+//        Iterator<Edge> it = edgeList.iterator();
+//        while (it.hasNext()) {
+//            Edge edge = it.next();
+//            if (edge.getSource().equals(vertex0)) {
+//                edges.add(edge);
+//            } else {
+//                if (edge.getTarget().equals(vertex0)) {
+//                    edges.add(edge);
+//                }
+//            }
+//        }
+//        return edges;
+//    }
 
-    private void changeVertexOfEdge(Edge edge, Vertex vertex, Point point, Vertex newVertex) {
-        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
-        if (edge.getSource().equals(vertex)) {
-            edge.setSource(newVertex);
-            e0.getPointStart().setX(point.getX());
-            e0.getPointStart().setY(point.getY());
-        } else {
-            edge.setTarget(newVertex);
-            e0.getPointEnd().setX(point.getX());
-            e0.getPointEnd().setY(point.getY());
-        }
-    }
+//    private void changeVertexOfEdge(Edge edge, Vertex vertex, Point point, Vertex newVertex) {
+//        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+//        if (edge.getSource().equals(vertex)) {
+//            edge.setSource(newVertex);
+//            e0.getPointStart().setX(point.getX());
+//            e0.getPointStart().setY(point.getY());
+//        } else {
+//            edge.setTarget(newVertex);
+//            e0.getPointEnd().setX(point.getX());
+//            e0.getPointEnd().setY(point.getY());
+//        }
+//    }
 
-    public void contractEdge(Edge edge) {
+ /*   public void contractEdge(Edge edge) {
         Vertex vertex = new Vertex();
         Point midPoint = ((EdgeShapeGraph) edge.getEdge()).geMidPoint();
         vertex.setVertex(ShapePlaneFactory.createShape(getClazzVertexShape(), midPoint.getX(), midPoint.getY()));
@@ -346,10 +355,10 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
         for (Edge edge : edgeList) {
             System.out.println(edge);
         }
-    }
+    }     */
 
 
-    public void separateVertex(Node node) {
+ /*   public void separateVertex(Node node) {
         Vertex vertex01 = new Vertex();
         Vertex vertex02 = new Vertex();
         Point point = ((VertexShapeGraph) node.getVertex()).centreShape();
@@ -429,8 +438,9 @@ public abstract class Graph<Edge extends AbstractEdge, Node extends Vertex> {
 
             addVertex((Node) vertex);
         }
-    }
+    }                 */
+    public abstract Edge getEdge(Node source, Node target);
 
-    public abstract Edge getEdge(Node source,Node target);
+
 
 }

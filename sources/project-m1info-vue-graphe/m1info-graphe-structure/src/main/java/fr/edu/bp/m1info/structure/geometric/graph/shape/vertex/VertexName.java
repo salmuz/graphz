@@ -29,35 +29,61 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
+ * Contributor(s):  
  *
  * Changes
  * -------
- * 22/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric.solid;
+
+package fr.edu.bp.m1info.structure.geometric.graph.shape.vertex;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.geometric.plane.Message;
+import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
+import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 
-/**
- * C'est une classe Sphere qui herite le shapeGeometric
- */
-public class Sphere extends ShapeGeometric{
-    /**
-     *
-     * @param graphics grace a l'objet graphics quand dessine
-     */
-    @Override
+public class VertexName extends VertexDecorator{
+
+    private String name;
+
+    public VertexName(AbstractVertexShape abstractVertexShape, String name) {
+        super(abstractVertexShape);
+        this.name = name;
+        this.name = DefaultVertexName.getNextName().toString();
+        createShape(abstractVertexShape.shape);
+    }
+
+    private void createShape(ShapeGeometric vertex) {
+        Point point = vertex.centre();
+        int less = getLess(name);
+        if (shape == null) {
+            shape = ShapePlaneFactory.createShape(Message.class,
+                    point.getX() - less, point.getY() + 5);
+            ((Message) shape).setMessage(name.toString());
+        } else {
+            ((Message) shape).getPoint().setX(point.getX() - less);
+            ((Message) shape).getPoint().setY(point.getY() + 5);
+        }
+    }
+
+    private int getLess(String value) {
+        if (value instanceof String) {
+            Integer val = Integer.valueOf(value.toString());
+            return (val < 10 ? 4 : (val < 100) ? 7 : 10);
+        }
+        return 10;
+    }
+
     public void draw(Graphics graphics) {
-        throw new UnsupportedOperationException();
+        abstractVertexShape.draw(graphics);
+        shape.draw(graphics);
     }
 
     @Override
-    public Point centre() {
-        throw new UnsupportedOperationException();
+    public ShapeGeometric shape() {
+        return abstractVertexShape.shape();
     }
 }

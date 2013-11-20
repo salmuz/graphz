@@ -39,16 +39,15 @@
  */
 package fr.edu.bp.m1info.structure.geometric.plane;
 
-import fr.edu.bp.m1info.structure.geometric.*;
 import fr.edu.bp.m1info.structure.design.Graphics;
+import fr.edu.bp.m1info.structure.geometric.Arrow;
 import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
 
 /**
  * nous avons une class appelle CurvedArrow et qui herite certaine methode de la class Curve
  *et elle est implementé dans la class Arrow
  */
-public class CurvedArrow extends Curve implements Arrow,ArcShapeGraph{
+public class CurvedArrow extends Curve implements Arrow{
 
     /**
      * C'est un constructeur

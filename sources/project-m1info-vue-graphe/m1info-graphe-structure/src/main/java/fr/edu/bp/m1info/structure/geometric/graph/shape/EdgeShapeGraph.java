@@ -29,28 +29,30 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
+ * Contributor(s):  
  *
  * Changes
  * -------
- * 20/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric.graph;
+
+package fr.edu.bp.m1info.structure.geometric.graph.shape;
 
 import fr.edu.bp.m1info.structure.geometric.Point;
 
 /**
- * c'est un interface VertexShapeGraph qui nous sert pour rassembler tout les point communs des Vertex
+ * Created with IntelliJ IDEA.
+ * User: salmuz
+ * Date: 20/11/2013
+ * Time: 20:24
+ * To change this template use File | Settings | File Templates.
  */
-public interface VertexShapeGraph {
-    /**
-     * C'est une methode qui est obliger a etre redefinir a tout les classes qui vont implement cet interface et
-     * elle sert pour faire le calculer le centre
-     *
-     * @return dont le centre est un point donc retourne un point
-     */
-    public Point centreShape();
+public interface EdgeShapeGraph {
+
+    public Point centre();
+
+    public Point to();
+
+    public Point from();
 
 }

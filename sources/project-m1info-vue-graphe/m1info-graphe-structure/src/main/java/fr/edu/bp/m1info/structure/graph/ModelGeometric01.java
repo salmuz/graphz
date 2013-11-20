@@ -40,25 +40,9 @@
  */
 package fr.edu.bp.m1info.structure.graph;
 
-import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.operation.LineOperation;
-import fr.edu.bp.m1info.structure.geometric.operation.impl.Line2DOperationImpl;
-import fr.edu.bp.m1info.structure.geometric.plane.*;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
-import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
-import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-
-import java.awt.*;
-import java.awt.Rectangle;
-import java.util.*;
-import java.util.List;
-
 
 public class ModelGeometric01 {
-
+                  /*
     private List<VertexVerticalLine> lineList;
     private Line topLine;
     private Line lowerLine;
@@ -73,7 +57,7 @@ public class ModelGeometric01 {
         this.topLine = topLine;
         this.lowerLine = lowerLine;
         lineList = new ArrayList<VertexVerticalLine>();
-        graph = new GraphNoOrient<Line, Circle, Integer, Integer>() {
+        graph = new UnDirectedGraph<Line, Circle, Integer, Integer>() {
         };
         ConstantsGeometric.RADIO = 8;
         nameVertex = 0;
@@ -366,5 +350,5 @@ public class ModelGeometric01 {
                     ", lower=" + lower +
                     '}';
         }
-    }
+    }              */
 }

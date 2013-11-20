@@ -42,14 +42,12 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.EdgeShapeGraph;
 
 /**
  * nous avons une class appelle curve et qui herite certaine methode de la class ShapeGeometric
  */
 public class Curve extends ShapeGeometric implements EdgeShapeGraph{
-
-
 
     private Point start;
     private Point end;
@@ -101,14 +99,7 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
     public void setSecondCurve(Point secondCurve) {
         this.secondCurve = secondCurve;
     }
-    /**
-     *  cette methode permette de recupére le contenu du variable start
-     *
-     *  @return elle retourn le point start
-     */
-    public Point getStart() {
-        return start;
-    }
+
     /**
      * cette methode permette de modifier le contenu du variable start
      *
@@ -116,14 +107,6 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
      */
     public void setStart(Point start) {
         this.start = start;
-    }
-    /**
-     * cette methode permette de recupére le contenu du variable end
-     *
-     *  @return elle retourn le point end
-     */
-    public Point getEnd() {
-        return end;
     }
 
     /**
@@ -150,7 +133,7 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
      *
      * @return
      */
-    public Point getPointStart() {
+    public Point from() {
         return this.start;
     }
     /**
@@ -158,11 +141,11 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
      *
      * @return
      */
-    public Point getPointEnd() {
+    public Point to() {
         return this.end;
     }
 
-    public Point geMidPoint() {
-        return null;
+    public Point centre() {
+        throw new UnsupportedOperationException();
     }
 }

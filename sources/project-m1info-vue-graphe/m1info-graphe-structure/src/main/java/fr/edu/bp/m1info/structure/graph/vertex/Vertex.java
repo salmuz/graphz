@@ -40,27 +40,19 @@
 package fr.edu.bp.m1info.structure.graph.vertex;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.plane.Message;
-import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.AbstractVertexShape;
 
 /*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
-public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
+public class Vertex{
 
-    private Shape vertex;
-    private Message valVertex;
+    private AbstractVertexShape vertex;
+    private int value;
 
-    private Value value;  // Value of Node
-
-    public Vertex() {
-        this.value = (Value) DefaultVertexName.getNextName().toString();
+    public Vertex(){
+        this.value = -1;
     }
 
-    public Vertex(Value value) {
+    public Vertex(int value){
         this.value = value;
     }
 
@@ -69,7 +61,7 @@ public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
      *
      * @return shapeGraph
      */
-    public Shape getVertex() {
+    public AbstractVertexShape getVertex() {
         return vertex;
     }
 
@@ -78,18 +70,18 @@ public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
      *
      * @parameter Shape shapeGraph
      */
-    public void setVertex(Shape vertex) {
+    public void setVertex(AbstractVertexShape vertex) {
         this.vertex = vertex;
     }
 
-    public Value getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(Value value) {
+    public void setValue(int value) {
         this.value = value;
     }
-
+                   /*
     private void createValue() {
         if (vertex != null && value != null) {
             Point point = ((VertexShapeGraph) vertex).centreShape();
@@ -112,21 +104,21 @@ public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
         }
         return 10;
     }
-
+                 */
     public void draw(Graphics graphics) {
-        createValue();
+       // createValue();
         vertex.draw(graphics);
-        if (valVertex != null) valVertex.draw(graphics);
+       // if (valVertex != null) valVertex.draw(graphics);
     }
 
     @Override
     public String toString() {
         return "Vertex{" +
                 "vertex=" + vertex +
-                ", value=" + value +
+             //   ", value=" + value +
                 '}';
     }
-
+            /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -145,6 +137,6 @@ public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
         int result = vertex != null ? vertex.hashCode() : 0;
         result = 31 * result + (value != null ? value.hashCode() : 0);
         return result;
-    }
+    }          */
 }
 

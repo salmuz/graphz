@@ -39,14 +39,6 @@
  */
 package fr.edu.bp.m1info.structure.graph;
 
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.graph.edge.Arc;
-import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-
-import java.util.ArrayList;
-
 /**
  * Cette classe permet de créer des objets graphes orientés
  *
@@ -56,7 +48,7 @@ import java.util.ArrayList;
  * @param <ShapeVertex>
  *
  */
-public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
+public class DirectedGraph{/*<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
                            ShapeVertex extends ShapeGeometric & VertexShapeGraph,ValueEdge, ValueVertex>
         extends Graph<Arc<ValueEdge,ShapeEdge>,Vertex<ValueVertex,ShapeVertex>>{
 
@@ -70,14 +62,14 @@ public class DirectedGraph<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
      *
      * n'a pas de parametre
      */
-    public DirectedGraph() {
-        super();
-        edgeList = new ArrayList<Arc<ValueEdge,ShapeEdge>> ();
-        vertexList = new ArrayList<Vertex<ValueVertex,ShapeVertex>>();
-    }
-
-    @Override
-    public Arc<ValueEdge, ShapeEdge> getEdge(Vertex<ValueVertex, ShapeVertex> source, Vertex<ValueVertex, ShapeVertex> target) {
-        throw new UnsupportedOperationException();
-    }
+//    public DirectedGraph() {
+//        super();
+//        edgeList = new ArrayList<Arc<ValueEdge,ShapeEdge>> ();
+//        vertexList = new ArrayList<Vertex<ValueVertex,ShapeVertex>>();
+//    }
+//
+//    @Override
+//    public Arc<ValueEdge, ShapeEdge> getEdge(Vertex<ValueVertex, ShapeVertex> source, Vertex<ValueVertex, ShapeVertex> target) {
+//        throw new UnsupportedOperationException();
+//    }
 }

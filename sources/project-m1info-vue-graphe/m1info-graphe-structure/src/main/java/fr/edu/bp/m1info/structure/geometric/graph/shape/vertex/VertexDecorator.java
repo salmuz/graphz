@@ -29,23 +29,20 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
+ * Contributor(s):  
  *
  * Changes
  * -------
- * 21/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.geometric.graph;
 
-import fr.edu.bp.m1info.structure.geometric.Point;
+package fr.edu.bp.m1info.structure.geometric.graph.shape.vertex;
 
-public interface EdgeShapeGraph {
+public abstract class VertexDecorator extends AbstractVertexShape {
 
-    public Point getPointStart();
+    protected AbstractVertexShape  abstractVertexShape;
 
-    public Point geMidPoint();
-
-    public Point getPointEnd();
+    public VertexDecorator(AbstractVertexShape abstractVertexShape) {
+        this.abstractVertexShape = abstractVertexShape;
+    }
 }

@@ -77,8 +77,8 @@ public class DesignGeometric2D implements Graphics {
         graphics2D.setColor(line.getColor());
         Stroke strokeDefault = graphics2D.getStroke();
         graphics2D.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
-        Shape shape = new java.awt.geom.Line2D.Double(line.getStart().getX(), line.getStart().getY(),
-                line.getEnd().getX(), line.getEnd().getY());
+        Shape shape = new java.awt.geom.Line2D.Double(line.from().getX(), line.from().getY(),
+                line.to().getX(), line.to().getY());
         graphics2D.draw(shape);
         graphics2D.setStroke(strokeDefault);
         return shape;
@@ -106,10 +106,10 @@ public class DesignGeometric2D implements Graphics {
      * @parameter Curve curve
      */
     public void draw(Curve curve) {
-        Shape shape = new CubicCurve2D.Double(curve.getStart().getX(), curve.getStart().getY(),
+        Shape shape = new CubicCurve2D.Double(curve.from().getX(), curve.from().getY(),
                 curve.getFirstCurve().getX(), curve.getSecondCurve().getY(),
                 curve.getSecondCurve().getX(), curve.getSecondCurve().getY(),
-                curve.getEnd().getX(), curve.getEnd().getY());
+                curve.to().getX(), curve.to().getY());
         graphics2D.setColor(curve.getColor());
         graphics2D.draw(shape);
     }
@@ -140,8 +140,8 @@ public class DesignGeometric2D implements Graphics {
 
         //Angle de la fleche
         double angleArrow = Math.asin(0.3);
-        double angleRotation = Math.atan2(lineArrow.getEnd().getY() - lineArrow.getStart().getY(),
-                lineArrow.getEnd().getX() - lineArrow.getStart().getX());
+        double angleRotation = Math.atan2(lineArrow.to().getY() - lineArrow.from().getY(),
+                lineArrow.to().getX() - lineArrow.from().getX());
         // taille de la fleche
         double arrowLength = 22;
 
@@ -149,7 +149,7 @@ public class DesignGeometric2D implements Graphics {
         //endroit de la fleche
         switch (lineArrow.getPlaceOfArrow()) {
             case END:
-                pointArrow = lineArrow.getEnd();
+                pointArrow = lineArrow.to();
                 break;
             case MIDDLE:
                 pointArrow = operation.calculateMidPoint(lineArrow);

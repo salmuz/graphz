@@ -40,10 +40,14 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.EdgeShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
+import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
+import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
@@ -56,8 +60,9 @@ public class AddEdgeListener extends MouseAdapter {
 
     protected GraphCanvas canvas;
     protected boolean isSelection;
-    protected Vertex vertex0;
-    protected AbstractEdge edge;
+    protected Vertex from;
+    protected Vertex to;
+    protected AbstractEdge edgeDraft;
     protected Color dragged = Color.RED;
 
     /**
@@ -76,11 +81,11 @@ public class AddEdgeListener extends MouseAdapter {
         double x0 = e.getPoint().getX();
         double y0 = e.getPoint().getY();
 
-        vertex0 = canvas.getGraph().getVertexShape(x0, y0);
-        if (vertex0 != null) {
+        from = canvas.getGraph().getVertexShape(x0, y0);
+        if (from != null) {
             this.isSelection = true;
-            edge = EdgeFactory.createEdge(canvas.getGraph().getClazzEdge(), vertex0, null, null);
-            canvas.getDraftEdge().add(edge);
+            edgeDraft = EdgeFactory.createEdge(Edge.class, from, null, null);
+            canvas.getDraftEdge().add(edgeDraft);
         }
 
     }
@@ -91,32 +96,18 @@ public class AddEdgeListener extends MouseAdapter {
         double y1 = e.getPoint().getY();
 
         if (this.isSelection) {
-            Vertex vertex1 = canvas.getGraph().getVertexShape(x1, y1);
-            if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
-                edge.setTarget(vertex1);
-                VertexShapeGraph v0 = (VertexShapeGraph) vertex0.getVertex();
-                VertexShapeGraph v1 = (VertexShapeGraph) vertex1.getVertex();
-                EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
-                e0.getPointStart().setX(v0.centreShape().getX());
-                e0.getPointStart().setY(v0.centreShape().getY());
-                e0.getPointEnd().setX(v1.centreShape().getX());
-                e0.getPointEnd().setY(v1.centreShape().getY());
-                edge.getEdge().setColor(Color.BLUE);
-                edge.createWeight();
-                if (!canvas.getGraph().containsEdge(edge)) {
-                    canvas.getGraph().addEdge(edge);
+            to = canvas.getGraph().getVertexShape(x1, y1);
+            if (from != null && to != null && !to.equals(from)) {
+                if (!canvas.getGraph().containsEdge(from, to)) {
+                    canvas.getGraph( ).addEdge(from, to);
                 }
 
-            } else {
-                canvas.getGraph().removeEdge(edge);
             }
             canvas.repaint();
         }
 
-        x1 = -1;
-        y1 = -1;
-        vertex0 = null;
-        edge = null;
+        from = null;
+        edgeDraft = null;
         isSelection = false;
         canvas.getDraftEdge().clear();
 
@@ -128,16 +119,14 @@ public class AddEdgeListener extends MouseAdapter {
         double y1 = e.getPoint().getY();
 
         if (this.isSelection) {
-            VertexShapeGraph v0 = (VertexShapeGraph) vertex0.getVertex();
-            EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
-            if (e0 == null) {
-                edge.setEdge(ShapePlaneFactory.createShape(canvas.getGraph().getClazzEdgeShape(),
-                        v0.centreShape().getX(), v0.centreShape().getY(), x1, y1));
+            ShapeGeometric v0 = from.getVertex().shape();
+            if (edgeDraft.getEdge() == null) {
+                edgeDraft.setEdge(new EdgeShape(canvas.getGraph().getClazzEdgeShape(),v0.centre(),new Point2D(x1,y1)));
             } else {
-                e0.getPointEnd().setX(x1);
-                e0.getPointEnd().setY(y1);
+                ((EdgeShapeGraph) edgeDraft.getEdge().shape()).to().setX(x1);
+                ((EdgeShapeGraph) edgeDraft.getEdge().shape()).to().setY(y1);
             }
-            edge.getEdge().setColor(dragged);
+            edgeDraft.getEdge().shape().setColor(dragged);
             canvas.repaint();
         }
     }
