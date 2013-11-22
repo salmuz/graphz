@@ -82,7 +82,7 @@ public class AddEdgeListener extends MouseAdapter {
         from = canvas.getGraph().getVertexShape(x0, y0);
         if (from != null) {
             this.isSelection = true;
-            edgeDraft = EdgeFactory.createEdge(Edge.class, from, null, null);
+            edgeDraft = EdgeFactory.createEdge(canvas.getGraph().getClazzEdge(), from, null, null);
             canvas.getDraftEdge().add(edgeDraft);
         }
 

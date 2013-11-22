@@ -18,7 +18,7 @@ public abstract class EdgeDecorator extends AbstractEdgeShape {
     public AbstractEdgeShape parentComponent() {
         if (parent == null){
             if(edgeShape instanceof EdgeDecorator){
-                ((EdgeDecorator) edgeShape).parentComponent();
+                parent = ((EdgeDecorator) edgeShape).parentComponent();
             }else{
                 parent = edgeShape;
             }

@@ -44,6 +44,8 @@ public class GraphProperties {
 
     public static final Color VERTEX_NAME_COLOR = Color.WHITE;
 
+    public static final Color EDGE_NAME_COLOR = Color.BLACK;
+
     public static final Color VERTEX_COLOR = Color.ORANGE;
 
     public static final Color VERTEX_BACKGROUND = Color.ORANGE;

@@ -67,11 +67,6 @@ public class DeleteEdgeListener extends AddEdgeListener {
             to = canvas.getGraph().getVertexShape(x1, y1);
             if (from != null && to != null && !to.equals(from)) {
                 edgeDraft.setTarget(to);
-//                VertexShapeGraph v1 = (VertexShapeGraph) vertex1.getVertex();
-//                EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
-//                e0.getPointEnd().setX(v1.centreShape().getX());
-//                e0.getPointEnd().setY(v1.centreShape().getY());
-               // edge.createWeight();
                 if (canvas.getGraph().containsEdge(edgeDraft)) {
                     canvas.getGraph().removeEdge(from, to);
                 }

@@ -41,6 +41,7 @@ package fr.edu.bp.m1info.structure.graph;
 
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDirected;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
@@ -83,7 +84,7 @@ public class DirectedGraph<Edge extends Arc,Node extends Vertex>
                 source.getVertex().parentComponent().shape().centre(),
                 target.getVertex().parentComponent().shape().centre());
 
-        ((AbstractEdge) edgeS).setShape(new EdgeDirected(shape));
+        ((AbstractEdge) edgeS).setShape(new EdgeDirected(new EdgeName(shape,"index")));
         adjacencys[index].add(edgeS);
 
         edges.add(edgeS);

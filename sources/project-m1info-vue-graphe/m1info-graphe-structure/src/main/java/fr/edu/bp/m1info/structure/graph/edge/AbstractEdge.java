@@ -126,30 +126,13 @@ public abstract class AbstractEdge implements IEdge {
         this.target = target;
     }
 
-//    public Value getWeight() {
-//        return weight;
-//    }
-
-//    public void createWeight() {
-//        if (this.source != null && this.target != null && this.shape != null  ) {
-//            Point point = ((EdgeShapeGraph) this.shape).geMidPoint();
-//            if (weightShape == null) {
-//                weightShape = (Message) ShapePlaneFactory.createShape(Message.class, point.getX(), point.getY());
-//            } else {
-//                weightShape.getPoint().setX(point.getX());
-//                weightShape.getPoint().setY(point.getY());
-//            }
-//            if(this.weight == null)
-//                this.weight = (Value)((Object) new String("("+source.getValue().toString()+","+target.getValue().toString()+")"));
-//
-//            weightShape.setMessage(weight.toString());
-//        }
-//    }
-
+    /**
+     *
+     * @param graphics
+     */
     public void draw(Graphics graphics) {
         shape.draw(graphics);
     }
-
 
     /**
      * C'est une methode  comparatif des objets

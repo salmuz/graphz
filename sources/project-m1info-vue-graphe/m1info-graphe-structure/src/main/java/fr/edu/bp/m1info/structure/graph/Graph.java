@@ -38,11 +38,11 @@
  */
 package fr.edu.bp.m1info.structure.graph;
 
+import fr.edu.bp.m1info.structure.common.Reflection;
 import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
@@ -69,9 +69,9 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
     public static int NOT_FOUND_KEY = -1;
 
-//    protected final Class<AbstractEdge> clazzEdge;
+    protected final Class<? extends IEdge> clazzEdge;
     protected final Class<? extends ShapeGeometric> clazzEdgeShape;
-//    protected final Class<Vertex> clazzVertex;
+    protected final Class<? extends Vertex> clazzVertex;
     protected final Class<? extends ShapeGeometric> clazzVertexShape;
 
     protected List<Node> nodes;
@@ -85,8 +85,10 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         this.clazzEdgeShape = Line.class;
         this.clazzVertexShape = Circle.class;
 
-//        this.clazzEdge = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 0);
-//        this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 1);
+        // modify version 2
+        this.clazzEdge = Reflection.getParamGenericOfSuperCLass(this.getClass(), 0);
+        this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass(), 1);
+
         this.clear();
     }
 
@@ -255,9 +257,9 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
      *
      * @return elle retourne la classe
      */
-//    public Class<AbstractEdge> getClazzEdge() {
-//        return clazzEdge;
-//    }
+    public Class<? extends IEdge> getClazzEdge() {
+        return clazzEdge;
+    }
 
     /**
      * indique la classe  de l'EdgeShape
@@ -271,9 +273,9 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
     /**
      * @return
      */
-//    public Class<Vertex> getClazzVertex() {
-//        return clazzVertex;
-//    }
+    public Class<? extends Vertex> getClazzVertex() {
+        return clazzVertex;
+    }
 
     /**
      * @return
@@ -341,14 +343,9 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         }
     }
 
-    private void showEdges() {
-        for (Edge edge : edgeList) {
-            System.out.println(edge);
-        }
-    }     */
 
 
- /*   public void separateVertex(Node node) {
+    public void separateVertex(Node node) {
         Vertex vertex01 = new Vertex();
         Vertex vertex02 = new Vertex();
         Point point = ((VertexShapeGraph) node.getVertex()).centreShape();

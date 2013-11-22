@@ -56,7 +56,7 @@ public abstract class VertexDecorator extends AbstractVertexShape {
     public AbstractVertexShape parentComponent() {
         if (parent == null){
             if(abstractVertexShape instanceof VertexDecorator){
-                ((VertexDecorator) abstractVertexShape).parentComponent();
+                parent = ((VertexDecorator) abstractVertexShape).parentComponent();
             }else{
                 parent = abstractVertexShape;
             }
