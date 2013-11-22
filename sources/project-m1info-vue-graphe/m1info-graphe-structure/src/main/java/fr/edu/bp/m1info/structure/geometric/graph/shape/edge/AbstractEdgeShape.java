@@ -11,4 +11,16 @@ public abstract class AbstractEdgeShape implements Shape {
     public ShapeGeometric shape() {
         return shape;
     }
+
+    public Shape parentComponent(){
+        return this;
+    }
+
+    public Point from(){
+        throw new UnsupportedOperationException("Operation not support in abstract class");
+    }
+
+    public Point to(){
+        throw new UnsupportedOperationException("Operation not support in abstract class");
+    }
 }

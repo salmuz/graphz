@@ -65,7 +65,7 @@ public class ContrationEdgeListener extends AddEdgeListener {
 //        if (this.isSelection) {
 //            Vertex vertex1 = canvas.getGraph().getVertexShape(x1, y1);
 //            if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
-//                edge = canvas.getGraph().getEdge(vertex0,vertex1);
+//                edge = canvas.getGraph().getShape(vertex0,vertex1);
 //                if (canvas.getGraph().containsEdge(edge)) {
 //                    canvas.getGraph().contractEdge(edge);
 //                }

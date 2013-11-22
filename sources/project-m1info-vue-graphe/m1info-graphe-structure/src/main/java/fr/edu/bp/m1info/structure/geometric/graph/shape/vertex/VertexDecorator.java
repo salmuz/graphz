@@ -38,11 +38,30 @@
 
 package fr.edu.bp.m1info.structure.geometric.graph.shape.vertex;
 
+import fr.edu.bp.m1info.structure.design.Graphics;
+
 public abstract class VertexDecorator extends AbstractVertexShape {
 
     protected AbstractVertexShape  abstractVertexShape;
+    private AbstractVertexShape parent;
 
     public VertexDecorator(AbstractVertexShape abstractVertexShape) {
         this.abstractVertexShape = abstractVertexShape;
     }
+
+    public void draw(Graphics graphics) {
+        abstractVertexShape.draw(graphics);
+    }
+
+    public AbstractVertexShape parentComponent() {
+        if (parent == null){
+            if(abstractVertexShape instanceof VertexDecorator){
+                ((VertexDecorator) abstractVertexShape).parentComponent();
+            }else{
+                parent = abstractVertexShape;
+            }
+        }
+        return parent;
+    }
+
 }

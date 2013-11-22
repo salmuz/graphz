@@ -30,18 +30,15 @@ public class GraphAction {
 
     public GraphAction(UIMain view, int optionGraphe) {
 
-        graph = new UnDirectedGraph<Edge, Vertex>() {};
-        canvas = new GraphCanvas<Edge, Vertex>(graph);
-
-       /* if (optionGraphe == NewGraphPresenter.GRAPHE_NON_ORIENTE) {
-            graph = new UnDirectedGraph<Line, Circle, Integer, Integer>() {};
-            canvas = new GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>>(graph);
+        if (optionGraphe == NewGraphPresenter.GRAPHE_NON_ORIENTE) {
+            graph = new UnDirectedGraph<Edge, Vertex>() {};
+            canvas = new GraphCanvas<Edge, Vertex>(graph);
         } else {
             if (optionGraphe == NewGraphPresenter.GRAPHE_ORIENTE) {
-                graph = new DirectedGraph<LineArrow, Circle, Integer, Integer>() {};
-                canvas = new GraphCanvas<Arc<Integer, LineArrow>, Vertex<Integer, Circle>>(graph);
+                graph = new DirectedGraph<Arc, Vertex>() {};
+                canvas = new GraphCanvas<Arc, Vertex>(graph);
             }
-        }     */
+        }
 
         if (optionGraphe != -1) {
 

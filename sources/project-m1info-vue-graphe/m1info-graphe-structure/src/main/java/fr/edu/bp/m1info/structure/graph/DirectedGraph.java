@@ -39,6 +39,14 @@
  */
 package fr.edu.bp.m1info.structure.graph;
 
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDirected;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
+import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
+import fr.edu.bp.m1info.structure.graph.edge.Arc;
+import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+
 /**
  * Cette classe permet de créer des objets graphes orientés
  *
@@ -48,13 +56,10 @@ package fr.edu.bp.m1info.structure.graph;
  * @param <ShapeVertex>
  *
  */
-public class DirectedGraph{/*<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
-                           ShapeVertex extends ShapeGeometric & VertexShapeGraph,ValueEdge, ValueVertex>
-        extends Graph<Arc<ValueEdge,ShapeEdge>,Vertex<ValueVertex,ShapeVertex>>{
+public class DirectedGraph<Edge extends Arc,Node extends Vertex>
+        extends Graph<Arc,Node>{
 
 
-    private Class<ShapeEdge> shapeEdge;
-    private Class<ShapeVertex> shapeVertex;
 
     /**
      * C'est un constructeur pour crées l'objet de la classe et
@@ -62,14 +67,44 @@ public class DirectedGraph{/*<ShapeEdge extends ShapeGeometric & ArcShapeGraph,
      *
      * n'a pas de parametre
      */
-//    public DirectedGraph() {
-//        super();
-//        edgeList = new ArrayList<Arc<ValueEdge,ShapeEdge>> ();
-//        vertexList = new ArrayList<Vertex<ValueVertex,ShapeVertex>>();
-//    }
-//
-//    @Override
-//    public Arc<ValueEdge, ShapeEdge> getEdge(Vertex<ValueVertex, ShapeVertex> source, Vertex<ValueVertex, ShapeVertex> target) {
-//        throw new UnsupportedOperationException();
-//    }
+    public DirectedGraph() {
+        super();
+    }
+
+    @Override
+    public void addEdge(Node source, Node target) {
+        int index = newIndexOfVertex(source);
+
+        Edge edgeS = (Edge) EdgeFactory.createEdge(Arc.class, source, target, null);
+
+        AbstractEdgeShape shape = new EdgeShape(this.clazzEdgeShape,
+                source.getVertex().parentComponent().shape().centre(),
+                target.getVertex().parentComponent().shape().centre());
+
+        ((AbstractEdge) edgeS).setShape(new EdgeDirected(shape));
+        adjacencys[index].add(edgeS);
+
+        edges.add(edgeS);
+    }
+
+
+    @Override
+    public boolean containsEdge(Node source, Node target) {
+        int from = indexOfVertex(source);
+        int to = indexOfVertex(target);
+        if (from != NOT_FOUND_KEY || to != NOT_FOUND_KEY)
+            return adjacencys[from].containsEdge(to);
+
+        return false;
+    }
+
+    @Override
+    public void removeEdge(Node source, Node target) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Arc getEdge(Node source, Node target) {
+        throw new UnsupportedOperationException();
+    }
 }

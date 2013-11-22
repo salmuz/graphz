@@ -42,10 +42,8 @@ package fr.edu.bp.m1info.swing.events;
 
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
-import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
@@ -99,9 +97,8 @@ public class AddEdgeListener extends MouseAdapter {
             to = canvas.getGraph().getVertexShape(x1, y1);
             if (from != null && to != null && !to.equals(from)) {
                 if (!canvas.getGraph().containsEdge(from, to)) {
-                    canvas.getGraph( ).addEdge(from, to);
+                    canvas.getGraph().addEdge(from, to);
                 }
-
             }
             canvas.repaint();
         }
@@ -120,13 +117,13 @@ public class AddEdgeListener extends MouseAdapter {
 
         if (this.isSelection) {
             ShapeGeometric v0 = from.getVertex().shape();
-            if (edgeDraft.getEdge() == null) {
-                edgeDraft.setEdge(new EdgeShape(canvas.getGraph().getClazzEdgeShape(),v0.centre(),new Point2D(x1,y1)));
+            if (edgeDraft.getShape() == null) {
+                edgeDraft.setShape(new EdgeShape(canvas.getGraph().getClazzEdgeShape(), v0.centre(), new Point2D(x1, y1)));
             } else {
-                ((EdgeShapeGraph) edgeDraft.getEdge().shape()).to().setX(x1);
-                ((EdgeShapeGraph) edgeDraft.getEdge().shape()).to().setY(y1);
+                ((EdgeShapeGraph) edgeDraft.getShape().shape()).to().setX(x1);
+                ((EdgeShapeGraph) edgeDraft.getShape().shape()).to().setY(y1);
             }
-            edgeDraft.getEdge().shape().setColor(dragged);
+            edgeDraft.getShape().shape().setColor(dragged);
             canvas.repaint();
         }
     }

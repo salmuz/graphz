@@ -42,6 +42,7 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 
 import fr.edu.bp.m1info.structure.geometric.Arrow;
 import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
+import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 
 /**
@@ -78,4 +79,7 @@ public class ShapePlaneFactory {
     }
 
 
+    public static ShapeGeometric createShape(Class<? extends ShapeGeometric> clazz, Point from, Point to) {
+        return createShape(clazz, from.getX(),from.getY(),to.getX(),to.getY());
+    }
 }

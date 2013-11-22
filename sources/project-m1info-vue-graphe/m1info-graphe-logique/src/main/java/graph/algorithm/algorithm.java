@@ -63,7 +63,7 @@ public class algorithm {
         //throw new UnsupportedOperationException("Not supported yet.");
 
         Graph g2 = new GraphList(0,g);
-        List<Edge> bEdges = g.getEdge(b.getNodeNum());
+        List<Edge> bEdges = g.getShape(b.getNodeNum());
         for(Edge e : bEdges){
             if(e.getNodeB() != a.getNodeNum()) {
                 Node t = g2.getNode(e.getNodeB());

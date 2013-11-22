@@ -99,7 +99,7 @@ public class GrapheRepository extends Repository{
 //        }
 //
 //        for(GetGraphResponse.Return.Node nodeR:returnG.getNode()){
-//            for(GetGraphResponse.Return.Node.Edge edge: nodeR.getEdge()){
+//            for(GetGraphResponse.Return.Node.Edge edge: nodeR.getShape()){
 //              manager.addEdge(idGraph, String.valueOf(edge.getNodeA()), String.valueOf(edge.getNodeB()), edge.getWeight());
 //            }
 //        }

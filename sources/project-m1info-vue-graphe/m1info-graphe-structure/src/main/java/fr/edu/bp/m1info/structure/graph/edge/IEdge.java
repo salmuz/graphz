@@ -1,6 +1,7 @@
 package fr.edu.bp.m1info.structure.graph.edge;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 /**
@@ -29,6 +30,12 @@ public interface IEdge<Value,Shape> {
      * @return
      */
     public Vertex getTarget();
+
+    /**
+     *
+     * @return
+     */
+    public AbstractEdgeShape getShape();
 
 //    public Value getCapacity();
 //

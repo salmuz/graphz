@@ -29,74 +29,67 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak 
+ * Contributor(s):  
  *
  * Changes
  * -------
- * 13/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.swing.design;
 
-import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
-import fr.edu.bp.m1info.structure.graph.Graph;
+package fr.edu.bp.m1info.structure.common;
+
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-import java.awt.*;
+import java.awt.Shape;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class GraphCanvas<Edge extends IEdge,Node extends Vertex> extends Canvas {
+public class ShapeUtils {
 
-    private Graph<Edge,Node> graph;
-    private List<Edge> draftEdge;
+    /**
+     * @param shapes
+     * @param excludes
+     * @return
+     */
+    public static boolean isVertexSamePlace(List<Vertex> shapes, ShapeGeometric shape, ShapeGeometric... excludes) {
 
-    public GraphCanvas(Graph<Edge,Node> graph) {
-        super();
-        this.graph = graph;
-        this.draftEdge = new ArrayList<Edge>();
-    }
-
-    public Graph<Edge, Node> getGraph() {
-        return graph;
-    }
-
-    @Override
-    public void update(java.awt.Graphics g) {
-      paint(g);
-    }
-
-    @Override
-    public void paint(java.awt.Graphics g) {
-        g.setColor(Color.white);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        Graphics2D  g2D = (Graphics2D)g;
-        Graphics graphics = new DesignGeometric2D(g2D);
-
-        for (Edge e: draftEdge){
-            e.draw(graphics);
+        Iterator<Vertex> it = shapes.iterator();
+        while (it.hasNext()) {
+            ShapeGeometric item = it.next().getVertex().parentComponent().shape();
+            boolean exclude = false;
+            for (int i = 0; i < excludes.length; i++) {
+                if (excludes[i].equals(item)) {
+                    exclude = true;
+                    break;
+                }
+            }
+            if (!exclude && item.intersects(shape)) {
+                return true;
+            }
         }
+        return false;
+    }
 
-        for (Edge e : graph.getEdges()) {
-            e.draw(graphics);
+    public static Iterator<IEdge> getEdgesOfVertex(List<IEdge> edgeList, Vertex from) {
+        List<IEdge> edges = new ArrayList<IEdge>();
+        Iterator<IEdge> it = edgeList.iterator();
+        while (it.hasNext()) {
+            IEdge edge = it.next();
+            if (edge.getSource().equals(from)) {
+                edges.add(edge);
+            } else {
+                if (edge.getTarget().equals(from)) {
+                    edges.add(edge);
+                }
+            }
         }
-
-        for (Node n : graph.getVertex()) {
-            n.draw(graphics);
-        }
-
+        return edges.iterator();
     }
 
-    public List<Edge> getDraftEdge() {
-        return draftEdge;
-    }
 
-    public void setGraph(Graph<Edge, Node> graph) {
-        this.graph = graph;
-    }
+
 }

@@ -260,7 +260,8 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         Iterator<Node> it = this.vertex.iterator();
         while (it.hasNext()) {
             Node node = it.next();
-            if (node.getVertex().shape().contains(x, y)) {
+            ShapeGeometric shape = node.getVertex().parentComponent().shape();
+            if (shape.contains(x, y)) {
                 return node;
             }
         }
@@ -268,33 +269,13 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         return null;
     }
 
-    public Iterable<Edge> adjacencys(int v){
-        if ((v < 0) || (v >= sizeVertex())) throw new IndexOutOfBoundsException();
+    public Iterable<Edge> adjacencys(Node node){
+        int v = node.getValue();
+        if ((v < 0) || (v >= sizeVertex())) throw new IndexOutOfBoundsException("The node/vertex of graph don't has nodes adjacencies:"+node.toString());
         return this.adjacencys[v];
     }
 
-    /**
-     * @param vertex
-     * @param excludes
-     * @return
-     */
-//    public boolean isVertexSamePlace(Node vertex, Node... excludes) {
-//        Iterator<Node> it = getVertexList().iterator();
-//        while (it.hasNext()) {
-//            Node item = it.next();
-//            boolean exclude = false;
-//            for (int i = 0; i < excludes.length; i++) {
-//                if (excludes[i].equals(item)) {
-//                    exclude = true;
-//                    break;
-//                }
-//            }
-//           /* if (!exclude && item.getVertex().intersect(vertex.getVertex())) {
-//                return true;
-//            }    */
-//        }
-//        return false;
-//    }
+
 
     /**
      * @param
@@ -317,7 +298,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 //    }
 
 //    private void changeVertexOfEdge(Edge edge, Vertex vertex, Point point, Vertex newVertex) {
-//        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+//        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
 //        if (edge.getSource().equals(vertex)) {
 //            edge.setSource(newVertex);
 //            e0.getPointStart().setX(point.getX());
@@ -331,7 +312,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
  /*   public void contractEdge(Edge edge) {
         Vertex vertex = new Vertex();
-        Point midPoint = ((EdgeShapeGraph) edge.getEdge()).geMidPoint();
+        Point midPoint = ((EdgeShapeGraph) edge.getShape()).geMidPoint();
         vertex.setVertex(ShapePlaneFactory.createShape(getClazzVertexShape(), midPoint.getX(), midPoint.getY()));
         vertex.getVertex().setBackground(Color.ORANGE);
         vertex.getVertex().setColor(Color.ORANGE);
@@ -385,7 +366,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
         //Edge between Vertex01 and Vertex02
         Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, vertex01, vertex02, null);
-        newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
+        newEdge.setShape(ShapePlaneFactory.createShape(clazzEdgeShape,
                 pointV1.getX(), pointV1.getY(), pointV2.getX(), pointV2.getY()));
         addEdge(newEdge);
 
@@ -393,16 +374,16 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
     }
 
     private void createEdgeInRelationToSource(Node source, Node target, Point point, Edge edge) {
-        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
         if (edge.getSource().equals(source)) {
             Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, target, edge.getTarget(), null);
-            newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
+            newEdge.setShape(ShapePlaneFactory.createShape(clazzEdgeShape,
                     point.getX(), point.getY(), e0.getPointEnd().getX(), e0.getPointEnd().getY()));
             newEdge.createWeight();
             addEdge(newEdge);
         } else {
             Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, edge.getSource(), target, null);
-            newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
+            newEdge.setShape(ShapePlaneFactory.createShape(clazzEdgeShape,
                     e0.getPointStart().getX(), e0.getPointStart().getY(), point.getX(), point.getY()));
             newEdge.createWeight();
             addEdge(newEdge);
@@ -431,7 +412,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
             for(Node node : vertexList){
                 VertexShapeGraph v0 = (VertexShapeGraph)node.getVertex();
                 Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, node, vertex, null);
-                newEdge.setEdge(ShapePlaneFactory.createShape(clazzEdgeShape,
+                newEdge.setShape(ShapePlaneFactory.createShape(clazzEdgeShape,
                         v0.centreShape().getX(), v0.centreShape().getY(), point.getX(), point.getY()));
                 addEdge(newEdge);
             }

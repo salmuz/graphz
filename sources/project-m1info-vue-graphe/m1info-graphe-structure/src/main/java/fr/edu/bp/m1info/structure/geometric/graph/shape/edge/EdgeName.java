@@ -15,7 +15,7 @@ public class EdgeName extends EdgeDecorator {
     }
 
     public void draw(Graphics graphics) {
-        edgeShape.draw(graphics);
+        super.draw(graphics);
         message.draw(graphics);
     }
 

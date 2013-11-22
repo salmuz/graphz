@@ -84,7 +84,7 @@ public class ModelGeometric01 {
         for (Edge node : graph.getEdgeList()) {
             VertexShapeGraph v0 = (VertexShapeGraph) node.getSource().getVertex();
             VertexShapeGraph v1 = (VertexShapeGraph) node.getTarget().getVertex();
-            node.setEdge(ShapePlaneFactory.createShape(Line.class,
+            node.setShape(ShapePlaneFactory.createShape(Line.class,
                     v0.centreShape().getX(), v0.centreShape().getY(),
                     v1.centreShape().getX(), v1.centreShape().getY()));
         }
@@ -130,7 +130,7 @@ public class ModelGeometric01 {
                 AbstractEdge<Integer, Line> edge = EdgeFactory.createEdge(Edge.class, vertex, vLine.getVertex(), null);
                 VertexShapeGraph v0 = (VertexShapeGraph) vertex.getVertex();
                 VertexShapeGraph v1 = (VertexShapeGraph) vLine.getVertex().getVertex();
-                ((Edge) edge).setEdge(ShapePlaneFactory.createShape(Line.class,
+                ((Edge) edge).setShape(ShapePlaneFactory.createShape(Line.class,
                         v0.centreShape().getX(), v0.centreShape().getY(),
                         v1.centreShape().getX(), v1.centreShape().getY()));
                 graph.addEdge((Edge) edge);

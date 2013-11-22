@@ -49,7 +49,7 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 public abstract class AbstractEdge implements IEdge {
 
     // Shapes for Edge
-    private AbstractEdgeShape edge;
+    private AbstractEdgeShape shape;
 
     // Attributs
     private Vertex source;
@@ -72,18 +72,18 @@ public abstract class AbstractEdge implements IEdge {
      *
      * @return la methode doit nous renvoyer un shape qui est le type d'un Edge
      */
-    public AbstractEdgeShape getEdge() {
-        return edge;
+    public AbstractEdgeShape getShape() {
+        return shape;
     }
 
     /**
      * methode trivale aussi pour les classe elle permet de modifier le variable Edge
      *
-     * @param edge pour la modifier il vaut une nouvel valeur elle se valeur et echange contre l'ancien valeur
+     * @param shape pour la modifier il vaut une nouvel valeur elle se valeur et echange contre l'ancien valeur
      *             de l'objet
      */
-    public void setEdge(AbstractEdgeShape edge) {
-        this.edge = edge;
+    public void setShape(AbstractEdgeShape shape) {
+        this.shape = shape;
     }
 
     /**
@@ -131,8 +131,8 @@ public abstract class AbstractEdge implements IEdge {
 //    }
 
 //    public void createWeight() {
-//        if (this.source != null && this.target != null && this.edge != null  ) {
-//            Point point = ((EdgeShapeGraph) this.edge).geMidPoint();
+//        if (this.source != null && this.target != null && this.shape != null  ) {
+//            Point point = ((EdgeShapeGraph) this.shape).geMidPoint();
 //            if (weightShape == null) {
 //                weightShape = (Message) ShapePlaneFactory.createShape(Message.class, point.getX(), point.getY());
 //            } else {
@@ -147,9 +147,7 @@ public abstract class AbstractEdge implements IEdge {
 //    }
 
     public void draw(Graphics graphics) {
-        //   createWeight();
-        edge.draw(graphics);
-        // if (weightShape != null) weightShape.draw(graphics);
+        shape.draw(graphics);
     }
 
 
@@ -168,7 +166,6 @@ public abstract class AbstractEdge implements IEdge {
 
         if (source != null ? !source.equals(edge.source) : edge.source != null) return false;
         if (target != null ? !target.equals(edge.target) : edge.target != null) return false;
-        //  if (weight != null ? !weight.equals(edge.weight) : edge.weight != null) return false;
 
         return true;
     }
@@ -194,7 +191,7 @@ public abstract class AbstractEdge implements IEdge {
     @Override
     public String toString() {
         return "AbstractEdge{" +
-                "edge=" + edge +
+                "shape=" + shape +
                 ", source=" + source +
                 ", target=" + target +
                 //  ", weight=" + weight +

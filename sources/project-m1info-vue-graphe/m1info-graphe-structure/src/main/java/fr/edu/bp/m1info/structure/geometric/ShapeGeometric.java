@@ -54,12 +54,12 @@ public abstract class ShapeGeometric {
     protected Color background = Color.BLACK;
 
     // Shape de AWT
-    protected Shape shape;
+    protected Shape shapeAWT;
     protected Object value;
 
 
-    public Shape getShape() {
-        return shape;
+    public Shape getShapeAWT() {
+        return shapeAWT;
     }
 
     /**
@@ -114,8 +114,8 @@ public abstract class ShapeGeometric {
      *
      * @return         une shapeGeometrique
      */
-    public boolean intersect(ShapeGeometric shapeGeometric) {
-        return false;
+    public boolean intersects(ShapeGeometric shapeGeometric) {
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -127,7 +127,7 @@ public abstract class ShapeGeometric {
      * @return  vrai ou faux
      */
     public boolean contains(double x, double y){
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     public abstract Point centre();
@@ -139,4 +139,5 @@ public abstract class ShapeGeometric {
                 ", color=" + color +
                 '}';
     }
+
 }

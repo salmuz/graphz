@@ -49,7 +49,6 @@ import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -64,14 +63,14 @@ public class TestTestCollectionSetEdge extends TestCase{
         v1.setVertex(new Circle(new Point2D(290,83),10));
 
         Edge<Integer,Line> e0 = new Edge<Integer,Line>(v0,v1,0);
-        e0.setEdge(new Line(new Point2D(196,154),new Point2D(290,83)));
+        e0.setShape(new Line(new Point2D(196, 154), new Point2D(290, 83)));
 
         Edge<Integer,Line> e1 = new Edge<Integer,Line>(v0,v1,0);
-        e1.setEdge(new Line(new Point2D(100,154),new Point2D(290,83)));
+        e1.setShape(new Line(new Point2D(100, 154), new Point2D(290, 83)));
 
         edgeSet.add(e0);
         edgeSet.add(e1);
-        //e1.getEdge().().setX(196);
+        //e1.getShape().().setX(196);
         System.out.println(e0.hashCode() == e1.hashCode());
         System.out.println(edgeSet.contains(e1));
         System.out.println(edgeSet.size());

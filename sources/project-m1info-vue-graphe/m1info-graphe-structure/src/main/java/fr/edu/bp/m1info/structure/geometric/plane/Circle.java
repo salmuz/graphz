@@ -109,7 +109,7 @@ public class Circle extends ShapeGeometric {
      */
     @Override
     public void draw(Graphics graphics) {
-       this.shape = graphics.draw(this);
+       this.shapeAWT = graphics.draw(this);
     }
 
     /**
@@ -123,7 +123,7 @@ public class Circle extends ShapeGeometric {
      */
     @Override
     public boolean contains(double x, double y) {
-        return this.shape.contains(x,y);
+        return this.shapeAWT.contains(x,y);
     }
 
     /**
@@ -144,14 +144,14 @@ public class Circle extends ShapeGeometric {
      * @return  un boolean
      */
     @Override
-    public boolean intersect(ShapeGeometric shapeGeometric) {
+    public boolean intersects(ShapeGeometric shapeGeometric) {
         Circle circle = (Circle)shapeGeometric;
 
-        if(this.shape == null){
+        if(this.shapeAWT == null){
           return false;
         }
 
-        return this.shape.intersects(circle.getCenter().getX()-circle.getRadio(),
+        return this.shapeAWT.intersects(circle.getCenter().getX()-circle.getRadio(),
                 circle.getCenter().getY()-circle.getRadio(),
                 2*circle.getRadio(),
                 2*circle.getRadio());
@@ -159,11 +159,11 @@ public class Circle extends ShapeGeometric {
 
     public boolean intersect(Point point) {
 
-        if(this.shape == null){
+        if(this.shapeAWT == null){
           return false;
         }
 
-        return this.shape.intersects(point.getX(),point.getY(),
+        return this.shapeAWT.intersects(point.getX(),point.getY(),
                 1.5*getRadio(), 1.5*getRadio());
     }
     /**

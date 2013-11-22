@@ -43,16 +43,16 @@ import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.AbstractVertexShape;
 
 /*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
-public class Vertex{
+public class Vertex {
 
     private AbstractVertexShape vertex;
     private int value;
 
-    public Vertex(){
+    public Vertex() {
         this.value = -1;
     }
 
-    public Vertex(int value){
+    public Vertex(int value) {
         this.value = value;
     }
 
@@ -81,62 +81,37 @@ public class Vertex{
     public void setValue(int value) {
         this.value = value;
     }
-                   /*
-    private void createValue() {
-        if (vertex != null && value != null) {
-            Point point = ((VertexShapeGraph) vertex).centreShape();
-            int less = getLess(value);
-            if (valVertex == null) {
-                valVertex = (Message) ShapePlaneFactory.createShape(Message.class,
-                        point.getX() - less, point.getY() + 5);
-                valVertex.setMessage(value.toString());
-            } else {
-                valVertex.getPoint().setX(point.getX() - less);
-                valVertex.getPoint().setY(point.getY() + 5);
-            }
-        }
-    }
 
-    private int getLess(Value value) {
-        if (value instanceof String) {
-            Integer val = Integer.valueOf(value.toString());
-            return (val < 10 ? 4 : (val < 100) ? 7 : 10);
-        }
-        return 10;
-    }
-                 */
+
     public void draw(Graphics graphics) {
-       // createValue();
         vertex.draw(graphics);
-       // if (valVertex != null) valVertex.draw(graphics);
     }
 
-    @Override
-    public String toString() {
-        return "Vertex{" +
-                "vertex=" + vertex +
-             //   ", value=" + value +
-                '}';
-    }
-            /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Vertex)) return false;
 
-        Vertex vertex1 = (Vertex) o;
+        Vertex vertex = (Vertex) o;
 
-        if (value != null ? !value.equals(vertex1.value) : vertex1.value != null) return false;
-        if (vertex != null ? !vertex.equals(vertex1.vertex) : vertex1.vertex != null) return false;
+        if (value != vertex.value) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = vertex != null ? vertex.hashCode() : 0;
-        result = 31 * result + (value != null ? value.hashCode() : 0);
-        return result;
-    }          */
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return "Vertex{" +
+                "vertex=" + vertex +
+                ", value=" + value +
+                '}';
+    }
+
+
 }
 

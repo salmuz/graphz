@@ -43,7 +43,6 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.plane.Message;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
-import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 
 public class VertexName extends VertexDecorator{
 
@@ -52,8 +51,7 @@ public class VertexName extends VertexDecorator{
     public VertexName(AbstractVertexShape abstractVertexShape, String name) {
         super(abstractVertexShape);
         this.name = name;
-        this.name = DefaultVertexName.getNextName().toString();
-        createShape(abstractVertexShape.shape);
+        createShape(abstractVertexShape.parentComponent().shape());
     }
 
     private void createShape(ShapeGeometric vertex) {
@@ -78,12 +76,9 @@ public class VertexName extends VertexDecorator{
     }
 
     public void draw(Graphics graphics) {
-        abstractVertexShape.draw(graphics);
+        super.draw(graphics);
+        createShape(abstractVertexShape.parentComponent().shape());
         shape.draw(graphics);
     }
 
-    @Override
-    public ShapeGeometric shape() {
-        return abstractVertexShape.shape();
-    }
 }

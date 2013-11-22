@@ -16,4 +16,6 @@ public interface Shape {
 
     public ShapeGeometric shape();
 
+    public Shape parentComponent();
+
 }

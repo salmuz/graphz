@@ -67,7 +67,7 @@ public class DeleteEdgeListener extends AddEdgeListener {
 //            if (vertex0 != null && vertex1 != null && !vertex1.equals(vertex0)) {
 //                edge.setTarget(vertex1);
 //                VertexShapeGraph v1 = (VertexShapeGraph) vertex1.getVertex();
-//                EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getEdge();
+//                EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
 //                e0.getPointEnd().setX(v1.centreShape().getX());
 //                e0.getPointEnd().setY(v1.centreShape().getY());
 //               // edge.createWeight();

@@ -41,7 +41,11 @@ public class DefaultVertexName {
 
     public static Integer nameVertex = 0;
 
-    public static Integer getNextName(){
+    public static Integer nextName(){
         return ++nameVertex;
+    }
+
+    public static void previousName(){
+        nameVertex--;
     }
 }

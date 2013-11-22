@@ -94,7 +94,7 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph{
      */
     @Override
     public void draw(Graphics graphics) {
-        this.shape = graphics.draw(this);
+        this.shapeAWT = graphics.draw(this);
     }
 
     /**
@@ -170,14 +170,14 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph{
     }
 
     @Override
-    public boolean intersect(ShapeGeometric shapeGeometric) {
+    public boolean intersects(ShapeGeometric shapeGeometric) {
         Line line = (Line) shapeGeometric;
 
-        if (this.shape == null) {
+        if (this.shapeAWT == null) {
             return false;
         }
 
-        return ((Line2D)this.shape).intersectsLine(line.from().getX(),line.from().getY(),
+        return ((Line2D)this.shapeAWT).intersectsLine(line.from().getX(),line.from().getY(),
                 line.to().getX(),line.to().getY());
     }
 }

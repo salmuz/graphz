@@ -43,7 +43,7 @@ public class InterfaceOfConverteStructureGraphe {
 //        double width = rectangle.getWidth() + rectangle.getX();
 //        double height = rectangle.getHeight() + rectangle.getY();
 //        for (Node node : graph.getNode()) {
-//            for (generated.Edge edge : node.getEdge()) {
+//            for (generated.Edge edge : node.getShape()) {
 //                Vertex debut = vertexs.get(edge.getNodeA());
 //                Vertex fin = vertexs.get(edge.getNodeB());
 //                Point pointDebut = new Point2D((int) (Math.random() * (width - x)) + 1, (int) (Math.random() * (height - y)) + 1);
@@ -78,7 +78,7 @@ public class InterfaceOfConverteStructureGraphe {
 //
 //
 //                AbstractEdge Aedge = EdgeFactory.createEdge(graphT5.getClazzEdge(), debut, fin, edge.getWeight());
-//                Aedge.setEdge(ShapePlaneFactory.createShape(graphT5.getClazzEdgeShape(),
+//                Aedge.setShape(ShapePlaneFactory.createShape(graphT5.getClazzEdgeShape(),
 //                        pointDebut.getX(), pointDebut.getY(), pointfin.getX(), pointfin.getY()));
 //                if (!graphT5.containsEdge(Aedge)) {
 //                    graphT5.addEdgeWithoutVerification(Aedge);
