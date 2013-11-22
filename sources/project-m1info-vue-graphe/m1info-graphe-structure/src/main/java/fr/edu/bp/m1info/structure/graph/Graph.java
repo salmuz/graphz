@@ -40,14 +40,15 @@ package fr.edu.bp.m1info.structure.graph;
 
 import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.VertexShape;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
+import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -61,22 +62,21 @@ import java.util.List;
 
 public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
-    protected AdjacencyBag<Edge>[] adjacencys;
-    protected List<Node> vertex;
-    protected List<Edge> edges;
+    //structures to do the algorithms
+    protected AdjacencyBag<Edge,Node>[] adjacencys;
+    private static final int MIN_CAPACITY = 10;
+    private int sizeAdj;
 
     public static int NOT_FOUND_KEY = -1;
-
-    //structures to do the algorithms
 
 //    protected final Class<AbstractEdge> clazzEdge;
     protected final Class<? extends ShapeGeometric> clazzEdgeShape;
 //    protected final Class<Vertex> clazzVertex;
     protected final Class<? extends ShapeGeometric> clazzVertexShape;
 
+    protected List<Node> nodes;
+    protected List<Edge> edges;
 
-    //protected List<Edge> edgeList;
-    //protected List<Node> vertexList;
 
     protected Graph() {
 //        this.clazzEdgeShape = (Class<? extends ShapeGeometric>) Reflection.getParamGenericOfSuperCLass(this.getClass(), 0);
@@ -87,26 +87,31 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
 //        this.clazzEdge = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 0);
 //        this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass().getSuperclass(), 1);
-        DefaultVertexName.nameVertex = 0;
-        ConstantsGeometric.RADIO = 15;
-        vertex = new ArrayList<Node>();
-        edges = new ArrayList<Edge>();
-        this.adjacencys = ((AdjacencyBag<Edge>[])new AdjacencyBag[100]);
-        for (int i = 0; i < 100; i++)
-            this.adjacencys[i] = new AdjacencyBag<Edge>();
+        this.clear();
     }
 
-
+    /**
+     *
+     * @return
+     */
     public List<Edge> getEdges() {
         return edges;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Node> getVertex(){
-        return vertex;
+        return nodes;
     }
 
+    /**
+     *
+     * @return
+     */
     public int sizeVertex(){
-        return vertex.size();
+        return nodes.size();
     }
 
      /**
@@ -118,37 +123,16 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
     public abstract void addEdge(Node source, Node target);
 
     /**
-     *
-     * @param key
-     * @return
-     */
-    public int indexOfVertex(Node key) {
-        return vertex.indexOf(key);
-    }
-
-    /**
-     *
-     * @param source
-     * @return index of vertex if found
-     */
-    protected int newIndexOfVertex(Node source){
-        int i = vertex.indexOf(source);
-
-        if(i == NOT_FOUND_KEY){
-            i = sizeVertex();
-        }
-
-        return i;
-    }
-
-    /**
      * C'est une methode qui permet de tester si on peut  rajouter un node dans le graph
      *
      * @param node c'est une variable de type node quand teste si on  rajouter dans le graph
      * @return de type boolean
     */
     public void addVertex(Node node) {
-        vertex.add(node);
+        nodes.add(node);
+        int index = newIndexOfVertex(node);
+        adjacencys[index] = new AdjacencyBag<Edge,Node>();
+        sizeAdj++;
     }
 
     /**
@@ -170,9 +154,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
      * @param edge
      * @return de types boolean si elle existe ou pas
      */
-    public boolean containsEdge(Edge edge) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract boolean containsEdge(Edge edge);
 
     /**
      * C'est une methode qui permet verifier si un Node est dans un graphe
@@ -181,7 +163,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
      * @return return boolean pour connaitre si elle est contenu dans le graphe ou pas
      */
     public boolean containsVertex(Node node) {
-        return vertex.contains(node);
+        return nodes.contains(node);
     }
 
     /**
@@ -204,7 +186,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
      * @return Elle retourne un boolean si ce impossible pour supprimer l'Edge ou pas
      */
     public boolean removeEdge(Edge edge) {
-        throw new UnsupportedOperationException();
+        return edges.remove(edge);
     }
 
     /**
@@ -216,8 +198,57 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
      * @return Elle retourne un Edge si ce impossible pour supprimer l'Edge
      */
     public boolean removeVertex(Node node) {
-        throw new UnsupportedOperationException();
+        removeEdgeAll(getEdgesOfVertex(node));
+        nodes.remove(node);
+        removeVertexAdj(node);
+        return true;
     }
+
+    /**
+     * Remove all edges
+     * @param edges
+     */
+    protected void removeEdgeAll(Collection<Edge> edges) {
+        for (Edge edge : edges) {
+            removeEdge(edge);
+        }
+    }
+
+    /**
+     * List of edges
+     * @param node
+     * @return list of edge
+     */
+    public List<Edge> getEdgesOfVertex(Node node) {
+        List<Edge> redges = new ArrayList<Edge>();
+        Iterator<Edge> it = edges.iterator();
+        while (it.hasNext()) {
+            Edge edge = it.next();
+            if (edge.getSource().equals(node)) {
+                redges.add(edge);
+            } else {
+                if (edge.getTarget().equals(node)) {
+                    redges.add(edge);
+                }
+            }
+        }
+        return redges;
+    }
+
+    public boolean removeVertexAdj(Node node){
+        int index = indexOfVertex(node);
+
+        if(index != NOT_FOUND_KEY){
+            adjacencys[index].removeAll();
+            for (int i = 0; i < adjacencys.length; i++) {
+                if(adjacencys[i]!=null)adjacencys[i].remove(node);
+            }
+            adjacencys[index] = null;
+        }
+
+        return true;
+    }
+
 
     /**
      * indique la classe  de L'edge
@@ -257,7 +288,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
      * @return
      */
     public Node getVertexShape(double x, double y) {
-        Iterator<Node> it = this.vertex.iterator();
+        Iterator<Node> it = this.nodes.iterator();
         while (it.hasNext()) {
             Node node = it.next();
             ShapeGeometric shape = node.getVertex().parentComponent().shape();
@@ -274,28 +305,6 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         if ((v < 0) || (v >= sizeVertex())) throw new IndexOutOfBoundsException("The node/vertex of graph don't has nodes adjacencies:"+node.toString());
         return this.adjacencys[v];
     }
-
-
-
-    /**
-     * @param
-     * @return
-     */
-//    public List<Edge> getEdgesOfVertex(Vertex vertex0) {
-//        List<Edge> edges = new ArrayList<Edge>();
-//        Iterator<Edge> it = edgeList.iterator();
-//        while (it.hasNext()) {
-//            Edge edge = it.next();
-//            if (edge.getSource().equals(vertex0)) {
-//                edges.add(edge);
-//            } else {
-//                if (edge.getTarget().equals(vertex0)) {
-//                    edges.add(edge);
-//                }
-//            }
-//        }
-//        return edges;
-//    }
 
 //    private void changeVertexOfEdge(Edge edge, Vertex vertex, Point point, Vertex newVertex) {
 //        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
@@ -390,11 +399,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         }
     }
 
-    protected void removeEdgeAll(Collection<Edge> edges) {
-        for (Edge edge : edges) {
-            removeEdge(edge);
-        }
-    }
+
 
     public void generateGraphe(int nroVertex, Rectangle rectangle) {
         double x = rectangle.getX();
@@ -420,8 +425,93 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
             addVertex((Node) vertex);
         }
     }                 */
-    public abstract Edge getEdge(Node source, Node target);
 
+    /**
+     *
+     * @param source
+     * @param target
+     * @return
+     */
+    public Edge getEdge(Node source, Node target) {
+        for (int i = 0; i < edges.size(); i++) {
+            Edge edge = edges.get(i);
+            Node v0 = (Node) edge.getSource();
+            Node v1 = (Node) edge.getTarget();
+            if ((v0.equals(source) && v1.equals(target)) ||
+                    (v0.equals(target) && v1.equals(source))) {
+                return edge;
+            }
+        }
+        return null;
+    }
 
+    public void clear(){
+        DefaultVertexName.nameVertex = -1;
+        ConstantsGeometric.RADIO = 15;
+        nodes = new ArrayList<Node>();
+        edges = new ArrayList<Edge>();
+        this.adjacencys = ((AdjacencyBag<Edge,Node>[])new AdjacencyBag[MIN_CAPACITY]);
+        for (int i = 0; i < MIN_CAPACITY; i++)
+            this.adjacencys[i] = null;
+    }
 
+    /**
+     *
+     * @param node
+     * @return
+     */
+    public int indexOfVertex(Node node) {
+        if (node == null)
+            throw new NullPointerException();
+
+        if(adjacencys[node.getValue()] != null)
+            return node.getValue();
+
+        return NOT_FOUND_KEY;
+    }
+
+    /**
+     *
+     * @param node
+     * @return index of vertex if found
+     */
+    public int newIndexOfVertex(Node node){
+        int i = indexOfVertex(node);
+
+        if(i == NOT_FOUND_KEY){
+            if (sizeAdj + 1 >= adjacencys.length) {
+                growArrayAdjacency(sizeAdj + MIN_CAPACITY);
+            }
+            i = sizeAdj;
+        }
+
+        return i;
+    }
+
+    /**
+     * Grow the Array Adjacency to a new size
+     */
+    private void growArrayAdjacency(int newSize) {
+        AdjacencyBag<Edge,Node>[] newAdja = new AdjacencyBag[newSize];
+        for (int i = 0; i < adjacencys.length; i++) {
+            newAdja[i] = adjacencys[i];
+        }
+        adjacencys = newAdja;
+    }
+
+    /**
+     *
+     * @return string, graph adj list
+     */
+    @Override
+    public String toString() {
+        StringBuffer buff = new StringBuffer();
+        for (Node v : getVertex()){
+            buff.append(v.getValue() + " -> ");
+            for (Edge w : adjacencys(v))
+                buff.append(w.getTarget().getValue()+", ");
+            buff.append("\n");
+        }
+        return buff.toString();
+    }
 }

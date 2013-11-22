@@ -47,17 +47,19 @@ import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
+import java.util.Iterator;
+
 /**
  * Cette classe permet de créer des objets graphes orientés
  *
  * Elle possède comme parametre deux l'Arc et le vertex qui sont des arc
  * pour l'orientation et des Vertex qui sont relier par les Arcs
- * @param <ShapeEdge>
- * @param <ShapeVertex>
+ * @param <Edge>
+ * @param <Node>
  *
  */
 public class DirectedGraph<Edge extends Arc,Node extends Vertex>
-        extends Graph<Arc,Node>{
+        extends Graph<Edge,Node>{
 
 
 
@@ -73,7 +75,7 @@ public class DirectedGraph<Edge extends Arc,Node extends Vertex>
 
     @Override
     public void addEdge(Node source, Node target) {
-        int index = newIndexOfVertex(source);
+        int index = indexOfVertex(source);
 
         Edge edgeS = (Edge) EdgeFactory.createEdge(Arc.class, source, target, null);
 
@@ -99,12 +101,23 @@ public class DirectedGraph<Edge extends Arc,Node extends Vertex>
     }
 
     @Override
-    public void removeEdge(Node source, Node target) {
-        throw new UnsupportedOperationException();
+    public boolean containsEdge(Edge e) {
+        Iterator<Edge> it = edges.iterator();
+        while (it.hasNext()) {
+            Edge edge = it.next();
+            Vertex v0 = edge.getSource();
+            Vertex v1 = edge.getTarget();
+            if (v0.equals(e.getSource()) && v1.equals(e.getTarget())){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public Arc getEdge(Node source, Node target) {
-        throw new UnsupportedOperationException();
+    public void removeEdge(Node source, Node target) {
+        adjacencys[source.getValue()].remove(target);
+        edges.remove(getEdge(source, target));
     }
+
 }

@@ -66,7 +66,7 @@ public class AddVertexListener extends MouseAdapter {
 
     public void mouseClicked(MouseEvent e) {
         Point p = e.getPoint();
-        Vertex vertex = new Vertex(DefaultVertexName.nextName());
+        Vertex vertex = new Vertex();
         ShapeGeometric sh = ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), p.getX(), p.getY());
         AbstractVertexShape vertexShape = new VertexName(new VertexShape(sh),String.valueOf(vertex.getValue()));
         vertex.setVertex(vertexShape);
@@ -75,7 +75,7 @@ public class AddVertexListener extends MouseAdapter {
             canvas.getGraph().addVertex(vertex);
             canvas.repaint();
         }else{
-            DefaultVertexName.previousName();
+            DefaultVertexName.previousNode();
         }
     }
 

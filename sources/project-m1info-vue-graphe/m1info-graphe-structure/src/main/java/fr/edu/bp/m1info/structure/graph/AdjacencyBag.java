@@ -40,11 +40,12 @@
 package fr.edu.bp.m1info.structure.graph;
 
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class AdjacencyBag<Edge extends IEdge> implements Iterable<Edge> {
+public class AdjacencyBag<Edge extends IEdge,Node extends Vertex> implements Iterable<Edge> {
 
     private int size;
     private Neighbor first;
@@ -52,6 +53,15 @@ public class AdjacencyBag<Edge extends IEdge> implements Iterable<Edge> {
     public AdjacencyBag(){
         size = 0;
         first = null;
+    }
+
+    public void removeAll(){
+        Neighbor next = first;
+        for(;next !=null;next=next.next){
+            next.value = null;
+        }
+        first = null;
+        size = 0;
     }
 
     public int size(){
@@ -92,6 +102,30 @@ public class AdjacencyBag<Edge extends IEdge> implements Iterable<Edge> {
                 return true;
         }
         return false;
+    }
+
+    public void remove(Node value) {
+        Neighbor next = first;
+        Neighbor prev = next;
+        for(;next!=null;prev=next,next=next.next){
+            Edge edge = next.value;
+            if(edge.getSource().getValue() == value.getValue()
+                    || edge.getTarget().getValue() == value.getValue()){
+                remove(prev,next);
+                size--;
+                break;
+            }
+        }
+    }
+
+    private void remove(Neighbor prev,Neighbor next){
+        if(next == first){
+            first = prev.next;
+            prev = null;
+        }else{
+            prev.next = next.next;
+            next = null;
+        }
     }
 
 

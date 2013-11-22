@@ -49,11 +49,7 @@ public class Vertex {
     private int value;
 
     public Vertex() {
-        this.value = -1;
-    }
-
-    public Vertex(int value) {
-        this.value = value;
+        this.value = DefaultVertexName.nextNode();
     }
 
     /**

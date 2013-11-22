@@ -43,8 +43,9 @@ import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
-
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+
+import java.util.Iterator;
 
 /**
  * Cette classe permet de créer des objets graphes orientés
@@ -71,7 +72,7 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
      */
     @Override
     public void addEdge(N source, N target) {
-        int index = newIndexOfVertex(source);
+        int index = indexOfVertex(source);
 
         E edgeS = (E) EdgeFactory.createEdge(Edge.class, source, target, null);
         AbstractEdgeShape shapeS = new EdgeShape(this.clazzEdgeShape,
@@ -80,7 +81,7 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
         ((AbstractEdge) edgeS).setShape(shapeS);
         adjacencys[index].add(edgeS);
 
-        index = newIndexOfVertex(target);
+        index = indexOfVertex(target);
         E edgeT = (E) EdgeFactory.createEdge(Edge.class, target, source, null);
         AbstractEdgeShape shapeT = new EdgeShape(this.clazzEdgeShape,
                 target.getVertex().parentComponent().shape().centre(),
@@ -115,21 +116,21 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
      * @param
      * @return vrai ou faux sur l'existance de l'edge dans le graphes
      */
-    //@Override
-//    public boolean containsEdge(Edge shapeEdgeEdge) {
-//        Iterator<Edge> it = edgeList.iterator();
-//        while (it.hasNext()) {
-//            Edge edge = it.next();
-//            Vertex v0 = edge.getSource();
-//            Vertex v1 = edge.getTarget();
-//            if ((v0.equals(shapeEdgeEdge.getSource()) && v1.equals(shapeEdgeEdge.getTarget())) ||
-//                    (v0.equals(shapeEdgeEdge.getTarget()) && v1.equals(shapeEdgeEdge.getSource()))) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
+    @Override
+    public boolean containsEdge(E shapeEdgeEdge) {
+        Iterator<E> it = edges.iterator();
+        while (it.hasNext()) {
+            Edge edge = it.next();
+            Vertex v0 = edge.getSource();
+            Vertex v1 = edge.getTarget();
+            if ((v0.equals(shapeEdgeEdge.getSource()) && v1.equals(shapeEdgeEdge.getTarget())) ||
+                    (v0.equals(shapeEdgeEdge.getTarget()) && v1.equals(shapeEdgeEdge.getSource()))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * C'est une methode qui est redefinie de la classe graphe et qui permet de supprimer  un Edge dans le graphes
@@ -140,25 +141,12 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
      * @param target
      */
     @Override
-    public void removeEdge(Vertex source, Vertex target) {
-        throw new UnsupportedOperationException();
-//        edgeList.remove(getShape(source, target));
+    public void removeEdge(N source, N target) {
+        adjacencys[source.getValue()].remove(target);
+        adjacencys[target.getValue()].remove(source);
+        edges.remove(getEdge(source, target));
     }
 
-    @Override
-    public E getEdge(Vertex source, Vertex target) {
-        throw new UnsupportedOperationException();
-//        for (int i = 0; i < edgeList.size(); i++) {
-//            Edge edge = edgeList.get(i);
-//            Vertex v0 = edge.getSource();
-//            Vertex v1 = edge.getTarget();
-//            if ((v0.equals(source) && v1.equals(target)) ||
-//                    (v0.equals(target) && v1.equals(source))) {
-//                return edge;
-//            }
-//        }
-//        return null;
-    }
 }
 
 
