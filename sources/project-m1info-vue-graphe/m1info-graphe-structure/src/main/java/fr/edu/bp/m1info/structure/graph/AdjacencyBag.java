@@ -109,17 +109,17 @@ public class AdjacencyBag<Edge extends IEdge,Node extends Vertex> implements Ite
         Neighbor prev = next;
         for(;next!=null;prev=next,next=next.next){
             Edge edge = next.value;
+            System.out.println(edge);
             if(edge.getSource().getValue() == value.getValue()
                     || edge.getTarget().getValue() == value.getValue()){
                 remove(prev,next);
-                size--;
                 break;
             }
         }
     }
 
     private void remove(Neighbor prev,Neighbor next){
-        if(next == first){
+        if(prev == first){
             first = prev.next;
             prev = null;
         }else{

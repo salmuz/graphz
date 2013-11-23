@@ -62,6 +62,7 @@ import java.util.List;
 
 public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
+    protected static int TYPE_EXECUTION = -1;
     //structures to do the algorithms
     protected AdjacencyBag<Edge,Node>[] adjacencys;
     private static final int MIN_CAPACITY = 10;
@@ -90,6 +91,11 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         this.clazzVertex = Reflection.getParamGenericOfSuperCLass(this.getClass(), 1);
 
         this.clear();
+    }
+
+    public Graph(int typeExecution) {
+        this();
+        this.TYPE_EXECUTION = typeExecution;
     }
 
     /**
@@ -304,7 +310,11 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
     public Iterable<Edge> adjacencys(Node node){
         int v = node.getValue();
-        if ((v < 0) || (v >= sizeVertex())) throw new IndexOutOfBoundsException("The node/vertex of graph don't has nodes adjacencies:"+node.toString());
+        return adjacencys(v);
+    }
+
+    public Iterable<Edge> adjacencys(int v){
+        if ((v < 0) || (v >= sizeVertex())) throw new IndexOutOfBoundsException("The node/vertex of graph don't has nodes adjacencies:"+v);
         return this.adjacencys[v];
     }
 

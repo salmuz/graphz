@@ -52,6 +52,10 @@ public class Vertex {
         this.value = DefaultVertexName.nextNode();
     }
 
+    public Vertex(int value) {
+        this.value = value;
+    }
+
     /**
      * Permette de modifier le contenu de la variable shapeGraph
      *

@@ -39,6 +39,7 @@
  */
 package fr.edu.bp.m1info.structure.graph;
 
+import fr.edu.bp.m1info.structure.common.GraphProperties;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDirected;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
@@ -74,17 +75,24 @@ public class DirectedGraph<Edge extends Arc,Node extends Vertex>
         super();
     }
 
+    public DirectedGraph(int type) {
+        super(type);
+    }
+
     @Override
     public void addEdge(Node source, Node target) {
         int index = indexOfVertex(source);
 
         Edge edgeS = (Edge) EdgeFactory.createEdge(Arc.class, source, target, null);
 
-        AbstractEdgeShape shape = new EdgeShape(this.clazzEdgeShape,
-                source.getVertex().parentComponent().shape().centre(),
-                target.getVertex().parentComponent().shape().centre());
+        if(TYPE_EXECUTION != GraphProperties.CONSOLE){
+            AbstractEdgeShape shape = new EdgeShape(this.clazzEdgeShape,
+                    source.getVertex().parentComponent().shape().centre(),
+                    target.getVertex().parentComponent().shape().centre());
 
-        ((AbstractEdge) edgeS).setShape(new EdgeDirected(new EdgeName(shape,"index")));
+            ((AbstractEdge) edgeS).setShape(new EdgeDirected(new EdgeName(shape,"index")));
+        }
+
         adjacencys[index].add(edgeS);
 
         edges.add(edgeS);

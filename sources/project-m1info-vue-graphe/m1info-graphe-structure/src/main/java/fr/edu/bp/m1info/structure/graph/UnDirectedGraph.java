@@ -38,6 +38,7 @@
  */
 package fr.edu.bp.m1info.structure.graph;
 
+import fr.edu.bp.m1info.structure.common.GraphProperties;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
@@ -66,6 +67,10 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
         super();
     }
 
+    public UnDirectedGraph(int typeExecution) {
+        super(typeExecution);
+    }
+
     /**
      * @param source
      * @param target
@@ -75,18 +80,22 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
         int index = indexOfVertex(source);
 
         E edgeS = (E) EdgeFactory.createEdge(Edge.class, source, target, null);
-        AbstractEdgeShape shapeS = new EdgeShape(this.clazzEdgeShape,
-                source.getVertex().parentComponent().shape().centre(),
-                target.getVertex().parentComponent().shape().centre());
-        ((AbstractEdge) edgeS).setShape(shapeS);
-        adjacencys[index].add(edgeS);
-
-        index = indexOfVertex(target);
         E edgeT = (E) EdgeFactory.createEdge(Edge.class, target, source, null);
-        AbstractEdgeShape shapeT = new EdgeShape(this.clazzEdgeShape,
-                target.getVertex().parentComponent().shape().centre(),
-                source.getVertex().parentComponent().shape().centre());
-        ((AbstractEdge) edgeT).setShape(shapeT);
+
+        if(TYPE_EXECUTION != GraphProperties.CONSOLE){
+            AbstractEdgeShape shapeS = new EdgeShape(this.clazzEdgeShape,
+                    source.getVertex().parentComponent().shape().centre(),
+                    target.getVertex().parentComponent().shape().centre());
+            ((AbstractEdge) edgeS).setShape(shapeS);
+
+            AbstractEdgeShape shapeT = new EdgeShape(this.clazzEdgeShape,
+                    target.getVertex().parentComponent().shape().centre(),
+                    source.getVertex().parentComponent().shape().centre());
+            ((AbstractEdge) edgeT).setShape(shapeT);
+        }
+
+        adjacencys[index].add(edgeS);
+        index = indexOfVertex(target);
         adjacencys[index].add(edgeT);
 
         edges.add(edgeS);
