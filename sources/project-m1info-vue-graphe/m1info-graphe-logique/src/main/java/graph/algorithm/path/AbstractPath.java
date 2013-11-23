@@ -47,23 +47,44 @@ import java.util.Stack;
 public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
 
     protected Graph<Edge,Node> graph;
-    protected int source;
+    protected Node source;
     protected boolean marked[];
     protected Edge[] edgeTo;
+    protected Node[] nodeTo;
 
-    public AbstractPath(Graph graph, int source){
+    public AbstractPath(Graph graph, Node source){
         this.graph = graph;
         this.source = source;
         marked = new boolean[graph.sizeVertex()];
         edgeTo = (Edge[]) new IEdge[graph.sizeVertex()];
+        nodeTo = (Node[]) new Vertex[graph.sizeVertex()];
         for(int i=0;i<graph.sizeVertex();i++){
             marked[i] = false;
             edgeTo[i] = null;
+            nodeTo[i] = null;
         }
     }
 
     public boolean hasPathTo(int v){
         return marked[v];
+    }
+
+    public Iterable<Node> pathTo(Node v){
+        Stack<Node> path = new Stack<Node>();
+
+        if (!hasPathTo(v.getValue())) return path;
+        if (nodeTo[v.getValue()] == null) return path;
+
+        for(Node x = v;
+            x != null && x.getValue() != source.getValue();
+            x = nodeTo[x.getValue()]){
+            path.push(x);
+        }
+
+        // size of edge among the source and the target
+        path.push(nodeTo[source.getValue()]);
+
+        return path;
     }
 
     public Iterable<Edge> pathTo(int v){
@@ -73,7 +94,7 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
         if (edgeTo[v] == null) return path;
 
         for(Edge x = edgeTo[v];
-                x != null && x.getTarget().getValue() != source;
+                x != null && x.getTarget().getValue() != source.getValue();
                 x = edgeTo[x.getSource().getValue()]){
             path.push(x);
         }

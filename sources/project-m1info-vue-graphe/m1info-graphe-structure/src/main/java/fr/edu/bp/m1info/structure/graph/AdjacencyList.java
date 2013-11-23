@@ -45,59 +45,79 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class AdjacencyBag<Edge extends IEdge,Node extends Vertex> implements Iterable<Edge> {
+public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements Iterable<Edge> {
 
     private int size;
     private Neighbor first;
 
-    public AdjacencyBag(){
+    public AdjacencyList() {
         size = 0;
         first = null;
     }
 
-    public void removeAll(){
+    public void removeAll() {
         Neighbor next = first;
-        for(;next !=null;next=next.next){
-            next.value = null;
+        for (; next != null; next = next.next) {
+            next.edge = null;
         }
         first = null;
         size = 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public void add(Edge item){
+    public void add(Edge item) {
         Neighbor old = first;
-        this.first = new Neighbor(item);
+        this.first = new Neighbor(item, (Node) item.getTarget());
         this.first.next = old;
         this.size++;
     }
 
-    public Iterator<Edge> iterator() {
-        return new Iterator<Edge>() {
-            private Neighbor cursor = first;
-
-            public boolean hasNext() {
-                return cursor != null;
-            }
-
-            public Edge next() {
-                if(!hasNext()) throw new NoSuchElementException();
-                Edge value = cursor.value;
-                cursor = cursor.next;
-                return value;
-            }
-
-            public void remove() {
-                throw new UnsupportedOperationException();
+    public Iterable<Neighbor> iteratorNode() {
+        return new Iterable<Neighbor>() {
+            public Iterator<Neighbor> iterator() {
+                return new ListIter<Neighbor>() {
+                    public Neighbor next() {
+                        if (!hasNext()) throw new NoSuchElementException();
+                        Neighbor value = cursor;
+                        cursor = cursor.next;
+                        return value;
+                    }
+                };
             }
         };
     }
 
+
+    public Iterator<Edge> iterator() {
+        return new ListIter<Edge>() {
+            public Edge next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                Edge value = cursor.edge;
+                cursor = cursor.next;
+                return value;
+            }
+        };
+    }
+
+
+    private abstract class ListIter<V> implements Iterator<V>{
+
+        protected Neighbor cursor = first;
+
+        public boolean hasNext() {
+            return cursor != null;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
     public boolean containsEdge(int from) {
-        for (Edge edge : this){
+        for (Edge edge : this) {
             if (edge.getSource().getValue() == from)
                 return true;
         }
@@ -107,34 +127,44 @@ public class AdjacencyBag<Edge extends IEdge,Node extends Vertex> implements Ite
     public void remove(Node value) {
         Neighbor next = first;
         Neighbor prev = next;
-        for(;next!=null;prev=next,next=next.next){
-            Edge edge = next.value;
-            System.out.println(edge);
-            if(edge.getSource().getValue() == value.getValue()
-                    || edge.getTarget().getValue() == value.getValue()){
-                remove(prev,next);
+        for (; next != null; prev = next, next = next.next) {
+            Edge edge = next.edge;
+            if (edge.getSource().getValue() == value.getValue()
+                    || edge.getTarget().getValue() == value.getValue()) {
+                remove(prev, next);
                 break;
             }
         }
     }
 
-    private void remove(Neighbor prev,Neighbor next){
-        if(prev == first){
+    private void remove(Neighbor prev, Neighbor next) {
+        if (prev == first) {
             first = prev.next;
             prev = null;
-        }else{
+        } else {
             prev.next = next.next;
             next = null;
         }
     }
 
 
-    private class Neighbor{
-        private Edge value;
+    public final class Neighbor {
+        private Edge edge;
+        private Node node;
         private Neighbor next;
-        public Neighbor(Edge value){
-            this.value = value;
+
+        public Neighbor(Edge edge, Node node) {
+            this.edge = edge;
+            this.node = node;
             next = null;
+        }
+
+        public Edge getEdge(){
+            return edge;
+        }
+
+        public Node getNode(){
+            return node;
         }
     }
 }

@@ -64,7 +64,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
     protected static int TYPE_EXECUTION = -1;
     //structures to do the algorithms
-    protected AdjacencyBag<Edge,Node>[] adjacencys;
+    protected AdjacencyList<Edge,Node>[] adjacencys;
     private static final int MIN_CAPACITY = 10;
     private int sizeAdj;
 
@@ -139,7 +139,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
     public void addVertex(Node node) {
         nodes.add(node);
         int index = newIndexOfVertex(node);
-        adjacencys[index] = new AdjacencyBag<Edge,Node>();
+        adjacencys[index] = new AdjacencyList<Edge,Node>();
         sizeAdj++;
     }
 
@@ -314,8 +314,15 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
     }
 
     public Iterable<Edge> adjacencys(int v){
-        if ((v < 0) || (v >= sizeVertex())) throw new IndexOutOfBoundsException("The node/vertex of graph don't has nodes adjacencies:"+v);
+        if ((v < 0) || (v >= sizeVertex()) || (adjacencys[v] == null))
+            throw new IndexOutOfBoundsException("The node/vertex of graph don't has nodes adjacencies:"+v);
         return this.adjacencys[v];
+    }
+
+    public Iterable<AdjacencyList<Edge,Node>.Neighbor> adjacencysNeighbor(int v){
+        if ((v < 0) || (v >= sizeVertex()) || (adjacencys[v] == null))
+            throw new IndexOutOfBoundsException("The node/vertex of graph don't has nodes adjacencies:"+v);
+        return this.adjacencys[v].iteratorNode();
     }
 
 //    private void changeVertexOfEdge(Edge edge, Vertex vertex, Point point, Vertex newVertex) {
@@ -457,7 +464,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         ConstantsGeometric.RADIO = 15;
         nodes = new ArrayList<Node>();
         edges = new ArrayList<Edge>();
-        this.adjacencys = ((AdjacencyBag<Edge,Node>[])new AdjacencyBag[MIN_CAPACITY]);
+        this.adjacencys = ((AdjacencyList<Edge,Node>[])new AdjacencyList[MIN_CAPACITY]);
         for (int i = 0; i < MIN_CAPACITY; i++)
             this.adjacencys[i] = null;
     }
@@ -499,7 +506,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
      * Grow the Array Adjacency to a new size
      */
     private void growArrayAdjacency(int newSize) {
-        AdjacencyBag<Edge,Node>[] newAdja = new AdjacencyBag[newSize];
+        AdjacencyList<Edge,Node>[] newAdja = new AdjacencyList[newSize];
         for (int i = 0; i < adjacencys.length; i++) {
             newAdja[i] = adjacencys[i];
         }
@@ -521,4 +528,8 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         }
         return buff.toString();
     }
+
+
+
+    //public void hasEdge(Node s, Node t);
 }

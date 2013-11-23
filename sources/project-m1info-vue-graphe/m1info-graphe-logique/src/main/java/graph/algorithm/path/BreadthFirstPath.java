@@ -39,11 +39,10 @@
 package graph.algorithm.path;
 
 import fr.edu.bp.m1info.structure.common.GraphProperties;
-import fr.edu.bp.m1info.structure.graph.DirectedGraph;
+import fr.edu.bp.m1info.structure.graph.AdjacencyList;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.UnDirectedGraph;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
@@ -52,23 +51,25 @@ import java.util.Queue;
 
 public class BreadthFirstPath<Edge extends IEdge,Node extends Vertex> extends AbstractPath<Edge,Node>{
 
-    public BreadthFirstPath(Graph<Edge,Node> graph,int source){
+    public BreadthFirstPath(Graph<Edge,Node> graph,Node source){
         super(graph,source);
         breadthFirstSearch(source);
     }
 
-    private void breadthFirstSearch(int source){
+    private void breadthFirstSearch(Node source){
         Queue<Integer> queue = new PriorityQueue<Integer>();
-        queue.offer(source);
-        marked[source] = true;
+        queue.offer(source.getValue());
+        marked[source.getValue()] = true;
+        nodeTo[source.getValue()] = source;
         while(!queue.isEmpty()){
             int v = queue.poll();
-            for (Edge w : graph.adjacencys(v)){
-                int vs = w.getTarget().getValue();
+            for (AdjacencyList.Neighbor w : graph.adjacencysNeighbor(v)){
+                int vs = w.getNode().getValue();
                 if(!marked[vs]){
                     queue.offer(vs);
                     marked[vs] = true;
-                    edgeTo[vs] = w;
+                    edgeTo[vs] = (Edge) w.getEdge();
+                    nodeTo[vs] = (Node) w.getEdge().getSource();
                 }
             }
         }
@@ -100,14 +101,18 @@ public class BreadthFirstPath<Edge extends IEdge,Node extends Vertex> extends Ab
 
         System.out.println(graph.toString());
 
-        AbstractPath<Arc,Vertex> paths = new BreadthFirstPath(graph, 3);
+        AbstractPath<Arc,Vertex> paths = new BreadthFirstPath(graph, v0);
 
         for (int v = 0; v<graph.sizeVertex();v++)
             if(paths.hasPathTo(v)){
                 System.out.println("belong to:"+v);
             }
 
-        for(IEdge v : paths.pathTo(0)){
+        for(Vertex v : paths.pathTo(v4)){
+            System.out.println(v);
+        }
+
+        for(IEdge v : paths.pathTo(v4.getValue())){
             System.out.println(v);
         }
     }

@@ -39,28 +39,29 @@
 package graph.algorithm.path;
 
 import fr.edu.bp.m1info.structure.common.GraphProperties;
+import fr.edu.bp.m1info.structure.graph.AdjacencyList;
 import fr.edu.bp.m1info.structure.graph.DirectedGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.UnDirectedGraph;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 public class DepthFirstPath<Edge extends IEdge,Node extends Vertex> extends AbstractPath<Edge,Node>{
 
-    public DepthFirstPath(Graph<Edge,Node> graph, int s){
-        super(graph,s);
-        dephtFirstSearch(s);
+    public DepthFirstPath(Graph<Edge,Node> graph, Node source){
+        super(graph,source);
+        nodeTo[source.getValue()] = source;
+        dephtFirstSearch(source);
     }
 
-    private void dephtFirstSearch(int v){
-        marked[v] = true;
-        for(Edge w : graph.adjacencys(v)){
-            int vs = w.getTarget().getValue();
-            if(!marked[vs]){
+    private void dephtFirstSearch(Node v){
+        marked[v.getValue()] = true;
+        for(AdjacencyList.Neighbor w : graph.adjacencysNeighbor(v.getValue())){
+            Node vs = (Node) w.getNode();
+            if(!marked[vs.getValue()]){
                 dephtFirstSearch(vs);
-                edgeTo[vs] = w;
+                edgeTo[vs.getValue()] = (Edge) w.getEdge();
+                nodeTo[vs.getValue()] = (Node) w.getEdge().getSource();
             }
         }
     }
@@ -91,14 +92,18 @@ public class DepthFirstPath<Edge extends IEdge,Node extends Vertex> extends Abst
 
         System.out.println(graph.toString());
 
-        AbstractPath<Arc,Vertex> paths = new DepthFirstPath<Arc, Vertex>(graph, 0);
+        AbstractPath<Arc,Vertex> paths = new DepthFirstPath<Arc, Vertex>(graph, v0);
 
         for (int v = 0; v<graph.sizeVertex();v++)
             if(paths.hasPathTo(v)){
                 System.out.println("belong to:"+v);
             }
 
-        for(IEdge v : paths.pathTo(4)){
+        for(Vertex v : paths.pathTo(v4)){
+            System.out.println(v);
+        }
+
+        for(IEdge v : paths.pathTo(v4.getValue())){
             System.out.println(v);
         }
     }

@@ -83,15 +83,16 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
         E edgeT = (E) EdgeFactory.createEdge(Edge.class, target, source, null);
 
         if(TYPE_EXECUTION != GraphProperties.CONSOLE){
+            // it just works with a edge shape !!
             AbstractEdgeShape shapeS = new EdgeShape(this.clazzEdgeShape,
                     source.getVertex().parentComponent().shape().centre(),
                     target.getVertex().parentComponent().shape().centre());
             ((AbstractEdge) edgeS).setShape(shapeS);
 
-            AbstractEdgeShape shapeT = new EdgeShape(this.clazzEdgeShape,
-                    target.getVertex().parentComponent().shape().centre(),
-                    source.getVertex().parentComponent().shape().centre());
-            ((AbstractEdge) edgeT).setShape(shapeT);
+//            AbstractEdgeShape shapeT = new EdgeShape(this.clazzEdgeShape,
+//                    target.getVertex().parentComponent().shape().centre(),
+//                    source.getVertex().parentComponent().shape().centre());
+//            ((AbstractEdge) edgeT).setShape(shapeT);
         }
 
         adjacencys[index].add(edgeS);
