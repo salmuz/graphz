@@ -46,7 +46,7 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 /**
  * ici nous avons une classe abstract et qui herite certaine methode de la class EdgeShapeGraph
  */
-public abstract class AbstractEdge implements IEdge {
+public abstract class AbstractEdge<Value> implements IEdge<Value> {
 
     // Shapes for Edge
     private AbstractEdgeShape shape;
@@ -179,6 +179,30 @@ public abstract class AbstractEdge implements IEdge {
                 ", target=" + target +
                 //  ", weight=" + weight +
                 '}';
+    }
+
+    /**
+     * The abstract class do not support this method
+     * @return weight
+     */
+    public Value weight() {
+        throw new UnsupportedOperationException("The edge do not support weight");
+    }
+
+    /**
+     * The abstract class do not support this method
+     * @return  capacity
+     */
+    public Value capacity() {
+        throw new UnsupportedOperationException("The edge do not support capacity");
+    }
+
+    /**
+     * The abstract class do not support this method
+     * @return flow of network
+     */
+    public Value flow() {
+        throw new UnsupportedOperationException("The edge do not support flow");
     }
 }
 

@@ -89,10 +89,10 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
                     target.getVertex().parentComponent().shape().centre());
             ((AbstractEdge) edgeS).setShape(shapeS);
 
-//            AbstractEdgeShape shapeT = new EdgeShape(this.clazzEdgeShape,
-//                    target.getVertex().parentComponent().shape().centre(),
-//                    source.getVertex().parentComponent().shape().centre());
-//            ((AbstractEdge) edgeT).setShape(shapeT);
+            AbstractEdgeShape shapeT = new EdgeShape(this.clazzEdgeShape,
+                    target.getVertex().parentComponent().shape().centre(),
+                    source.getVertex().parentComponent().shape().centre());
+            ((AbstractEdge) edgeT).setShape(shapeT);
         }
 
         adjacencys[index].add(edgeS);

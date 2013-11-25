@@ -3,7 +3,7 @@ package fr.edu.bp.m1info.structure.graph.edge.decorator;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 
-public class EdgeFlow<Value> extends EdgeDecorator {
+public class EdgeFlow<Value extends Number> extends EdgeDecorator<Value> {
 
     protected Value capacity;
     protected Value flow;
@@ -20,4 +20,40 @@ public class EdgeFlow<Value> extends EdgeDecorator {
         this.capacity = capacity;
         this.flow =flow;
     }
+
+    /**
+     *
+     * @param node
+     * @param newFlow
+     */
+    public void addFlowTo(Vertex node,Value newFlow){
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Value residualCapacityTo(){
+      return null;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Value flow(){
+        return flow;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Value capacity(){
+        return capacity;
+    }
+
 }

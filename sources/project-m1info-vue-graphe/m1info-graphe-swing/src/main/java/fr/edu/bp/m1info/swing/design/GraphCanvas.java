@@ -46,12 +46,15 @@ import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.IterativeView;
+import graph.algorithm.path.AbstractPath;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphCanvas<Edge extends IEdge,Node extends Vertex> extends Canvas {
+public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
+        extends Canvas implements IterativeView<Edge,Node> {
 
     private Graph<Edge,Node> graph;
     private List<Edge> draftEdge;
@@ -98,5 +101,16 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex> extends Canvas 
 
     public void setGraph(Graph<Edge, Node> graph) {
         this.graph = graph;
+    }
+
+    public void updateView(Node node, Edge edge) {
+        if(node != null) node.getVertex().parentComponent().shape().setBackground(Color.RED);
+        if(edge != null)  edge.getShape().parentComponent().shape().setColor(Color.RED);
+        repaint();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 }

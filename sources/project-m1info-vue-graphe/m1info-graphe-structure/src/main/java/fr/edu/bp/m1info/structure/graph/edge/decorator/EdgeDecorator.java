@@ -5,7 +5,7 @@ import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 
-public abstract class EdgeDecorator extends AbstractEdge {
+public abstract class EdgeDecorator<Value> extends AbstractEdge<Value> {
 
     protected IEdge edge;
 

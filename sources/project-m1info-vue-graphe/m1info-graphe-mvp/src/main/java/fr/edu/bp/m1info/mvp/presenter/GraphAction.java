@@ -13,13 +13,13 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.common.SwingUtils;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.events.*;
+import graph.algorithm.IterativeView;
+import graph.algorithm.path.BreadthFirstPath;
+import graph.algorithm.path.DepthFirstPath;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 public class GraphAction {
 
@@ -31,18 +31,20 @@ public class GraphAction {
     public GraphAction(UIMain view, int optionGraphe) {
 
         if (optionGraphe == NewGraphPresenter.GRAPHE_NON_ORIENTE) {
-            graph = new UnDirectedGraph<Edge, Vertex>() {};
+            graph = new UnDirectedGraph<Edge, Vertex>() {
+            };
             canvas = new GraphCanvas<Edge, Vertex>(graph);
         } else {
             if (optionGraphe == NewGraphPresenter.GRAPHE_ORIENTE) {
-                graph = new DirectedGraph<Arc, Vertex>() {};
+                graph = new DirectedGraph<Arc, Vertex>() {
+                };
                 canvas = new GraphCanvas<Arc, Vertex>(graph);
             }
         }
 
         if (optionGraphe != -1) {
 
-            for (Component cp: view.getJpPrincipal().getComponents()){
+            for (Component cp : view.getJpPrincipal().getComponents()) {
                 view.getJpPrincipal().remove(cp);
             }
 
@@ -120,11 +122,35 @@ public class GraphAction {
     }
 
     public void generateGrapheAction(JButton jComponent) {
-        AbstractAction geVertexAction = new GenerateGrapheAction(canvas,spanel);
+        AbstractAction geVertexAction = new GenerateGrapheAction(canvas, spanel);
         SwingUtils.removeListenerMouse(MouseListener.class, canvas);
         SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
 
         jComponent.addActionListener(geVertexAction);
+    }
+
+    public void executeBreadFirstSearch() {
+        final BreadthFirstPath bfs = new BreadthFirstPath(canvas.getGraph(), (Vertex) graph.getVertex().get(0), (IterativeView) canvas);
+        Thread runner = new Thread(
+                new Runnable() {
+                    public void run() {
+                        bfs.execute();
+                    }
+                }
+        );
+        runner.start();
+    }
+
+    public void executeDepthFirstPath(){
+        final DepthFirstPath dfp = new DepthFirstPath(canvas.getGraph(),(Vertex) graph.getVertex().get(0),(IterativeView)canvas);
+        Thread runner = new Thread(
+                new Runnable() {
+                    public void run() {
+                        dfp.execute();
+                    }
+                }
+        );
+        runner.start();
     }
 
     public void actions() {
@@ -224,6 +250,19 @@ public class GraphAction {
         });
 
         this.view.getJmiCleanGraph().addActionListener(new ClearGraphAction(canvas));
+
+        this.view.getJmiBFS().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                executeBreadFirstSearch();
+            }
+        });
+
+        this.view.getJmiDFS().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                executeDepthFirstPath();
+            }
+        });
+
         this.generateGrapheAction(view.getBtnGAuto());
     }
 

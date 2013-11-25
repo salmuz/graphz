@@ -29,41 +29,19 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak 
+ * Contributor(s):  
  *
  * Changes
  * -------
- * 13/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.graph.edge;
 
+package graph.algorithm.path;
 
-import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
+import fr.edu.bp.m1info.structure.graph.Graph;
+import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-public class EdgeFactory {
-
-    public static AbstractEdge createEdge(Class clazz,Vertex source, Vertex target,Object ...value){
-
-        AbstractEdge edge = null;
-
-        if(clazz.isAssignableFrom(Edge.class)){
-            edge = new Edge(source,target);
-        }else{
-            if(clazz.isAssignableFrom(Arc.class)){
-                edge = new Arc(source,target);
-            }else{
-                if(clazz.isAssignableFrom(EdgeFlow.class)){
-                   //edge = new EdgeFlow
-                }
-            }
-
-        }
-
-        return edge;
-    }
+public class ResidualGraph<Edge extends IEdge,Node extends Vertex> {
 
 }

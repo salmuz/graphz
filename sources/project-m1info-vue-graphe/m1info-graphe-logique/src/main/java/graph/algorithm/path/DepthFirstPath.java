@@ -45,12 +45,21 @@ import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.IterativeView;
 
 public class DepthFirstPath<Edge extends IEdge,Node extends Vertex> extends AbstractPath<Edge,Node>{
 
-    public DepthFirstPath(Graph<Edge,Node> graph, Node source){
-        super(graph,source);
+    private DepthFirstPath(Graph<Edge,Node> graph, Node source){
+        super(graph, source);
+    }
+
+    public DepthFirstPath(Graph<Edge, Node> graph, Node source, IterativeView<Edge, Node> iterative) {
+        super(graph,source,iterative);
+    }
+
+    public void execute(){
         nodeTo[source.getValue()] = source;
+        iterativeView.updateView(source,null);
         dephtFirstSearch(source);
     }
 
@@ -59,9 +68,10 @@ public class DepthFirstPath<Edge extends IEdge,Node extends Vertex> extends Abst
         for(AdjacencyList.Neighbor w : graph.adjacencysNeighbor(v.getValue())){
             Node vs = (Node) w.getNode();
             if(!marked[vs.getValue()]){
-                dephtFirstSearch(vs);
                 edgeTo[vs.getValue()] = (Edge) w.getEdge();
                 nodeTo[vs.getValue()] = (Node) w.getEdge().getSource();
+                iterativeView.updateView((Node)w.getNode(),(Edge)w.getEdge());
+                dephtFirstSearch(vs);
             }
         }
     }
@@ -93,6 +103,7 @@ public class DepthFirstPath<Edge extends IEdge,Node extends Vertex> extends Abst
         System.out.println(graph.toString());
 
         AbstractPath<Arc,Vertex> paths = new DepthFirstPath<Arc, Vertex>(graph, v0);
+        paths.execute();
 
         for (int v = 0; v<graph.sizeVertex();v++)
             if(paths.hasPathTo(v)){
@@ -107,6 +118,8 @@ public class DepthFirstPath<Edge extends IEdge,Node extends Vertex> extends Abst
             System.out.println(v);
         }
     }
+
+
 
 
 }

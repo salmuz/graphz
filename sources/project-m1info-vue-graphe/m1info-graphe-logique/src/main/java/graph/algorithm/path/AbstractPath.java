@@ -41,18 +41,20 @@ package graph.algorithm.path;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.IterativeView;
 
 import java.util.Stack;
 
 public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
 
     protected Graph<Edge,Node> graph;
+    protected IterativeView<Edge, Node> iterativeView;
     protected Node source;
     protected boolean marked[];
     protected Edge[] edgeTo;
     protected Node[] nodeTo;
 
-    public AbstractPath(Graph graph, Node source){
+    public AbstractPath(Graph<Edge,Node> graph, Node source,IterativeView<Edge, Node> iterative){
         this.graph = graph;
         this.source = source;
         marked = new boolean[graph.sizeVertex()];
@@ -63,6 +65,14 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
             edgeTo[i] = null;
             nodeTo[i] = null;
         }
+        this.iterativeView = iterative;
+    }
+
+    public AbstractPath(Graph<Edge, Node> graph, Node source) {
+        this(graph,source,new IterativeView<Edge, Node>() {
+            public void updateView(Node node, Edge edge) {
+            }
+        });
     }
 
     public boolean hasPathTo(int v){
@@ -104,4 +114,8 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
 
         return path;
     }
+
+    public abstract void execute();
+
+
 }

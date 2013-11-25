@@ -11,7 +11,7 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
  * Time: 09:42
  * To change this template use File | Settings | File Templates.
  */
-public interface IEdge<Value,Shape> {
+public interface IEdge<Value> {
 
     /**
      *
@@ -37,12 +37,22 @@ public interface IEdge<Value,Shape> {
      */
     public AbstractEdgeShape getShape();
 
-//    public Value getCapacity();
-//
-//    public void setCapacity(Value value);
-//
-//    public Value getWeight();
-//
-//    public void setWeight(Value value);
+    /**
+     *
+     * @return
+     */
+    public Value weight();
+
+    /**
+     *
+     * @return
+     */
+    public Value capacity();
+
+    /**
+     *
+     * @return
+     */
+    public Value flow();
 
 }

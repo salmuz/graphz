@@ -50,6 +50,16 @@ public class UIMain extends javax.swing.JFrame implements View {
     /** Creates new form UIMain */
     public UIMain() {
         initComponents();
+        invisible();
+    }
+
+    private void invisible(){
+        jmiContrater.setVisible(false);
+        jmiSepare.setVisible(false);
+        jmiNewGeometric.setVisible(false);
+        btnSepare.setVisible(false);
+        btnContracter.setVisible(false);
+        jmGeometric.setVisible(false);
     }
     
     /** This method is called from within the constructor to
@@ -115,6 +125,11 @@ public class UIMain extends javax.swing.JFrame implements View {
         jmiAbout = new javax.swing.JMenuItem();
         jmiAide = new javax.swing.JMenuItem();
         jmiOpen = new javax.swing.JMenuItem();
+
+
+        jmAlgorithms = new javax.swing.JMenu();
+        jmiBFS = new javax.swing.JMenuItem();
+        jmiDFS = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jpPrincipal.setLayout(new java.awt.BorderLayout());
@@ -325,6 +340,16 @@ public class UIMain extends javax.swing.JFrame implements View {
 
         jMenuBar1.add(jmHelp);
 
+        jmAlgorithms.setText("Algorithms");
+
+        jmiBFS.setText("Breadth-First-Search");
+        jmAlgorithms.add(jmiBFS);
+
+        jmiDFS.setText("Depth-First-Search");
+        jmAlgorithms.add(jmiDFS);
+
+        jMenuBar1.add(jmAlgorithms);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -529,6 +554,18 @@ public class UIMain extends javax.swing.JFrame implements View {
         return jpPrincipal;
     }
 
+    public JMenu getJmAlgorithms() {
+        return jmAlgorithms;
+    }
+
+    public JMenuItem getJmiBFS() {
+        return jmiBFS;
+    }
+
+    public JMenuItem getJmiDFS() {
+        return jmiDFS;
+    }
+
     public void ennableBtnGraphe(boolean pFlag){
         btnAArete.setEnabled(pFlag);
         btnASommets.setEnabled(pFlag);
@@ -591,6 +628,7 @@ public class UIMain extends javax.swing.JFrame implements View {
     private javax.swing.JToolBar jtbGraphe;
     private javax.swing.JToolBar jtbGeometric;
     private javax.swing.JMenu jmFichier;
+    private javax.swing.JMenu jmAlgorithms;
     private javax.swing.JMenuItem jmiAbout;
     private javax.swing.JMenuItem jmiAddEdge;
     private javax.swing.JMenuItem jmiAddLine;
@@ -612,6 +650,9 @@ public class UIMain extends javax.swing.JFrame implements View {
     private javax.swing.JMenuItem jmiNewGraph;
     private javax.swing.JMenuItem jmiSave;
     private javax.swing.JMenuItem jmiSepare;
+    private javax.swing.JMenuItem jmiBFS;
+    private javax.swing.JMenuItem jmiDFS;
+
     // End of variables declaration//GEN-END:variables
     
 }
