@@ -20,13 +20,13 @@ public class InterfaceOfConverteStructureGraphe {
 //
 //        if (graph.getClazzEdge().isAssignableFrom(Edge.class)) {
 //            for (AbstractEdge edge : graph.getEdgeList()) {
-//                manager.addEdge(idGraph, edge.getSource().getValue().toString(),
-//                        edge.getTarget().getValue().toString(), 0);
+//                manager.addEdge(idGraph, edge.from().getValue().toString(),
+//                        edge.to().getValue().toString(), 0);
 //            }
 //        } else {
 //            for (AbstractEdge arc : graph.getEdgeList()) {
-//                manager.addEdge(idGraph, arc.getSource().getValue().toString(),
-//                        arc.getTarget().getValue().toString(), 0);
+//                manager.addEdge(idGraph, arc.from().getValue().toString(),
+//                        arc.to().getValue().toString(), 0);
 //            }
 //        }
 //

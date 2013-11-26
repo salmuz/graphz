@@ -84,7 +84,7 @@ public class Message extends ShapeGeometric {
     }
 
     public void draw(Graphics graphics) {
-        graphics.draw(this);
+        shapeAWT = graphics.draw(this);
     }
 
     public Point centre(){
@@ -117,5 +117,11 @@ public class Message extends ShapeGeometric {
                 "message='" + message + '\'' +
                 ", point=" + point +
                 '}';
+    }
+
+    @Override
+    public boolean contains(double x, double y) {
+        if(shapeAWT == null) return false;
+        return shapeAWT.contains(x,y);
     }
 }

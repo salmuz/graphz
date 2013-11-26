@@ -171,12 +171,20 @@ public class DesignGeometric2D implements Graphics {
     }
 
 
-    public void draw(Message message) {
+    public Shape draw(Message message) {
         graphics2D.setColor(message.getColor());
         Font fonts = new Font("TimesRoman ",Font.BOLD,12);
         message.setFont(fonts);
         graphics2D.setFont(message.getFont());
         graphics2D.drawString(message.getMessage(),(float) message.getPoint().getX(),
                 (float)message.getPoint().getY());
+
+        Shape shape = new Rectangle2D.Double(message.getPoint().getX(),
+                    message.getPoint().getY()-12,message.getMessage().length()*10,12);
+        Color color=new Color(0f,0f,0f,0f );  // colorless
+        graphics2D.setColor(color);
+        graphics2D.setBackground(color);
+        graphics2D.draw(shape);
+        return shape;
     }
 }

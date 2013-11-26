@@ -25,4 +25,8 @@ public abstract class EdgeDecorator extends AbstractEdgeShape {
         }
         return parent;
     }
+
+    public AbstractEdgeShape childEdgeShape(){
+        return edgeShape;
+    }
 }

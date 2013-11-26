@@ -12,6 +12,7 @@ import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 public class EdgeName extends EdgeDecorator {
 
     private String message;
+    private final static int SHIFT = 5;
 
     public EdgeName(AbstractEdgeShape edgeShape, String message) {
         super(edgeShape);
@@ -23,11 +24,13 @@ public class EdgeName extends EdgeDecorator {
     public void createWeight(Point from, Point to) {
         Line line = new Line(from,to);
         Point point = line.centre();
+        double x = point.getX() - SHIFT;
+        double y = point.getY() - SHIFT;
         if (shape == null) {
-            shape = (Message) ShapePlaneFactory.createShape(Message.class, point.getX(), point.getY());
+            shape = (Message) ShapePlaneFactory.createShape(Message.class, x, y);
         } else {
-            ((Message)shape).getPoint().setX(point.getX());
-            ((Message)shape).getPoint().setY(point.getY());
+            ((Message)shape).getPoint().setX(x);
+            ((Message)shape).getPoint().setY(y);
         }
 
         if(this.message == null)
@@ -41,8 +44,8 @@ public class EdgeName extends EdgeDecorator {
         super.draw(graphics);
         AbstractEdgeShape parent = (AbstractEdgeShape) edgeShape.parentComponent();
         Line line = new Line(((EdgeShape)parent).from(),((EdgeShape)parent).to());
-        ((Message)shape).getPoint().setX(line.centre().getX());
-        ((Message)shape).getPoint().setY(line.centre().getY());
+        ((Message)shape).getPoint().setX(line.centre().getX()- SHIFT);
+        ((Message)shape).getPoint().setY(line.centre().getY()- SHIFT);
         shape.draw(graphics);
     }
 

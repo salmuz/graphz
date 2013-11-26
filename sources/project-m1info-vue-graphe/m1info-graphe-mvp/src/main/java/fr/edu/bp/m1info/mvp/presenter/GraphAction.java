@@ -1,25 +1,34 @@
 package fr.edu.bp.m1info.mvp.presenter;
 
 import fr.edu.bp.m1info.mvp.view.UIMain;
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.*;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDecorator;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.geometric.plane.LineArrow;
+import fr.edu.bp.m1info.structure.geometric.plane.Message;
 import fr.edu.bp.m1info.structure.graph.DirectedGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.UnDirectedGraph;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
+import fr.edu.bp.m1info.structure.graph.edge.IEdge;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.common.SwingUtils;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.events.*;
 import graph.algorithm.IterativeView;
+import graph.algorithm.path.BellmanFordPath;
 import graph.algorithm.path.BreadthFirstPath;
 import graph.algorithm.path.DepthFirstPath;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Iterator;
 
 public class GraphAction {
 
@@ -141,8 +150,8 @@ public class GraphAction {
         runner.start();
     }
 
-    public void executeDepthFirstPath(){
-        final DepthFirstPath dfp = new DepthFirstPath(canvas.getGraph(),(Vertex) graph.getVertex().get(0),(IterativeView)canvas);
+    public void executeDepthFirstPath() {
+        final DepthFirstPath dfp = new DepthFirstPath(canvas.getGraph(), (Vertex) graph.getVertex().get(0), (IterativeView) canvas);
         Thread runner = new Thread(
                 new Runnable() {
                     public void run() {
@@ -153,12 +162,55 @@ public class GraphAction {
         runner.start();
     }
 
+    private void executeBellmanFord() {
+        final BellmanFordPath bfp = new BellmanFordPath(canvas.getGraph(), (Vertex) graph.getVertex().get(0), (IterativeView) canvas);
+        Thread runner = new Thread(
+                new Runnable() {
+                    public void run() {
+                        bfp.execute();
+                    }
+                }
+        );
+        runner.start();
+    }
+
+
+    private void mouseListenerSearchShape() {
+        canvas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Iterator it = canvas.getGraph().getEdges().iterator();
+                while (it.hasNext()) {
+                    IEdge edge = (IEdge) it.next();
+                    fr.edu.bp.m1info.structure.geometric.graph.shape.Shape shape = edge.getShape();
+                    if (shape instanceof EdgeDecorator) {
+                        EdgeDecorator decorator = ((EdgeDecorator) shape);
+                        if (decorator.childEdgeShape() instanceof EdgeName) {
+                            ShapeGeometric shapeGeometric = decorator.childEdgeShape().shape();
+                            if(shapeGeometric.contains(e.getX(),e.getY())){
+                                String value = JOptionPane.showInputDialog(view.getParent(),"Weigh:");
+                                int w = Integer.parseInt(value);
+                                edge.setWeight(w);
+                                ((Message)shapeGeometric).setMessage(value);
+                                canvas.repaint();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+    }
+
+
     public void actions() {
 
         this.view.getBtnASommets().addActionListener(
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
                         addVertexAction();
+                        mouseListenerSearchShape();
                     }
                 });
 
@@ -173,6 +225,7 @@ public class GraphAction {
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
                         addEdgeAction();
+                        mouseListenerSearchShape();
                     }
                 });
 
@@ -263,7 +316,14 @@ public class GraphAction {
             }
         });
 
+        this.view.getJmiBellmanFord().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                executeBellmanFord();
+            }
+        });
+
         this.generateGrapheAction(view.getBtnGAuto());
+
     }
 
 

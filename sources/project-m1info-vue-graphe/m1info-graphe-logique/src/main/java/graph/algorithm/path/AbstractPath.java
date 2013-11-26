@@ -104,8 +104,8 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
         if (edgeTo[v] == null) return path;
 
         for(Edge x = edgeTo[v];
-                x != null && x.getTarget().getValue() != source.getValue();
-                x = edgeTo[x.getSource().getValue()]){
+                x != null && x.to().getValue() != source.getValue();
+                x = edgeTo[x.from().getValue()]){
             path.push(x);
         }
 

@@ -44,6 +44,7 @@ import fr.edu.bp.m1info.structure.graph.DirectedGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 
@@ -69,7 +70,7 @@ public class DepthFirstPath<Edge extends IEdge,Node extends Vertex> extends Abst
             Node vs = (Node) w.getNode();
             if(!marked[vs.getValue()]){
                 edgeTo[vs.getValue()] = (Edge) w.getEdge();
-                nodeTo[vs.getValue()] = (Node) w.getEdge().getSource();
+                nodeTo[vs.getValue()] = (Node) w.getEdge().from();
                 iterativeView.updateView((Node)w.getNode(),(Edge)w.getEdge());
                 dephtFirstSearch(vs);
             }

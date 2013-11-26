@@ -180,4 +180,10 @@ public class Line extends ShapeGeometric implements EdgeShapeGraph{
         return ((Line2D)this.shapeAWT).intersectsLine(line.from().getX(),line.from().getY(),
                 line.to().getX(),line.to().getY());
     }
+
+    @Override
+    public boolean contains(double x, double y) {
+        if(shapeAWT == null) return false;
+        return shapeAWT.contains(x,y);
+    }
 }

@@ -39,11 +39,9 @@
 package fr.edu.bp.m1info.structure.common;
 
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -79,10 +77,10 @@ public class ShapeUtils {
         Iterator<IEdge> it = edgeList.iterator();
         while (it.hasNext()) {
             IEdge edge = it.next();
-            if (edge.getSource().equals(from)) {
+            if (edge.from().equals(from)) {
                 edges.add(edge);
             } else {
-                if (edge.getTarget().equals(from)) {
+                if (edge.to().equals(from)) {
                     edges.add(edge);
                 }
             }

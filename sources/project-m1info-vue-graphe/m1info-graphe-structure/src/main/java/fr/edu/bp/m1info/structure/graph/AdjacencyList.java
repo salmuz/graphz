@@ -70,7 +70,7 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
 
     public void add(Edge item) {
         Neighbor old = first;
-        this.first = new Neighbor(item, (Node) item.getTarget());
+        this.first = new Neighbor(item, (Node) item.to());
         this.first.next = old;
         this.size++;
     }
@@ -118,7 +118,7 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
 
     public boolean containsEdge(int from) {
         for (Edge edge : this) {
-            if (edge.getSource().getValue() == from)
+            if (edge.from().getValue() == from)
                 return true;
         }
         return false;
@@ -129,8 +129,8 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
         Neighbor prev = next;
         for (; next != null; prev = next, next = next.next) {
             Edge edge = next.edge;
-            if (edge.getSource().getValue() == value.getValue()
-                    || edge.getTarget().getValue() == value.getValue()) {
+            if (edge.from().getValue() == value.getValue()
+                    || edge.to().getValue() == value.getValue()) {
                 remove(prev, next);
                 break;
             }

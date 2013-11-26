@@ -47,6 +47,8 @@ import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
+import fr.edu.bp.m1info.structure.graph.edge.IEdge;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.util.Iterator;
@@ -60,7 +62,7 @@ import java.util.Iterator;
  * @param <Node>
  *
  */
-public class DirectedGraph<Edge extends Arc,Node extends Vertex>
+public class DirectedGraph<Edge extends IEdge,Node extends Vertex>
         extends Graph<Edge,Node>{
 
 
@@ -83,7 +85,7 @@ public class DirectedGraph<Edge extends Arc,Node extends Vertex>
     public void addEdge(Node source, Node target) {
         int index = indexOfVertex(source);
 
-        Edge edgeS = (Edge) EdgeFactory.createEdge(Arc.class, source, target, null);
+        Edge edgeS = (Edge) EdgeFactory.createEdge(EdgeWeight.class, source, target, null);
 
         if(TYPE_EXECUTION != GraphProperties.CONSOLE){
             AbstractEdgeShape shape = new EdgeShape(this.clazzEdgeShape,
@@ -114,9 +116,9 @@ public class DirectedGraph<Edge extends Arc,Node extends Vertex>
         Iterator<Edge> it = edges.iterator();
         while (it.hasNext()) {
             Edge edge = it.next();
-            Vertex v0 = edge.getSource();
-            Vertex v1 = edge.getTarget();
-            if (v0.equals(e.getSource()) && v1.equals(e.getTarget())){
+            Vertex v0 = edge.from();
+            Vertex v1 = edge.to();
+            if (v0.equals(e.from()) && v1.equals(e.to())){
                 return true;
             }
         }

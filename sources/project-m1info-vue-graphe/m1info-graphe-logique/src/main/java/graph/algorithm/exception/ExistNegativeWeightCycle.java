@@ -29,43 +29,22 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aden Nouh Abdirazak
+ * Contributor(s):  
+ *
  * Changes
  * -------
- * 21/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.design;
 
-import fr.edu.bp.m1info.structure.geometric.plane.*;
-import fr.edu.bp.m1info.structure.geometric.plane.Rectangle;
+package graph.algorithm.exception;
 
-import java.awt.*;
+public class ExistNegativeWeightCycle extends  Exception {
 
-//Visitor, le client va appeler seulement le methode draw et il aura son travail
-/**
- * cette interface qui contient quatre methode et ces methode seront appeller par d'autre class
- *  pour dessiner une graphe
- */
-public interface Graphics {
+    public ExistNegativeWeightCycle(String message) {
+        super(message);
+    }
 
-    /**
-     *-Line line -Circle circle  - LineArrow lineArrow -Rectangle rectangle - Curve curve
-     * et ces methodes permette de dessiner la graphe
-     *
-     * @ parameter dans chaque methode on a une parameter de son type quand veut dessiner
-     */
-    public Shape draw(Line line);
-
-    public Shape draw(Circle circle);
-
-    public void draw(LineArrow lineArrow);
-
-    public void draw(Rectangle rectangle);
-
-    public void draw(Curve curve);
-
-    public Shape draw(Message message);
+    public ExistNegativeWeightCycle(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

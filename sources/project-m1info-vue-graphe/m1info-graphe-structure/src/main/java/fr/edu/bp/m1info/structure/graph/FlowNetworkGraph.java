@@ -39,9 +39,10 @@
 package fr.edu.bp.m1info.structure.graph;
 
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-public class FlowNetworkGraph<Edge extends Arc, Node extends Vertex>
+public class FlowNetworkGraph<Edge extends EdgeWeight, Node extends Vertex>
         extends DirectedGraph<Edge, Node> {
 
     private Node source; // source

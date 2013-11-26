@@ -131,10 +131,10 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
         Iterator<E> it = edges.iterator();
         while (it.hasNext()) {
             Edge edge = it.next();
-            Vertex v0 = edge.getSource();
-            Vertex v1 = edge.getTarget();
-            if ((v0.equals(shapeEdgeEdge.getSource()) && v1.equals(shapeEdgeEdge.getTarget())) ||
-                    (v0.equals(shapeEdgeEdge.getTarget()) && v1.equals(shapeEdgeEdge.getSource()))) {
+            Vertex v0 = edge.from();
+            Vertex v1 = edge.to();
+            if ((v0.equals(shapeEdgeEdge.from()) && v1.equals(shapeEdgeEdge.to())) ||
+                    (v0.equals(shapeEdgeEdge.to()) && v1.equals(shapeEdgeEdge.from()))) {
                 return true;
             }
         }

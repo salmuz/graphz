@@ -113,7 +113,6 @@ public class MainPresenter extends Presenter<UIMain> {
 
         this.view.getJmiExporte().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
                 JFileChooser choix = new JFileChooser(".");
                 //choix.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 choix.addChoosableFileFilter(new FiltreFichier());

@@ -130,6 +130,9 @@ public class UIMain extends javax.swing.JFrame implements View {
         jmAlgorithms = new javax.swing.JMenu();
         jmiBFS = new javax.swing.JMenuItem();
         jmiDFS = new javax.swing.JMenuItem();
+        jmiBellmanFord = new javax.swing.JMenuItem();
+        jmiClearIteraction = new javax.swing.JMenuItem();
+        jSeparatorAlgo = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jpPrincipal.setLayout(new java.awt.BorderLayout());
@@ -347,6 +350,14 @@ public class UIMain extends javax.swing.JFrame implements View {
 
         jmiDFS.setText("Depth-First-Search");
         jmAlgorithms.add(jmiDFS);
+
+        jmiBellmanFord.setText("Bellman-Ford");
+        jmAlgorithms.add(jmiBellmanFord);
+
+        jmAlgorithms.add(jSeparatorAlgo);
+
+        jmiClearIteraction.setText("Re-initialition");
+        jmAlgorithms.add(jmiClearIteraction);
 
         jMenuBar1.add(jmAlgorithms);
 
@@ -566,6 +577,14 @@ public class UIMain extends javax.swing.JFrame implements View {
         return jmiDFS;
     }
 
+    public JMenuItem getJmiBellmanFord() {
+        return jmiBellmanFord;
+    }
+
+    public JMenuItem getJmiClearIteraction() {
+        return jmiClearIteraction;
+    }
+
     public void ennableBtnGraphe(boolean pFlag){
         btnAArete.setEnabled(pFlag);
         btnASommets.setEnabled(pFlag);
@@ -652,7 +671,9 @@ public class UIMain extends javax.swing.JFrame implements View {
     private javax.swing.JMenuItem jmiSepare;
     private javax.swing.JMenuItem jmiBFS;
     private javax.swing.JMenuItem jmiDFS;
-
+    private javax.swing.JMenuItem jmiBellmanFord;
+    private javax.swing.JMenuItem jmiClearIteraction;
+    private javax.swing.JSeparator jSeparatorAlgo;
     // End of variables declaration//GEN-END:variables
     
 }

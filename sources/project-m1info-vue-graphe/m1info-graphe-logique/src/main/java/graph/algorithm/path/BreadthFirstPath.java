@@ -79,7 +79,7 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
                     queue.offer(vs);
                     marked[vs] = true;
                     edgeTo[vs] = (Edge) w.getEdge();
-                    nodeTo[vs] = (Node) w.getEdge().getSource();
+                    nodeTo[vs] = (Node) w.getEdge().from();
                     iterativeView.updateView((Node)w.getNode(),(Edge)w.getEdge());
                 }
             }

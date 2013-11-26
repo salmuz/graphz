@@ -1,5 +1,6 @@
 package fr.edu.bp.m1info.structure.graph.edge.decorator;
 
+import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 
@@ -15,8 +16,8 @@ public class EdgeFlow<Value extends Number> extends EdgeDecorator<Value> {
      * @parameter sources c'est le debut
      * @parameter target  c'est le fin
      */
-    protected EdgeFlow(Vertex source, Vertex target,Value capacity, Value flow) {
-        super(source, target);
+    public EdgeFlow(AbstractEdge edge,Value capacity, Value flow) {
+        super(edge);
         this.capacity = capacity;
         this.flow =flow;
     }

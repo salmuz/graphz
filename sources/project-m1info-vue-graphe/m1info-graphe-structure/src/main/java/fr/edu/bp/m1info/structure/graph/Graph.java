@@ -232,10 +232,10 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         Iterator<Edge> it = edges.iterator();
         while (it.hasNext()) {
             Edge edge = it.next();
-            if (edge.getSource().equals(node)) {
+            if (edge.from().equals(node)) {
                 redges.add(edge);
             } else {
-                if (edge.getTarget().equals(node)) {
+                if (edge.to().equals(node)) {
                     redges.add(edge);
                 }
             }
@@ -327,7 +327,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
 //    private void changeVertexOfEdge(Edge edge, Vertex vertex, Point point, Vertex newVertex) {
 //        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
-//        if (edge.getSource().equals(vertex)) {
+//        if (edge.from().equals(vertex)) {
 //            edge.setSource(newVertex);
 //            e0.getPointStart().setX(point.getX());
 //            e0.getPointStart().setY(point.getY());
@@ -346,16 +346,16 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         vertex.getVertex().setColor(Color.ORANGE);
 
         if (removeEdge(edge)) {
-            List<Edge> edgeSources = getEdgesOfVertex(edge.getSource());
+            List<Edge> edgeSources = getEdgesOfVertex(edge.from());
             for (Edge item : edgeSources) {
-                changeVertexOfEdge(item, edge.getSource(), midPoint, vertex);
+                changeVertexOfEdge(item, edge.from(), midPoint, vertex);
             }
-            List<Edge> edgeTarget = getEdgesOfVertex(edge.getTarget());
+            List<Edge> edgeTarget = getEdgesOfVertex(edge.to());
             for (Edge item : edgeTarget) {
-                changeVertexOfEdge(item, edge.getTarget(), midPoint, vertex);
+                changeVertexOfEdge(item, edge.to(), midPoint, vertex);
             }
-            removeVertex((Node) edge.getSource());
-            removeVertex((Node) edge.getTarget());
+            removeVertex((Node) edge.from());
+            removeVertex((Node) edge.to());
             addVertex((Node) vertex);
         }
     }
@@ -398,14 +398,14 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 
     private void createEdgeInRelationToSource(Node source, Node target, Point point, Edge edge) {
         EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
-        if (edge.getSource().equals(source)) {
-            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, target, edge.getTarget(), null);
+        if (edge.from().equals(source)) {
+            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, target, edge.to(), null);
             newEdge.setShape(ShapePlaneFactory.createShape(clazzEdgeShape,
                     point.getX(), point.getY(), e0.getPointEnd().getX(), e0.getPointEnd().getY()));
             newEdge.createWeight();
             addEdge(newEdge);
         } else {
-            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, edge.getSource(), target, null);
+            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, edge.from(), target, null);
             newEdge.setShape(ShapePlaneFactory.createShape(clazzEdgeShape,
                     e0.getPointStart().getX(), e0.getPointStart().getY(), point.getX(), point.getY()));
             newEdge.createWeight();
@@ -449,8 +449,8 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
     public Edge getEdge(Node source, Node target) {
         for (int i = 0; i < edges.size(); i++) {
             Edge edge = edges.get(i);
-            Node v0 = (Node) edge.getSource();
-            Node v1 = (Node) edge.getTarget();
+            Node v0 = (Node) edge.from();
+            Node v1 = (Node) edge.to();
             if ((v0.equals(source) && v1.equals(target)) ||
                     (v0.equals(target) && v1.equals(source))) {
                 return edge;
@@ -523,7 +523,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
         for (Node v : getVertex()){
             buff.append(v.getValue() + " -> ");
             for (Edge w : adjacencys(v))
-                buff.append(w.getTarget().getValue()+", ");
+                buff.append(w.to().getValue()+", ");
             buff.append("\n");
         }
         return buff.toString();

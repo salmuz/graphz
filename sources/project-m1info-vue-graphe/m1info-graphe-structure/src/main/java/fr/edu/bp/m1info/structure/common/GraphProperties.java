@@ -51,4 +51,6 @@ public class GraphProperties {
     public static final Color VERTEX_BACKGROUND = Color.ORANGE;
 
     public static final int CONSOLE = 1;
+
+    public static final Color COLORLESS = new Color(0f,0f,0f,0f );
 }

@@ -46,7 +46,7 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 /**
  * ici nous avons une classe abstract et qui herite certaine methode de la class EdgeShapeGraph
  */
-public abstract class AbstractEdge<Value> implements IEdge<Value> {
+public abstract class AbstractEdge<Value extends Number> implements IEdge<Value> {
 
     // Shapes for Edge
     private AbstractEdgeShape shape;
@@ -91,7 +91,7 @@ public abstract class AbstractEdge<Value> implements IEdge<Value> {
      *
      * @return elle retourne un meme type que source qui est Vertex
      */
-    public Vertex getSource() {
+    public Vertex from() {
         return source;
     }
 
@@ -111,7 +111,7 @@ public abstract class AbstractEdge<Value> implements IEdge<Value> {
      *
      * @return elle retourne un meme type que target qui est Vertex
      */
-    public Vertex getTarget() {
+    public Vertex to() {
         return target;
     }
 
@@ -186,6 +186,14 @@ public abstract class AbstractEdge<Value> implements IEdge<Value> {
      * @return weight
      */
     public Value weight() {
+        throw new UnsupportedOperationException("The edge do not support weight");
+    }
+
+    /**
+     *
+     * @param value
+     */
+    public void setWeight(Value value) {
         throw new UnsupportedOperationException("The edge do not support weight");
     }
 

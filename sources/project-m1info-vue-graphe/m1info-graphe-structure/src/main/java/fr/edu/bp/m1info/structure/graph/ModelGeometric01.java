@@ -82,8 +82,8 @@ public class ModelGeometric01 {
         }
 
         for (Edge node : graph.getEdgeList()) {
-            VertexShapeGraph v0 = (VertexShapeGraph) node.getSource().getVertex();
-            VertexShapeGraph v1 = (VertexShapeGraph) node.getTarget().getVertex();
+            VertexShapeGraph v0 = (VertexShapeGraph) node.from().getVertex();
+            VertexShapeGraph v1 = (VertexShapeGraph) node.to().getVertex();
             node.setShape(ShapePlaneFactory.createShape(Line.class,
                     v0.centreShape().getX(), v0.centreShape().getY(),
                     v1.centreShape().getX(), v1.centreShape().getY()));
