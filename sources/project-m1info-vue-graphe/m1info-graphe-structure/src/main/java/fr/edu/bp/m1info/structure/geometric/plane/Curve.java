@@ -51,53 +51,15 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
 
     private Point start;
     private Point end;
-    private Point firstCurve;
-    private Point secondCurve;
 
     /**
      * C'est un constructeur
      *
      * @parameter start,end,firstCurve,secondCurve cette methode contient 4 parameter
      */
-    public Curve(Point start, Point end, Point firstCurve, Point secondCurve) {
+    public Curve(Point start, Point end) {
         this.start = start;
         this.end = end;
-        this.firstCurve = firstCurve;
-        this.secondCurve = secondCurve;
-    }
-    /**
-     * cette methode permette de recupére le contenu du variable firstCurve
-     *
-     *  @return elle retourn le point firstCurve
-     *
-     * */
-    public Point getFirstCurve() {
-        return firstCurve;
-    }
-    /**
-     *  cette methode permette de modifier le contenu du variable FirstCurve
-     *
-     *  @parameter FirstCurve
-     */
-    public void setFirstCurve(Point firstCurve) {
-        this.firstCurve = firstCurve;
-    }
-     /**
-      *  cette methode permette de recupére le contenu du variable secondCurve
-      *
-      *  @return elle retourn le point secondCurve
-      */
-    public Point getSecondCurve() {
-        return secondCurve;
-    }
-
-    /**
-     *  cette methode permette de modifier le contenu du variable secondCurve
-     *
-     *  @parameter secondCurve
-     */
-    public void setSecondCurve(Point secondCurve) {
-        this.secondCurve = secondCurve;
     }
 
     /**

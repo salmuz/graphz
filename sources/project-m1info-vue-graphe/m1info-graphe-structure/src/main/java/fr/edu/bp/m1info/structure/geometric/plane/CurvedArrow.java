@@ -54,8 +54,8 @@ public class CurvedArrow extends Curve implements Arrow{
      * @parameter start,end,firstCurve,secondCurve cette methode contient 4 parameter
      * et ces point serons herité de la class curve
      */
-    public CurvedArrow(Point start, Point end, Point firstCurve, Point secondCurve) {
-        super(start, end, firstCurve, secondCurve);
+    public CurvedArrow(Point start, Point end) {
+        super(start, end);
     }
     /**
      * cette methode permettent de dessiner la graphic

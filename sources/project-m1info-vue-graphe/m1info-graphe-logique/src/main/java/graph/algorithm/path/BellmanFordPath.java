@@ -119,8 +119,8 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
                     int w = (Integer) neighbor.getEdge().weight();
                     if (distance[u.getValue()] + w < distance[v.getValue()]) {
                         distance[v.getValue()] = distance[u.getValue()] + w;
-                        nodeTo[v.getValue()] = (Node) neighbor.getEdge().from();
-                        iterativeView.updateView((Node)neighbor.getEdge().to(),neighbor.getEdge());
+                        //nodeTo[v.getValue()] = (Node) neighbor.getEdge().from();
+                        edgeTo[v.getValue()] = neighbor.getEdge();
                     }
                 }
             }
@@ -137,6 +137,15 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
                 }
             }
         }
+
+
+        for(Edge edge: edgeTo){
+            if(edge != null){
+                iterativeView.updateView((Node) edge.from(),edge);
+                iterativeView.updateView((Node) edge.to(),edge);
+            }
+        }
+
     }
 
 }

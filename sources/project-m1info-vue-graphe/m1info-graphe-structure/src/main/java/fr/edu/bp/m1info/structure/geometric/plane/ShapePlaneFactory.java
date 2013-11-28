@@ -64,7 +64,12 @@ public class ShapePlaneFactory {
                         new Point2D(coordinate[2],coordinate[3]), Arrow.PLACE_OF_ARROW.MIDDLE);
                }else{
                    if(clazz.isAssignableFrom(Message.class)){
-                        shape = new Message(new Point2D(coordinate[0],coordinate[1]),"2");
+                       shape = new Message(new Point2D(coordinate[0],coordinate[1]),"2");
+                   }else{
+                       if(clazz.isAssignableFrom(Curve.class)){
+                           shape = new Curve(new Point2D(coordinate[0],coordinate[1]),
+                                   new Point2D(coordinate[2],coordinate[3]));
+                       }
                    }
                }
             }

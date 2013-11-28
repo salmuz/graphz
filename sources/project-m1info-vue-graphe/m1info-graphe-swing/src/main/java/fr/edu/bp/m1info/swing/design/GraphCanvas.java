@@ -105,7 +105,7 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
 
     public void updateView(Node node, Edge edge) {
         if(node != null) node.getVertex().parentComponent().shape().setBackground(Color.RED);
-        if(edge != null)  edge.getShape().parentComponent().shape().setColor(Color.RED);
+        if(edge != null) edge.getShape().shape().setColor(Color.RED);
         repaint();
         try {
             Thread.sleep(1000);

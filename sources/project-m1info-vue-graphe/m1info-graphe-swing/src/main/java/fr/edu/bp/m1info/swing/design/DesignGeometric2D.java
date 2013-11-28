@@ -105,13 +105,33 @@ public class DesignGeometric2D implements Graphics {
      *
      * @parameter Curve curve
      */
-    public void draw(Curve curve) {
-        Shape shape = new CubicCurve2D.Double(curve.from().getX(), curve.from().getY(),
-                curve.getFirstCurve().getX(), curve.getSecondCurve().getY(),
-                curve.getSecondCurve().getX(), curve.getSecondCurve().getY(),
-                curve.to().getX(), curve.to().getY());
+    public Shape draw(Curve curve) {
+
+        double x0 = curve.from().getX();
+        double y0 = curve.from().getY();
+        double x1 = curve.to().getX();
+        double y1 = curve.to().getY();
+
+        double angle = Math.atan2(y1 - y0, x1 - x0);
+        double d = Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2));
+
+        java.awt.geom.Point2D.Double from = new java.awt.geom.Point2D.Double(0, 0); // Start point
+        java.awt.geom.Point2D.Double to = new java.awt.geom.Point2D.Double(d, 0); // End point
+        java.awt.geom.Point2D.Double control = new java.awt.geom.Point2D.Double(d / 2, 0 - (d / 4)); // Control point
+        QuadCurve2D.Double  shape = new QuadCurve2D.Double( // Create quadratic curve
+                from.x, from.y, // Segment start point
+                control.x, control.y, // Control point
+                to.x, to.y); // Segment end point
+
+        AffineTransform afine = new AffineTransform();
+        afine.translate(x0, y0); // translate to work with coordinates (0,0)
+        afine.rotate(angle);  // then it must rotate
+
+        // Draw the curves
         graphics2D.setColor(curve.getColor());
-        graphics2D.draw(shape);
+        graphics2D.draw(afine.createTransformedShape(shape));
+
+        return shape;
     }
 
     /**

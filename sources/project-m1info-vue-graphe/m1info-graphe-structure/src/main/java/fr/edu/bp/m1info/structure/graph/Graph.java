@@ -42,6 +42,7 @@ import fr.edu.bp.m1info.structure.common.Reflection;
 import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
+import fr.edu.bp.m1info.structure.geometric.plane.Curve;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
@@ -83,7 +84,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
 //        this.clazzEdgeShape = (Class<? extends ShapeGeometric>) Reflection.getParamGenericOfSuperCLass(this.getClass(), 0);
 //        this.clazzVertexShape = (Class<? extends ShapeGeometric>) Reflection.getParamGenericOfSuperCLass(this.getClass(), 1);
 
-        this.clazzEdgeShape = Line.class;
+        this.clazzEdgeShape = Curve.class;
         this.clazzVertexShape = Circle.class;
 
         // modify version 2
