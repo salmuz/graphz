@@ -103,7 +103,7 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
     }
 
 
-    private abstract class ListIter<V> implements Iterator<V>{
+    private abstract class ListIter<V> implements Iterator<V> {
 
         protected Neighbor cursor = first;
 
@@ -116,12 +116,12 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
         }
     }
 
-    public boolean containsEdge(int from) {
+    public Edge containsEdge(int from) {
         for (Edge edge : this) {
             if (edge.from().getValue() == from)
-                return true;
+                return edge;
         }
-        return false;
+        return null;
     }
 
     public void remove(Node value) {
@@ -159,11 +159,11 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
             next = null;
         }
 
-        public Edge getEdge(){
+        public Edge getEdge() {
             return edge;
         }
 
-        public Node getNode(){
+        public Node getNode() {
             return node;
         }
     }

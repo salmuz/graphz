@@ -29,50 +29,54 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak 
+ * Contributor(s):  
  *
  * Changes
  * -------
- * 13/02/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.structure.graph.edge;
 
+package graph.algorithm.path;
 
+import fr.edu.bp.m1info.structure.graph.AdjacencyList;
+import fr.edu.bp.m1info.structure.graph.Graph;
+import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
-import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.IterativeView;
 
-public class EdgeFactory {
+import java.util.Stack;
 
-    public static AbstractEdge createEdge(Class clazz,Vertex source, Vertex target,Object ...value){
+public class BFSFlowNetworkPath<Edge extends EdgeFlow,Node extends Vertex> extends BreadthFirstPath<Edge,Node> {
 
-        AbstractEdge<Integer> edge = null;
+    public BFSFlowNetworkPath(Graph<Edge, Node> graph, Node source) {
+        super(graph, source);
+    }
 
-        if(clazz.isAssignableFrom(Edge.class)){
-            edge = new Edge(source,target);
-        }else{
-            if(clazz.isAssignableFrom(Arc.class)){
-                edge = new Arc(source,target);
-            }else{
-                if(clazz.isAssignableFrom(EdgeWeight.class)){
-                   int weight = 0;
-                   if(value != null) weight = (Integer)value[0];
-                   edge = new EdgeWeight(new Arc(source,target),weight);
-                }else{
-                    if(clazz.isAssignableFrom(EdgeFlow.class)){
-                        int capacity = 0, flow = 0;
-                        if(value != null) capacity = (Integer)value[0];
-                        edge = new EdgeFlow(new Arc(source,target),capacity,flow);
-                    }
-                }
-            }
+    public BFSFlowNetworkPath(Graph<Edge, Node> graph, Node source, IterativeView<Edge, Node> iterative) {
+        super(graph, source, iterative);
+    }
 
+    protected boolean isMarked(Edge edge, Node to){
+        return (!marked[to.getValue()] && (edge.residualCapacityTo(to) > 0));
+    }
+
+    @Override
+    public Iterable<Edge> pathTo(int v) {
+        Stack<Edge> path = new Stack<Edge>();
+
+        if (!hasPathTo(v)) return path;
+        if (edgeTo[v] == null) return path;
+
+        path.push(edgeTo[v]);
+
+        for(Node x = nodeTo[v];
+            x != null && x.getValue() != source.getValue();
+            x = nodeTo[x.getValue()]){
+            path.push(edgeTo[x.getValue()]);
         }
 
-        return edge;
+        return path;
     }
 
 }

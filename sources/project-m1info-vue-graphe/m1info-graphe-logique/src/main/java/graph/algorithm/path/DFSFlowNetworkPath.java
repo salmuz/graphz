@@ -22,37 +22,60 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library; if not, write to the Free Software Foundation,
  * Inc.,
- *
+ * 
  * ------------------
- * GraphProperties.java
+ * Point.java
  * ------------------
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):
+ * Contributor(s):  
  *
  * Changes
  * -------
  *
  */
 
-package fr.edu.bp.m1info.structure.common;
+package graph.algorithm.path;
 
-import java.awt.*;
+import fr.edu.bp.m1info.structure.graph.Graph;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.IterativeView;
 
-public class GraphProperties {
+import java.util.Stack;
 
-    public static final Color VERTEX_NAME_COLOR = Color.WHITE;
+public class DFSFlowNetworkPath<Edge extends EdgeFlow,Node extends Vertex> extends DepthFirstPath<Edge,Node> {
 
-    public static final Color EDGE_NAME_COLOR = Color.BLACK;
 
-    public static final Color VERTEX_COLOR = Color.ORANGE;
+    public DFSFlowNetworkPath(Graph<Edge, Node> graph, Node source) {
+        super(graph, source);
+    }
 
-    public static final Color VERTEX_BACKGROUND = Color.ORANGE;
+    public DFSFlowNetworkPath(Graph<Edge, Node> graph, Node source, IterativeView<Edge, Node> iterative) {
+        super(graph, source, iterative);
+    }
 
-    public static final int CONSOLE = 1;
+    @Override
+    protected boolean condition(Edge edge,Node to) {
+        return ((!marked[to.getValue()]) && (edge.residualCapacityTo(to) > 0));
+    }
 
-    public static final int GUI = 0;
+    @Override
+    public Iterable<Edge> pathTo(int v) {
+        Stack<Edge> path = new Stack<Edge>();
 
-    public static final Color COLORLESS = new Color(0f,0f,0f,0f );
+        if (!hasPathTo(v)) return path;
+        if (edgeTo[v] == null) return path;
+
+        path.push(edgeTo[v]);
+
+        for(Node x = nodeTo[v];
+            x != null && x.getValue() != source.getValue();
+            x = nodeTo[x.getValue()]){
+            path.push(edgeTo[x.getValue()]);
+        }
+
+        return path;
+    }
 }

@@ -38,21 +38,39 @@
 
 package fr.edu.bp.m1info.structure.graph;
 
+import fr.edu.bp.m1info.structure.common.GraphProperties;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDirected;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
+import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
+import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-public class FlowNetworkGraph<Edge extends EdgeWeight, Node extends Vertex>
+public class FlowNetworkGraph<Edge extends EdgeFlow, Node extends Vertex>
         extends DirectedGraph<Edge, Node> {
 
     private Node source; // source
     private Node sink; // puit
 
     public FlowNetworkGraph(Node source, Node sink) {
+        this(source, sink, GraphProperties.GUI);
+    }
+
+    public FlowNetworkGraph(Node source, Node sink,int type) {
+        super(type);
         this.source = source;
         this.sink = sink;
-        this.nodes.add(source);
-        this.nodes.add(sink);
+    }
+
+    public void addEdge(Node source, Node target, int capacity) {
+        Edge edgeS = super.addEdge(source,target);
+        edgeS.setCapacity(capacity);
+        int to = indexOfVertex(target);
+        adjacencys[to].add(edgeS);
     }
 
     public Node to() {  // source
@@ -61,6 +79,22 @@ public class FlowNetworkGraph<Edge extends EdgeWeight, Node extends Vertex>
 
     public Node from() { // puit
         return source;
+    }
+
+    /**
+     *
+     * @return string, graph adj list
+     */
+    @Override
+    public String toString() {
+        StringBuffer buff = new StringBuffer();
+        for (Node v : getVertex()){
+            buff.append(v.getValue() + " -> ");
+            for (Edge w : adjacencys(v))
+                buff.append("(("+w.from().getValue()+","+w.to().getValue()+"), "+w.capacity()+", "+w.flow()+")");
+            buff.append("\n");
+        }
+        return buff.toString();
     }
 
 }

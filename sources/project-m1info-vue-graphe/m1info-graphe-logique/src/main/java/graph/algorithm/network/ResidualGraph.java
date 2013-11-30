@@ -22,37 +22,47 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library; if not, write to the Free Software Foundation,
  * Inc.,
- *
+ * 
  * ------------------
- * GraphProperties.java
+ * Point.java
  * ------------------
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):
+ * Contributor(s):  
  *
  * Changes
  * -------
  *
  */
 
-package fr.edu.bp.m1info.structure.common;
+package graph.algorithm.network;
 
-import java.awt.*;
+import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
+import fr.edu.bp.m1info.structure.graph.Graph;
+import fr.edu.bp.m1info.structure.graph.edge.IEdge;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.path.AbstractPath;
 
-public class GraphProperties {
+public class ResidualGraph<Edge extends EdgeFlow,Node extends Vertex> {
 
-    public static final Color VERTEX_NAME_COLOR = Color.WHITE;
 
-    public static final Color EDGE_NAME_COLOR = Color.BLACK;
+    public  Graph<Edge,Node> createResidualGraph(FlowNetworkGraph<Edge,Node> graph,
+                                                       Iterable<Edge>  path,int newflow){
 
-    public static final Color VERTEX_COLOR = Color.ORANGE;
+        for(Edge edge: path){
+            edge.setCapacity(edge.capacity() - newflow);
+            Edge toFrom = graph.containsEdge((Node)edge.to(),(Node)edge.from());
+            if(toFrom != null){
+                toFrom.setCapacity(toFrom.capacity() - newflow);
+            }else{
+                graph.addEdge((Node)edge.to(),(Node)edge.from(),newflow);
+            }
 
-    public static final Color VERTEX_BACKGROUND = Color.ORANGE;
+        }
 
-    public static final int CONSOLE = 1;
+        return graph;
+    }
 
-    public static final int GUI = 0;
-
-    public static final Color COLORLESS = new Color(0f,0f,0f,0f );
 }

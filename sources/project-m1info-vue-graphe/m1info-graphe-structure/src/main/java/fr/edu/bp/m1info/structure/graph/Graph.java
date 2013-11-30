@@ -129,7 +129,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
       * @param  source
       * @param  target
       */
-    public abstract void addEdge(Node source, Node target);
+    public abstract Edge addEdge(Node source, Node target);
 
     /**
      * C'est une methode qui permet de tester si on peut  rajouter un node dans le graph
@@ -153,7 +153,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
      * @param target
      * @return
      */
-    public abstract boolean containsEdge(Node source, Node target);
+    public abstract Edge containsEdge(Node source, Node target);
 
     /**
      * C'est une methode qui permet de verifier si une  arrete existe ou pas a partir de la definition d'une arrete

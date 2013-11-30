@@ -38,11 +38,8 @@
 
 package graph.algorithm.path;
 
-import fr.edu.bp.m1info.structure.common.GraphProperties;
 import fr.edu.bp.m1info.structure.graph.AdjacencyList;
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.UnDirectedGraph;
-import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
@@ -66,6 +63,12 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
         breadthFirstSearch(source);
     }
 
+    /**
+     * The research the path shortest
+     * Obs:
+     *  (1) It do not function with cycle in the same vertex.
+     * @param source
+     */
     private void breadthFirstSearch(Node source) {
         Queue<Integer> queue = new PriorityQueue<Integer>();
         queue.offer(source.getValue());
@@ -74,61 +77,43 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
         while (!queue.isEmpty()) {
             int v = queue.poll();
             for (AdjacencyList.Neighbor w : graph.adjacencysNeighbor(v)) {
-                int vs = w.getNode().getValue();
-                if (!marked[vs]) {
-                    queue.offer(vs);
-                    marked[vs] = true;
-                    edgeTo[vs] = (Edge) w.getEdge();
-                    nodeTo[vs] = (Node) w.getEdge().from();
-                    iterativeView.updateView((Node)w.getNode(),(Edge)w.getEdge());
+                Node node = visit(w,v);
+                Edge edge = (Edge) w.getEdge();
+                if (isMarked(edge, node)) {
+                    queue.offer(node.getValue());
+                    marked[node.getValue()] = true;
+                    edgeTo[node.getValue()] = edge;
+                    nodeTo[node.getValue()] = visit(w, node.getValue());
+                    iterativeView.updateView(node,edge);
                 }
             }
         }
     }
 
-    public static void main(String... arg) {
-        Graph<fr.edu.bp.m1info.structure.graph.edge.Edge, Vertex> graph =
-                new UnDirectedGraph<fr.edu.bp.m1info.structure.graph.edge.Edge, Vertex>(GraphProperties.CONSOLE) {
-                };
-        Vertex v0 = new Vertex();
-        Vertex v1 = new Vertex();
-        Vertex v2 = new Vertex();
-        Vertex v3 = new Vertex();
-        Vertex v4 = new Vertex();
-        Vertex v5 = new Vertex();
-        graph.addVertex(v0);
-        graph.addVertex(v1);
-        graph.addVertex(v2);
-        graph.addVertex(v3);
-        graph.addVertex(v4);
-        graph.addVertex(v5);
-
-        graph.addEdge(v0, v1);
-        graph.addEdge(v0, v2);
-        graph.addEdge(v0, v3);
-        graph.addEdge(v0, v5);
-        graph.addEdge(v2, v1);
-        graph.addEdge(v2, v3);
-        graph.addEdge(v5, v4);
-
-        System.out.println(graph.toString());
-
-        AbstractPath<Arc, Vertex> paths = new BreadthFirstPath(graph, v0);
-        paths.execute();
-
-        for (int v = 0; v < graph.sizeVertex(); v++)
-            if (paths.hasPathTo(v)) {
-                System.out.println("belong to:" + v);
-            }
-
-        for (Vertex v : paths.pathTo(v4)) {
-            System.out.println(v);
+    /**
+     * The method es added because some algorithms the target or the source
+     * are equals to the node adjacent. If they are equals, a loop is generate
+     * at the time of traverse a graph.
+     * @param w
+     * @param from
+     * @return
+     */
+    protected Node visit(AdjacencyList.Neighbor w, int from) {
+        if(from == w.getEdge().to().getValue()){
+            return (Node) w.getEdge().from();
         }
-
-        for (IEdge v : paths.pathTo(v4.getValue())) {
-            System.out.println(v);
-        }
+        return (Node) w.getNode();
     }
 
+    /**
+     * It is the condition for marked a Node, in a particular cause
+     * can be overloaded.
+     * @param edge
+     * @param to
+     * @return
+     */
+    protected boolean isMarked(Edge edge, Node to){
+        return !marked[to.getValue()];
+    }
 
 }

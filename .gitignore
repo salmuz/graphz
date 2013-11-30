@@ -2,6 +2,7 @@
 *.iml
 *.ipr
 *.iws
+*.error
 *.classpath
 *.project
 .settings/

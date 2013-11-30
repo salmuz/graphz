@@ -49,7 +49,6 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
     extends  AbstractPath<Edge,Node>{
 
     private int distance[];
-    //private int predecesor[];
 
     public BellmanFordPath(Graph<Edge, Node> graph, Node source){
         super(graph, source);
@@ -63,7 +62,6 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
     public void execute() {
         distance = new int[graph.sizeVertex()];
         try {
-            iterativeView.updateView(source,null);
             bellmanFordSearch(source);
         } catch (ExistNegativeWeightCycle e) {
             e.printStackTrace();
@@ -99,7 +97,7 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
      * @param source
      */
     private void bellmanFordSearch(Node source) throws ExistNegativeWeightCycle {
-        // obs: nodeTo  == predecessor
+        // obs: edgeTo  == predecessor
 
         // Step 1: initialize graph
         for (Node node : graph.getVertex()) {
@@ -138,14 +136,16 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
             }
         }
 
+    }
 
+    public void showIterative(){
+        iterativeView.updateView(source,null);
         for(Edge edge: edgeTo){
             if(edge != null){
                 iterativeView.updateView((Node) edge.from(),edge);
                 iterativeView.updateView((Node) edge.to(),edge);
             }
         }
-
     }
 
 }

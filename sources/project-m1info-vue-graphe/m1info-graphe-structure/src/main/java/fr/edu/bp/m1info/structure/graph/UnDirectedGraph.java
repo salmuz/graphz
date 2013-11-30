@@ -76,13 +76,13 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
      * @param target
      */
     @Override
-    public void addEdge(N source, N target) {
+    public E addEdge(N source, N target) {
         int index = indexOfVertex(source);
 
         E edgeS = (E) EdgeFactory.createEdge(Edge.class, source, target, null);
         E edgeT = (E) EdgeFactory.createEdge(Edge.class, target, source, null);
 
-        if(TYPE_EXECUTION != GraphProperties.CONSOLE){
+        if (TYPE_EXECUTION != GraphProperties.CONSOLE) {
             // it just works with a edge shape !!
             AbstractEdgeShape shapeS = new EdgeShape(this.clazzEdgeShape,
                     source.getVertex().parentComponent().shape().centre(),
@@ -100,6 +100,8 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
         adjacencys[index].add(edgeT);
 
         edges.add(edgeS);
+
+        return edgeS;
     }
 
     /**
@@ -108,14 +110,17 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
      * @return
      */
     @Override
-    public boolean containsEdge(N source, N target) {
+    public E containsEdge(N source, N target) {
         int from = indexOfVertex(source);
         int to = indexOfVertex(target);
-        if (from != NOT_FOUND_KEY || to != NOT_FOUND_KEY)
-            if (adjacencys[from].containsEdge(to))
-                return adjacencys[to].containsEdge(from);
+        if (from != NOT_FOUND_KEY || to != NOT_FOUND_KEY) {
+            E e = adjacencys[from].containsEdge(to);
+            if (e != null)
+                return adjacencys[to].containsEdge(from) != null ? e : null;
 
-        return false;
+        }
+
+        return null;
     }
 
     /**

@@ -22,37 +22,43 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library; if not, write to the Free Software Foundation,
  * Inc.,
- *
+ * 
  * ------------------
- * GraphProperties.java
+ * Point.java
  * ------------------
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):
+ * Contributor(s):  
  *
  * Changes
  * -------
  *
  */
 
-package fr.edu.bp.m1info.structure.common;
+package graph.algorithm.network;
 
-import java.awt.*;
+import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
+import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.GenerateGraphTest;
+import junit.framework.TestCase;
 
-public class GraphProperties {
+public class EdmondsKarpTest extends TestCase {
+    public void setUp() throws Exception {
+        super.setUp();
+    }
 
-    public static final Color VERTEX_NAME_COLOR = Color.WHITE;
+    public void testAlgorithmEdmondsKarpTest(){
 
-    public static final Color EDGE_NAME_COLOR = Color.BLACK;
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow01();
 
-    public static final Color VERTEX_COLOR = Color.ORANGE;
+        System.out.println(graph.toString());
 
-    public static final Color VERTEX_BACKGROUND = Color.ORANGE;
+        EdmondsKarp<EdgeFlow,Vertex> edmondsKarp = new EdmondsKarp<EdgeFlow, Vertex>(graph);
 
-    public static final int CONSOLE = 1;
+        edmondsKarp.execute();
 
-    public static final int GUI = 0;
-
-    public static final Color COLORLESS = new Color(0f,0f,0f,0f );
+        assertEquals(edmondsKarp.getFlowMaximal(),4);
+    }
 }

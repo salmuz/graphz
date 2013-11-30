@@ -38,48 +38,49 @@
 
 package graph.algorithm.path;
 
-import fr.edu.bp.m1info.structure.common.GraphProperties;
-import fr.edu.bp.m1info.structure.graph.AdjacencyList;
-import fr.edu.bp.m1info.structure.graph.DirectedGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
-import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-import graph.algorithm.IterativeView;
+import graph.algorithm.GenerateGraphTest;
+import junit.framework.TestCase;
 
-public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends AbstractPath<Edge, Node> {
-
-    public DepthFirstPath(Graph<Edge, Node> graph, Node source) {
-        super(graph, source);
+public class DepthFirstPathTest extends TestCase {
+    public void setUp() throws Exception {
+        super.setUp();
     }
 
-    public DepthFirstPath(Graph<Edge, Node> graph, Node source, IterativeView<Edge, Node> iterative) {
-        super(graph, source, iterative);
-    }
+    public void testDFSAlgorithm(){
 
-    public void execute() {
-        nodeTo[source.getValue()] = source;
-        iterativeView.updateView(source, null);
-        dephtFirstSearch(source);
-    }
+        Graph<Arc, Vertex> graph = GenerateGraphTest.generateDirectedGraph();
 
-    private void dephtFirstSearch(Node v) {
-        marked[v.getValue()] = true;
-        for (AdjacencyList.Neighbor w : graph.adjacencysNeighbor(v.getValue())) {
-            Node vs = (Node) w.getNode();
-            Edge edge = (Edge) w.getEdge();
-            if (condition(edge, vs)) {
-                edgeTo[vs.getValue()] = edge;
-                nodeTo[vs.getValue()] = (Node) w.getEdge().from();
-                iterativeView.updateView((Node) w.getNode(), (Edge) w.getEdge());
-                dephtFirstSearch(vs);
+        System.out.println(graph.toString());
+
+        AbstractPath<Arc,Vertex> paths = new DepthFirstPath<Arc, Vertex>(graph, graph.getVertex().get(0));
+        paths.execute();
+
+        Vertex v4 = graph.getVertex().get(graph.sizeVertex()-2);
+
+        for (int v = 0; v<graph.sizeVertex();v++)
+            if(paths.hasPathTo(v)){
+                System.out.println("belong to:"+v);
             }
+
+        int path[] = {4,5,0};
+        int index = 0;
+        for(Vertex v : paths.pathTo(v4)){
+            System.out.println(v);
+            assertEquals(v.getValue(),path[index++]);
+        }
+
+        int pathOUT[] = {5,0};
+        int pathIn[] = {4,5};
+        index = 0;
+        for(IEdge e : paths.pathTo(v4.getValue())){
+            System.out.println(e);
+            assertEquals(e.from().getValue(),pathOUT[index]);
+            assertEquals(e.to().getValue(),pathIn[index]);
+            index++;
         }
     }
-
-    protected boolean condition(Edge edge, Node to) {
-        return !marked[to.getValue()];
-    }
-
 }

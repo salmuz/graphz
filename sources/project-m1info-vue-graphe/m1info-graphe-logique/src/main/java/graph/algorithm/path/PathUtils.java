@@ -38,10 +38,15 @@
 
 package graph.algorithm.path;
 
-import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.edge.IEdge;
-import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 
-public class ResidualGraph<Edge extends IEdge,Node extends Vertex> {
+public final class PathUtils {
 
+    public static int sizeofShortestPathArc(Iterable<? extends EdgeFlow> its) {
+        int min = Integer.MAX_VALUE;
+        for (EdgeFlow edge : its) {
+            min = Math.min(min, edge.residualCapacityTo(edge.to()));
+        }
+        return min;
+    }
 }

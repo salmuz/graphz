@@ -40,9 +40,11 @@ package graph.algorithm.path;
 
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 
+import java.lang.reflect.Array;
 import java.util.Stack;
 
 public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
@@ -58,7 +60,7 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
         this.graph = graph;
         this.source = source;
         marked = new boolean[graph.sizeVertex()];
-        edgeTo = (Edge[]) new IEdge[graph.sizeVertex()];
+        edgeTo = (Edge[]) Array.newInstance(graph.getClazzEdge(), graph.sizeVertex()); //(Edge[]) new IEdge[graph.sizeVertex()];
         nodeTo = (Node[]) new Vertex[graph.sizeVertex()];
         for(int i=0;i<graph.sizeVertex();i++){
             marked[i] = false;
@@ -116,6 +118,7 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
     }
 
     public abstract void execute();
+
 
 
 }

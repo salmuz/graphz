@@ -65,8 +65,6 @@ import java.util.Iterator;
 public class DirectedGraph<Edge extends IEdge,Node extends Vertex>
         extends Graph<Edge,Node>{
 
-
-
     /**
      * C'est un constructeur pour crées l'objet de la classe et
      * en meme temps initialiser
@@ -82,10 +80,10 @@ public class DirectedGraph<Edge extends IEdge,Node extends Vertex>
     }
 
     @Override
-    public void addEdge(Node source, Node target) {
+    public Edge addEdge(Node source, Node target) {
         int index = indexOfVertex(source);
 
-        Edge edgeS = (Edge) EdgeFactory.createEdge(EdgeWeight.class, source, target, null);
+        Edge edgeS = (Edge) EdgeFactory.createEdge(this.clazzEdge, source, target, null);
 
         if(TYPE_EXECUTION != GraphProperties.CONSOLE){
             AbstractEdgeShape shape = new EdgeShape(this.clazzEdgeShape,
@@ -98,17 +96,19 @@ public class DirectedGraph<Edge extends IEdge,Node extends Vertex>
         adjacencys[index].add(edgeS);
 
         edges.add(edgeS);
+
+        return edgeS;
     }
 
 
     @Override
-    public boolean containsEdge(Node source, Node target) {
+    public Edge containsEdge(Node source, Node target) {
         int from = indexOfVertex(source);
         int to = indexOfVertex(target);
         if (from != NOT_FOUND_KEY || to != NOT_FOUND_KEY)
             return adjacencys[from].containsEdge(to);
 
-        return false;
+        return null;
     }
 
     @Override
