@@ -42,10 +42,11 @@ package fr.edu.bp.m1info.structure.graph;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements Iterable<Edge> {
+public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements Iterable<Edge>{
 
     private int size;
     private Neighbor first;

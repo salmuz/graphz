@@ -38,28 +38,37 @@
 
 package graph.algorithm.network;
 
+import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-import graph.algorithm.path.AbstractPath;
 
-public class ResidualGraph<Edge extends EdgeFlow,Node extends Vertex> {
+public class ResidualGraph<Edge extends EdgeFlow, Node extends Vertex> {
 
 
-    public  Graph<Edge,Node> createResidualGraph(FlowNetworkGraph<Edge,Node> graph,
-                                                       Iterable<Edge>  path,int newflow){
+    /**
+     *
+     * Using:
+     *      ResidualGraph<Edge,Node> residual = new ResidualGraph<Edge, Node>();
+     *      residual.createResidualGraph(graph,path.pathTo(sick),newFlow);
+     *
+     * @param graph
+     * @param path
+     * @param newflow
+     * @return
+     */
+    public Graph<Edge, Node> createResidualGraph(FlowNetworkGraph<Edge, Node> graph,
+                                                 Iterable<Edge> path, int newflow) {
 
-        for(Edge edge: path){
+        for (Edge edge : path) {
             edge.setCapacity(edge.capacity() - newflow);
-            Edge toFrom = graph.containsEdge((Node)edge.to(),(Node)edge.from());
-            if(toFrom != null){
+            Edge toFrom = graph.containsEdge((Node) edge.to(), (Node) edge.from());
+            if (toFrom != null) {
                 toFrom.setCapacity(toFrom.capacity() - newflow);
-            }else{
-                graph.addEdge((Node)edge.to(),(Node)edge.from(),newflow);
+            } else {
+                graph.addEdge((Node) edge.to(), (Node) edge.from(), newflow);
             }
-
         }
 
         return graph;

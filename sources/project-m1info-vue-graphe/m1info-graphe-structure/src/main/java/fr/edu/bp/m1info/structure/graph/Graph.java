@@ -48,6 +48,7 @@ import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -61,7 +62,7 @@ import java.util.List;
  * @param <Node> c'est la variables sommet
  */
 
-public abstract class Graph<Edge extends IEdge, Node extends Vertex> {
+public abstract class Graph<Edge extends IEdge, Node extends Vertex> implements Serializable{
 
     protected static int TYPE_EXECUTION = -1;
     //structures to do the algorithms

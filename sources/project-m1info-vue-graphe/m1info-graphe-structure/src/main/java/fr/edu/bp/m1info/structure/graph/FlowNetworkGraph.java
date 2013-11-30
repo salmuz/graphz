@@ -70,7 +70,7 @@ public class FlowNetworkGraph<Edge extends EdgeFlow, Node extends Vertex>
         Edge edgeS = super.addEdge(source,target);
         edgeS.setCapacity(capacity);
         int to = indexOfVertex(target);
-        adjacencys[to].add(edgeS);
+        //adjacencys[to].add(edgeS);
     }
 
     public Node to() {  // source

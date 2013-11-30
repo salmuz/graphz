@@ -72,6 +72,7 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
 
             int newFlow = PathUtils.sizeofShortestPathArc(bfdPath.pathTo(sick));
 
+
             for (Edge edge : bfdPath.pathTo(sick)) {
                 edge.addFlowTo(edge.to(), newFlow);
             }

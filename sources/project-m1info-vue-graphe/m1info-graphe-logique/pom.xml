@@ -2,17 +2,20 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>project-m1info-vue-graphe</artifactId>
         <groupId>fr.edu.bp.m1info</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
     <groupId>fr.edu.bp.m1info</groupId>
     <artifactId>m1info-graphe-logique</artifactId>
     <version>1.0.0</version>
     <name>m1info-graphe-logique</name>
     <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -24,6 +27,11 @@
             <groupId>fr.edu.bp.m1info</groupId>
             <artifactId>m1info-graphe-structure</artifactId>
             <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.com.robust-it</groupId>
+            <artifactId>cloning</artifactId>
+            <version>1.9.0</version>
         </dependency>
     </dependencies>
 
