@@ -87,5 +87,17 @@ public class DinicFlowNetworkTest extends TestCase {
 
     }
 
+    public void testDinicAlgorithm04(){
+
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow04();
+
+        DinicFlowNetwork<EdgeFlow,Vertex> dinicFlowNetwork = new DinicFlowNetwork<EdgeFlow, Vertex>(graph);
+
+        dinicFlowNetwork.execute();
+
+        assertEquals(dinicFlowNetwork.getFlowMaximal(),2287);
+
+    }
+
 
 }

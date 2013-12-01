@@ -38,7 +38,6 @@
 
 package graph.algorithm.network;
 
-import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
@@ -78,7 +77,8 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
             //Version v2, I don't know if it's optimal
             residualGraph.createResidualGraph(graphNetwork, bfspath.pathTo(sick), newFlow);
 
-            updateFlowGraph(sick, newFlow);
+            // it's bad to test of performance
+            // updateFlowGraph(sick, newFlow);
             // end version v2
 
             // Old version, it don't use residualGraph
@@ -125,8 +125,8 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
      *
      */
     public void execute() {
-        FlowNetworkGraph<Edge, Node> dgraph = new Cloner().deepClone(graph);
-        this.networkEdmondsKarp(dgraph);
+        //FlowNetworkGraph<Edge, Node> dgraph = new Cloner().deepClone(graph);
+        this.networkEdmondsKarp(graph);
     }
 
     /**

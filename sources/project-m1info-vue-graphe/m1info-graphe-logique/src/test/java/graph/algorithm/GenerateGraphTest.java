@@ -48,6 +48,12 @@ import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public final class GenerateGraphTest {
 
     public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkFlow01() {
@@ -209,5 +215,46 @@ public final class GenerateGraphTest {
         graph.addEdge(v2, v3);
         graph.addEdge(v5, v4);
         return graph;
+    }
+
+
+    public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkFlow04() {
+        FlowNetworkGraph<EdgeFlow, Vertex> graph =  null;
+        File file = new File("/Users/user/Documents/git/Graphes_Multi_Plateformes/data/flowNetwork/flowNetwok_500_1200_01122013_0425.txt");
+        try {
+            Scanner in = new Scanner(file);
+            int nbV = in.nextInt();
+
+            List<Vertex> V = new ArrayList<Vertex>();
+            Vertex v0 = new Vertex();
+            V.add(v0);
+            for (int i = 1; i < nbV - 1; i++) {
+                 V.add(new Vertex());
+            }
+            Vertex vn = new Vertex();
+            V.add(vn);
+
+            graph = new FlowNetworkGraph<EdgeFlow, Vertex>(v0, vn, GraphProperties.CONSOLE) { };
+
+            for(Vertex v : V){
+                graph.addVertex(v);
+            }
+
+            int nbE = in.nextInt();
+            for (int i = 0; i < nbE; i++) {
+                int s = in.nextInt();
+                int t = in.nextInt();
+                int capacity = in.nextInt();
+                graph.addEdge(V.get(s-1), V.get(t-1), capacity);
+            }
+
+            System.out.println("it's done");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        return graph;
+
     }
 }

@@ -38,7 +38,6 @@
 
 package graph.algorithm.network;
 
-import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
@@ -89,7 +88,8 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
             //Version v2, I don't know if it's optimal
             residualGraph.createResidualGraph(graphNetwork, dfsPath.pathTo(sick), newFlow);
 
-            updateFlowGraph(sick,newFlow);
+            //it's bad to test of performance
+            //updateFlowGraph(sick,newFlow);
             // end version v2
 
             // Old version, it don't use residualGraph
@@ -98,6 +98,7 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
             //    edge.addFlowTo(edge.to(), newFlow);
             //}
 
+            System.out.println("newFlow:"+newFlow);
             flowMax += newFlow;
         }
 
@@ -135,8 +136,8 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
      *
      */
     public void execute() {
-        FlowNetworkGraph<Edge, Node> duplicate = new Cloner().deepClone(graph);
-        this.networkFordFulkerson(duplicate);
+        //FlowNetworkGraph<Edge, Node> duplicate = new Cloner().deepClone(graph);
+        this.networkFordFulkerson(graph);
     }
 
     /**

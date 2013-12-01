@@ -61,6 +61,7 @@ public class ResidualGraph<Edge extends EdgeFlow, Node extends Vertex> {
 
         for (Edge edge : path) {
             edge.setCapacity(edge.capacity() - newflow);
+            //il faut ameliore le recherche d'un arête
             Edge toFrom = graph.containsEdge((Node) edge.to(), (Node) edge.from());
             if (toFrom != null) {
                 toFrom.setCapacity(toFrom.capacity() - newflow);

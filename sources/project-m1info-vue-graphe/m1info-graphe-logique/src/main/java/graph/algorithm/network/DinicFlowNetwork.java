@@ -38,12 +38,10 @@
 
 package graph.algorithm.network;
 
-import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-import graph.algorithm.IterativeView;
 import graph.algorithm.path.AbstractPath;
 import graph.algorithm.path.BreadthFirstPath;
 
@@ -103,7 +101,6 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
         int v, bottleneck;
         int sk = sink.getValue();
         int nbVertex = graph.sizeVertex();
-        boolean marked[] = new boolean[nbVertex];
         Edge path[] = (Edge[]) Array.newInstance(graph.getClazzEdge(), nbVertex);
         int level[] = bfsPath.dist();
         int maxLevel = level[sk];
@@ -115,11 +112,10 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
 
             bottleneck = Integer.MAX_VALUE;
             v = source.getValue();
-            marked[v] = true;
             for (int i = 0; i <= maxLevel; i++) {
                 for (Edge e : graph.adjacencys(v)) {
                     int to = e.to().getValue();
-                    if ((level[v] + 1 != level[to]) || ( e.to().outdegree() == 0 && to != sk)) continue;
+                    if ((level[v] + 1 != level[to]) || (e.to().outdegree() == 0 && to != sk)) continue;
                     bottleneck = Math.min(bottleneck, e.residualCapacityTo(e.to()));
                     path[v] = e;
                     v = to;
@@ -127,8 +123,11 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
                 }
             }
 
+            if (v == source.getValue()) break;
+
             //System.out.println(bottleneck + "  PATH");
             //Augment flow f by f' and go back sink step 2.
+            //Il faut ameliore, il ne doit que faire le path
             for (Edge w : path) {
                 if (w != null) {
                     //System.out.print("(" + w.from().getValue() + "," + w.to().getValue() + ")");
@@ -154,9 +153,11 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
             }
 
             //System.out.println("Output:\n" + graph);
+            System.out.println("bottleneck:" + bottleneck);
             augmentFlow += bottleneck;
         } while (v != sk);
 
+        System.out.println("augmentFlow:" + augmentFlow);
         return augmentFlow;
     }
 
@@ -164,9 +165,9 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
      *
      */
     public void execute() {
-        FlowNetworkGraph<Edge, Node> origin = new Cloner().deepClone(graph);
+//        FlowNetworkGraph<Edge, Node> origin = new Cloner().deepClone(graph);
         this.networkDinic();
-        graph = origin;
+        //graph = origin;
     }
 
     /**
@@ -184,10 +185,6 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
 
         public BFSDinicFlowPath(Graph<Edge, Node> graph, Node source) {
             super(graph, source);
-        }
-
-        public BFSDinicFlowPath(Graph<Edge, Node> graph, Node source, IterativeView<Edge, Node> iterative) {
-            super(graph, source, iterative);
         }
 
         protected boolean isMarked(Edge edge, Node to) {
