@@ -49,7 +49,7 @@ public class EdmondsKarpTest extends TestCase {
         super.setUp();
     }
 
-    public void testAlgorithmEdmondsKarpTest(){
+    public void testAlgorithmEdmondsKarpTest01(){
 
         FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow01();
 
@@ -60,5 +60,18 @@ public class EdmondsKarpTest extends TestCase {
         edmondsKarp.execute();
 
         assertEquals(edmondsKarp.getFlowMaximal(),4);
+    }
+
+    public void testAlgorithmEdmondsKarpTest03(){
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow03();
+
+        System.out.println(graph.toString());
+
+        EdmondsKarp<EdgeFlow,Vertex> edmondsKarp = new EdmondsKarp<EdgeFlow, Vertex>(graph);
+
+        edmondsKarp.execute();
+
+        assertEquals(edmondsKarp.getFlowMaximal(),27);
+
     }
 }

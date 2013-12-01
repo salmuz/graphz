@@ -43,7 +43,6 @@ import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Curve;
-import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
@@ -65,7 +64,7 @@ import java.util.List;
 public abstract class Graph<Edge extends IEdge, Node extends Vertex> implements Serializable{
 
     protected static int TYPE_EXECUTION = -1;
-    //structures to do the algorithms
+    //structures sink do the algorithms
     protected AdjacencyList<Edge,Node>[] adjacencys;
     private static final int MIN_CAPACITY = 10;
     private int sizeAdj;
@@ -329,7 +328,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> implements 
 
 //    private void changeVertexOfEdge(Edge edge, Vertex vertex, Point point, Vertex newVertex) {
 //        EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
-//        if (edge.from().equals(vertex)) {
+//        if (edge.source().equals(vertex)) {
 //            edge.setSource(newVertex);
 //            e0.getPointStart().setX(point.getX());
 //            e0.getPointStart().setY(point.getY());
@@ -348,16 +347,16 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> implements 
         vertex.getVertex().setColor(Color.ORANGE);
 
         if (removeEdge(edge)) {
-            List<Edge> edgeSources = getEdgesOfVertex(edge.from());
+            List<Edge> edgeSources = getEdgesOfVertex(edge.source());
             for (Edge item : edgeSources) {
-                changeVertexOfEdge(item, edge.from(), midPoint, vertex);
+                changeVertexOfEdge(item, edge.source(), midPoint, vertex);
             }
-            List<Edge> edgeTarget = getEdgesOfVertex(edge.to());
+            List<Edge> edgeTarget = getEdgesOfVertex(edge.sink());
             for (Edge item : edgeTarget) {
-                changeVertexOfEdge(item, edge.to(), midPoint, vertex);
+                changeVertexOfEdge(item, edge.sink(), midPoint, vertex);
             }
-            removeVertex((Node) edge.from());
-            removeVertex((Node) edge.to());
+            removeVertex((Node) edge.source());
+            removeVertex((Node) edge.sink());
             addVertex((Node) vertex);
         }
     }
@@ -400,14 +399,14 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> implements 
 
     private void createEdgeInRelationToSource(Node source, Node target, Point point, Edge edge) {
         EdgeShapeGraph e0 = (EdgeShapeGraph) edge.getShape();
-        if (edge.from().equals(source)) {
-            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, target, edge.to(), null);
+        if (edge.source().equals(source)) {
+            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, target, edge.sink(), null);
             newEdge.setShape(ShapePlaneFactory.createShape(clazzEdgeShape,
                     point.getX(), point.getY(), e0.getPointEnd().getX(), e0.getPointEnd().getY()));
             newEdge.createWeight();
             addEdge(newEdge);
         } else {
-            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, edge.from(), target, null);
+            Edge newEdge = (Edge) EdgeFactory.createEdge(clazzEdge, edge.source(), target, null);
             newEdge.setShape(ShapePlaneFactory.createShape(clazzEdgeShape,
                     e0.getPointStart().getX(), e0.getPointStart().getY(), point.getX(), point.getY()));
             newEdge.createWeight();
@@ -448,18 +447,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> implements 
      * @param target
      * @return
      */
-    public Edge getEdge(Node source, Node target) {
-        for (int i = 0; i < edges.size(); i++) {
-            Edge edge = edges.get(i);
-            Node v0 = (Node) edge.from();
-            Node v1 = (Node) edge.to();
-            if ((v0.equals(source) && v1.equals(target)) ||
-                    (v0.equals(target) && v1.equals(source))) {
-                return edge;
-            }
-        }
-        return null;
-    }
+    public abstract Edge getEdge(Node source, Node target);
 
     public void clear(){
         DefaultVertexName.nameVertex = -1;
@@ -505,7 +493,7 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> implements 
     }
 
     /**
-     * Grow the Array Adjacency to a new size
+     * Grow the Array Adjacency sink a new size
      */
     private void growArrayAdjacency(int newSize) {
         AdjacencyList<Edge,Node>[] newAdja = new AdjacencyList[newSize];

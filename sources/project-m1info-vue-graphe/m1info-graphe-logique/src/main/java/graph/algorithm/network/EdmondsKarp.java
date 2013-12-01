@@ -38,17 +38,19 @@
 
 package graph.algorithm.network;
 
+import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
+import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.path.AbstractPath;
-import graph.algorithm.path.BFSFlowNetworkPath;
+import graph.algorithm.path.BreadthFirstPath;
 import graph.algorithm.path.PathUtils;
 
 public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
 
     private FlowNetworkGraph<Edge, Node> graph;
-    private AbstractPath<Edge, Node> bfdPath;
+    private AbstractPath<Edge, Node> bfspath;
     private int flowMaximal;
 
     public EdmondsKarp(FlowNetworkGraph<Edge, Node> graph) {
@@ -62,23 +64,28 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
     }
 
     /**
-     *
+     * Research the flow max in a network
      */
-    private void networkEdmondsKarp() {
+    private void networkEdmondsKarp(FlowNetworkGraph<Edge,Node> graphNetwork) {
         int flowMax = 0;
-        while (hasPathFromSourceToSick()) {
+        ResidualGraph<Edge, Node> residualGraph = new ResidualGraph<Edge, Node>();
 
-            int sick = graph.to().getValue();
+        while (hasPathFromSourceToSick(graphNetwork)) {
+            int sick = graphNetwork.sink().getValue();
 
-            int newFlow = PathUtils.sizeofShortestPathArc(bfdPath.pathTo(sick));
+            int newFlow = PathUtils.sizeofShortestPathArc(bfspath.pathTo(sick));
 
+            //Version v2, I don't know if it's optimal
+            residualGraph.createResidualGraph(graphNetwork, bfspath.pathTo(sick), newFlow);
 
-            for (Edge edge : bfdPath.pathTo(sick)) {
-                edge.addFlowTo(edge.to(), newFlow);
-            }
+            updateFlowGraph(sick, newFlow);
+            // end version v2
 
-            System.out.println(newFlow);
-            System.out.println(graph.toString());
+            // Old version, it don't use residualGraph
+            // it use the method visit() for BFS and DFS
+            //for (Edge edge : bfspath.pathTo(sick)) {
+            //    edge.addFlowTo(edge.to(), newFlow);
+            //}
 
             flowMax += newFlow;
         }
@@ -87,19 +94,39 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
     }
 
     /**
-     * @return
+     *
+     * @param sick
+     * @param newFlow
      */
-    private boolean hasPathFromSourceToSick() {
-        bfdPath = new BFSFlowNetworkPath<Edge, Node>(graph, graph.from());
-        bfdPath.execute();
-        return bfdPath.hasPathTo(graph.to().getValue());
+    private void updateFlowGraph(int sick, int newFlow) {
+        for (Edge edge : bfspath.pathTo(sick)) {
+            Edge directed = graph.getEdge((Node) edge.from(), (Node) edge.to());
+            if(directed != null){
+                directed.addFlowTo(edge.to(), newFlow);
+            }else{
+                directed = graph.getEdge((Node) edge.to(), (Node) edge.from());
+                directed.addFlowTo(edge.to(), newFlow);
+            }
+        }
+    }
+
+    /**
+     * It exist a path between source to sink
+     *
+     * @return true if exist un path, else false
+     */
+    private boolean hasPathFromSourceToSick(FlowNetworkGraph<Edge,Node> graphNetwork) {
+        bfspath = new BFSFlowNetworkPath<Edge, Node>(graphNetwork, graphNetwork.source());
+        bfspath.execute();
+        return bfspath.hasPathTo(graphNetwork.sink().getValue());
     }
 
     /**
      *
      */
     public void execute() {
-        networkEdmondsKarp();
+        FlowNetworkGraph<Edge, Node> dgraph = new Cloner().deepClone(graph);
+        this.networkEdmondsKarp(dgraph);
     }
 
     /**
@@ -107,5 +134,22 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
      */
     public int getFlowMaximal() {
         return flowMaximal;
+    }
+
+    /**
+     *
+     * @param <Edge>
+     * @param <Node>
+     */
+    private class BFSFlowNetworkPath<Edge extends EdgeFlow,Node extends Vertex> extends BreadthFirstPath<Edge,Node> {
+
+        public BFSFlowNetworkPath(Graph<Edge, Node> graph, Node source) {
+            super(graph, source);
+        }
+
+        protected boolean isMarked(Edge edge, Node to){
+            return ((super.isMarked(edge,to)) && (edge.residualCapacityTo(to) > 0));
+        }
+
     }
 }

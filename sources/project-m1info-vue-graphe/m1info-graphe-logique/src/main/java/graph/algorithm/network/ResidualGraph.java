@@ -38,14 +38,12 @@
 
 package graph.algorithm.network;
 
-import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 public class ResidualGraph<Edge extends EdgeFlow, Node extends Vertex> {
-
 
     /**
      *
@@ -73,5 +71,6 @@ public class ResidualGraph<Edge extends EdgeFlow, Node extends Vertex> {
 
         return graph;
     }
+
 
 }

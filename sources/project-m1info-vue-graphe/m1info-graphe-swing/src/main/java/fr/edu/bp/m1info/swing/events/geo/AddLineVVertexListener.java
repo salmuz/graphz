@@ -83,7 +83,7 @@ public class AddLineVVertexListener extends MouseAdapter {
             draftLine.to().setY(y1);
 //            if (canvas.getModelGeometric().intersect(draftLine)) {
 //                canvas.getModelGeometric().addLineVertex(
-//                        new Line((Point) draftLine.getStart().clone(), (Point) draftLine.to().clone()),
+//                        new Line((Point) draftLine.getStart().clone(), (Point) draftLine.sink().clone()),
 //                        null, jspGraphe.getBounds(),null);
 //            }
             canvas.repaint();

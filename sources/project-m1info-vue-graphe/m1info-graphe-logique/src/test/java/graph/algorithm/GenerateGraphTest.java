@@ -80,6 +80,82 @@ public final class GenerateGraphTest {
         return graph;
     }
 
+    public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkFlow02() {
+        Vertex v0 = new Vertex();
+        Vertex v1 = new Vertex();
+        Vertex v2 = new Vertex();
+        Vertex v3 = new Vertex();
+        Vertex v4 = new Vertex();
+        Vertex v5 = new Vertex();
+        FlowNetworkGraph<EdgeFlow, Vertex> graph =
+                new FlowNetworkGraph<EdgeFlow, Vertex>(v0, v5, GraphProperties.CONSOLE) {
+                };
+
+        graph.addVertex(v0);
+        graph.addVertex(v1);
+        graph.addVertex(v2);
+        graph.addVertex(v3);
+        graph.addVertex(v4);
+        graph.addVertex(v5);
+
+        graph.addEdge(v0, v1, 10);
+        graph.addEdge(v0, v2, 5);
+        graph.addEdge(v0, v3, 15);
+        graph.addEdge(v1, v4, 10);
+        graph.addEdge(v2, v4, 10);
+        graph.addEdge(v3, v4, 10);
+        graph.addEdge(v1, v5, 5);
+        graph.addEdge(v3, v5, 5);
+        graph.addEdge(v4, v5, 20);
+
+        return graph;
+    }
+
+
+    public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkFlow03() {
+        Vertex v0 = new Vertex();
+        Vertex v1 = new Vertex();
+        Vertex v2 = new Vertex();
+        Vertex v3 = new Vertex();
+        Vertex v4 = new Vertex();
+        Vertex v5 = new Vertex();
+        Vertex v6 = new Vertex();
+        Vertex v7 = new Vertex();
+        Vertex v8 = new Vertex();
+        Vertex v9 = new Vertex();
+        FlowNetworkGraph<EdgeFlow, Vertex> graph =
+                new FlowNetworkGraph<EdgeFlow, Vertex>(v0, v9, GraphProperties.CONSOLE) {
+                };
+
+        graph.addVertex(v0);
+        graph.addVertex(v1);
+        graph.addVertex(v2);
+        graph.addVertex(v3);
+        graph.addVertex(v4);
+        graph.addVertex(v5);
+        graph.addVertex(v6);
+        graph.addVertex(v7);
+        graph.addVertex(v8);
+        graph.addVertex(v9);
+
+        graph.addEdge(v0, v1, 30);
+        graph.addEdge(v0, v2, 10);
+        graph.addEdge(v1, v3, 15);
+        graph.addEdge(v1, v4, 5);
+        graph.addEdge(v2, v4, 5);
+        graph.addEdge(v2, v5, 5);
+        graph.addEdge(v3, v6, 10);
+        graph.addEdge(v3, v7, 10);
+        graph.addEdge(v4, v7, 5);
+        graph.addEdge(v4, v8, 5);
+        graph.addEdge(v5, v8, 6);
+        graph.addEdge(v6, v9, 15);
+        graph.addEdge(v7, v9, 7);
+        graph.addEdge(v8, v9, 10);
+
+        return graph;
+    }
+
     public static Graph<Edge, Vertex> generateUnDirectedGraph() {
         Graph<Edge, Vertex> graph =
                 new UnDirectedGraph<Edge, Vertex>(GraphProperties.CONSOLE) {

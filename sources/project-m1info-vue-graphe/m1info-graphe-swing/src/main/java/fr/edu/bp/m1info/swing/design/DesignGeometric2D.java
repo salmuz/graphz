@@ -124,7 +124,7 @@ public class DesignGeometric2D implements Graphics {
                 to.x, to.y); // Segment end point
 
         AffineTransform afine = new AffineTransform();
-        afine.translate(x0, y0); // translate to work with coordinates (0,0)
+        afine.translate(x0, y0); // translate sink work with coordinates (0,0)
         afine.rotate(angle);  // then it must rotate
 
         // Draw the curves

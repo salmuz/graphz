@@ -39,15 +39,7 @@
 package fr.edu.bp.m1info.structure.graph;
 
 import fr.edu.bp.m1info.structure.common.GraphProperties;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDirected;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
-import fr.edu.bp.m1info.structure.graph.edge.Arc;
-import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
-import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 public class FlowNetworkGraph<Edge extends EdgeFlow, Node extends Vertex>
@@ -69,15 +61,17 @@ public class FlowNetworkGraph<Edge extends EdgeFlow, Node extends Vertex>
     public void addEdge(Node source, Node target, int capacity) {
         Edge edgeS = super.addEdge(source,target);
         edgeS.setCapacity(capacity);
-        int to = indexOfVertex(target);
+        // implementation with double link
+        // source : http://algs4.cs.princeton.edu/
+        //int to = indexOfVertex(target);
         //adjacencys[to].add(edgeS);
     }
 
-    public Node to() {  // source
+    public Node sink() {  // source
         return sink;
     }
 
-    public Node from() { // puit
+    public Node source() { // puit
         return source;
     }
 
@@ -89,7 +83,7 @@ public class FlowNetworkGraph<Edge extends EdgeFlow, Node extends Vertex>
     public String toString() {
         StringBuffer buff = new StringBuffer();
         for (Node v : getVertex()){
-            buff.append(v.getValue() + " -> ");
+            buff.append(v.getValue() + " = degre (In:"+v.indegree()+",Out"+v.outdegree()+") ->");
             for (Edge w : adjacencys(v))
                 buff.append("(("+w.from().getValue()+","+w.to().getValue()+"), "+w.capacity()+", "+w.flow()+")");
             buff.append("\n");

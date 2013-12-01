@@ -73,8 +73,8 @@ public class GrapheRepository extends Repository{
 //        }
 //
 //        for(AbstractEdge edge:graphe.getEdgeList()){
-//          soap.addEdgeByLabel(name,edge.from().getValue().toString(),
-//                  edge.to().getValue().toString(),
+//          soap.addEdgeByLabel(name,edge.source().getValue().toString(),
+//                  edge.sink().getValue().toString(),
 //                  Integer.valueOf(edge.getWeight().toString()),"salmuz","123456");
 //        }
 //

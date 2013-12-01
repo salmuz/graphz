@@ -36,47 +36,25 @@
  *
  */
 
-package graph.algorithm.path;
+package graph.algorithm.network;
 
-import fr.edu.bp.m1info.structure.graph.AdjacencyList;
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-import graph.algorithm.IterativeView;
 
-import java.util.Stack;
+public final class NetworkUtils {
 
-public class BFSFlowNetworkPath<Edge extends EdgeFlow,Node extends Vertex> extends BreadthFirstPath<Edge,Node> {
+    public static void showFlowInNetworkWithoutResidualGraph(Graph<EdgeFlow,Vertex> graph){
 
-    public BFSFlowNetworkPath(Graph<Edge, Node> graph, Node source) {
-        super(graph, source);
-    }
-
-    public BFSFlowNetworkPath(Graph<Edge, Node> graph, Node source, IterativeView<Edge, Node> iterative) {
-        super(graph, source, iterative);
-    }
-
-    protected boolean isMarked(Edge edge, Node to){
-        return (!marked[to.getValue()] && (edge.residualCapacityTo(to) > 0));
-    }
-
-    @Override
-    public Iterable<Edge> pathTo(int v) {
-        Stack<Edge> path = new Stack<Edge>();
-
-        if (!hasPathTo(v)) return path;
-        if (edgeTo[v] == null) return path;
-
-        path.push(edgeTo[v]);
-
-        for(Node x = nodeTo[v];
-            x != null && x.getValue() != source.getValue();
-            x = nodeTo[x.getValue()]){
-            path.push(edgeTo[x.getValue()]);
+        StringBuffer buff = new StringBuffer();
+        for(Vertex node : graph.getVertex()){
+            for(EdgeFlow w : graph.adjacencys(node.getValue())){
+                if(node.getValue() == w.from().getValue())
+                    buff.append("(Arc =(" + w.from().getValue() + "," + w.to().getValue() + "), Flow=" + w.flow() + ")\n");
+            }
         }
 
-        return path;
-    }
+        System.out.println(buff.toString());
 
+    }
 }

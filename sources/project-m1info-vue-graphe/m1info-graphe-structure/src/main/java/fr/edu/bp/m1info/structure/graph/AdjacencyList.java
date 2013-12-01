@@ -42,7 +42,6 @@ package fr.edu.bp.m1info.structure.graph;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -71,6 +70,8 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
 
     public void add(Edge item) {
         Neighbor old = first;
+        item.to().augmentInDegree();
+        item.from().augmentOutnDegree();
         this.first = new Neighbor(item, (Node) item.to());
         this.first.next = old;
         this.size++;
@@ -132,20 +133,25 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
             Edge edge = next.edge;
             if (edge.from().getValue() == value.getValue()
                     || edge.to().getValue() == value.getValue()) {
-                remove(prev, next);
+                Neighbor remove = remove(prev, next);
+                remove.edge.to().decreaseInDegree();
+                remove.edge.from().decreaseOutDegree();
+                remove = null;
                 break;
             }
         }
     }
 
-    private void remove(Neighbor prev, Neighbor next) {
+    private Neighbor remove(Neighbor prev, Neighbor next) {
+        Neighbor remove = null;
         if (prev == first) {
             first = prev.next;
-            prev = null;
+            remove = prev;
         } else {
             prev.next = next.next;
-            next = null;
+            remove = next;
         }
+        return remove;
     }
 
 

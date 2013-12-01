@@ -40,7 +40,6 @@ package graph.algorithm.path;
 
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
-import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 
@@ -55,6 +54,7 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
     protected boolean marked[];
     protected Edge[] edgeTo;
     protected Node[] nodeTo;
+    protected int[] dist;   // it's the distance or level
 
     public AbstractPath(Graph<Edge,Node> graph, Node source,IterativeView<Edge, Node> iterative){
         this.graph = graph;
@@ -62,10 +62,12 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
         marked = new boolean[graph.sizeVertex()];
         edgeTo = (Edge[]) Array.newInstance(graph.getClazzEdge(), graph.sizeVertex()); //(Edge[]) new IEdge[graph.sizeVertex()];
         nodeTo = (Node[]) new Vertex[graph.sizeVertex()];
+        dist = new int[graph.sizeVertex()];
         for(int i=0;i<graph.sizeVertex();i++){
             marked[i] = false;
             edgeTo[i] = null;
             nodeTo[i] = null;
+            dist[i] = -1;
         }
         this.iterativeView = iterative;
     }
@@ -119,6 +121,7 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
 
     public abstract void execute();
 
-
-
+    public int[] dist() {
+        return dist;
+    }
 }

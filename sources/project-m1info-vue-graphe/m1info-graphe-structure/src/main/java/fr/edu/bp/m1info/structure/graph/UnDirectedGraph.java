@@ -162,6 +162,19 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
         edges.remove(getEdge(source, target));
     }
 
+    @Override
+    public E getEdge(N source, N target) {
+        for (int i = 0; i < edges.size(); i++) {
+            E edge = edges.get(i);
+            N v0 = (N) edge.from();
+            N v1 = (N) edge.to();
+            if ((v0.getValue() == source.getValue() && v1.getValue()==target.getValue()) ||
+                    (v0.getValue() == target.getValue() && v1.getValue() == source.getValue())) {
+                return edge;
+            }
+        }
+        return null;
+    }
 }
 
 

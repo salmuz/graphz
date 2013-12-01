@@ -83,7 +83,7 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
      *      predecessor[v] := null
      *
      *    // Step 2: relax edges repeatedly
-     *    for i from 1 to size(vertices)-1:
+     *    for i source 1 sink size(vertices)-1:
      *        for each edge (u, v) with weight w in edges:
      *            if distance[u] + w < distance[v]:
      *                distance[v] := distance[u] + w
@@ -117,7 +117,7 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
                     int w = (Integer) neighbor.getEdge().weight();
                     if (distance[u.getValue()] + w < distance[v.getValue()]) {
                         distance[v.getValue()] = distance[u.getValue()] + w;
-                        //nodeTo[v.getValue()] = (Node) neighbor.getEdge().from();
+                        //nodeTo[v.getValue()] = (Node) neighbor.getEdge().source();
                         edgeTo[v.getValue()] = neighbor.getEdge();
                     }
                 }

@@ -36,52 +36,56 @@
  *
  */
 
-package graph.algorithm.path;
+package graph.algorithm.network;
 
-import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.edge.Arc;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
-import fr.edu.bp.m1info.structure.graph.edge.IEdge;
+import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.GenerateGraphTest;
 import junit.framework.TestCase;
 
-public class BreadthFirstPathTest extends TestCase {
+public class DinicFlowNetworkTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
     }
 
-    public void testBFSAlgorithm(){
-
-        Graph<Edge, Vertex> graph = GenerateGraphTest.generateUnDirectedGraph();
+    public void testDinicAlgorithm01(){
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow01();
 
         System.out.println(graph.toString());
 
-        AbstractPath<Arc, Vertex> paths = new BreadthFirstPath(graph, graph.getVertex().get(0));
-        paths.execute();
+        DinicFlowNetwork<EdgeFlow,Vertex> dinicFlowNetwork = new DinicFlowNetwork<EdgeFlow, Vertex>(graph);
 
-        for (int v = 0; v < graph.sizeVertex(); v++)
-            if (paths.hasPathTo(v)) {
-                System.out.println("belong sink:" + v);
-            }
+        dinicFlowNetwork.execute();
 
-        Vertex v4 = graph.getVertex().get(graph.sizeVertex()-2);
-
-        int path[] = {4,5,0};
-        int index = 0;
-        for (Vertex v : paths.pathTo(v4)) {
-            System.out.println(v);
-            assertEquals(v.getValue(),path[index++]);
-        }
-
-        int pathOUT[] = {5,0};
-        int pathIn[] = {4,5};
-        index = 0;
-        for (IEdge e : paths.pathTo(v4.getValue())) {
-            System.out.println(e);
-            assertEquals(e.from().getValue(),pathOUT[index]);
-            assertEquals(e.to().getValue(),pathIn[index]);
-            index++;
-        }
+        assertEquals(dinicFlowNetwork.getFlowMaximal(),4);
     }
+
+    public void testDinicAlgorithm03(){
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow03();
+
+        System.out.println(graph.toString());
+
+        DinicFlowNetwork<EdgeFlow,Vertex> dinicFlowNetwork = new DinicFlowNetwork<EdgeFlow, Vertex>(graph);
+
+        dinicFlowNetwork.execute();
+
+        assertEquals(dinicFlowNetwork.getFlowMaximal(),27);
+
+    }
+
+    public void testDinicAlgorithm02(){
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow02();
+
+        System.out.println(graph.toString());
+
+        DinicFlowNetwork<EdgeFlow,Vertex> dinicFlowNetwork = new DinicFlowNetwork<EdgeFlow, Vertex>(graph);
+
+        dinicFlowNetwork.execute();
+
+        assertEquals(dinicFlowNetwork.getFlowMaximal(),30);
+
+    }
+
+
 }

@@ -45,7 +45,6 @@ import fr.edu.bp.m1info.structure.geometric.graph.shape.EdgeShapeGraph;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;

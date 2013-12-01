@@ -63,7 +63,7 @@ public class DepthFirstPathTest extends TestCase {
 
         for (int v = 0; v<graph.sizeVertex();v++)
             if(paths.hasPathTo(v)){
-                System.out.println("belong to:"+v);
+                System.out.println("belong sink:"+v);
             }
 
         int path[] = {4,5,0};

@@ -38,25 +38,27 @@
 
 package graph.algorithm.network;
 
+import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
+import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.path.AbstractPath;
-import graph.algorithm.path.DFSFlowNetworkPath;
+import graph.algorithm.path.DepthFirstPath;
 import graph.algorithm.path.PathUtils;
 
 
-public class FordFulkerson<Edge extends EdgeFlow,Node extends Vertex> {
+public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
 
-    private FlowNetworkGraph<Edge,Node> graph;
-    private AbstractPath<Edge,Node> dfsPath;
+    private FlowNetworkGraph<Edge, Node> graph;
+    private AbstractPath<Edge, Node> dfsPath;
     private int flowMaximal;
 
-    public FordFulkerson(FlowNetworkGraph<Edge,Node> graph){
+    public FordFulkerson(FlowNetworkGraph<Edge, Node> graph) {
         this.graph = graph;
         this.flowMaximal = 0;
-        for(Node node : graph.getVertex()){
-            for(Edge edge:graph.adjacencys(node)){
+        for (Node node : graph.getVertex()) {
+            for (Edge edge : graph.adjacencys(node)) {
                 edge.setFlow(0);
             }
         }
@@ -65,62 +67,97 @@ public class FordFulkerson<Edge extends EdgeFlow,Node extends Vertex> {
     /**
      * source 01: http://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
      * Algorithm Ford–Fulkerson
-     *  Inputs : Graph G with flow capacity c, a source node s, and a sink node t
-     *  Output :  A flow f from s to t which is a maximum
-     *      f(u,v) <- 0 for all edges (u,v)
-     *      While there is a path p from s to t in Gf, such that cf(u,v) > 0 for all edges (u,v) belong to p:
-     *          Find cf(p) = min{cf(u,v) : (u,v) belong to p}
-     *          For each edge (u,v) belong to p
-     *              f(u,v) <- f(u,v) + cf(p) (Send flow along the path)
-     *              f(v,u) <- f(v,u) - cf(p) (The flow might be "returned" later)
-     *
+     * Inputs : Graph G with flow capacity c, a source node s, and a sink node t
+     * Output :  A flow f source s sink t which is a maximum
+     * f(u,v) <- 0 for all edges (u,v)
+     * While there is a path p source s sink t in Gf, such that cf(u,v) > 0 for all edges (u,v) belong sink p:
+     * Find cf(p) = min{cf(u,v) : (u,v) belong sink p}
+     * For each edge (u,v) belong sink p
+     * f(u,v) <- f(u,v) + cf(p) (Send flow along the path)
+     * f(v,u) <- f(v,u) - cf(p) (The flow might be "returned" later)
+     * <p/>
      * source 02: http://algs4.cs.princeton.edu/40graphs/
-     *
      */
-    private void networkFordFulkerson(){
-       int flowMax = 0;
-       while(hasPathFromSourceToSick()){
+    private void networkFordFulkerson(FlowNetworkGraph<Edge, Node> graphNetwork) {
+        int flowMax = 0;
+        ResidualGraph<Edge, Node> residualGraph = new ResidualGraph<Edge, Node>();
+        while (hasPathFromSourceToSick(graphNetwork)) {
 
-           int sick = graph.to().getValue();
-           int newFlow = PathUtils.sizeofShortestPathArc(dfsPath.pathTo(sick));
+            int sick = graphNetwork.sink().getValue();
+            int newFlow = PathUtils.sizeofShortestPathArc(dfsPath.pathTo(sick));
 
-           for(Edge edge: dfsPath.pathTo(sick)){
-              edge.addFlowTo(edge.to(),newFlow);
-           }
+            //Version v2, I don't know if it's optimal
+            residualGraph.createResidualGraph(graphNetwork, dfsPath.pathTo(sick), newFlow);
 
-           System.out.println(newFlow);
-           System.out.println(graph.toString());
+            updateFlowGraph(sick,newFlow);
+            // end version v2
 
-           flowMax += newFlow;
-       }
+            // Old version, it don't use residualGraph
+            // it use the method visit() for BFS and DFS
+            //for (Edge edge : bfspath.pathTo(sick)) {
+            //    edge.addFlowTo(edge.to(), newFlow);
+            //}
+
+            flowMax += newFlow;
+        }
 
         flowMaximal = flowMax;
     }
 
     /**
-     *
      * @return
      */
-    private boolean hasPathFromSourceToSick() {
-        dfsPath =  new DFSFlowNetworkPath<Edge, Node>(graph, graph.from());
+    private boolean hasPathFromSourceToSick(FlowNetworkGraph<Edge, Node> graphNetwork) {
+        dfsPath = new DFSFlowNetworkPath<Edge, Node>(graphNetwork, graphNetwork.source());
         dfsPath.execute();
-        return dfsPath.hasPathTo(graph.to().getValue());
+        return dfsPath.hasPathTo(graphNetwork.sink().getValue());
     }
 
+
+    /**
+     *
+     * @param sick
+     * @param newFlow
+     */
+    private void updateFlowGraph(int sick, int newFlow) {
+        for (Edge edge : dfsPath.pathTo(sick)) {
+            Edge directd = graph.getEdge((Node) edge.from(), (Node) edge.to());
+            if(directd != null){
+                directd.addFlowTo(edge.to(), newFlow);
+            }else{
+                directd = graph.getEdge((Node) edge.to(), (Node) edge.from());
+                directd.addFlowTo(edge.to(), newFlow);
+            }
+        }
+    }
 
     /**
      *
      */
-    public void execute(){
-        this.networkFordFulkerson();
+    public void execute() {
+        FlowNetworkGraph<Edge, Node> duplicate = new Cloner().deepClone(graph);
+        this.networkFordFulkerson(duplicate);
     }
 
     /**
-     *
      * @return
      */
     public int getFlowMaximal() {
         return flowMaximal;
+    }
+
+
+    private class DFSFlowNetworkPath<Edge extends EdgeFlow, Node extends Vertex> extends DepthFirstPath<Edge, Node> {
+
+        public DFSFlowNetworkPath(Graph<Edge, Node> graph, Node source) {
+            super(graph, source);
+        }
+
+        @Override
+        protected boolean isMarked(Edge edge, Node to) {
+            return ((super.isMarked(edge, to)) && (edge.residualCapacityTo(to) > 0));
+        }
+
     }
 
 }

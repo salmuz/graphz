@@ -47,9 +47,13 @@ public class Vertex {
 
     private AbstractVertexShape vertex;
     private int value;
+    private int outdegree;
+    private int indegree;
 
     public Vertex() {
         this.value = DefaultVertexName.nextNode();
+        this.outdegree = 0;
+        this.indegree = 0;
     }
 
     public Vertex(int value) {
@@ -85,6 +89,30 @@ public class Vertex {
 
     public void draw(Graphics graphics) {
         vertex.draw(graphics);
+    }
+
+    public int indegree() {
+        return indegree;
+    }
+
+    public void augmentInDegree() {
+        this.indegree++;
+    }
+
+    public void decreaseInDegree() {
+        this.indegree--;
+    }
+
+    public int outdegree() {
+        return outdegree;
+    }
+
+    public void augmentOutnDegree() {
+        this.outdegree++;
+    }
+
+    public void decreaseOutDegree() {
+        this.outdegree--;
     }
 
     @Override

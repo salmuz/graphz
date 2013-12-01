@@ -50,7 +50,7 @@ public class FordFulkersonTest extends TestCase {
         super.setUp();
     }
 
-    public void testAlgorithmFordFulkerson(){
+    public void testAlgorithmFordFulkerson01(){
 
         FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow01();
 
@@ -61,5 +61,18 @@ public class FordFulkersonTest extends TestCase {
         fordFulkerson.execute();
 
         assertEquals(fordFulkerson.getFlowMaximal(),4);
+    }
+
+    public void testAlgorithmFordFulkerson02(){
+
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow02();
+
+        System.out.println(graph.toString());
+
+        FordFulkerson<EdgeFlow,Vertex> fordFulkerson = new FordFulkerson<EdgeFlow, Vertex>(graph);
+
+        fordFulkerson.execute();
+
+        assertEquals(fordFulkerson.getFlowMaximal(),30);
     }
 }

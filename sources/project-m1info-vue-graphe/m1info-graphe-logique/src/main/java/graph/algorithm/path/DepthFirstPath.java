@@ -38,13 +38,9 @@
 
 package graph.algorithm.path;
 
-import fr.edu.bp.m1info.structure.common.GraphProperties;
 import fr.edu.bp.m1info.structure.graph.AdjacencyList;
-import fr.edu.bp.m1info.structure.graph.DirectedGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
-import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 
@@ -69,7 +65,7 @@ public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends Abs
         for (AdjacencyList.Neighbor w : graph.adjacencysNeighbor(v.getValue())) {
             Node vs = (Node) w.getNode();
             Edge edge = (Edge) w.getEdge();
-            if (condition(edge, vs)) {
+            if (isMarked(edge, vs)) {
                 edgeTo[vs.getValue()] = edge;
                 nodeTo[vs.getValue()] = (Node) w.getEdge().from();
                 iterativeView.updateView((Node) w.getNode(), (Edge) w.getEdge());
@@ -78,7 +74,7 @@ public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends Abs
         }
     }
 
-    protected boolean condition(Edge edge, Node to) {
+    protected boolean isMarked(Edge edge, Node to) {
         return !marked[to.getValue()];
     }
 

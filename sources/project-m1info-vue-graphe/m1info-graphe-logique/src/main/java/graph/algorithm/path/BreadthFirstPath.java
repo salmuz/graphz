@@ -74,16 +74,18 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
         queue.offer(source.getValue());
         marked[source.getValue()] = true;
         nodeTo[source.getValue()] = source;
+        dist[source.getValue()] = 0;
         while (!queue.isEmpty()) {
             int v = queue.poll();
             for (AdjacencyList.Neighbor w : graph.adjacencysNeighbor(v)) {
-                Node node = visit(w,v);
+                Node node = (Node) w.getNode();
                 Edge edge = (Edge) w.getEdge();
                 if (isMarked(edge, node)) {
                     queue.offer(node.getValue());
                     marked[node.getValue()] = true;
                     edgeTo[node.getValue()] = edge;
-                    nodeTo[node.getValue()] = visit(w, node.getValue());
+                    nodeTo[node.getValue()] = (Node) w.getEdge().from();
+                    dist[node.getValue()] = dist[v] + 1;
                     iterativeView.updateView(node,edge);
                 }
             }
@@ -92,12 +94,16 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
 
     /**
      * The method es added because some algorithms the target or the source
-     * are equals to the node adjacent. If they are equals, a loop is generate
+     * are equals sink the node adjacent. If they are equals, a loop is generate
      * at the time of traverse a graph.
+     *
+     * Obs:
+     * It is used when the graph are used references to the same Edge object
      * @param w
      * @param from
      * @return
      */
+    @Deprecated
     protected Node visit(AdjacencyList.Neighbor w, int from) {
         if(from == w.getEdge().to().getValue()){
             return (Node) w.getEdge().from();
@@ -113,7 +119,7 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
      * @return
      */
     protected boolean isMarked(Edge edge, Node to){
-        return !marked[to.getValue()];
+        return !marked[to.getValue()] && dist[to.getValue()]== -1;
     }
 
 }
