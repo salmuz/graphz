@@ -257,4 +257,38 @@ public final class GenerateGraphTest {
         return graph;
 
     }
+
+    public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkFlow05() {
+        Vertex v0 = new Vertex();
+        Vertex v1 = new Vertex();
+        Vertex v2 = new Vertex();
+        Vertex v3 = new Vertex();
+        Vertex v4 = new Vertex();
+        Vertex v5 = new Vertex();
+        FlowNetworkGraph<EdgeFlow, Vertex> graph =
+                new FlowNetworkGraph<EdgeFlow, Vertex>(v0, v5, GraphProperties.CONSOLE) {
+                };
+
+        graph.addVertex(v0);
+        graph.addVertex(v1);
+        graph.addVertex(v2);
+        graph.addVertex(v3);
+        graph.addVertex(v4);
+        graph.addVertex(v5);
+
+        graph.addEdge(v0, v1, 10);
+        graph.addEdge(v0, v2, 10);
+        graph.addEdge(v1, v2, 2);
+        graph.addEdge(v1, v3, 4);
+        graph.addEdge(v1, v4, 8);
+        graph.addEdge(v2, v4, 9);
+        graph.addEdge(v4, v3, 6);
+        graph.addEdge(v3, v5, 10);
+        graph.addEdge(v4, v5, 10);
+
+        return graph;
+    }
+
+
+
 }

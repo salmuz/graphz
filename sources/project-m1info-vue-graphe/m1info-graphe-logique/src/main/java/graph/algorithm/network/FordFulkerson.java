@@ -98,7 +98,7 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
             //    edge.addFlowTo(edge.to(), newFlow);
             //}
 
-            System.out.println("newFlow:"+newFlow);
+            //System.out.println("newFlow:"+newFlow);
             flowMax += newFlow;
         }
 

@@ -85,4 +85,16 @@ public class EdmondsKarpTest extends TestCase {
         assertEquals(edmondsKarp.getFlowMaximal(),2287);
 
     }
+
+    public void testAlgorithmEdmondsKarpTest05(){
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow05();
+
+        EdmondsKarp<EdgeFlow,Vertex> edmondsKarp = new EdmondsKarp<EdgeFlow, Vertex>(graph);
+
+        edmondsKarp.execute();
+
+        assertEquals(edmondsKarp.getFlowMaximal(),19);
+
+    }
+
 }

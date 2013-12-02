@@ -144,7 +144,7 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
 
     private Neighbor remove(Neighbor prev, Neighbor next) {
         Neighbor remove = null;
-        if (prev == first) {
+        if (next == first) {
             first = prev.next;
             remove = prev;
         } else {

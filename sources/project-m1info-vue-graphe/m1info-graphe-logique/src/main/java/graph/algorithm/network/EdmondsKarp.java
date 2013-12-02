@@ -86,6 +86,7 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
             //for (Edge edge : bfspath.pathTo(sick)) {
             //    edge.addFlowTo(edge.to(), newFlow);
             //}
+            System.out.println("newFlow:"+newFlow);
 
             flowMax += newFlow;
         }
