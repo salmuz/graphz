@@ -118,9 +118,9 @@ public class AdjacencyList<Edge extends IEdge, Node extends Vertex> implements I
         }
     }
 
-    public Edge containsEdge(int from) {
+    public Edge containsEdge(int to) {
         for (Edge edge : this) {
-            if (edge.from().getValue() == from)
+            if (edge.to().getValue() == to)
                 return edge;
         }
         return null;

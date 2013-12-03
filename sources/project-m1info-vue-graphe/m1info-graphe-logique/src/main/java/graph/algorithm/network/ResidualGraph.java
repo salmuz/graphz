@@ -46,10 +46,9 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 public class ResidualGraph<Edge extends EdgeFlow, Node extends Vertex> {
 
     /**
-     *
      * Using:
-     *      ResidualGraph<Edge,Node> residual = new ResidualGraph<Edge, Node>();
-     *      residual.createResidualGraph(graph,path.pathTo(sick),newFlow);
+     * ResidualGraph<Edge,Node> residual = new ResidualGraph<Edge, Node>();
+     * residual.createResidualGraph(graph,path.pathTo(sick),newFlow);
      *
      * @param graph
      * @param path
@@ -64,7 +63,7 @@ public class ResidualGraph<Edge extends EdgeFlow, Node extends Vertex> {
             //il faut ameliore le recherche d'un arête
             Edge toFrom = graph.containsEdge((Node) edge.to(), (Node) edge.from());
             if (toFrom != null) {
-                toFrom.setCapacity(toFrom.capacity() - newflow);
+                toFrom.setCapacity(toFrom.capacity() - toFrom.flow() + newflow);
             } else {
                 graph.addEdge((Node) edge.to(), (Node) edge.from(), newflow);
             }
@@ -74,4 +73,21 @@ public class ResidualGraph<Edge extends EdgeFlow, Node extends Vertex> {
     }
 
 
+    public void createResidualGraph(FlowNetworkGraph<Edge, Node> graph) {
+        for (Node node : graph.getVertex()) {
+            for (Edge edge : graph.adjacencys(node.getValue())) {
+                if (edge.flow() > 0) {
+                    edge.setCapacity(edge.capacity() - edge.flow());
+                    Edge toFrom = graph.containsEdge((Node) edge.to(), (Node) edge.from());
+                    if (toFrom != null) {
+                        toFrom.setCapacity(toFrom.capacity() - toFrom.flow() + edge.flow());
+                        toFrom.setFlow(0);
+                    } else {
+                        graph.addEdge((Node) edge.to(), (Node) edge.from(), edge.flow());
+                    }
+                    edge.setFlow(0);
+                }
+            }
+        }
+    }
 }

@@ -78,15 +78,21 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
             }
         }
 
+        ResidualGraph<Edge,Node> residualGraph = new ResidualGraph<Edge, Node>();
+
         // Construct Gl source Gf of G. If  dist(t) = infty, stop and output f.
         while (hasShortestAugmentingPath()) {
             //Find a blocking flow f' in Gl.
             flowMaximal += computeBlokingFlow(graph.source(), graph.sink());
+            // genere graph residuel
+            residualGraph.createResidualGraph(graph);
+
         }
 
     }
 
     /**
+     * La distance en nombre de d'arcs de s à p dans G
      * @return
      */
     private boolean hasShortestAugmentingPath() {
@@ -97,64 +103,73 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
 
     /**
      * Il prend en compte l'ensemble des plus courts chemins en nombres d'arcs
+     * À chaque phase l'algorithme construit un graphe en couches avec une recherche
+     * en profondeur d'abord sur le graphe résiduel. Le flot maximum dans le graphe en
+     * couche peut être calcule en temps O(VE), et le nombre maximum de phase est de V-1.
      */
     private int computeBlokingFlow(Node source, Node sink) {
-        int v, bottleneck;
+        int bottleneck;
         int sk = sink.getValue();
         int nbVertex = graph.sizeVertex();
         Edge path[] = (Edge[]) Array.newInstance(graph.getClazzEdge(), nbVertex);
         int level[] = bfsPath.dist();
         int maxLevel = level[sk];
         int augmentFlow = 0;
-        do {
+        while (true) {
 
-            System.out.println("level:\n" + level[sk]);
-            for (Edge w = path[source.getValue()]; w != null ; w = path[w.to().getValue()]) path[w.from().getValue()] = null;
+            System.out.println("level:" + maxLevel);
+            if(maxLevel == 8){
+                System.out.println("debug:");
+            }
+
+            //System.out.println("Input:\n" + graph);
+            for (Edge w = path[source.getValue()]; w != null; w = path[w.to().getValue()])
+                path[w.from().getValue()] = null;
 
             bottleneck = Integer.MAX_VALUE;
-            v = source.getValue();
-            bottleneck = backtrackGetNextNode(sk, level, v, maxLevel, bottleneck, path, 0);
+            bottleneck = backtrackGetNextNode(sk, level, source.getValue(), maxLevel, bottleneck, path, 0);
 
-            if (bottleneck != FAILURE_PATH) v = sk;
-            else break;
+            if (bottleneck == FAILURE_PATH) break;
 
-            //System.out.println(bottleneck + "  PATH");
+            System.out.println("bot:"+bottleneck + "  PATH");
             //Augment flow f by f' and go back sink step 2.
-            //Il faut ameliore, il ne doit que faire le path
-            for (Edge w = path[source.getValue()]; w != null ; w = path[w.to().getValue()]){
+            for (Edge w = path[source.getValue()]; w != null; w = path[w.to().getValue()]) {
                 System.out.print("(" + w.from().getValue() + "," + w.to().getValue() + ")");
                 w.addFlowTo(w.to(), bottleneck);
-                if (w.residualCapacityTo(w.to()) == 0) {
-                    graph.removeEdge((Node) w.from(), (Node) w.to());
-                }
+//                if (w.residualCapacityTo(w.to()) == 0) {
+//                    w.setFlow(-1*w.flow());
+//                   // System.out.print("remove(" + w.from().getValue() + "," + w.to().getValue() + ")");
+//                   // graph.removeEdge((Node) w.from(), (Node) w.to());
+//                }
             }
             System.out.println();
 
-            for (int i = 0; i <= maxLevel; i++) {
-                for (int j = 0; j < level.length; j++) {
-                    if (level[j] == i && j != source.getValue() && j != sk) {
-                        Node u = graph.getVertex().get(j);
-                        if (u.indegree() == 0) {
-                            for (Edge e : graph.adjacencys(u.getValue())) {
-                                graph.removeEdge((Node) e.from(), (Node) e.to());
-                            }
-                        }
-                    }
-                }
-            }
+//            for (int i = 0; i <= maxLevel; i++) {
+//                for (int j = 0; j < level.length; j++) {
+//                    if (level[j] == i && j != source.getValue() && j != sk) {
+//                        Node u = graph.getVertex().get(j);
+//                        if (u.indegree() == 0) {
+//                            for (Edge e : graph.adjacencys(u.getValue())) {
+//                                graph.removeEdge((Node) e.from(), (Node) e.to());
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 
-            // System.out.println("Output:\n" + graph);
-            System.out.println("bottleneck:" + bottleneck);
+
             augmentFlow += bottleneck;
-        } while (v != sk);
+        }
 
         System.out.println("augmentFlow:" + augmentFlow);
+        System.out.println("========================================");
         return augmentFlow;
     }
 
 
     /**
-     * failure
+     * Tant qu'il existe l'ensemble de plus courts chemain n'est pas vide,
+     * On utilise l'algorithm de backtraking
      */
     public int backtrackGetNextNode(int sink, int[] level, int v, int maxLevel, int bottleneck, Edge[] path, int nextLevel) {
 
@@ -164,7 +179,7 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
         int to = -1;
         for (Edge e : graph.adjacencys(v)) {
             to = e.to().getValue();
-            if (!((level[v] + 1 != level[to]) || (e.to().outdegree() == 0 && to != sink))) {
+            if ((level[v] + 1 == level[to]) && (e.residualCapacityTo(e.to())!=0)) {
                 int flow = backtrackGetNextNode(sink, level, to, maxLevel, Math.min(bottleneck, e.residualCapacityTo(e.to())),
                         path, nextLevel + 1);
                 if (flow != FAILURE_PATH) {
@@ -185,6 +200,7 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
         //System.out.println("Output:\n" + graph);
 //        FlowNetworkGraph<Edge, Node> origin = new Cloner().deepClone(graph);
         this.networkDinic();
+        //System.out.println("Output:\n" + graph);
         //graph = origin;
     }
 

@@ -144,8 +144,8 @@ public final class GenerateGraphTest {
         graph.addVertex(v8);
         graph.addVertex(v9);
 
-        graph.addEdge(v0, v1, 30);
         graph.addEdge(v0, v2, 10);
+        graph.addEdge(v0, v1, 30);
         graph.addEdge(v1, v3, 15);
         graph.addEdge(v1, v4, 5);
         graph.addEdge(v2, v4, 5);
