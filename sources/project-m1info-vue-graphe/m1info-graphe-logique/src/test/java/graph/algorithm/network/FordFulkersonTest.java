@@ -86,7 +86,7 @@ public class FordFulkersonTest extends TestCase {
 
         fordFulkerson.execute();
 
-        assertEquals(fordFulkerson.getFlowMaximal(),2287);
+        assertEquals(fordFulkerson.getFlowMaximal(),4399);
     }
 
 }

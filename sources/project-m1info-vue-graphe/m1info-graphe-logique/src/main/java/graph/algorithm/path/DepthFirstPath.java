@@ -44,6 +44,8 @@ import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 
+import java.util.Stack;
+
 public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends AbstractPath<Edge, Node> {
 
     public DepthFirstPath(Graph<Edge, Node> graph, Node source) {
@@ -60,7 +62,41 @@ public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends Abs
         dephtFirstSearch(source);
     }
 
+    /**
+     * DFS-Iterative
+     *
+     * @param v
+     */
     private void dephtFirstSearch(Node v) {
+        Stack<Node> stack = new Stack<Node>();
+        stack.push(v);
+        marked[v.getValue()] = true;
+        while (!stack.isEmpty()) {
+            Node u = stack.pop();
+            iterativeView.updateView(u, null);
+            for (AdjacencyList.Neighbor w : graph.adjacencysNeighbor(u.getValue())) {
+                Node vs = (Node) w.getNode();
+                Edge edge = (Edge) w.getEdge();
+                if (isMarked(edge, vs)) {
+                    stack.push(vs);
+                    marked[vs.getValue()] = true;
+                    edgeTo[vs.getValue()] = edge;
+                    nodeTo[vs.getValue()] = (Node) edge.from();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * DFS-Recursive:
+     * The algorithm DFS recursive don't work with 500.000 nodes
+     * because it catch a StackOverflowException at graph deeper
+     * than a couple of thousand nodes.
+     *
+     * @param v node to look for
+     */
+    private void dephtFirstSearchR(Node v) {
         marked[v.getValue()] = true;
         for (AdjacencyList.Neighbor w : graph.adjacencysNeighbor(v.getValue())) {
             Node vs = (Node) w.getNode();
@@ -69,7 +105,7 @@ public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends Abs
                 edgeTo[vs.getValue()] = edge;
                 nodeTo[vs.getValue()] = (Node) w.getEdge().from();
                 iterativeView.updateView((Node) w.getNode(), (Edge) w.getEdge());
-                dephtFirstSearch(vs);
+                dephtFirstSearchR(vs);
             }
         }
     }

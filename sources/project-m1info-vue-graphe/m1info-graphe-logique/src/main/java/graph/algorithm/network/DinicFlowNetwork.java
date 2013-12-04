@@ -117,10 +117,7 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
         int augmentFlow = 0;
         while (true) {
 
-            System.out.println("level:" + maxLevel);
-            if(maxLevel == 8){
-                System.out.println("debug:");
-            }
+//            System.out.println("level:" + maxLevel);
 
             //System.out.println("Input:\n" + graph);
             for (Edge w = path[source.getValue()]; w != null; w = path[w.to().getValue()])
@@ -131,10 +128,10 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
 
             if (bottleneck == FAILURE_PATH) break;
 
-            System.out.println("bot:"+bottleneck + "  PATH");
+//            System.out.println("bot:"+bottleneck + "  PATH");
             //Augment flow f by f' and go back sink step 2.
             for (Edge w = path[source.getValue()]; w != null; w = path[w.to().getValue()]) {
-                System.out.print("(" + w.from().getValue() + "," + w.to().getValue() + ")");
+//                System.out.print("(" + w.from().getValue() + "," + w.to().getValue() + ")");
                 w.addFlowTo(w.to(), bottleneck);
 //                if (w.residualCapacityTo(w.to()) == 0) {
 //                    w.setFlow(-1*w.flow());
@@ -142,7 +139,7 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
 //                   // graph.removeEdge((Node) w.from(), (Node) w.to());
 //                }
             }
-            System.out.println();
+//            System.out.println();
 
 //            for (int i = 0; i <= maxLevel; i++) {
 //                for (int j = 0; j < level.length; j++) {
@@ -161,8 +158,8 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
             augmentFlow += bottleneck;
         }
 
-        System.out.println("augmentFlow:" + augmentFlow);
-        System.out.println("========================================");
+//        System.out.println("augmentFlow:" + augmentFlow);
+//        System.out.println("========================================");
         return augmentFlow;
     }
 

@@ -73,6 +73,8 @@ public class DepthFirstPathTest extends TestCase {
             assertEquals(v.getValue(),path[index++]);
         }
 
+        assertNotSame(index,0);
+
         int pathOUT[] = {5,0};
         int pathIn[] = {4,5};
         index = 0;
@@ -82,5 +84,6 @@ public class DepthFirstPathTest extends TestCase {
             assertEquals(e.to().getValue(),pathIn[index]);
             index++;
         }
+        assertNotSame(index,0);
     }
 }

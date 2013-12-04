@@ -220,7 +220,7 @@ public final class GenerateGraphTest {
 
     public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkFlow04() {
         FlowNetworkGraph<EdgeFlow, Vertex> graph =  null;
-        File file = new File("/Users/user/Documents/git/Graphes_Multi_Plateformes/data/flowNetwork/flowNetwok_500_1200_01122013_0425.txt");
+        File file = new File("/Users/user/Dropbox/MasterM1_DECOL/AlgorithmiqueComplexiteCalculabilite/TPs/refactory/data/flowNetwork_50000_250000_1386085102702.txt");
         try {
             Scanner in = new Scanner(file);
             int nbV = in.nextInt();

@@ -82,7 +82,7 @@ public class EdmondsKarpTest extends TestCase {
 
         edmondsKarp.execute();
 
-        assertEquals(edmondsKarp.getFlowMaximal(),2287);
+        assertEquals(edmondsKarp.getFlowMaximal(),4399);
 
     }
 
