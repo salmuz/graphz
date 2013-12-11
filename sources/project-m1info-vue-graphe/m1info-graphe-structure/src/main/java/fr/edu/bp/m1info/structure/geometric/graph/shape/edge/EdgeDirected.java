@@ -1,11 +1,7 @@
 package fr.edu.bp.m1info.structure.geometric.graph.shape.edge;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.Arrow;
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.plane.LineArrow;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 
 public class EdgeDirected extends EdgeDecorator{
@@ -13,7 +9,7 @@ public class EdgeDirected extends EdgeDecorator{
     public EdgeDirected(AbstractEdgeShape edgeShape) {
         super(edgeShape);
         AbstractEdgeShape parent = (AbstractEdgeShape) edgeShape.parentComponent();
-        this.shape = ShapePlaneFactory.createShape(LineArrow.class, parent.from(), parent.to());
+        this.shape = ShapePlaneFactory.createShape(parent.shape.getClass(), parent.from(), parent.to());
     }
 
     public void draw(Graphics graphics) {

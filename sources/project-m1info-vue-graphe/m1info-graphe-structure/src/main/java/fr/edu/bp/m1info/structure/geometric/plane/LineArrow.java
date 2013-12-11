@@ -41,6 +41,7 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Arrow;
+import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.Point;
 
 import java.awt.*;
@@ -52,6 +53,7 @@ import java.awt.*;
 public class LineArrow extends Line implements Arrow {
 
     private PLACE_OF_ARROW placeOfArrow;
+    private double margin;
     private Color cfecha;
 
     /**
@@ -62,6 +64,7 @@ public class LineArrow extends Line implements Arrow {
      */
     public LineArrow(Point start, Point end, PLACE_OF_ARROW placeOfArrow) {
         super(start, end);
+        this.margin = ConstantsGeometric.RADIO;
         this.placeOfArrow = placeOfArrow;
         this.cfecha = Color.GRAY;
     }
@@ -103,13 +106,29 @@ public class LineArrow extends Line implements Arrow {
     }
 
     /**
+     *
+     * @return
+     */
+    public double getMargin() {
+        return margin;
+    }
+
+    /**
+     *
+     * @param margin
+     */
+    public void setMargin(double margin) {
+        this.margin = margin;
+    }
+
+    /**
      * cette methode permettent de dessiner le ligne et le fleche
      *
      * @parameter graphics qui permet de tracer grace a cet objet
      */
     @Override
     public void draw(Graphics graphics) {
-        super.draw(graphics);  // designer le ligne                           ss
+        super.draw(graphics);  // designer le ligne
         graphics.draw(this); // ajouter seulement fleche
     }
 }

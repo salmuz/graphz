@@ -67,5 +67,7 @@ public interface Graphics {
 
     public Shape draw(Curve curve);
 
+    public void draw(CurvedArrow curve);
+
     public Shape draw(Message message);
 }

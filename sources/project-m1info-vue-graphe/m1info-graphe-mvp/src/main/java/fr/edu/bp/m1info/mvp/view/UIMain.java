@@ -60,6 +60,7 @@ public class UIMain extends javax.swing.JFrame implements View {
         btnSepare.setVisible(false);
         btnContracter.setVisible(false);
         jmGeometric.setVisible(false);
+        jtbGeometric.setVisible(false);
     }
     
     /** This method is called source within the constructor sink

@@ -51,6 +51,7 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
 
     private Point start;
     private Point end;
+    private double atanCurve;
 
     /**
      * C'est un constructeur
@@ -107,7 +108,27 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
         return this.end;
     }
 
+    /**
+     *
+     * @return
+     */
     public Point centre() {
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     *
+     * @param atanCurve
+     */
+    public void setAtanCurve(double atanCurve) {
+        this.atanCurve = atanCurve;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public double getAtanCurve() {
+        return atanCurve;
     }
 }

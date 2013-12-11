@@ -107,6 +107,9 @@ public class DesignGeometric2D implements Graphics {
      */
     public Shape draw(Curve curve) {
 
+        Stroke strokeDefault = graphics2D.getStroke();
+        graphics2D.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+
         double x0 = curve.from().getX();
         double y0 = curve.from().getY();
         double x1 = curve.to().getX();
@@ -123,6 +126,8 @@ public class DesignGeometric2D implements Graphics {
                 control.x, control.y, // Control point
                 to.x, to.y); // Segment end point
 
+        curve.setAtanCurve(Math.atan2(to.getY() - control.getY() + control.getY()/8, to.getX() - control.getX() + control.getX()/8));
+
         AffineTransform afine = new AffineTransform();
         afine.translate(x0, y0); // translate sink work with coordinates (0,0)
         afine.rotate(angle);  // then it must rotate
@@ -130,6 +135,7 @@ public class DesignGeometric2D implements Graphics {
         // Draw the curves
         graphics2D.setColor(curve.getColor());
         graphics2D.draw(afine.createTransformedShape(shape));
+        graphics2D.setStroke(strokeDefault);
 
         return shape;
     }
@@ -182,15 +188,20 @@ public class DesignGeometric2D implements Graphics {
 
         // dessin de la fleche
         Path2D.Double path = new Path2D.Double();
-        path.moveTo(-arrowLength * Math.cos(angleArrow), arrowLength * Math.sin(angleArrow));
-        path.lineTo(0, 0);
-        path.lineTo(-arrowLength * Math.cos(angleArrow), -arrowLength * Math.sin(angleArrow));
+
+        path.moveTo(-arrowLength * Math.cos(angleArrow)-lineArrow.getMargin(), arrowLength * Math.sin(angleArrow));
+        path.lineTo(-lineArrow.getMargin(), 0);
+        path.lineTo(-arrowLength * Math.cos(angleArrow)-lineArrow.getMargin(), -arrowLength * Math.sin(angleArrow));
 
         graphics2D.fill(transform.createTransformedShape(path));
 
     }
 
-
+    /**
+     *
+     * @param message
+     * @return
+     */
     public Shape draw(Message message) {
         graphics2D.setColor(message.getColor());
         Font fonts = new Font("TimesRoman ",Font.BOLD,12);
@@ -206,5 +217,43 @@ public class DesignGeometric2D implements Graphics {
         graphics2D.setBackground(color);
         graphics2D.draw(shape);
         return shape;
+    }
+
+    /**
+     *
+     * @param curvedArrow
+     * @return
+     */
+    public void draw(CurvedArrow curvedArrow) {
+        graphics2D.setColor(curvedArrow.getCfecha());
+
+        //Angle de la fleche
+        double angleArrow = Math.asin(0.3);
+        double angleRotation = Math.atan2(curvedArrow.to().getY() - curvedArrow.from().getY(),
+                curvedArrow.to().getX() - curvedArrow.from().getX()) + curvedArrow.getAtanCurve();
+        // taille de la fleche
+        double arrowLength = 22;
+
+        Point pointArrow = new Point2D(0.0, 0.0);
+        //endroit de la fleche
+        switch (curvedArrow.getPlaceOfArrow()) {
+            case END:
+                pointArrow = curvedArrow.to();
+                break;
+        }
+
+        AffineTransform transform = new AffineTransform();
+        transform.translate(pointArrow.getX(), pointArrow.getY());
+        transform.rotate(angleRotation);
+
+        // dessin de la fleche
+        Path2D.Double path = new Path2D.Double();
+
+        path.moveTo(-arrowLength * Math.cos(angleArrow)-curvedArrow.getMargin(), arrowLength * Math.sin(angleArrow));
+        path.lineTo(-curvedArrow.getMargin(), 0);
+        path.lineTo(-arrowLength * Math.cos(angleArrow)-curvedArrow.getMargin(), -arrowLength * Math.sin(angleArrow));
+
+        graphics2D.fill(transform.createTransformedShape(path));
+
     }
 }

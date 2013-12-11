@@ -40,15 +40,18 @@
 package fr.edu.bp.m1info.structure.graph;
 
 import fr.edu.bp.m1info.structure.common.GraphProperties;
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDirected;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeShape;
+import fr.edu.bp.m1info.structure.geometric.plane.CurvedArrow;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
+import java.awt.*;
 import java.util.Iterator;
 
 /**
@@ -84,11 +87,26 @@ public class DirectedGraph<Edge extends IEdge, Node extends Vertex>
         Edge edgeS = (Edge) EdgeFactory.createEdge(this.clazzEdge, source, target, null);
 
         if (TYPE_EXECUTION != GraphProperties.CONSOLE) {
-            AbstractEdgeShape shape = new EdgeShape(this.clazzEdgeShape,
+
+            Class<? extends ShapeGeometric>  clazz = this.clazzEdgeShape;
+            Edge edgeT = containsEdge(target,source);
+            if(edgeT != null){
+                clazz = CurvedArrow.class;
+                AbstractEdgeShape shapeT = new EdgeShape(clazz,
+                        target.getVertex().parentComponent().shape().centre(),
+                        source.getVertex().parentComponent().shape().centre());
+                 EdgeDirected directed = new EdgeDirected(new EdgeName(shapeT, "0"));
+                 directed.shape().setColor(Color.RED);
+                ((AbstractEdge) edgeT).setShape(directed);
+
+            }
+
+            AbstractEdgeShape shapeS = new EdgeShape(clazz,
                     source.getVertex().parentComponent().shape().centre(),
                     target.getVertex().parentComponent().shape().centre());
 
-            ((AbstractEdge) edgeS).setShape(new EdgeDirected(new EdgeName(shape, "index")));
+            ((AbstractEdge) edgeS).setShape(new EdgeDirected(new EdgeName(shapeS, "0")));
+
         }
 
         adjacencys[index].add(edgeS);
