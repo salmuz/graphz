@@ -64,6 +64,7 @@ public class ResidualGraph<Edge extends EdgeFlow, Node extends Vertex> {
             Edge toFrom = graph.containsEdge((Node) edge.to(), (Node) edge.from());
             if (toFrom != null) {
                 toFrom.setCapacity(toFrom.capacity() - toFrom.flow() + newflow);
+                edge.setCapacity(edge.capacity() + toFrom.flow());
             } else {
                 graph.addEdge((Node) edge.to(), (Node) edge.from(), newflow);
             }

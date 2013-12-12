@@ -38,25 +38,28 @@
 
 package graph.algorithm.network;
 
+import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.IterativeView;
 import graph.algorithm.path.AbstractPath;
 import graph.algorithm.path.BreadthFirstPath;
 
 import java.lang.reflect.Array;
 
-public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
+public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> extends AbstractNetwork<Edge,Node>{
 
     private static final int FAILURE_PATH = -1;
-    private FlowNetworkGraph<Edge, Node> graph;
     private AbstractPath<Edge, Node> bfsPath;
-    private int flowMaximal;
+
+    public DinicFlowNetwork(FlowNetworkGraph<Edge, Node> graph,IterativeView<Edge,Node> iterativeView) {
+        super(graph,new Cloner().deepClone(graph),iterativeView);
+    }
 
     public DinicFlowNetwork(FlowNetworkGraph<Edge, Node> graph) {
-        this.graph = graph;
-        this.flowMaximal = 0;
+        super(graph);
     }
 
     /**
@@ -86,6 +89,8 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
             flowMaximal += computeBlokingFlow(graph.source(), graph.sink());
             // genere graph residuel
             residualGraph.createResidualGraph(graph);
+
+            this.iterativeView.updateView(graph);
 
         }
 
@@ -117,9 +122,6 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> {
         int augmentFlow = 0;
         while (true) {
 
-//            System.out.println("level:" + maxLevel);
-
-            //System.out.println("Input:\n" + graph);
             for (Edge w = path[source.getValue()]; w != null; w = path[w.to().getValue()])
                 path[w.from().getValue()] = null;
 

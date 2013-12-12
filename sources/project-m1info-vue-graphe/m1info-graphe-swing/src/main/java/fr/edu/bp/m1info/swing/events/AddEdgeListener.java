@@ -94,7 +94,7 @@ public class AddEdgeListener extends MouseAdapter {
             to = canvas.getGraph().getVertexShape(x1, y1);
             if (from != null && to != null && !to.equals(from)) {
                 if (!(canvas.getGraph().containsEdge(from, to)!=null)) {
-                    canvas.getGraph().addEdge(from, to);
+                    canvas.getGraph().addEdge(from, to, 0);
                 }
             }
             canvas.repaint();

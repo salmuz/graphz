@@ -3,6 +3,7 @@
 *.ipr
 *.iws
 *.error
+*.log
 *.classpath
 *.project
 .settings/

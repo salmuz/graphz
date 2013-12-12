@@ -80,7 +80,7 @@ public class DirectedGraph<Edge extends IEdge, Node extends Vertex>
     }
 
     @Override
-    public Edge addEdge(Node source, Node target) {
+    public Edge addEdge(Node source, Node target, Number weigth) {
         int index = indexOfVertex(source);
 
         Edge edgeS = (Edge) EdgeFactory.createEdge(this.clazzEdge, source, target, null);
@@ -94,7 +94,7 @@ public class DirectedGraph<Edge extends IEdge, Node extends Vertex>
                 AbstractEdgeShape shapeT = new EdgeShape(clazz,
                         target.getVertex().parentComponent().shape().centre(),
                         source.getVertex().parentComponent().shape().centre());
-                 EdgeDirected directed = new EdgeDirected(new EdgeName(shapeT, "0"));
+                 EdgeDirected directed = new EdgeDirected(new EdgeName(shapeT, weigth.toString()));
                 ((AbstractEdge) edgeT).setShape(directed);
             }
 
@@ -102,7 +102,7 @@ public class DirectedGraph<Edge extends IEdge, Node extends Vertex>
                     source.getVertex().parentComponent().shape().centre(),
                     target.getVertex().parentComponent().shape().centre());
 
-            ((AbstractEdge) edgeS).setShape(new EdgeDirected(new EdgeName(shapeS, "0")));
+            ((AbstractEdge) edgeS).setShape(new EdgeDirected(new EdgeName(shapeS, weigth.toString())));
 
         }
 

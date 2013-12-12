@@ -51,31 +51,14 @@ import graph.algorithm.path.PathUtils;
 
 public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> extends AbstractNetwork<Edge,Node>{
 
-    private FlowNetworkGraph<Edge, Node> graph;
     private AbstractPath<Edge, Node> dfsPath;
-    private int flowMaximal;
 
     public FordFulkerson(FlowNetworkGraph<Edge, Node> graph,IterativeView<Edge,Node> iterativeView) {
-        super(iterativeView);
-        this.graph = new Cloner().deepClone(graph);
-        init();
+        super(graph,new Cloner().deepClone(graph),iterativeView);
     }
 
     public FordFulkerson(FlowNetworkGraph<Edge, Node> graph) {
-        super();
-        this.graph = graph;
-    }
-
-    /**
-     *
-     */
-    private void init(){
-        this.flowMaximal = 0;
-        for (Node node : graph.getVertex()) {
-            for (Edge edge : graph.adjacencys(node)) {
-                edge.setFlow(0);
-            }
-        }
+        super(graph);
     }
 
     /**
@@ -149,21 +132,19 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> extends A
     }
 
     /**
-     *
+     * Execute l'algorithme
      */
     public void execute() {
         this.networkFordFulkerson(graph);
         System.out.println("newFlowMax:"+flowMaximal);
     }
 
+
     /**
-     * @return
+     *
+     * @param <Edge>
+     * @param <Node>
      */
-    public int getFlowMaximal() {
-        return flowMaximal;
-    }
-
-
     private class DFSFlowNetworkPath<Edge extends EdgeFlow, Node extends Vertex> extends DepthFirstPath<Edge, Node> {
 
         public DFSFlowNetworkPath(Graph<Edge, Node> graph, Node source) {

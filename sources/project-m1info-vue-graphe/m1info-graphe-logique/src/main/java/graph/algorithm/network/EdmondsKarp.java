@@ -38,28 +38,26 @@
 
 package graph.algorithm.network;
 
+import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.IterativeView;
 import graph.algorithm.path.AbstractPath;
 import graph.algorithm.path.BreadthFirstPath;
 import graph.algorithm.path.PathUtils;
 
-public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
+public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> extends AbstractNetwork<Edge,Node>{
 
-    private FlowNetworkGraph<Edge, Node> graph;
     private AbstractPath<Edge, Node> bfspath;
-    private int flowMaximal;
+
+    public EdmondsKarp(FlowNetworkGraph<Edge, Node> graph,IterativeView<Edge,Node> iterativeView) {
+        super(graph,new Cloner().deepClone(graph),iterativeView);
+    }
 
     public EdmondsKarp(FlowNetworkGraph<Edge, Node> graph) {
-        this.graph = graph;
-        this.flowMaximal = 0;
-        for (Node node : graph.getVertex()) {
-            for (Edge edge : graph.adjacencys(node)) {
-                edge.setFlow(0);
-            }
-        }
+        super(graph);
     }
 
     /**
@@ -87,7 +85,8 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
             //    edge.addFlowTo(edge.to(), newFlow);
             //}
             //System.out.println("newFlow:"+newFlow);
-
+            System.out.println(graphNetwork.toString());
+            this.iterativeView.updateView(graphNetwork);
             flowMax += newFlow;
         }
 
@@ -128,13 +127,6 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> {
     public void execute() {
         //FlowNetworkGraph<Edge, Node> dgraph = new Cloner().deepClone(graph);
         this.networkEdmondsKarp(graph);
-    }
-
-    /**
-     * @return
-     */
-    public int getFlowMaximal() {
-        return flowMaximal;
     }
 
     /**

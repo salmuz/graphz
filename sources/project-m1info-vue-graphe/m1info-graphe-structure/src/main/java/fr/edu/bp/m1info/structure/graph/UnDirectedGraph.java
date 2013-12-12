@@ -74,9 +74,10 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
     /**
      * @param source
      * @param target
+     * @param weigth
      */
     @Override
-    public E addEdge(N source, N target) {
+    public E addEdge(N source, N target, Number weigth) {
         int index = indexOfVertex(source);
 
         E edgeS = (E) EdgeFactory.createEdge(Edge.class, source, target, null);
@@ -168,7 +169,7 @@ public class UnDirectedGraph<E extends Edge, N extends Vertex>
             E edge = edges.get(i);
             N v0 = (N) edge.from();
             N v1 = (N) edge.to();
-            if ((v0.getValue() == source.getValue() && v1.getValue()==target.getValue()) ||
+            if ((v0.getValue() == source.getValue() && v1.getValue() == target.getValue()) ||
                     (v0.getValue() == target.getValue() && v1.getValue() == source.getValue())) {
                 return edge;
             }

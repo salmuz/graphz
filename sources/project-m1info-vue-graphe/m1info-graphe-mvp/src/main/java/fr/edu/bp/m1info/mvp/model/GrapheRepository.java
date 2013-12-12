@@ -46,9 +46,11 @@ import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.VertexName;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.VertexShape;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
 import fr.edu.bp.m1info.structure.graph.DirectedGraph;
+import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.UnDirectedGraph;
 import fr.edu.bp.m1info.structure.graph.edge.*;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
@@ -73,25 +75,26 @@ public class GrapheRepository extends Repository {
             FileWriter filewrite = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(filewrite);
 
-            int type = (graphe instanceof DirectedGraph ? 1 : 2);
-            bw.write(type+ "\n");
+            int type = (graphe instanceof FlowNetworkGraph ? 3 :
+                    (graphe instanceof DirectedGraph) ? 1 : 2);
+            bw.write(type + "\n");
             bw.write(graphe.sizeVertex() + "\n");
 
             java.util.List<IEdge> edges = new ArrayList<IEdge>();
             for (Vertex v : graphe.getVertex()) {
                 bw.write(v.getValue() + " ");
-                bw.write((int)v.getVertex().parentComponent().shape().centre().getX() + " ");
-                bw.write((int)v.getVertex().parentComponent().shape().centre().getY() + "\n");
-                for(IEdge e : graphe.adjacencys(v)){
+                bw.write((int) v.getVertex().parentComponent().shape().centre().getX() + " ");
+                bw.write((int) v.getVertex().parentComponent().shape().centre().getY() + "\n");
+                for (IEdge e : graphe.adjacencys(v)) {
                     edges.add(e);
                 }
             }
 
             bw.write(edges.size() + "\n");
-            for(IEdge e : edges){
-                bw.write(e.from().getValue()+" ");
-                bw.write(e.to().getValue()+"\n");
-
+            for (IEdge e : edges) {
+                bw.write(e.from().getValue() + " ");
+                bw.write(e.to().getValue() + " ");
+                bw.write(e.weight() + "\n");
             }
 
             bw.close();
@@ -121,7 +124,13 @@ public class GrapheRepository extends Repository {
                     };
                     canvas = new GraphCanvas<Arc, Vertex>(graph);
                 } else {
-                    throw new UnsupportedOperationException("Not supported");
+                    if (type == NewGraphPresenter.GRAPHE_NETWORK) {
+                        graph = new FlowNetworkGraph<EdgeFlow, Vertex>() {
+                        };
+                        canvas = new GraphCanvas<EdgeFlow, Vertex>(graph);
+                    } else {
+                        throw new UnsupportedOperationException("Not supported");
+                    }
                 }
             }
 
@@ -141,9 +150,10 @@ public class GrapheRepository extends Repository {
             for (int i = 0; i < nE; i++) {
                 int from = in.nextInt();
                 int to = in.nextInt();
+                int capacity = in.nextInt();
                 Vertex vfrom = (Vertex) graph.getVertex().get(from);
                 Vertex vto = (Vertex) graph.getVertex().get(to);
-                canvas.getGraph().addEdge(vfrom, vto);
+                canvas.getGraph().addEdge(vfrom, vto,capacity);
             }
 
         } catch (IOException e) {

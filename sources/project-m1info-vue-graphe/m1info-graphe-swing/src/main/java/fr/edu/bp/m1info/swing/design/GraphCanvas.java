@@ -40,6 +40,7 @@
  */
 package fr.edu.bp.m1info.swing.design;
 
+import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDecorator;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
@@ -113,8 +114,9 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
         }
     }
 
-    public void updateView(Graph<Edge, Node> graph) {
-        this.graph = graph;
+    public void updateView(Graph<Edge, Node> ograph) {
+        this.graph = new Cloner().deepClone(ograph);
+
         // remove edge avec capacity or weigh cero
         for(Node v : graph.getVertex()){
             for(Edge e : graph.adjacencys(v)){
@@ -126,6 +128,7 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
                }
             }
         }
+
         repaint();
         try {
             Thread.sleep(2000);

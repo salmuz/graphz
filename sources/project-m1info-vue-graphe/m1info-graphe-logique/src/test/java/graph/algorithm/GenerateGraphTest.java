@@ -179,13 +179,13 @@ public final class GenerateGraphTest {
         graph.addVertex(v4);
         graph.addVertex(v5);
 
-        graph.addEdge(v0, v1);
-        graph.addEdge(v0, v2);
-        graph.addEdge(v0, v3);
-        graph.addEdge(v0, v5);
-        graph.addEdge(v2, v1);
-        graph.addEdge(v2, v3);
-        graph.addEdge(v5, v4);
+        graph.addEdge(v0, v1, 0);
+        graph.addEdge(v0, v2, 0);
+        graph.addEdge(v0, v3, 0);
+        graph.addEdge(v0, v5, 0);
+        graph.addEdge(v2, v1, 0);
+        graph.addEdge(v2, v3, 0);
+        graph.addEdge(v5, v4, 0);
 
         return graph;
     }
@@ -207,13 +207,13 @@ public final class GenerateGraphTest {
         graph.addVertex(v4);
         graph.addVertex(v5);
 
-        graph.addEdge(v0, v1);
-        graph.addEdge(v0, v2);
-        graph.addEdge(v0, v3);
-        graph.addEdge(v0, v5);
-        graph.addEdge(v2, v1);
-        graph.addEdge(v2, v3);
-        graph.addEdge(v5, v4);
+        graph.addEdge(v0, v1, 0);
+        graph.addEdge(v0, v2, 0);
+        graph.addEdge(v0, v3, 0);
+        graph.addEdge(v0, v5, 0);
+        graph.addEdge(v2, v1, 0);
+        graph.addEdge(v2, v3, 0);
+        graph.addEdge(v5, v4, 0);
         return graph;
     }
 

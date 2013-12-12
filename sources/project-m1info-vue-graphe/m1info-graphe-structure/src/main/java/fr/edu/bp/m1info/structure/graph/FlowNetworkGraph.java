@@ -48,21 +48,36 @@ public class FlowNetworkGraph<Edge extends EdgeFlow, Node extends Vertex>
     private Node source; // source
     private Node sink; // puit
 
+    /**
+     *
+     */
     public FlowNetworkGraph() {
         this(null, null, GraphProperties.GUI);
     }
 
+    /**
+     *
+     * @param source
+     * @param sink
+     * @param type
+     */
     public FlowNetworkGraph(Node source, Node sink, int type) {
         super(type);
         this.source = source;
         this.sink = sink;
     }
 
-    public void addEdge(Node source, Node target, int capacity) {
-        Edge edgeS = super.addEdge(source, target);
-        edgeS.setCapacity(capacity);
-        //int to = indexOfVertex(target);
-        //adjacencys[to].add(edgeS);
+    /**
+     *
+     * @param source
+     * @param target
+     * @param capacity
+     */
+    @Override
+    public Edge addEdge(Node source, Node target, Number capacity) {
+        Edge edgeS = super.addEdge(source, target,capacity);
+        edgeS.setCapacity((Integer)capacity);
+        return edgeS;
     }
 
     /**

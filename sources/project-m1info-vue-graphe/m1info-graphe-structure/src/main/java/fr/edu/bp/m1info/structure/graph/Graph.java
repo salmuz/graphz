@@ -126,8 +126,9 @@ public abstract class Graph<Edge extends IEdge, Node extends Vertex> implements 
       *
       * @param  source
       * @param  target
+      * @param  weigth
       */
-    public abstract Edge addEdge(Node source, Node target);
+    public abstract Edge addEdge(Node source, Node target, Number weigth);
 
     /**
      * C'est une methode qui permet de tester si on peut  rajouter un node dans le graph

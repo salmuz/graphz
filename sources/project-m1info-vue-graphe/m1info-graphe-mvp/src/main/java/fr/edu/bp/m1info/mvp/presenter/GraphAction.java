@@ -17,6 +17,8 @@ import fr.edu.bp.m1info.swing.common.SwingUtils;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.events.*;
 import graph.algorithm.IterativeView;
+import graph.algorithm.network.DinicFlowNetwork;
+import graph.algorithm.network.EdmondsKarp;
 import graph.algorithm.network.FordFulkerson;
 import graph.algorithm.path.BellmanFordPath;
 import graph.algorithm.path.BreadthFirstPath;
@@ -205,11 +207,35 @@ public class GraphAction {
     }
 
     private void executeEdmondsKarp() {
-
+        ((FlowNetworkGraph)graph).setSource((Vertex) graph.getVertex().get(0));
+        ((FlowNetworkGraph)graph).setSink((Vertex) graph.getVertex().get(graph.sizeVertex()-1));
+        final EdmondsKarp ekn = new EdmondsKarp<EdgeFlow, Vertex>((FlowNetworkGraph<EdgeFlow, Vertex>) canvas.getGraph(),
+                (IterativeView) canvas);
+        Thread runner = new Thread(
+                new Runnable() {
+                    public void run() {
+                        ekn.execute();
+                        JOptionPane.showMessageDialog(view,"Flot maximum :"+ekn.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+        );
+        runner.start();
     }
 
     private void executeDinics() {
-
+        ((FlowNetworkGraph)graph).setSource((Vertex) graph.getVertex().get(0));
+        ((FlowNetworkGraph)graph).setSink((Vertex) graph.getVertex().get(graph.sizeVertex()-1));
+        final DinicFlowNetwork dnc = new DinicFlowNetwork<EdgeFlow, Vertex>((FlowNetworkGraph<EdgeFlow, Vertex>) canvas.getGraph(),
+                (IterativeView) canvas);
+        Thread runner = new Thread(
+                new Runnable() {
+                    public void run() {
+                        dnc.execute();
+                        JOptionPane.showMessageDialog(view,"Flot maximum :"+dnc.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+        );
+        runner.start();
     }
 
     private void mouseListenerSearchShape() {

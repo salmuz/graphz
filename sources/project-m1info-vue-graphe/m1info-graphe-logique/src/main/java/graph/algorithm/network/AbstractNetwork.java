@@ -38,25 +38,70 @@
 
 package graph.algorithm.network;
 
+import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.edge.IEdge;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 
-public class AbstractNetwork<Edge extends IEdge, Node extends Vertex> {
+public class AbstractNetwork<Edge extends EdgeFlow, Node extends Vertex> {
 
+    protected FlowNetworkGraph<Edge, Node> graph;
     protected IterativeView<Edge, Node> iterativeView;
+    protected int flowMaximal;
+    private FlowNetworkGraph<Edge, Node> origin;
 
-    public AbstractNetwork(IterativeView<Edge, Node> iterativeView) {
+    /**
+     *
+     * @param graph
+     * @param origin
+     * @param iterativeView
+     */
+    public AbstractNetwork(FlowNetworkGraph<Edge, Node> graph,
+                           FlowNetworkGraph<Edge, Node> origin,
+                           IterativeView<Edge, Node> iterativeView) {
+        this.graph = graph;
+        this.origin = origin;
         this.iterativeView = iterativeView;
+        this.flowMaximal = 0;
+        initFlowZero();
     }
 
-    public AbstractNetwork() {
-        this.iterativeView = new IterativeView<Edge, Node>() {
-            public void updateView(Node node, Edge edge) {
+    /**
+     *
+     * @param graph
+     */
+    public AbstractNetwork(FlowNetworkGraph<Edge, Node> graph) {
+        this(graph, null, new IterativeView<Edge, Node>() {
+            public void updateView(Node node, Edge edge) { }
+            public void updateView(Graph<Edge, Node> graph) {}
+        });
+    }
+
+    /**
+     * Inisialisation of the flow
+     */
+    private void initFlowZero(){
+        this.flowMaximal = 0;
+        for (Node node : graph.getVertex()) {
+            for (Edge edge : graph.adjacencys(node)) {
+                edge.setFlow(0);
             }
-            public void updateView(Graph<Edge, Node> graph) {
-            }
-        };
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public FlowNetworkGraph<Edge, Node> getOrigin() {
+        return origin;
+    }
+
+    /**
+     * @return
+     */
+    public int getFlowMaximal() {
+        return flowMaximal;
     }
 }
