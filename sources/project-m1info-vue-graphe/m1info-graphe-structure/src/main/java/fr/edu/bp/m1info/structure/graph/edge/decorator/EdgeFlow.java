@@ -81,4 +81,18 @@ public class EdgeFlow extends EdgeDecorator<Integer> {
     public void setFlow(int flow) {
         this.flow = flow;
     }
+
+    @Override
+    public void setWeight(Integer weight) {
+        this.setCapacity(weight);
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Integer weight() {
+        return capacity;
+    }
 }

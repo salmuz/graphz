@@ -29,28 +29,34 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak 
+ * Contributor(s):  
  *
  * Changes
  * -------
- * 31/01/13 : Version 01;
  *
  */
-package fr.edu.bp.m1info.mvp.common;
+
+package graph.algorithm.network;
 
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
+import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-import fr.edu.bp.m1info.swing.design.GraphCanvas;
+import graph.algorithm.IterativeView;
 
-/**
- * Ce le classe repository qui comme fonction de liaison avec la base des données
- */
-public abstract class Repository {
+public class AbstractNetwork<Edge extends IEdge, Node extends Vertex> {
 
-    public abstract boolean enregistreGraphe(Graph<AbstractEdge,Vertex> graphe,String name);
-    public abstract GraphCanvas openGraphe(String name);
+    protected IterativeView<Edge, Node> iterativeView;
 
+    public AbstractNetwork(IterativeView<Edge, Node> iterativeView) {
+        this.iterativeView = iterativeView;
+    }
+
+    public AbstractNetwork() {
+        this.iterativeView = new IterativeView<Edge, Node>() {
+            public void updateView(Node node, Edge edge) {
+            }
+            public void updateView(Graph<Edge, Node> graph) {
+            }
+        };
+    }
 }

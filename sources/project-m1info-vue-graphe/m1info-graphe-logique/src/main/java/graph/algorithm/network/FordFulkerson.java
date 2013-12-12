@@ -38,23 +38,38 @@
 
 package graph.algorithm.network;
 
+import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
+import graph.algorithm.IterativeView;
 import graph.algorithm.path.AbstractPath;
 import graph.algorithm.path.DepthFirstPath;
 import graph.algorithm.path.PathUtils;
 
 
-public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
+public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> extends AbstractNetwork<Edge,Node>{
 
     private FlowNetworkGraph<Edge, Node> graph;
     private AbstractPath<Edge, Node> dfsPath;
     private int flowMaximal;
 
+    public FordFulkerson(FlowNetworkGraph<Edge, Node> graph,IterativeView<Edge,Node> iterativeView) {
+        super(iterativeView);
+        this.graph = new Cloner().deepClone(graph);
+        init();
+    }
+
     public FordFulkerson(FlowNetworkGraph<Edge, Node> graph) {
+        super();
         this.graph = graph;
+    }
+
+    /**
+     *
+     */
+    private void init(){
         this.flowMaximal = 0;
         for (Node node : graph.getVertex()) {
             for (Edge edge : graph.adjacencys(node)) {
@@ -70,10 +85,10 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
      * Output :  A flow f source s sink t which is a maximum
      * f(u,v) <- 0 for all edges (u,v)
      * While there is a path p source s sink t in Gf, such that cf(u,v) > 0 for all edges (u,v) belong sink p:
-     * Find cf(p) = min{cf(u,v) : (u,v) belong sink p}
-     * For each edge (u,v) belong sink p
-     * f(u,v) <- f(u,v) + cf(p) (Send flow along the path)
-     * f(v,u) <- f(v,u) - cf(p) (The flow might be "returned" later)
+     * -----Find cf(p) = min{cf(u,v) : (u,v) belong sink p}
+     * -----For each edge (u,v) belong sink p
+     * -------f(u,v) <- f(u,v) + cf(p) (Send flow along the path)
+     * -------f(v,u) <- f(v,u) - cf(p) (The flow might be "returned" later)
      * <p/>
      * source 02: http://algs4.cs.princeton.edu/40graphs/
      */
@@ -98,6 +113,7 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
             //    edge.addFlowTo(edge.to(), newFlow);
             //}
 
+            this.iterativeView.updateView(graphNetwork);
             System.out.println("newFlow:"+newFlow);
             flowMax += newFlow;
         }
@@ -136,8 +152,8 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> {
      *
      */
     public void execute() {
-        //FlowNetworkGraph<Edge, Node> duplicate = new Cloner().deepClone(graph);
         this.networkFordFulkerson(graph);
+        System.out.println("newFlowMax:"+flowMaximal);
     }
 
     /**

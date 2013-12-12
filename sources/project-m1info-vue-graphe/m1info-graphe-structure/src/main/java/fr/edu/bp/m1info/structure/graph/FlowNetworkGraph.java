@@ -48,44 +48,65 @@ public class FlowNetworkGraph<Edge extends EdgeFlow, Node extends Vertex>
     private Node source; // source
     private Node sink; // puit
 
-    public FlowNetworkGraph(Node source, Node sink) {
-        this(source, sink, GraphProperties.GUI);
+    public FlowNetworkGraph() {
+        this(null, null, GraphProperties.GUI);
     }
 
-    public FlowNetworkGraph(Node source, Node sink,int type) {
+    public FlowNetworkGraph(Node source, Node sink, int type) {
         super(type);
         this.source = source;
         this.sink = sink;
     }
 
     public void addEdge(Node source, Node target, int capacity) {
-        Edge edgeS = super.addEdge(source,target);
+        Edge edgeS = super.addEdge(source, target);
         edgeS.setCapacity(capacity);
-        // implementation with double link
-        // source : http://algs4.cs.princeton.edu/
         //int to = indexOfVertex(target);
         //adjacencys[to].add(edgeS);
     }
 
+    /**
+     *
+     * @return
+     */
     public Node sink() {  // source
         return sink;
     }
 
+    /**
+     *
+     * @return
+     */
     public Node source() { // puit
         return source;
     }
 
     /**
      *
+     * @param sink
+     */
+    public void setSink(Node sink) {
+        this.sink = sink;
+    }
+
+    /**
+     *
+     * @param source
+     */
+    public void setSource(Node source) {
+        this.source = source;
+    }
+
+    /**
      * @return string, graph adj list
      */
     @Override
     public String toString() {
         StringBuffer buff = new StringBuffer();
-        for (Node v : getVertex()){
-            buff.append(v.getValue() + " = degre (In:"+v.indegree()+",Out"+v.outdegree()+") ->");
+        for (Node v : getVertex()) {
+            buff.append(v.getValue() + " = degre (In:" + v.indegree() + ",Out" + v.outdegree() + ") ->");
             for (Edge w : adjacencys(v))
-                buff.append("(("+w.from().getValue()+","+w.to().getValue()+"), "+w.capacity()+", "+w.flow()+")");
+                buff.append("((" + w.from().getValue() + "," + w.to().getValue() + "), " + w.capacity() + ", " + w.flow() + ")");
             buff.append("\n");
         }
         return buff.toString();

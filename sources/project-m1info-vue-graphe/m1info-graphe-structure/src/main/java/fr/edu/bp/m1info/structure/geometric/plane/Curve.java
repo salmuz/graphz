@@ -44,6 +44,8 @@ import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.EdgeShapeGraph;
 
+import java.awt.*;
+
 /**
  * nous avons une class appelle curve et qui herite certaine methode de la class ShapeGeometric
  */
@@ -51,6 +53,7 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
 
     private Point start;
     private Point end;
+    private Point control;
     private double atanCurve;
 
     /**
@@ -61,6 +64,8 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
     public Curve(Point start, Point end) {
         this.start = start;
         this.end = end;
+        this.color = Color.BLUE;
+        this.background = Color.BLUE;
     }
 
     /**
@@ -130,5 +135,21 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
      */
     public double getAtanCurve() {
         return atanCurve;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Point getControl() {
+        return control;
+    }
+
+    /**
+     *
+     * @param control
+     */
+    public void setControl(Point control) {
+        this.control = control;
     }
 }

@@ -29,9 +29,8 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aden Nouh Abdirazak
+ * Contributor(s):
+ *
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -42,7 +41,9 @@ package fr.edu.bp.m1info.structure.graph.vertex;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.AbstractVertexShape;
 
-/*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
+/**
+ * Nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph>
+ **/
 public class Vertex {
 
     private AbstractVertexShape vertex;

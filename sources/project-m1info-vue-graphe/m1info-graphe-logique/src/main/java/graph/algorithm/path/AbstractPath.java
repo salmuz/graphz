@@ -76,6 +76,8 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
         this(graph,source,new IterativeView<Edge, Node>() {
             public void updateView(Node node, Edge edge) {
             }
+            public void updateView(Graph<Edge, Node> graph) {
+            }
         });
     }
 

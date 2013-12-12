@@ -41,13 +41,12 @@
 package fr.edu.bp.m1info.swing.design;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDecorator;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
 import fr.edu.bp.m1info.structure.graph.Graph;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
-import graph.algorithm.path.AbstractPath;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -109,6 +108,27 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
         repaint();
         try {
             Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    public void updateView(Graph<Edge, Node> graph) {
+        this.graph = graph;
+        // remove edge avec capacity or weigh cero
+        for(Node v : graph.getVertex()){
+            for(Edge e : graph.adjacencys(v)){
+               if(((Integer)e.weight()).intValue()<=0){
+                   graph.removeEdge((Node)e.from(),(Node)e.to());
+               }else{
+                  EdgeName ename = (EdgeName) ((EdgeDecorator) e.getShape()).childEdgeShape();
+                  ename.setMessage(e.weight().toString());
+               }
+            }
+        }
+        repaint();
+        try {
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

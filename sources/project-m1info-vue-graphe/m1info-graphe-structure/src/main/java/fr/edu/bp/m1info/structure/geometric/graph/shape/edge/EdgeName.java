@@ -3,10 +3,7 @@ package fr.edu.bp.m1info.structure.geometric.graph.shape.edge;
 import fr.edu.bp.m1info.structure.common.GraphProperties;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.plane.Line;
-import fr.edu.bp.m1info.structure.geometric.plane.Message;
-import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
+import fr.edu.bp.m1info.structure.geometric.plane.*;
 
 
 public class EdgeName extends EdgeDecorator {
@@ -14,14 +11,41 @@ public class EdgeName extends EdgeDecorator {
     private String message;
     private final static int SHIFT = 5;
 
+    /**
+     *
+     * @param edgeShape
+     * @param message
+     */
     public EdgeName(AbstractEdgeShape edgeShape, String message) {
         super(edgeShape);
         this.message = message;
         AbstractEdgeShape parent = (AbstractEdgeShape) edgeShape.parentComponent();
-        createWeight(parent.from(), parent.to());
+        if(parent.shape() instanceof Line)
+            createWeightLine(parent.from(), parent.to());
+        else
+            if(parent.shape() instanceof Curve)
+                createWeightCurve(new Point2D(0.0,0.0));
+
     }
 
-    public void createWeight(Point from, Point to) {
+    /**
+     *
+     * @param control
+     */
+    public void createWeightCurve(Point control) {
+        shape = (Message) ShapePlaneFactory.createShape(Message.class,control.getX(),control.getY());
+        if(this.message == null)
+            this.message = "edge empty";
+        ((Message)shape).setMessage(message);
+        shape.setColor(GraphProperties.EDGE_NAME_COLOR);
+    }
+
+    /**
+     *
+     * @param from
+     * @param to
+     */
+    public void createWeightLine(Point from, Point to) {
         Line line = new Line(from,to);
         Point point = line.centre();
         double x = point.getX() - SHIFT;
@@ -40,13 +64,39 @@ public class EdgeName extends EdgeDecorator {
         shape.setColor(GraphProperties.EDGE_NAME_COLOR);
     }
 
+    /**
+     *
+     * @param graphics
+     */
     public void draw(Graphics graphics) {
         super.draw(graphics);
         AbstractEdgeShape parent = (AbstractEdgeShape) edgeShape.parentComponent();
-        Line line = new Line(((EdgeShape)parent).from(),((EdgeShape)parent).to());
-        ((Message)shape).getPoint().setX(line.centre().getX()- SHIFT);
-        ((Message)shape).getPoint().setY(line.centre().getY()- SHIFT);
+        if(parent.shape() instanceof Line){
+            Line line = new Line(((EdgeShape)parent).from(),((EdgeShape)parent).to());
+            ((Message)shape).getPoint().setX(line.centre().getX()- SHIFT);
+            ((Message)shape).getPoint().setY(line.centre().getY() - SHIFT);
+        }else{
+            Curve curve = (Curve) parent.shape();
+            ((Message)shape).getPoint().setX(curve.getControl().getX());
+            ((Message)shape).getPoint().setY(curve.getControl().getY());
+        }
+        ((Message)shape).setMessage(message);
         shape.draw(graphics);
     }
 
+    /**
+     *
+     * @return
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     *
+     * @param message
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

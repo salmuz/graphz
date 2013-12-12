@@ -61,6 +61,9 @@ public class UIMain extends javax.swing.JFrame implements View {
         btnContracter.setVisible(false);
         jmGeometric.setVisible(false);
         jtbGeometric.setVisible(false);
+        jmiExporte.setVisible(false);
+        jmiImporte.setVisible(false);
+        jSeparator2.setVisible(false);
     }
     
     /** This method is called source within the constructor sink
@@ -132,8 +135,12 @@ public class UIMain extends javax.swing.JFrame implements View {
         jmiBFS = new javax.swing.JMenuItem();
         jmiDFS = new javax.swing.JMenuItem();
         jmiBellmanFord = new javax.swing.JMenuItem();
+        jmiDinicFlowNetWork = new javax.swing.JMenuItem();
+        jmiFordFulkerson = new javax.swing.JMenuItem();
+        jmiEdmondsKarp = new javax.swing.JMenuItem();
         jmiClearIteraction = new javax.swing.JMenuItem();
         jSeparatorAlgo = new javax.swing.JSeparator();
+        jSeparatorNetwork = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jpPrincipal.setLayout(new java.awt.BorderLayout());
@@ -335,15 +342,6 @@ public class UIMain extends javax.swing.JFrame implements View {
 
         jMenuBar1.add(jmGeometric);
 
-        jmHelp.setText("Aide");
-        jmiAbout.setText("About");
-        jmHelp.add(jmiAbout);
-
-        jmiAide.setText("Support");
-        jmHelp.add(jmiAide);
-
-        jMenuBar1.add(jmHelp);
-
         jmAlgorithms.setText("Algorithms");
 
         jmiBFS.setText("Breadth-First-Search");
@@ -355,12 +353,32 @@ public class UIMain extends javax.swing.JFrame implements View {
         jmiBellmanFord.setText("Bellman-Ford");
         jmAlgorithms.add(jmiBellmanFord);
 
+        jmAlgorithms.add(jSeparatorNetwork);
+
+        jmiFordFulkerson.setText("Ford-Fulkerson");
+        jmAlgorithms.add(jmiFordFulkerson);
+
+        jmiEdmondsKarp.setText("Edomnds-Karp");
+        jmAlgorithms.add(jmiEdmondsKarp);
+
+        jmiDinicFlowNetWork.setText("Dinic's");
+        jmAlgorithms.add(jmiDinicFlowNetWork);
+
         jmAlgorithms.add(jSeparatorAlgo);
 
         jmiClearIteraction.setText("Re-initialition");
         jmAlgorithms.add(jmiClearIteraction);
 
         jMenuBar1.add(jmAlgorithms);
+
+        jmHelp.setText("Aide");
+        jmiAbout.setText("About");
+        jmHelp.add(jmiAbout);
+
+        jmiAide.setText("Support");
+        jmHelp.add(jmiAide);
+
+        jMenuBar1.add(jmHelp);
 
         setJMenuBar(jMenuBar1);
 
@@ -586,6 +604,18 @@ public class UIMain extends javax.swing.JFrame implements View {
         return jmiClearIteraction;
     }
 
+    public JMenuItem getJmiDinicFlowNetWork() {
+        return jmiDinicFlowNetWork;
+    }
+
+    public JMenuItem getJmiEdmondsKarp() {
+        return jmiEdmondsKarp;
+    }
+
+    public JMenuItem getJmiFordFulkerson() {
+        return jmiFordFulkerson;
+    }
+
     public void ennableBtnGraphe(boolean pFlag){
         btnAArete.setEnabled(pFlag);
         btnASommets.setEnabled(pFlag);
@@ -673,8 +703,14 @@ public class UIMain extends javax.swing.JFrame implements View {
     private javax.swing.JMenuItem jmiBFS;
     private javax.swing.JMenuItem jmiDFS;
     private javax.swing.JMenuItem jmiBellmanFord;
+    private javax.swing.JMenuItem jmiFordFulkerson;
+    private javax.swing.JMenuItem jmiEdmondsKarp;
+    private javax.swing.JMenuItem jmiDinicFlowNetWork;
     private javax.swing.JMenuItem jmiClearIteraction;
     private javax.swing.JSeparator jSeparatorAlgo;
+    private javax.swing.JSeparator jSeparatorNetwork;
+
+
     // End of variables declaration//GEN-END:variables
     
 }

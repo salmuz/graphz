@@ -2,25 +2,22 @@ package fr.edu.bp.m1info.mvp.presenter;
 
 import fr.edu.bp.m1info.mvp.view.UIMain;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.shape.*;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDecorator;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
-import fr.edu.bp.m1info.structure.geometric.plane.Circle;
-import fr.edu.bp.m1info.structure.geometric.plane.Line;
-import fr.edu.bp.m1info.structure.geometric.plane.LineArrow;
-import fr.edu.bp.m1info.structure.geometric.plane.Message;
 import fr.edu.bp.m1info.structure.graph.DirectedGraph;
+import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.UnDirectedGraph;
 import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
-import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.common.SwingUtils;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.events.*;
 import graph.algorithm.IterativeView;
+import graph.algorithm.network.FordFulkerson;
 import graph.algorithm.path.BellmanFordPath;
 import graph.algorithm.path.BreadthFirstPath;
 import graph.algorithm.path.DepthFirstPath;
@@ -48,34 +45,50 @@ public class GraphAction {
                 graph = new DirectedGraph<Arc, Vertex>() {
                 };
                 canvas = new GraphCanvas<Arc, Vertex>(graph);
+            }else{
+                if (optionGraphe == NewGraphPresenter.GRAPHE_NETWORK) {
+                    graph = new FlowNetworkGraph<EdgeFlow,Vertex>() {};
+                    canvas = new GraphCanvas<EdgeFlow, Vertex>(graph);
+                }
             }
         }
-
         if (optionGraphe != -1) {
-
-            for (Component cp : view.getJpPrincipal().getComponents()) {
-                view.getJpPrincipal().remove(cp);
-            }
-
-            spanel = new javax.swing.JScrollPane();
-            spanel.setBackground(new java.awt.Color(255, 255, 255));
-            view.getJpPrincipal().add(spanel, java.awt.BorderLayout.CENTER);
-            spanel.setViewportView(canvas);
-            view.ennableBtnGraphe(true);
-            view.ennableBtnDroit(false);
-            if (optionGraphe == NewGraphPresenter.GRAPHE_ORIENTE) {
-                view.getBtnContracter().setEnabled(false);
-                view.getJmiContrater().setEnabled(false);
-                view.getBtnGAuto().setEnabled(false);
-            }
-            view.getJmGraphe().setEnabled(true);
-            view.getJmGeometric().setEnabled(false);
-
-            view.revalidate();
-            view.repaint();
-            this.view = view;
-            actions();
+            createComponent(view);
         }
+    }
+
+    private void createComponent(UIMain view) {
+
+        for (Component cp : view.getJpPrincipal().getComponents()) {
+            view.getJpPrincipal().remove(cp);
+        }
+
+        spanel = new javax.swing.JScrollPane();
+        spanel.setBackground(new java.awt.Color(255, 255, 255));
+        view.getJpPrincipal().add(spanel, java.awt.BorderLayout.CENTER);
+        spanel.setViewportView(canvas);
+        view.ennableBtnGraphe(true);
+        view.ennableBtnDroit(false);
+//            if (optionGraphe == NewGraphPresenter.GRAPHE_ORIENTE) {
+//                view.getBtnContracter().setEnabled(false);
+//                view.getJmiContrater().setEnabled(false);
+//                view.getBtnGAuto().setEnabled(false);
+//            }
+        view.getJmGraphe().setEnabled(true);
+        view.getJmGeometric().setEnabled(false);
+
+        view.revalidate();
+        view.repaint();
+        this.view = view;
+        actions();
+
+    }
+
+
+    public GraphAction(UIMain view, GraphCanvas canvas) {
+        this.canvas = canvas;
+        this.graph = canvas.getGraph();
+        createComponent(view);
     }
 
     public void addVertexAction() {
@@ -175,6 +188,30 @@ public class GraphAction {
     }
 
 
+    private void executeFordFulkerson() {
+        ((FlowNetworkGraph)graph).setSource((Vertex) graph.getVertex().get(0));
+        ((FlowNetworkGraph)graph).setSink((Vertex) graph.getVertex().get(graph.sizeVertex()-1));
+        final FordFulkerson ffn = new FordFulkerson<EdgeFlow, Vertex>((FlowNetworkGraph<EdgeFlow, Vertex>) canvas.getGraph(),
+                (IterativeView) canvas);
+        Thread runner = new Thread(
+                new Runnable() {
+                    public void run() {
+                        ffn.execute();
+                        JOptionPane.showMessageDialog(view,"Flot maximum :"+ffn.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+        );
+        runner.start();
+    }
+
+    private void executeEdmondsKarp() {
+
+    }
+
+    private void executeDinics() {
+
+    }
+
     private void mouseListenerSearchShape() {
         canvas.addMouseListener(new MouseAdapter() {
             @Override
@@ -187,11 +224,12 @@ public class GraphAction {
                         EdgeDecorator decorator = ((EdgeDecorator) shape);
                         if (decorator.childEdgeShape() instanceof EdgeName) {
                             ShapeGeometric shapeGeometric = decorator.childEdgeShape().shape();
-                            if(shapeGeometric.contains(e.getX(),e.getY())){
-                                String value = JOptionPane.showInputDialog(view.getParent(),"Weigh:");
+                            if (shapeGeometric.contains(e.getX(), e.getY())) {
+                                String value = JOptionPane.showInputDialog(view.getParent(), "Weigh:");
                                 int w = Integer.parseInt(value);
                                 edge.setWeight(w);
-                                ((Message)shapeGeometric).setMessage(value);
+                                ((EdgeName)decorator.childEdgeShape()).setMessage(value);
+                                //((Message) shapeGeometric).setMessage(value);
                                 canvas.repaint();
                                 break;
                             }
@@ -319,6 +357,24 @@ public class GraphAction {
         this.view.getJmiBellmanFord().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 executeBellmanFord();
+            }
+        });
+
+        this.view.getJmiFordFulkerson().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                executeFordFulkerson();
+            }
+        });
+
+        this.view.getJmiDinicFlowNetWork().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                executeDinics();
+            }
+        });
+
+        this.view.getJmiEdmondsKarp().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                executeEdmondsKarp();
             }
         });
 

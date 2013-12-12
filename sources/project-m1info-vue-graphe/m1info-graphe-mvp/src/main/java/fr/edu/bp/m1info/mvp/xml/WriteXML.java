@@ -15,6 +15,7 @@ public class WriteXML {
 //        ModelManager manager = ModelManager.getInstance();
 //        graph.modelgraph.Graph graphT1=InterfaceOfConverteStructureGraphe.converterGrapheT5ToGrapheT1(graph,"graphe");
 //        return manager.marshalling(graphT1.getIdGraph(),ruta);
+
         return false;
     }
 }

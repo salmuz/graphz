@@ -47,5 +47,5 @@ public interface IterativeView<Edge extends IEdge,Node extends Vertex> {
 
     public void updateView(Node node, Edge edge);
 
-
+    public void updateView(Graph<Edge,Node> graph);
 }

@@ -40,12 +40,12 @@
 package fr.edu.bp.m1info.swing.design;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
+import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.operation.LineOperation;
 import fr.edu.bp.m1info.structure.geometric.operation.impl.Line2DOperationImpl;
 import fr.edu.bp.m1info.structure.geometric.plane.*;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
 import fr.edu.bp.m1info.structure.geometric.plane.Rectangle;
-import fr.edu.bp.m1info.structure.geometric.Point;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -121,21 +121,36 @@ public class DesignGeometric2D implements Graphics {
         java.awt.geom.Point2D.Double from = new java.awt.geom.Point2D.Double(0, 0); // Start point
         java.awt.geom.Point2D.Double to = new java.awt.geom.Point2D.Double(d, 0); // End point
         java.awt.geom.Point2D.Double control = new java.awt.geom.Point2D.Double(d / 2, 0 - (d / 4)); // Control point
-        QuadCurve2D.Double  shape = new QuadCurve2D.Double( // Create quadratic curve
+        QuadCurve2D.Double shape = new QuadCurve2D.Double( // Create quadratic curve
                 from.x, from.y, // Segment start point
                 control.x, control.y, // Control point
                 to.x, to.y); // Segment end point
 
-        curve.setAtanCurve(Math.atan2(to.getY() - control.getY() + control.getY()/8, to.getX() - control.getX() + control.getX()/8));
+        curve.setAtanCurve(Math.atan2(to.getY() - control.getY() + control.getY() / 8, to.getX() - control.getX() + control.getX() / 8));
 
         AffineTransform afine = new AffineTransform();
         afine.translate(x0, y0); // translate sink work with coordinates (0,0)
         afine.rotate(angle);  // then it must rotate
 
         // Draw the curves
+        Shape shape01 = afine.createTransformedShape(shape);
         graphics2D.setColor(curve.getColor());
-        graphics2D.draw(afine.createTransformedShape(shape));
+        graphics2D.draw(shape01);
         graphics2D.setStroke(strokeDefault);
+
+
+        //compute the control's point
+        PathIterator pi = ((Path2D) shape01).getPathIterator(null);
+        while (pi.isDone() == false) {
+            double[] coordinates = new double[6];
+            int type = pi.currentSegment(coordinates);
+            if (type == PathIterator.SEG_QUADTO) {
+                curve.setControl(new Point2D(coordinates[0], coordinates[1]));
+                break;
+            }
+            pi.next();
+        }
+
 
         return shape;
     }
@@ -189,30 +204,29 @@ public class DesignGeometric2D implements Graphics {
         // dessin de la fleche
         Path2D.Double path = new Path2D.Double();
 
-        path.moveTo(-arrowLength * Math.cos(angleArrow)-lineArrow.getMargin(), arrowLength * Math.sin(angleArrow));
+        path.moveTo(-arrowLength * Math.cos(angleArrow) - lineArrow.getMargin(), arrowLength * Math.sin(angleArrow));
         path.lineTo(-lineArrow.getMargin(), 0);
-        path.lineTo(-arrowLength * Math.cos(angleArrow)-lineArrow.getMargin(), -arrowLength * Math.sin(angleArrow));
+        path.lineTo(-arrowLength * Math.cos(angleArrow) - lineArrow.getMargin(), -arrowLength * Math.sin(angleArrow));
 
         graphics2D.fill(transform.createTransformedShape(path));
 
     }
 
     /**
-     *
      * @param message
      * @return
      */
     public Shape draw(Message message) {
         graphics2D.setColor(message.getColor());
-        Font fonts = new Font("TimesRoman ",Font.BOLD,12);
+        Font fonts = new Font("TimesRoman ", Font.BOLD, 12);
         message.setFont(fonts);
         graphics2D.setFont(message.getFont());
-        graphics2D.drawString(message.getMessage(),(float) message.getPoint().getX(),
-                (float)message.getPoint().getY());
+        graphics2D.drawString(message.getMessage(), (float) message.getPoint().getX(),
+                (float) message.getPoint().getY());
 
         Shape shape = new Rectangle2D.Double(message.getPoint().getX(),
-                    message.getPoint().getY()-12,message.getMessage().length()*10,12);
-        Color color=new Color(0f,0f,0f,0f );  // colorless
+                message.getPoint().getY() - 12, message.getMessage().length() * 10, 12);
+        Color color = new Color(0f, 0f, 0f, 0f);  // colorless
         graphics2D.setColor(color);
         graphics2D.setBackground(color);
         graphics2D.draw(shape);
@@ -220,7 +234,6 @@ public class DesignGeometric2D implements Graphics {
     }
 
     /**
-     *
      * @param curvedArrow
      * @return
      */
@@ -249,9 +262,9 @@ public class DesignGeometric2D implements Graphics {
         // dessin de la fleche
         Path2D.Double path = new Path2D.Double();
 
-        path.moveTo(-arrowLength * Math.cos(angleArrow)-curvedArrow.getMargin(), arrowLength * Math.sin(angleArrow));
+        path.moveTo(-arrowLength * Math.cos(angleArrow) - curvedArrow.getMargin(), arrowLength * Math.sin(angleArrow));
         path.lineTo(-curvedArrow.getMargin(), 0);
-        path.lineTo(-arrowLength * Math.cos(angleArrow)-curvedArrow.getMargin(), -arrowLength * Math.sin(angleArrow));
+        path.lineTo(-arrowLength * Math.cos(angleArrow) - curvedArrow.getMargin(), -arrowLength * Math.sin(angleArrow));
 
         graphics2D.fill(transform.createTransformedShape(path));
 
