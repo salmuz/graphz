@@ -38,7 +38,6 @@
 
 package graph.algorithm.network;
 
-import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
@@ -55,7 +54,8 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> extend
     private AbstractPath<Edge, Node> bfsPath;
 
     public DinicFlowNetwork(FlowNetworkGraph<Edge, Node> graph,IterativeView<Edge,Node> iterativeView) {
-        super(graph,new Cloner().deepClone(graph),iterativeView);
+        super(graph,null,iterativeView);
+        //super(graph,new Cloner().deepClone(graph),iterativeView);
     }
 
     public DinicFlowNetwork(FlowNetworkGraph<Edge, Node> graph) {

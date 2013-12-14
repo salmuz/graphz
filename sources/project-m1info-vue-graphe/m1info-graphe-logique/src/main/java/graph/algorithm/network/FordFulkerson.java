@@ -38,7 +38,6 @@
 
 package graph.algorithm.network;
 
-import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
@@ -48,15 +47,29 @@ import graph.algorithm.path.AbstractPath;
 import graph.algorithm.path.DepthFirstPath;
 import graph.algorithm.path.PathUtils;
 
-
+/**
+ *
+ * @param <Edge>
+ * @param <Node>
+ */
 public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> extends AbstractNetwork<Edge,Node>{
 
     private AbstractPath<Edge, Node> dfsPath;
 
+    /**
+     *
+     * @param graph
+     * @param iterativeView
+     */
     public FordFulkerson(FlowNetworkGraph<Edge, Node> graph,IterativeView<Edge,Node> iterativeView) {
-        super(graph,new Cloner().deepClone(graph),iterativeView);
+        super(graph,null,iterativeView);
+        //super(graph,new Cloner().deepClone(graph),iterativeView);
     }
 
+    /**
+     *
+     * @param graph
+     */
     public FordFulkerson(FlowNetworkGraph<Edge, Node> graph) {
         super(graph);
     }
@@ -81,10 +94,14 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> extends A
         while (hasPathFromSourceToSick(graphNetwork)) {
 
             int sick = graphNetwork.sink().getValue();
-            int newFlow = PathUtils.sizeofShortestPathArc(dfsPath.pathTo(sick));
+            Iterable<Edge> path = dfsPath.pathTo(sick);
+            int newFlow = PathUtils.sizeofShortestPathArc(path);
+
+            // simulation view
+            this.iterativeView.updateView(path);
 
             //Version v2, I don't know if it's optimal
-            residualGraph.createResidualGraph(graphNetwork, dfsPath.pathTo(sick), newFlow);
+            residualGraph.createResidualGraph(graphNetwork, path, newFlow);
 
             //it's bad to test of performance
             //updateFlowGraph(sick,newFlow);
@@ -97,7 +114,7 @@ public class FordFulkerson<Edge extends EdgeFlow, Node extends Vertex> extends A
             //}
 
             this.iterativeView.updateView(graphNetwork);
-            System.out.println("newFlow:"+newFlow);
+            //System.out.println("newFlow:"+newFlow);
             flowMax += newFlow;
         }
 

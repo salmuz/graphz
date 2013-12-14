@@ -44,6 +44,7 @@ import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 
+import java.awt.*;
 import java.util.Stack;
 
 public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends AbstractPath<Edge, Node> {
@@ -58,7 +59,7 @@ public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends Abs
 
     public void execute() {
         nodeTo[source.getValue()] = source;
-        iterativeView.updateView(source, null);
+        iterativeView.updateView(source, null, Color.RED, Color.RED);
         dephtFirstSearch(source);
     }
 
@@ -73,7 +74,7 @@ public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends Abs
         marked[v.getValue()] = true;
         while (!stack.isEmpty()) {
             Node u = stack.pop();
-            iterativeView.updateView(u, null);
+            iterativeView.updateView(u, null, Color.RED, Color.RED);
             for (AdjacencyList.Neighbor w : graph.adjacencysNeighbor(u.getValue())) {
                 Node vs = (Node) w.getNode();
                 Edge edge = (Edge) w.getEdge();
@@ -104,7 +105,7 @@ public class DepthFirstPath<Edge extends IEdge, Node extends Vertex> extends Abs
             if (isMarked(edge, vs)) {
                 edgeTo[vs.getValue()] = edge;
                 nodeTo[vs.getValue()] = (Node) w.getEdge().from();
-                iterativeView.updateView((Node) w.getNode(), (Edge) w.getEdge());
+                iterativeView.updateView((Node) w.getNode(), (Edge) w.getEdge(), Color.RED, Color.RED);
                 dephtFirstSearchR(vs);
             }
         }

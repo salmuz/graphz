@@ -38,7 +38,6 @@
 
 package graph.algorithm.network;
 
-import com.rits.cloning.Cloner;
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
@@ -53,7 +52,8 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> extends Abs
     private AbstractPath<Edge, Node> bfspath;
 
     public EdmondsKarp(FlowNetworkGraph<Edge, Node> graph,IterativeView<Edge,Node> iterativeView) {
-        super(graph,new Cloner().deepClone(graph),iterativeView);
+        super(graph,null,iterativeView);
+        //super(graph,new Cloner().deepClone(graph),iterativeView);
     }
 
     public EdmondsKarp(FlowNetworkGraph<Edge, Node> graph) {
@@ -69,11 +69,14 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> extends Abs
 
         while (hasPathFromSourceToSick(graphNetwork)) {
             int sick = graphNetwork.sink().getValue();
+            Iterable<Edge> path = bfspath.pathTo(sick);
+            int newFlow = PathUtils.sizeofShortestPathArc(path);
 
-            int newFlow = PathUtils.sizeofShortestPathArc(bfspath.pathTo(sick));
+            //simulation
+            iterativeView.updateView(path);
 
             //Version v2, I don't know if it's optimal
-            residualGraph.createResidualGraph(graphNetwork, bfspath.pathTo(sick), newFlow);
+            residualGraph.createResidualGraph(graphNetwork, path, newFlow);
 
             // it's bad to test of performance
             // updateFlowGraph(sick, newFlow);

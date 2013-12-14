@@ -42,6 +42,7 @@ import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
+import graph.algorithm.IterativeViewAdapter;
 
 import java.lang.reflect.Array;
 import java.util.Stack;
@@ -73,12 +74,7 @@ public abstract class AbstractPath<Edge extends IEdge,Node extends Vertex> {
     }
 
     public AbstractPath(Graph<Edge, Node> graph, Node source) {
-        this(graph,source,new IterativeView<Edge, Node>() {
-            public void updateView(Node node, Edge edge) {
-            }
-            public void updateView(Graph<Edge, Node> graph) {
-            }
-        });
+        this(graph,source,new IterativeViewAdapter<Edge, Node>());
     }
 
     public boolean hasPathTo(int v){

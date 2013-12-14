@@ -45,6 +45,8 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 import graph.algorithm.exception.ExistNegativeWeightCycle;
 
+import java.awt.*;
+
 public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
     extends  AbstractPath<Edge,Node>{
 
@@ -139,11 +141,11 @@ public class BellmanFordPath<Edge extends IEdge, Node extends Vertex>
     }
 
     public void showIterative(){
-        iterativeView.updateView(source,null);
+        iterativeView.updateView(source,null,Color.RED,Color.RED);
         for(Edge edge: edgeTo){
             if(edge != null){
-                iterativeView.updateView((Node) edge.from(),edge);
-                iterativeView.updateView((Node) edge.to(),edge);
+                iterativeView.updateView((Node) edge.from(),edge, Color.RED,Color.RED);
+                iterativeView.updateView((Node) edge.to(),edge,Color.RED,Color.RED);
             }
         }
     }

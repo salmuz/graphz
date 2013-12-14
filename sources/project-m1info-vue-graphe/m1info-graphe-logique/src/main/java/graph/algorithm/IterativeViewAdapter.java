@@ -44,12 +44,14 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 import java.awt.*;
 
+public class IterativeViewAdapter<Edge extends IEdge,Node extends Vertex> implements IterativeView<Edge,Node> {
 
-public interface IterativeView<Edge extends IEdge,Node extends Vertex> {
+    public void updateView(Iterable<Edge> path){
+    }
 
-    public void updateView(Node node, Edge edge,Color cnode, Color cedge);
+    public void updateView(Graph<Edge, Node> graph) {
+    }
 
-    public void updateView(Graph<Edge,Node> graph);
-
-    public void updateView(Iterable<Edge> path);
+    public void updateView(Node node, Edge edge,Color cnode, Color cedge){
+    }
 }

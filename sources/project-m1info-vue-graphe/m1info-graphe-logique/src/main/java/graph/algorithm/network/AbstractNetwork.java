@@ -39,10 +39,10 @@
 package graph.algorithm.network;
 
 import fr.edu.bp.m1info.structure.graph.FlowNetworkGraph;
-import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
+import graph.algorithm.IterativeViewAdapter;
 
 public class AbstractNetwork<Edge extends EdgeFlow, Node extends Vertex> {
 
@@ -72,10 +72,7 @@ public class AbstractNetwork<Edge extends EdgeFlow, Node extends Vertex> {
      * @param graph
      */
     public AbstractNetwork(FlowNetworkGraph<Edge, Node> graph) {
-        this(graph, null, new IterativeView<Edge, Node>() {
-            public void updateView(Node node, Edge edge) { }
-            public void updateView(Graph<Edge, Node> graph) {}
-        });
+        this(graph, null, new IterativeViewAdapter<Edge, Node>());
     }
 
     /**

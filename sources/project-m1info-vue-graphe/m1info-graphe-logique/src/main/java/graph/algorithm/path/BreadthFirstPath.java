@@ -44,6 +44,7 @@ import fr.edu.bp.m1info.structure.graph.edge.IEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.IterativeView;
 
+import java.awt.*;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -59,7 +60,7 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
     }
 
     public void execute(){
-        iterativeView.updateView(source,null);
+        iterativeView.updateView(source,null, Color.RED,Color.RED);
         breadthFirstSearch(source);
     }
 
@@ -86,7 +87,7 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
                     edgeTo[node.getValue()] = edge;
                     nodeTo[node.getValue()] = (Node) w.getEdge().from();
                     dist[node.getValue()] = dist[v] + 1;
-                    iterativeView.updateView(node,edge);
+                    iterativeView.updateView(node,edge,Color.RED,Color.RED);
                 }
             }
         }

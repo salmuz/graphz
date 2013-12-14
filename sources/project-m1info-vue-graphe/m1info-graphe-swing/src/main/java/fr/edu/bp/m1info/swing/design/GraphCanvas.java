@@ -40,7 +40,7 @@
  */
 package fr.edu.bp.m1info.swing.design;
 
-import com.rits.cloning.Cloner;
+import fr.edu.bp.m1info.structure.common.GraphProperties;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeDecorator;
 import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.EdgeName;
@@ -103,19 +103,19 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
         this.graph = graph;
     }
 
-    public void updateView(Node node, Edge edge) {
-        if(node != null) node.getVertex().parentComponent().shape().setBackground(Color.RED);
-        if(edge != null) edge.getShape().shape().setColor(Color.RED);
-        repaint();
-        try {
+    public void updateView(Node node, Edge edge, Color cnode, Color cedge){
+        if(node != null) node.getVertex().parentComponent().shape().setBackground(cnode);
+        if(edge != null) edge.getShape().shape().setColor(cedge);
+        //repaint();
+        /*try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        }      */
     }
 
-    public void updateView(Graph<Edge, Node> ograph) {
-        this.graph = new Cloner().deepClone(ograph);
+    public void updateView(Graph<Edge, Node> graph) {
+        //this.graph = new Cloner().deepClone(ograph);
 
         // remove edge avec capacity or weigh cero
         for(Node v : graph.getVertex()){
@@ -135,5 +135,25 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+    }
+
+    public void updateView(Iterable<Edge> path) {
+        for (Edge edge : path) {
+            this.updateView((Node)edge.from(),edge,Color.RED,Color.RED);
+        }
+
+        repaint();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        // recuperar valores
+        for (Edge edge : path) {
+            this.updateView((Node)edge.from(),edge,
+                    GraphProperties.VERTEX_COLOR,GraphProperties.EDGE_COLOR);
+        }
+
     }
 }
