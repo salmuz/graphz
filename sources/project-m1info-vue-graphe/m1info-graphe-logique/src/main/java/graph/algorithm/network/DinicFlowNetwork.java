@@ -47,6 +47,7 @@ import graph.algorithm.path.AbstractPath;
 import graph.algorithm.path.BreadthFirstPath;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> extends AbstractNetwork<Edge,Node>{
 
@@ -130,6 +131,7 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> extend
 
             if (bottleneck == FAILURE_PATH) break;
 
+            iterativeView.updateView(Arrays.asList(path));
 //            System.out.println("bot:"+bottleneck + "  PATH");
             //Augment flow f by f' and go back sink step 2.
             for (Edge w = path[source.getValue()]; w != null; w = path[w.to().getValue()]) {
@@ -197,17 +199,10 @@ public class DinicFlowNetwork<Edge extends EdgeFlow, Node extends Vertex> extend
      */
     public void execute() {
         //System.out.println("Output:\n" + graph);
-//        FlowNetworkGraph<Edge, Node> origin = new Cloner().deepClone(graph);
+        //FlowNetworkGraph<Edge, Node> origin = new Cloner().deepClone(graph);
         this.networkDinic();
         //System.out.println("Output:\n" + graph);
         //graph = origin;
-    }
-
-    /**
-     * @return
-     */
-    public int getFlowMaximal() {
-        return flowMaximal;
     }
 
     /**

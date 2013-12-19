@@ -70,7 +70,7 @@ public class BreadthFirstPath<Edge extends IEdge, Node extends Vertex>
      *  (1) It do not function with cycle in the same vertex.
      * @param source
      */
-    private void breadthFirstSearch(Node source) {
+    protected void breadthFirstSearch(Node source) {
         Queue<Integer> queue = new PriorityQueue<Integer>();
         queue.offer(source.getValue());
         marked[source.getValue()] = true;

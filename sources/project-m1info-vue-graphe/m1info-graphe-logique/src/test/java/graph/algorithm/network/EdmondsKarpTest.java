@@ -75,17 +75,6 @@ public class EdmondsKarpTest extends TestCase {
 
     }
 
-    public void testAlgorithmEdmondsKarpTest04(){
-        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow04();
-
-        EdmondsKarp<EdgeFlow,Vertex> edmondsKarp = new EdmondsKarp<EdgeFlow, Vertex>(graph);
-
-        edmondsKarp.execute();
-
-        assertEquals(edmondsKarp.getFlowMaximal(),4399);
-
-    }
-
     public void testAlgorithmEdmondsKarpTest05(){
         FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow05();
 

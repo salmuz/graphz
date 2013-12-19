@@ -44,61 +44,20 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import graph.algorithm.GenerateGraphTest;
 import junit.framework.TestCase;
 
-public class DinicFlowNetworkTest extends TestCase {
+public class CapacityScalingTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
     }
 
-    public void testDinicAlgorithm01(){
-        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow01();
+    public void testCapacityScalingAlgorithm01(){
+        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkCapacityScaling();
 
         System.out.println(graph.toString());
 
-        DinicFlowNetwork<EdgeFlow,Vertex> dinicFlowNetwork = new DinicFlowNetwork<EdgeFlow, Vertex>(graph);
+        CapacityScaling<EdgeFlow,Vertex> capacityScaling = new CapacityScaling<EdgeFlow, Vertex>(graph);
 
-        dinicFlowNetwork.execute();
+        capacityScaling.execute();
 
-        assertEquals(dinicFlowNetwork.getFlowMaximal(),4);
+        assertEquals(capacityScaling.getFlowMaximal(),8);
     }
-
-    public void testDinicAlgorithm03(){
-        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow03();
-
-        System.out.println(graph.toString());
-
-        DinicFlowNetwork<EdgeFlow,Vertex> dinicFlowNetwork = new DinicFlowNetwork<EdgeFlow, Vertex>(graph);
-
-        dinicFlowNetwork.execute();
-
-        assertEquals(dinicFlowNetwork.getFlowMaximal(),27);
-
-    }
-
-    public void testDinicAlgorithm02(){
-        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow02();
-
-        System.out.println(graph.toString());
-
-        DinicFlowNetwork<EdgeFlow,Vertex> dinicFlowNetwork = new DinicFlowNetwork<EdgeFlow, Vertex>(graph);
-
-        dinicFlowNetwork.execute();
-
-        assertEquals(dinicFlowNetwork.getFlowMaximal(),30);
-
-    }
-
-    public void testDinicAlgorithm05(){
-
-        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow05();
-
-        DinicFlowNetwork<EdgeFlow,Vertex> dinicFlowNetwork = new DinicFlowNetwork<EdgeFlow, Vertex>(graph);
-
-        dinicFlowNetwork.execute();
-
-        assertEquals(dinicFlowNetwork.getFlowMaximal(),19);
-
-    }
-
-
-
 }

@@ -48,12 +48,6 @@ import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 public final class GenerateGraphTest {
 
     public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkFlow01() {
@@ -220,7 +214,7 @@ public final class GenerateGraphTest {
 
     public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkFlow04() {
         FlowNetworkGraph<EdgeFlow, Vertex> graph =  null;
-        File file = new File("/Users/user/Dropbox/MasterM1_DECOL/AlgorithmiqueComplexiteCalculabilite/TPs/refactory/data/flowNetwork_50000_250000_1386085102702.txt");
+        /*File file = new File("data/flowNetwork_50000_250000_1386085102702.txt");
         try {
             Scanner in = new Scanner(file);
             int nbV = in.nextInt();
@@ -252,7 +246,7 @@ public final class GenerateGraphTest {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        }          */
 
         return graph;
 
@@ -289,6 +283,37 @@ public final class GenerateGraphTest {
         return graph;
     }
 
+
+    public static FlowNetworkGraph<EdgeFlow, Vertex> generateGraphNetworkCapacityScaling() {
+        Vertex v0 = new Vertex();
+        Vertex v1 = new Vertex();
+        Vertex v2 = new Vertex();
+        Vertex v3 = new Vertex();
+        Vertex v4 = new Vertex();
+        Vertex v5 = new Vertex();
+        FlowNetworkGraph<EdgeFlow, Vertex> graph =
+                new FlowNetworkGraph<EdgeFlow, Vertex>(v0, v3, GraphProperties.CONSOLE) {
+                };
+
+        graph.addVertex(v0);
+        graph.addVertex(v1);
+        graph.addVertex(v2);
+        graph.addVertex(v3);
+        graph.addVertex(v4);
+        graph.addVertex(v5);
+
+
+        graph.addEdge(v0, v1, 3);
+        graph.addEdge(v0, v5, 4);
+        graph.addEdge(v0, v3, 1);
+        graph.addEdge(v1, v2, 3);
+        graph.addEdge(v1, v4, 4);
+        graph.addEdge(v2, v3, 3);
+        graph.addEdge(v4, v3, 8);
+        graph.addEdge(v5, v4, 4);
+
+        return graph;
+    }
 
 
 }

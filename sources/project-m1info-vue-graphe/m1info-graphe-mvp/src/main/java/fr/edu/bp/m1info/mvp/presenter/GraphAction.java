@@ -17,6 +17,7 @@ import fr.edu.bp.m1info.swing.common.SwingUtils;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.events.*;
 import graph.algorithm.IterativeView;
+import graph.algorithm.network.CapacityScaling;
 import graph.algorithm.network.DinicFlowNetwork;
 import graph.algorithm.network.EdmondsKarp;
 import graph.algorithm.network.FordFulkerson;
@@ -199,7 +200,8 @@ public class GraphAction {
                 new Runnable() {
                     public void run() {
                         ffn.execute();
-                        JOptionPane.showMessageDialog(view,"Flot maximum :"+ffn.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
+                        if(ffn.getFlowMaximal()>0)
+                            JOptionPane.showMessageDialog(view,"Flot maximum :"+ffn.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
         );
@@ -215,7 +217,8 @@ public class GraphAction {
                 new Runnable() {
                     public void run() {
                         ekn.execute();
-                        JOptionPane.showMessageDialog(view,"Flot maximum :"+ekn.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
+                        if(ekn.getFlowMaximal()>0)
+                            JOptionPane.showMessageDialog(view,"Flot maximum :"+ekn.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
         );
@@ -231,7 +234,25 @@ public class GraphAction {
                 new Runnable() {
                     public void run() {
                         dnc.execute();
-                        JOptionPane.showMessageDialog(view,"Flot maximum :"+dnc.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
+                        if(dnc.getFlowMaximal()>0)
+                            JOptionPane.showMessageDialog(view,"Flot maximum :"+dnc.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+        );
+        runner.start();
+    }
+
+    private void executeCapacityScaling(){
+        ((FlowNetworkGraph)graph).setSource((Vertex) graph.getVertex().get(0));
+        ((FlowNetworkGraph)graph).setSink((Vertex) graph.getVertex().get(graph.sizeVertex()-1));
+        final CapacityScaling capacityScaling = new CapacityScaling<EdgeFlow, Vertex>((FlowNetworkGraph<EdgeFlow, Vertex>) canvas.getGraph(),
+                (IterativeView) canvas);
+        Thread runner = new Thread(
+                new Runnable() {
+                    public void run() {
+                        capacityScaling.execute();
+                        if(capacityScaling.getFlowMaximal()>0)
+                            JOptionPane.showMessageDialog(view,"Flot maximum :"+capacityScaling.getFlowMaximal(),"Graphz Message",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
         );
@@ -401,6 +422,12 @@ public class GraphAction {
         this.view.getJmiEdmondsKarp().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 executeEdmondsKarp();
+            }
+        });
+
+        this.view.getJmiCapacityScaling().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                executeCapacityScaling();
             }
         });
 

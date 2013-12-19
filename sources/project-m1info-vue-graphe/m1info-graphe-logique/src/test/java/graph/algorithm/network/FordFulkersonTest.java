@@ -76,17 +76,6 @@ public class FordFulkersonTest extends TestCase {
         assertEquals(fordFulkerson.getFlowMaximal(),30);
     }
 
-    public void testAlgorithmFordFulkerson04(){
 
-        FlowNetworkGraph<EdgeFlow,Vertex> graph = GenerateGraphTest.generateGraphNetworkFlow04();
-
-        //System.out.println(graph.toString());
-
-        FordFulkerson<EdgeFlow,Vertex> fordFulkerson = new FordFulkerson<EdgeFlow, Vertex>(graph);
-
-        fordFulkerson.execute();
-
-        assertEquals(fordFulkerson.getFlowMaximal(),4399);
-    }
 
 }

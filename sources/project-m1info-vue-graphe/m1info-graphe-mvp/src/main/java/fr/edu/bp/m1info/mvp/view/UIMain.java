@@ -138,6 +138,7 @@ public class UIMain extends javax.swing.JFrame implements View {
         jmiDinicFlowNetWork = new javax.swing.JMenuItem();
         jmiFordFulkerson = new javax.swing.JMenuItem();
         jmiEdmondsKarp = new javax.swing.JMenuItem();
+        jmiCapacityScaling = new javax.swing.JMenuItem();
         jmiClearIteraction = new javax.swing.JMenuItem();
         jSeparatorAlgo = new javax.swing.JSeparator();
         jSeparatorNetwork = new javax.swing.JSeparator();
@@ -363,6 +364,9 @@ public class UIMain extends javax.swing.JFrame implements View {
 
         jmiDinicFlowNetWork.setText("Dinic's");
         jmAlgorithms.add(jmiDinicFlowNetWork);
+
+        jmiCapacityScaling.setText("Capacity Scaling");
+        jmAlgorithms.add(jmiCapacityScaling);
 
         jmAlgorithms.add(jSeparatorAlgo);
 
@@ -616,6 +620,10 @@ public class UIMain extends javax.swing.JFrame implements View {
         return jmiFordFulkerson;
     }
 
+    public JMenuItem getJmiCapacityScaling() {
+        return jmiCapacityScaling;
+    }
+
     public void ennableBtnGraphe(boolean pFlag){
         btnAArete.setEnabled(pFlag);
         btnASommets.setEnabled(pFlag);
@@ -706,6 +714,7 @@ public class UIMain extends javax.swing.JFrame implements View {
     private javax.swing.JMenuItem jmiFordFulkerson;
     private javax.swing.JMenuItem jmiEdmondsKarp;
     private javax.swing.JMenuItem jmiDinicFlowNetWork;
+    private javax.swing.JMenuItem jmiCapacityScaling;
     private javax.swing.JMenuItem jmiClearIteraction;
     private javax.swing.JSeparator jSeparatorAlgo;
     private javax.swing.JSeparator jSeparatorNetwork;

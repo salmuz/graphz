@@ -49,6 +49,7 @@ public class AbstractNetwork<Edge extends EdgeFlow, Node extends Vertex> {
     protected FlowNetworkGraph<Edge, Node> graph;
     protected IterativeView<Edge, Node> iterativeView;
     protected int flowMaximal;
+    protected int maxCapacity; // max capacity
     private FlowNetworkGraph<Edge, Node> origin;
 
     /**
@@ -80,9 +81,13 @@ public class AbstractNetwork<Edge extends EdgeFlow, Node extends Vertex> {
      */
     private void initFlowZero(){
         this.flowMaximal = 0;
+        this.maxCapacity = Integer.MIN_VALUE;
         for (Node node : graph.getVertex()) {
             for (Edge edge : graph.adjacencys(node)) {
                 edge.setFlow(0);
+                if(this.maxCapacity < edge.capacity()){
+                    this.maxCapacity = edge.capacity();
+                }
             }
         }
     }

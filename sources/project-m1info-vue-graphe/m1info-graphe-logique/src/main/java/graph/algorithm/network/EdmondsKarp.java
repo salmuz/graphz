@@ -88,7 +88,7 @@ public class EdmondsKarp<Edge extends EdgeFlow, Node extends Vertex> extends Abs
             //    edge.addFlowTo(edge.to(), newFlow);
             //}
             //System.out.println("newFlow:"+newFlow);
-            System.out.println(graphNetwork.toString());
+            //System.out.println(graphNetwork.toString());
             this.iterativeView.updateView(graphNetwork);
             flowMax += newFlow;
         }

@@ -131,7 +131,7 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
 
         repaint();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -139,19 +139,21 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
 
     public void updateView(Iterable<Edge> path) {
         for (Edge edge : path) {
-            this.updateView((Node)edge.from(),edge,Color.RED,Color.RED);
+            if(edge != null)
+                this.updateView((Node)edge.from(),edge,Color.RED,Color.RED);
         }
 
         repaint();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
         // recuperar valores
         for (Edge edge : path) {
-            this.updateView((Node)edge.from(),edge,
+            if(edge != null)
+                this.updateView((Node)edge.from(),edge,
                     GraphProperties.VERTEX_COLOR,GraphProperties.EDGE_COLOR);
         }
 
