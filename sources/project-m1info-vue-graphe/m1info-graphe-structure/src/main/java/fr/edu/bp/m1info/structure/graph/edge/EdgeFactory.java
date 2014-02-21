@@ -41,20 +41,38 @@
 package fr.edu.bp.m1info.structure.graph.edge;
 
 
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeFlow;
+import fr.edu.bp.m1info.structure.graph.edge.decorator.EdgeWeight;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
 public class EdgeFactory {
 
-    public static AbstractEdge createEdge(Class clazz,Vertex source, Vertex target,Object value){
+    public static AbstractEdge createEdge(Class clazz,Vertex source, Vertex target,Object ...value){
 
-        AbstractEdge edge = null;
+        AbstractEdge<Integer> edge = null;
 
         if(clazz.isAssignableFrom(Edge.class)){
-            edge = new Edge(source,target,value);
+            edge = new Edge(source,target);
         }else{
-            edge = new Arc(source,target,value);
+            if(clazz.isAssignableFrom(Arc.class)){
+                edge = new Arc(source,target);
+            }else{
+                if(clazz.isAssignableFrom(EdgeWeight.class)){
+                   int weight = 0;
+                   if(value != null) weight = (Integer)value[0];
+                   edge = new EdgeWeight(new Arc(source,target),weight);
+                }else{
+                    if(clazz.isAssignableFrom(EdgeFlow.class)){
+                        int capacity = 0, flow = 0;
+                        if(value != null) capacity = (Integer)value[0];
+                        edge = new EdgeFlow(new Arc(source,target),capacity,flow);
+                    }
+                }
+            }
+
         }
 
         return edge;
     }
+
 }

@@ -29,9 +29,8 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aden Nouh Abdirazak
+ * Contributor(s):  
+ *
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -40,13 +39,13 @@
 package fr.edu.bp.m1info.structure.graph.edge;
 
 
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-/*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
-*et de la class AbstractEdge<Shape>*/
-public class Edge<Value,Shape extends ShapeGeometric & EdgeShapeGraph> extends AbstractEdge<Value,Shape>{
+/* *
+ * Ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
+ * et de la class AbstractEdge<Shape>
+ */
+public class Edge extends AbstractEdge {
 
 
     /**
@@ -57,7 +56,7 @@ public class Edge<Value,Shape extends ShapeGeometric & EdgeShapeGraph> extends A
      * @parameter target  Vertex
      *
      */
-    public Edge(Vertex source, Vertex target, Value value) {
-        super(source, target, value);
+    public Edge(Vertex source, Vertex target) {
+        super(source, target);
     }
 }

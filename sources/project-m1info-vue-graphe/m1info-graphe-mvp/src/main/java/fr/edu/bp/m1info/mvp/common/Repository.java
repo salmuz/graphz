@@ -43,8 +43,7 @@ package fr.edu.bp.m1info.mvp.common;
 import fr.edu.bp.m1info.structure.graph.Graph;
 import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-
-import java.awt.*;
+import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 /**
  * Ce le classe repository qui comme fonction de liaison avec la base des données
@@ -52,6 +51,6 @@ import java.awt.*;
 public abstract class Repository {
 
     public abstract boolean enregistreGraphe(Graph<AbstractEdge,Vertex> graphe,String name);
-    public abstract void openGraphe(Graph grapheDesi,Rectangle rectangle,String name);
+    public abstract GraphCanvas openGraphe(String name);
 
 }

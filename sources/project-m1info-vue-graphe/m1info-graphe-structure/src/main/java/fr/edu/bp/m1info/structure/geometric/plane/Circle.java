@@ -40,19 +40,16 @@
 package fr.edu.bp.m1info.structure.geometric.plane;
 
 
+import fr.edu.bp.m1info.structure.common.GraphProperties;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-
-import java.awt.*;
-import java.awt.geom.Area;
 
 /**
  * nous avons une class appelle circle et qui herite certaine methode de la class ShapeGeometric
  * et elle est implementé dans la class VertexShapeGraph
  */
-public class Circle extends ShapeGeometric implements VertexShapeGraph {
+public class Circle extends ShapeGeometric {
 
     private Point center;
     private double radio;
@@ -65,6 +62,8 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
      public Circle(Point center, double radio) {
         this.center = center;
         this.radio = radio;
+        this.color = GraphProperties.VERTEX_COLOR;
+        this.background = GraphProperties.VERTEX_BACKGROUND;
     }
 
     /**
@@ -110,7 +109,7 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
      */
     @Override
     public void draw(Graphics graphics) {
-       this.shape = graphics.draw(this);
+       this.shapeAWT = graphics.draw(this);
     }
 
     /**
@@ -124,7 +123,7 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
      */
     @Override
     public boolean contains(double x, double y) {
-        return this.shape.contains(x,y);
+        return this.shapeAWT.contains(x,y);
     }
 
     /**
@@ -132,7 +131,7 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
      *
      * @return un point
      */
-    public Point centreShape() {
+    public Point centre() {
         return this.getCenter();
     }
 
@@ -145,14 +144,14 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
      * @return  un boolean
      */
     @Override
-    public boolean intersect(ShapeGeometric shapeGeometric) {
+    public boolean intersects(ShapeGeometric shapeGeometric) {
         Circle circle = (Circle)shapeGeometric;
 
-        if(this.shape == null){
+        if(this.shapeAWT == null){
           return false;
         }
 
-        return this.shape.intersects(circle.getCenter().getX()-circle.getRadio(),
+        return this.shapeAWT.intersects(circle.getCenter().getX()-circle.getRadio(),
                 circle.getCenter().getY()-circle.getRadio(),
                 2*circle.getRadio(),
                 2*circle.getRadio());
@@ -160,11 +159,11 @@ public class Circle extends ShapeGeometric implements VertexShapeGraph {
 
     public boolean intersect(Point point) {
 
-        if(this.shape == null){
+        if(this.shapeAWT == null){
           return false;
         }
 
-        return this.shape.intersects(point.getX(),point.getY(),
+        return this.shapeAWT.intersects(point.getX(),point.getY(),
                 1.5*getRadio(), 1.5*getRadio());
     }
     /**

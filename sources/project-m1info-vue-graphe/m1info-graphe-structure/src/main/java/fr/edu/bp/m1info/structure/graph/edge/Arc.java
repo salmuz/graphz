@@ -39,13 +39,13 @@
  */
 package fr.edu.bp.m1info.structure.graph.edge;
 
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-/*ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
-*et de la class AbstractEdge<Shape>*/
-public class Arc<Value,Shape extends ShapeGeometric & ArcShapeGraph> extends AbstractEdge<Value,Shape>{
+/**
+ * ici nous avons une classe public  et qui herite certaine methode de la class EdgeShapeGraph>
+ * et de la class AbstractEdge<Shape>
+ */
+public class Arc extends AbstractEdge{
 
     /**
      * C'est une methode ou un constructeur  qui contienne une parameter
@@ -55,7 +55,7 @@ public class Arc<Value,Shape extends ShapeGeometric & ArcShapeGraph> extends Abs
      * @parameter target  Vertex
      *
      */
-    public Arc(Vertex source, Vertex target, Value value) {
-        super(source, target, value);
+    public Arc(Vertex source, Vertex target) {
+        super(source, target);
     }
 }

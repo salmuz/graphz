@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>graph.algorithm.network</OriginalElement>
+  <nodes>
+    <node x="524.0" y="76.0">graph.algorithm.path.PathUtils</node>
+    <node x="322.0" y="290.0">graph.algorithm.network.EdmondsKarp</node>
+    <node x="153.0" y="78.0">graph.algorithm.network.NetworkUtils</node>
+    <node x="153.0" y="290.0">graph.algorithm.network.DinicFlowNetwork</node>
+    <node x="463.0" y="289.0">graph.algorithm.network.FordFulkerson</node>
+    <node x="0.0" y="290.0">graph.algorithm.network.CapacityScaling</node>
+    <node x="606.0" y="290.0">graph.algorithm.path.BreadthFirstPath</node>
+    <node x="90.50892857142861" y="160.0">graph.algorithm.network.AbstractNetwork</node>
+    <node x="306.83333333333337" y="80.0">graph.algorithm.IterativeViewAdapter</node>
+    <node x="331.33333333333337" y="0.0">graph.algorithm.IterativeView</node>
+    <node x="621.3958333333333" y="160.0">graph.algorithm.path.AbstractPath</node>
+    <node x="766.0" y="293.0">graph.algorithm.path.BellmanFordPath</node>
+    <node x="320.0" y="160.0">graph.algorithm.network.ResidualGraph</node>
+    <node x="690.0" y="328.0">graph.algorithm.path.DepthFirstPath</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="graph.algorithm.network.FordFulkerson" target="graph.algorithm.network.AbstractNetwork">
+      <point x="-41.33333333333334" y="-15.0" />
+      <point x="482.66666666666663" y="220.0" />
+      <point x="213.0089285714286" y="220.0" />
+      <point x="52.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.DinicFlowNetwork" target="graph.algorithm.network.ResidualGraph">
+      <point x="0.0" y="-15.0" />
+      <point x="227.5" y="240.0" />
+      <point x="340.66666666666663" y="240.0" />
+      <point x="-41.33333333333334" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.path.DepthFirstPath" target="graph.algorithm.path.AbstractPath">
+      <point x="0.0" y="-15.0" />
+      <point x="755.5" y="272.0" />
+      <point x="706.8958333333333" y="270.0" />
+      <point x="28.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.FordFulkerson" target="graph.algorithm.path.AbstractPath">
+      <point x="41.333333333333314" y="-15.0" />
+      <point x="565.3333333333333" y="270.0" />
+      <point x="668.8958333333333" y="270.0" />
+      <point x="-9.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.EdmondsKarp" target="graph.algorithm.path.AbstractPath">
+      <point x="40.0" y="-15.0" />
+      <point x="422.0" y="260.0" />
+      <point x="649.8958333333333" y="260.0" />
+      <point x="-28.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.EdmondsKarp" target="graph.algorithm.network.AbstractNetwork">
+      <point x="-40.0" y="-15.0" />
+      <point x="342.0" y="230.0" />
+      <point x="178.0089285714286" y="230.0" />
+      <point x="17.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.EdmondsKarp" target="graph.algorithm.network.ResidualGraph">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.FordFulkerson" target="graph.algorithm.network.ResidualGraph">
+      <point x="0.0" y="-15.0" />
+      <point x="524.0" y="210.0" />
+      <point x="423.33333333333337" y="210.0" />
+      <point x="41.33333333333334" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.CapacityScaling" target="graph.algorithm.network.AbstractNetwork">
+      <point x="0.0" y="-15.0" />
+      <point x="66.5" y="270.0" />
+      <point x="108.00892857142861" y="270.0" />
+      <point x="-52.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.DinicFlowNetwork" target="graph.algorithm.path.AbstractPath">
+      <point x="49.66666666666666" y="-15.0" />
+      <point x="277.16666666666663" y="250.0" />
+      <point x="630.8958333333333" y="250.0" />
+      <point x="-47.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.DinicFlowNetwork" target="graph.algorithm.network.AbstractNetwork">
+      <point x="-49.66666666666666" y="-15.0" />
+      <point x="177.83333333333337" y="270.0" />
+      <point x="143.0089285714286" y="270.0" />
+      <point x="-17.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.IterativeViewAdapter" target="graph.algorithm.IterativeView">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.path.AbstractPath" target="graph.algorithm.IterativeView">
+      <point x="28.5" y="-15.0" />
+      <point x="706.8958333333333" y="135.0" />
+      <point x="704.0208333333333" y="135.0" />
+      <point x="704.0208333333333" y="55.0" />
+      <point x="426.33333333333337" y="55.0" />
+      <point x="38.0" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.path.AbstractPath" target="graph.algorithm.IterativeViewAdapter">
+      <point x="-28.5" y="-15.0" />
+      <point x="649.8958333333333" y="135.0" />
+      <point x="429.08333333333337" y="135.0" />
+      <point x="40.75" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.AbstractNetwork" target="graph.algorithm.IterativeViewAdapter">
+      <point x="35.0" y="-15.0" />
+      <point x="195.5089285714286" y="135.0" />
+      <point x="347.58333333333337" y="135.0" />
+      <point x="-40.75" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.path.BellmanFordPath" target="graph.algorithm.path.AbstractPath">
+      <point x="0.0" y="-15.0" />
+      <point x="833.0" y="263.0" />
+      <point x="725.8958333333333" y="260.0" />
+      <point x="47.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.path.BreadthFirstPath" target="graph.algorithm.path.AbstractPath">
+      <point x="0.0" y="-15.0" />
+      <point x="674.0" y="270.0" />
+      <point x="687.8958333333333" y="270.0" />
+      <point x="9.5" y="15.0" />
+    </edge>
+    <edge source="graph.algorithm.network.AbstractNetwork" target="graph.algorithm.IterativeView">
+      <point x="-35.0" y="-15.0" />
+      <point x="125.50892857142861" y="55.0" />
+      <point x="350.33333333333337" y="55.0" />
+      <point x="-38.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="497.0" y="225.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

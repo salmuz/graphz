@@ -40,6 +40,7 @@
  */
 package fr.edu.bp.m1info.structure.geometric.plane;
 
+import fr.edu.bp.m1info.structure.common.GraphProperties;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
@@ -55,6 +56,7 @@ public class Message extends ShapeGeometric {
     public Message(Point point, String message) {
         this.point = point;
         this.message = message;
+        this.color = GraphProperties.VERTEX_NAME_COLOR;
     }
 
     public Point getPoint() {
@@ -82,7 +84,11 @@ public class Message extends ShapeGeometric {
     }
 
     public void draw(Graphics graphics) {
-        graphics.draw(this);
+        shapeAWT = graphics.draw(this);
+    }
+
+    public Point centre(){
+        return this.point;
     }
 
     @Override
@@ -111,5 +117,11 @@ public class Message extends ShapeGeometric {
                 "message='" + message + '\'' +
                 ", point=" + point +
                 '}';
+    }
+
+    @Override
+    public boolean contains(double x, double y) {
+        if(shapeAWT == null) return false;
+        return shapeAWT.contains(x,y);
     }
 }

@@ -24,18 +24,15 @@
  * Inc.,
  * 
  * ------------------
- * Point.java
+ * DefaultVertexName.java
  * ------------------
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aben Nouh Abdirazak 
+ * Contributor(s):
  *
  * Changes
  * -------
- * 23/02/13 : Version 01;
  *
  */
 package fr.edu.bp.m1info.structure.graph.vertex;
@@ -44,8 +41,11 @@ public class DefaultVertexName {
 
     public static Integer nameVertex = -1;
 
-    public static Integer getNextName(){
-        nameVertex++;
-        return nameVertex;
+    public static Integer nextNode(){
+        return ++nameVertex;
+    }
+
+    public static void previousNode(){
+        nameVertex--;
     }
 }

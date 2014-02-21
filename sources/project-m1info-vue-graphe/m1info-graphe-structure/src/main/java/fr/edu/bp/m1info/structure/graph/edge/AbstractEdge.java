@@ -40,24 +40,20 @@
 package fr.edu.bp.m1info.structure.graph.edge;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.plane.Message;
-import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.edge.AbstractEdgeShape;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 
-/*ici nous avons une classe abstract et qui herite certaine methode de la class EdgeShapeGraph */
-public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
+/**
+ * ici nous avons une classe abstract et qui herite certaine methode de la class EdgeShapeGraph
+ */
+public abstract class AbstractEdge<Value extends Number> implements IEdge<Value> {
 
     // Shapes for Edge
-    private Shape edge;
-    private Message weightShape;
+    private AbstractEdgeShape shape;
 
-    //attributs
+    // Attributs
     private Vertex source;
     private Vertex target;
-    private Value weight; // weight of Edge
 
     /**
      * C'est une methode ou un constructeur proteger qui contienne deux  parameter
@@ -65,16 +61,10 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
      *
      * @parameter sources c'est le debut
      * @parameter target  c'est le fin
-     * @parameter value  valuer de l'arête
      */
-    protected AbstractEdge(Vertex source, Vertex target, Value weight) {
+    protected AbstractEdge(Vertex source, Vertex target) {
         this.source = source;
         this.target = target;
-        if(weight==null){
-            this.weight = (Value)((Object) new String("0"));
-        }else{
-            this.weight = weight;
-        }
     }
 
     /**
@@ -82,18 +72,18 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
      *
      * @return la methode doit nous renvoyer un shape qui est le type d'un Edge
      */
-    public Shape getEdge() {
-        return edge;
+    public AbstractEdgeShape getShape() {
+        return shape;
     }
 
     /**
      * methode trivale aussi pour les classe elle permet de modifier le variable Edge
      *
-     * @param edge pour la modifier il vaut une nouvel valeur elle se valeur et echange contre l'ancien valeur
+     * @param shape pour la modifier il vaut une nouvel valeur elle se valeur et echange contre l'ancien valeur
      *             de l'objet
      */
-    public void setEdge(Shape edge) {
-        this.edge = edge;
+    public void setShape(AbstractEdgeShape shape) {
+        this.shape = shape;
     }
 
     /**
@@ -101,7 +91,7 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
      *
      * @return elle retourne un meme type que source qui est Vertex
      */
-    public Vertex getSource() {
+    public Vertex from() {
         return source;
     }
 
@@ -121,7 +111,7 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
      *
      * @return elle retourne un meme type que target qui est Vertex
      */
-    public Vertex getTarget() {
+    public Vertex to() {
         return target;
     }
 
@@ -136,41 +126,13 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
         this.target = target;
     }
 
-    public Message getWeightShape() {
-        return weightShape;
-    }
-
-    public void setWeightShape(Message weightShape) {
-        this.weightShape = weightShape;
-    }
-
-
-    public Value getWeight() {
-        return weight;
-    }
-
-    public void createWeight() {
-        if (this.source != null && this.target != null && this.edge != null  ) {
-            Point point = ((EdgeShapeGraph) this.edge).geMidPoint();
-            if (weightShape == null) {
-                weightShape = (Message) ShapePlaneFactory.createShape(Message.class, point.getX(), point.getY());
-            } else {
-                weightShape.getPoint().setX(point.getX());
-                weightShape.getPoint().setY(point.getY());
-            }
-            if(this.weight == null)
-                this.weight = (Value)((Object) new String("("+source.getValue().toString()+","+target.getValue().toString()+")"));
-
-            weightShape.setMessage(weight.toString());
-        }
-    }
-
+    /**
+     *
+     * @param graphics
+     */
     public void draw(Graphics graphics) {
-        createWeight();
-        edge.draw(graphics);
-        if (weightShape != null) weightShape.draw(graphics);
+        shape.draw(graphics);
     }
-
 
     /**
      * C'est une methode  comparatif des objets
@@ -187,7 +149,6 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
 
         if (source != null ? !source.equals(edge.source) : edge.source != null) return false;
         if (target != null ? !target.equals(edge.target) : edge.target != null) return false;
-        if (weight != null ? !weight.equals(edge.weight) : edge.weight != null) return false;
 
         return true;
     }
@@ -201,7 +162,7 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
     public int hashCode() {
         int result = source != null ? source.hashCode() : 0;
         result = 31 * result + (target != null ? target.hashCode() : 0);
-        result = 31 * result + (weight != null ? weight.hashCode() : 0);
+        // result = 31 * result + (weight != null ? weight.hashCode() : 0);
         return result;
     }
 
@@ -213,11 +174,43 @@ public abstract class AbstractEdge<Value, Shape extends ShapeGeometric> {
     @Override
     public String toString() {
         return "AbstractEdge{" +
-                "edge=" + edge +
+                "shape=" + shape +
                 ", source=" + source +
                 ", target=" + target +
-                ", weight=" + weight +
+                //  ", weight=" + weight +
                 '}';
+    }
+
+    /**
+     * The abstract class do not support this method
+     * @return weight
+     */
+    public Value weight() {
+        throw new UnsupportedOperationException("The edge do not support weight");
+    }
+
+    /**
+     *
+     * @param value
+     */
+    public void setWeight(Value value) {
+        throw new UnsupportedOperationException("The edge do not support weight");
+    }
+
+    /**
+     * The abstract class do not support this method
+     * @return  capacity
+     */
+    public Value capacity() {
+        throw new UnsupportedOperationException("The edge do not support capacity");
+    }
+
+    /**
+     * The abstract class do not support this method
+     * @return flow of network
+     */
+    public Value flow() {
+        throw new UnsupportedOperationException("The edge do not support flow");
     }
 }
 

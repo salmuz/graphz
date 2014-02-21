@@ -48,7 +48,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class SeparateVertexListener implements MouseListener {
+public class SeparateVertexListener extends MouseAdapter {
 
     private GraphCanvas canvas;
 
@@ -59,18 +59,11 @@ public class SeparateVertexListener implements MouseListener {
 
     public void mouseClicked(MouseEvent e) {
         Point p = e.getPoint();
-        Vertex vertex = canvas.getGraph().getVertexShape(p.getX(),p.getY());
-        if(vertex != null){
-            canvas.getGraph().separateVertex(vertex);
-            canvas.repaint();
-        }
+//        Vertex vertex = canvas.getGraph().getVertexShape(p.getX(),p.getY());
+//        if(vertex != null){
+//            canvas.getGraph().separateVertex(vertex);
+//            canvas.repaint();
+//        }
     }
 
-    public void mousePressed(MouseEvent e) { }
-
-    public void mouseReleased(MouseEvent e) { }
-
-    public void mouseEntered(MouseEvent e) { }
-
-    public void mouseExited(MouseEvent e) { }
 }

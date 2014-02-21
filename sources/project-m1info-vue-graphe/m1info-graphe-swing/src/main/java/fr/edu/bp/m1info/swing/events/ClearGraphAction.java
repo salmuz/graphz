@@ -57,8 +57,7 @@ public class ClearGraphAction extends AbstractAction {
         int op = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de supprimer le graphe?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
 
         if (op == JOptionPane.YES_OPTION) {
-            this.canvas.getGraph().getEdgeList().clear();
-            this.canvas.getGraph().getVertexList().clear();
+            this.canvas.getGraph().clear();
             this.canvas.repaint();
         }
     }

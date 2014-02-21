@@ -44,10 +44,11 @@ import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class DeleteVertexListener implements MouseListener {
+public class DeleteVertexListener extends MouseAdapter {
 
     private GraphCanvas canvas;
 
@@ -65,15 +66,4 @@ public class DeleteVertexListener implements MouseListener {
         }
     }
 
-    public void mousePressed(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    public void mouseExited(MouseEvent e) {
-    }
 }

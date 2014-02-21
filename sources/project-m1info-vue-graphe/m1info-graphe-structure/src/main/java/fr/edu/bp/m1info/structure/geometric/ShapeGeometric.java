@@ -49,16 +49,17 @@ import java.awt.*;
  */
 public abstract class ShapeGeometric {
 
-      /*on a declare deux attribut pour la couleur des ligne et du fond de la fenetre */
+    // on a declare deux attribut pour la couleur des ligne et du fond de la fenetre
     protected Color color = Color.BLACK;
-    protected Color background = Color.black;
+    protected Color background = Color.BLACK;
+
     // Shape de AWT
-    protected Shape shape;
+    protected Shape shapeAWT;
     protected Object value;
 
 
-    public Shape getShape() {
-        return shape;
+    public Shape getShapeAWT() {
+        return shapeAWT;
     }
 
     /**
@@ -113,8 +114,8 @@ public abstract class ShapeGeometric {
      *
      * @return         une shapeGeometrique
      */
-    public boolean intersect(ShapeGeometric shapeGeometric) {
-        return false;
+    public boolean intersects(ShapeGeometric shapeGeometric) {
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -126,8 +127,10 @@ public abstract class ShapeGeometric {
      * @return  vrai ou faux
      */
     public boolean contains(double x, double y){
-        return false;
+        throw new UnsupportedOperationException();
     }
+
+    public abstract Point centre();
 
     @Override
     public String toString() {
@@ -136,4 +139,5 @@ public abstract class ShapeGeometric {
                 ", color=" + color +
                 '}';
     }
+
 }

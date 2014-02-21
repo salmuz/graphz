@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>MODULES</ID>
+  <OriginalElement>mdl-m1info-graphe-mvp</OriginalElement>
+  <nodes>
+    <node x="87.25" y="166.0">mdl-m1info-graphe-logique</node>
+    <node x="445.125" y="0.0">mdl-m1info-graphe-mvp</node>
+    <node x="328.97569444444446" y="80.0">mdl-m1info-graphe-swing</node>
+    <node x="318.97569444444446" y="258.0">mdl-m1info-graphe-structure</node>
+  </nodes>
+  <notes>
+    <note x="0.0" y="241.0">
+      <node>mdl-m1info-graphe-logique</node>
+      <value>Des algorithmes pour parcourir une graphe \net calculer le flow maximum</value>
+      <edge>
+        <point x="-60.25" y="15.0" />
+        <point x="0.0" y="-21.0" />
+      </edge>
+    </note>
+    <note x="397.88194444444446" y="-38.0">
+      <node>mdl-m1info-graphe-mvp</node>
+      <value>Le patron d'architecture Modèle Vue Prèsentation</value>
+      <edge>
+        <point x="82.875" y="15.0" />
+        <point x="563.5" y="3.0" />
+        <point x="564.3819444444445" y="-10.0" />
+        <point x="0.0" y="-13.0" />
+      </edge>
+    </note>
+    <note x="424.88194444444446" y="160.0">
+      <node>mdl-m1info-graphe-swing</node>
+      <value>Framework pour dessiner tous les graphiques \net manipuler les evénements.</value>
+      <edge>
+        <point x="77.0" y="15.0" />
+        <point x="521.4756944444445" y="135.0" />
+        <point x="580.3819444444445" y="135.0" />
+        <point x="0.0" y="-21.0" />
+      </edge>
+    </note>
+    <note x="288.47569444444446" y="315.0">
+      <node>mdl-m1info-graphe-structure</node>
+      <value>Structure du graphe, sommet, arc et arête.\nStructure géométrique pour dessiner le graphe.</value>
+      <edge>
+        <point x="0.0" y="15.0" />
+        <point x="0.0" y="-21.0" />
+      </edge>
+    </note>
+  </notes>
+  <edges>
+    <edge source="mdl-m1info-graphe-mvp" target="mdl-m1info-graphe-swing">
+      <point x="-27.625" y="15.0" />
+      <point x="528.0" y="60.0" />
+      <point x="444.47569444444446" y="60.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-m1info-graphe-swing" target="mdl-m1info-graphe-structure">
+      <point x="0.0" y="15.0" />
+      <point x="444.47569444444446" y="135.0" />
+      <point x="414.38194444444446" y="135.0" />
+      <point x="414.38194444444446" y="227.0" />
+      <point x="444.47569444444446" y="227.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-m1info-graphe-mvp" target="mdl-m1info-graphe-logique">
+      <point x="-82.875" y="15.0" />
+      <point x="472.75" y="50.0" />
+      <point x="147.5" y="50.0" />
+      <point x="-60.25" y="-15.0" />
+    </edge>
+    <edge source="mdl-m1info-graphe-logique" target="mdl-m1info-graphe-structure">
+      <point x="60.25" y="15.0" />
+      <point x="268.0" y="227.0" />
+      <point x="360.80902777777777" y="227.0" />
+      <point x="-83.66666666666669" y="-15.0" />
+    </edge>
+    <edge source="mdl-m1info-graphe-swing" target="mdl-m1info-graphe-logique">
+      <point x="-77.0" y="15.0" />
+      <point x="367.47569444444446" y="135.0" />
+      <point x="268.0" y="135.0" />
+      <point x="60.25" y="-15.0" />
+    </edge>
+    <edge source="mdl-m1info-graphe-mvp" target="mdl-m1info-graphe-structure">
+      <point x="27.625" y="15.0" />
+      <point x="583.25" y="60.0" />
+      <point x="746.3819444444445" y="60.0" />
+      <point x="746.3819444444445" y="227.0" />
+      <point x="528.1423611111111" y="227.0" />
+      <point x="83.66666666666663" y="-15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="493.0" y="175.0" />
+  <SelectedNodes />
+  <Categories />
+</Diagram>
+

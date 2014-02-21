@@ -76,17 +76,17 @@ public class ModelGeometric01Canvas extends Canvas {
         Stroke strokeDefault = g2D.getStroke();
         g.setColor(Color.BLACK);
         g2D.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
-        modelGeometric.getTopLine().draw(graphics);
-        modelGeometric.getLowerLine().draw(graphics);
-        g2D.setStroke(strokeDefault);
-
-        for(Line line : draftLine){
-            line.draw(graphics);
-        }
-
-        for(ModelGeometric01.VertexVerticalLine lineVertical : modelGeometric.getLineList()){
-            lineVertical.draw(graphics);
-        }
+//        modelGeometric.getTopLine().draw(graphics);
+//        modelGeometric.getLowerLine().draw(graphics);
+//        g2D.setStroke(strokeDefault);
+//
+//        for(Line line : draftLine){
+//            line.draw(graphics);
+//        }
+//
+//        for(ModelGeometric01.VertexVerticalLine lineVertical : modelGeometric.getLineList()){
+//            lineVertical.draw(graphics);
+//        }
 
     }
 

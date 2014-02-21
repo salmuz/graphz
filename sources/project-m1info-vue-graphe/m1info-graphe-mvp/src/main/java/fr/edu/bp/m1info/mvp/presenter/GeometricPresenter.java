@@ -65,7 +65,7 @@ public class GeometricPresenter extends Presenter<UIGeometric> {
 
     private ModelGeometric01Canvas canvas;
     private ModelGeometric01 modeleGeometric01;
-    private GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>> canvasGraphe;
+    //private GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>> canvasGraphe;
 
     @Override
     protected void createrView() {
@@ -81,7 +81,7 @@ public class GeometricPresenter extends Presenter<UIGeometric> {
     protected void initComponent() {
         Line topLine = new Line(new Point2D(50, 50), new Point2D(500, 50));
         Line lowerLine = new Line(new Point2D(50, 200), new Point2D(500, 200));
-        modeleGeometric01 = new ModelGeometric01(topLine, lowerLine);
+        //modeleGeometric01 = new ModelGeometric01(topLine, lowerLine);
     }
 
     protected void initAcctions() {
@@ -91,11 +91,11 @@ public class GeometricPresenter extends Presenter<UIGeometric> {
                     public void actionPerformed(ActionEvent e) {
                         canvas = new ModelGeometric01Canvas(modeleGeometric01);
                         view.getjScrollPane1().setViewportView(canvas);
-                        MouseAdapter addLineVertex = new AddLineVVertexListener(canvas,canvasGraphe,null);
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
-                        canvas.addMouseMotionListener(addLineVertex);
-                        canvas.addMouseListener(addLineVertex);
+//                        MouseAdapter addLineVertex = new AddLineVVertexListener(canvas,canvasGraphe,null);
+//                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
+//                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
+//                        canvas.addMouseMotionListener(addLineVertex);
+//                        canvas.addMouseListener(addLineVertex);
                     }
                 }
         );
@@ -106,9 +106,9 @@ public class GeometricPresenter extends Presenter<UIGeometric> {
                         SwingUtils.removeListenerMouse(MouseListener.class, canvas);
                         SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
 
-                        MouseAdapter mvLineVertex = new MoveLineVVertexListener(canvas,null,null);
-                        canvas.addMouseMotionListener(mvLineVertex);
-                        canvas.addMouseListener(mvLineVertex);
+                        //MouseAdapter mvLineVertex = new MoveLineVVertexListener(canvas,null,null);
+                        //canvas.addMouseMotionListener(mvLineVertex);
+                        //canvas.addMouseListener(mvLineVertex);
                         //MouseListener delLineVertex = new DeleteLineVVertexListener(canvas);
                         //canvas.addMouseListener(delLineVertex);
                     }
@@ -120,12 +120,12 @@ public class GeometricPresenter extends Presenter<UIGeometric> {
                 new AbstractAction() {
                     public void actionPerformed(ActionEvent e) {
                         Rectangle rectangle = view.getjScrollPane1().bounds();
-                        modeleGeometric01.generateGraphe(rectangle.getX(), rectangle.getY(),
-                                rectangle.getWidth(), rectangle.getHeight());
-                        canvasGraphe = new GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>>(modeleGeometric01.getGraph());
-                        view.getjScrollPane1().setViewportView(canvasGraphe);
-                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
-                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
+//                        modeleGeometric01.generateGraphe(rectangle.getX(), rectangle.getY(),
+//                                rectangle.getWidth(), rectangle.getHeight());
+//                        canvasGraphe = new GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>>(modeleGeometric01.getGraph());
+//                        view.getjScrollPane1().setViewportView(canvasGraphe);
+//                        SwingUtils.removeListenerMouse(MouseListener.class, canvas);
+//                        SwingUtils.removeListenerMouse(MouseMotionListener.class, canvas);
                     }
                 }
         );

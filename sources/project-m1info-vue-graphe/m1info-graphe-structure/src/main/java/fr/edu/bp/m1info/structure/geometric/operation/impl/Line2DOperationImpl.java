@@ -59,8 +59,8 @@ public class Line2DOperationImpl implements LineOperation {
         /* Declaraion d'un nouveau point avec deux coordonnée (x,y)*/
         Point midPoint = new Point2D(0.0, 0.0);
 
-        double midX = (line.getStart().getX() + line.getEnd().getX()) / 2;
-        double midY = (line.getStart().getY() + line.getEnd().getY()) / 2;
+        double midX = (line.from().getX() + line.to().getX()) / 2;
+        double midY = (line.from().getY() + line.to().getY()) / 2;
 
         midPoint.setX(midX);  /*le coordonnée du nouveaux point sera midPoint=(midX,midY)*/
         midPoint.setY(midY);
@@ -76,31 +76,31 @@ public class Line2DOperationImpl implements LineOperation {
      */
     public double calculateSize(Line line) {
         /*on declare une variable size qui va contenir la taille de la droite */
-        double size = Math.sqrt(Math.pow(line.getStart().getX() - line.getEnd().getX(), 2) +
-                Math.pow(line.getStart().getY() - line.getEnd().getY(), 2));
+        double size = Math.sqrt(Math.pow(line.from().getX() - line.to().getX(), 2) +
+                Math.pow(line.from().getY() - line.to().getY(), 2));
 
         return size;
     }
 
 
     public Point getPointIntersectLines(Line pLine01, Line pLine02) {
-        double px = pLine01.getEnd().getX() - pLine01.getStart().getX();
-        double py = pLine01.getEnd().getY() - pLine01.getStart().getY();
-        double qx = pLine02.getEnd().getX() - pLine02.getStart().getX();
-        double qy = pLine02.getEnd().getY() - pLine02.getStart().getY();
+        double px = pLine01.to().getX() - pLine01.from().getX();
+        double py = pLine01.to().getY() - pLine01.from().getY();
+        double qx = pLine02.to().getX() - pLine02.from().getX();
+        double qy = pLine02.to().getY() - pLine02.from().getY();
 
         double D = px * qy - py * qx;
         if (D == 0) return null;
 
-        double pu = -((pLine01.getStart().getX() - pLine02.getStart().getX()) * qy -
-                (pLine01.getStart().getY() - pLine02.getStart().getY()) * qx) / D;
+        double pu = -((pLine01.from().getX() - pLine02.from().getX()) * qy -
+                (pLine01.from().getY() - pLine02.from().getY()) * qx) / D;
         if (pu < 0 || pu > 1) return null;
 
-        double du = ((pLine02.getStart().getX() - pLine01.getStart().getX()) * py -
-                (pLine02.getStart().getY() - pLine01.getStart().getY()) * px) / D;
+        double du = ((pLine02.from().getX() - pLine01.from().getX()) * py -
+                (pLine02.from().getY() - pLine01.from().getY()) * px) / D;
         if (du < 0 || du > 1) return null;
 
-        return new Point2D(pLine01.getStart().getX() + pu * (pLine01.getEnd().getX() - pLine01.getStart().getX()),
-                pLine01.getStart().getY() + pu * (pLine01.getEnd().getY() - pLine01.getStart().getY()));
+        return new Point2D(pLine01.from().getX() + pu * (pLine01.to().getX() - pLine01.from().getX()),
+                pLine01.from().getY() + pu * (pLine01.to().getY() - pLine01.from().getY()));
     }
 }

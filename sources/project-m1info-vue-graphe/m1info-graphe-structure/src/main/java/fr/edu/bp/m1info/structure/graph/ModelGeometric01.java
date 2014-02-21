@@ -40,25 +40,9 @@
  */
 package fr.edu.bp.m1info.structure.graph;
 
-import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.operation.LineOperation;
-import fr.edu.bp.m1info.structure.geometric.operation.impl.Line2DOperationImpl;
-import fr.edu.bp.m1info.structure.geometric.plane.*;
-import fr.edu.bp.m1info.structure.graph.edge.AbstractEdge;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
-import fr.edu.bp.m1info.structure.graph.edge.EdgeFactory;
-import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
-
-import java.awt.*;
-import java.awt.Rectangle;
-import java.util.*;
-import java.util.List;
-
 
 public class ModelGeometric01 {
-
+                  /*
     private List<VertexVerticalLine> lineList;
     private Line topLine;
     private Line lowerLine;
@@ -73,7 +57,7 @@ public class ModelGeometric01 {
         this.topLine = topLine;
         this.lowerLine = lowerLine;
         lineList = new ArrayList<VertexVerticalLine>();
-        graph = new GraphNoOrient<Line, Circle, Integer, Integer>() {
+        graph = new UnDirectedGraph<Line, Circle, Integer, Integer>() {
         };
         ConstantsGeometric.RADIO = 8;
         nameVertex = 0;
@@ -98,9 +82,9 @@ public class ModelGeometric01 {
         }
 
         for (Edge node : graph.getEdgeList()) {
-            VertexShapeGraph v0 = (VertexShapeGraph) node.getSource().getVertex();
-            VertexShapeGraph v1 = (VertexShapeGraph) node.getTarget().getVertex();
-            node.setEdge(ShapePlaneFactory.createShape(Line.class,
+            VertexShapeGraph v0 = (VertexShapeGraph) node.source().getVertex();
+            VertexShapeGraph v1 = (VertexShapeGraph) node.sink().getVertex();
+            node.setShape(ShapePlaneFactory.createShape(Line.class,
                     v0.centreShape().getX(), v0.centreShape().getY(),
                     v1.centreShape().getX(), v1.centreShape().getY()));
         }
@@ -146,7 +130,7 @@ public class ModelGeometric01 {
                 AbstractEdge<Integer, Line> edge = EdgeFactory.createEdge(Edge.class, vertex, vLine.getVertex(), null);
                 VertexShapeGraph v0 = (VertexShapeGraph) vertex.getVertex();
                 VertexShapeGraph v1 = (VertexShapeGraph) vLine.getVertex().getVertex();
-                ((Edge) edge).setEdge(ShapePlaneFactory.createShape(Line.class,
+                ((Edge) edge).setShape(ShapePlaneFactory.createShape(Line.class,
                         v0.centreShape().getX(), v0.centreShape().getY(),
                         v1.centreShape().getX(), v1.centreShape().getY()));
                 graph.addEdge((Edge) edge);
@@ -366,5 +350,5 @@ public class ModelGeometric01 {
                     ", lower=" + lower +
                     '}';
         }
-    }
+    }              */
 }

@@ -29,9 +29,8 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aden Nouh Abdirazak
+ * Contributor(s):
+ *
  * Changes
  * -------
  * 21/01/13 : Version 01;
@@ -39,25 +38,70 @@
  */
 package fr.edu.bp.m1info.structure.geometric.plane;
 
-import fr.edu.bp.m1info.structure.geometric.*;
 import fr.edu.bp.m1info.structure.design.Graphics;
+import fr.edu.bp.m1info.structure.geometric.Arrow;
+import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
 import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.graph.ArcShapeGraph;
+
+import java.awt.*;
 
 /**
- * nous avons une class appelle CurvedArrow et qui herite certaine methode de la class Curve
+ * Nous avons une class appelle CurvedArrow et qui herite certaine methode de la class Curve
  *et elle est implementé dans la class Arrow
  */
-public class CurvedArrow extends Curve implements Arrow,ArcShapeGraph{
+public class CurvedArrow extends Curve implements Arrow{
+
+    private PLACE_OF_ARROW placeOfArrow;
+    private Color cfecha;
+    private double margin;
 
     /**
      * C'est un constructeur
      * @parameter start,end,firstCurve,secondCurve cette methode contient 4 parameter
      * et ces point serons herité de la class curve
      */
-    public CurvedArrow(Point start, Point end, Point firstCurve, Point secondCurve) {
-        super(start, end, firstCurve, secondCurve);
+    public CurvedArrow(Point start, Point end, PLACE_OF_ARROW placeOfArrow) {
+        super(start, end);
+        this.placeOfArrow = placeOfArrow;
+        this.margin = ConstantsGeometric.RADIO;
     }
+
+    /**
+     * cette methode permette de recupére le contenu du variable placeOfArrow
+     *
+     *  @return elle retourn placeOfArrow
+     */
+    public PLACE_OF_ARROW getPlaceOfArrow() {
+        return placeOfArrow;
+    }
+    /**
+     *  cette methode permette de modifier le contenu du variable placeOfArrow
+     *
+     *  @parameter placeOfArrow
+     */
+    public void setPlaceOfArrow(PLACE_OF_ARROW placeOfArrow) {
+        this.placeOfArrow = placeOfArrow;
+    }
+
+    /**
+     * cette methode permette de recupére le contenu du variable cfecha
+     *
+     * @return qui retoune un color
+     */
+    public Color getCfecha() {
+        return cfecha;
+    }
+
+    /**
+     * cette methode permette de modifier le contenu du variable cfecha qui est un couleur
+     *
+     * @param cfecha      qui est un couleur
+     *
+     */
+    public void setCfecha(Color cfecha) {
+        this.cfecha = cfecha;
+    }
+
     /**
      * cette methode permettent de dessiner la graphic
      *
@@ -65,7 +109,23 @@ public class CurvedArrow extends Curve implements Arrow,ArcShapeGraph{
      *
      */
     public void draw(Graphics graphic) {
-        throw new UnsupportedOperationException("Il faut implementer");
+        super.draw(graphic);  // designer la curve
+        graphic.draw(this);
     }
 
+    /**
+     *
+     * @return
+     */
+    public double getMargin() {
+        return margin;
+    }
+
+    /**
+     *
+     * @param margin
+     */
+    public void setMargin(double margin) {
+        this.margin = margin;
+    }
 }

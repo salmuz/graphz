@@ -54,7 +54,7 @@ import java.awt.event.MouseEvent;
 import java.util.Map;
 
 public class MoveLineVVertexListener extends MouseAdapter {
-
+                   /*
     private ModelGeometric01Canvas canvas;
     private ModelGeometric01.VertexVerticalLine vertexLine;
     private boolean isSelection;
@@ -148,5 +148,5 @@ public class MoveLineVVertexListener extends MouseAdapter {
             }
         }
 
-    }
+    }                         */
 }

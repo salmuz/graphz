@@ -40,12 +40,8 @@
  */
 package fr.edu.bp.m1info.swing.events.geo;
 
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
-import fr.edu.bp.m1info.structure.graph.edge.Edge;
-import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 import fr.edu.bp.m1info.swing.design.ModelGeometric01Canvas;
 
@@ -83,13 +79,13 @@ public class AddLineVVertexListener extends MouseAdapter {
         double y1 = e.getPoint().getY();
 
         if (this.isSelection) {
-            draftLine.getEnd().setX(x1);
-            draftLine.getEnd().setY(y1);
-            if (canvas.getModelGeometric().intersect(draftLine)) {
-                canvas.getModelGeometric().addLineVertex(
-                        new Line((Point) draftLine.getStart().clone(), (Point) draftLine.getEnd().clone()),
-                        null, jspGraphe.getBounds(),null);
-            }
+            draftLine.to().setX(x1);
+            draftLine.to().setY(y1);
+//            if (canvas.getModelGeometric().intersect(draftLine)) {
+//                canvas.getModelGeometric().addLineVertex(
+//                        new Line((Point) draftLine.getStart().clone(), (Point) draftLine.sink().clone()),
+//                        null, jspGraphe.getBounds(),null);
+//            }
             canvas.repaint();
             canvasGraphe.repaint();
         }
@@ -107,8 +103,8 @@ public class AddLineVVertexListener extends MouseAdapter {
         double y1 = e.getPoint().getY();
 
         if (this.isSelection) {
-            draftLine.getEnd().setX(x1);
-            draftLine.getEnd().setY(y1);
+            draftLine.to().setX(x1);
+            draftLine.to().setY(y1);
             canvas.repaint();
         }
     }

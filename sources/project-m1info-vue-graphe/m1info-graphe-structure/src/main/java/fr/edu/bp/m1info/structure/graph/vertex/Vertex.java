@@ -29,9 +29,8 @@
  * (C) Copyright 2013, by salmuz and Contributors
  *
  * Original Author: Carranza Alarcon Yonatan Carlos
- * Contributor(s):  Coz Velasquez Antonio
- * 					Kalil DAHER MOHAMED
- *                  Aden Nouh Abdirazak
+ * Contributor(s):
+ *
  * Changes
  * -------
  * 20/01/13 : Version 01;
@@ -40,27 +39,25 @@
 package fr.edu.bp.m1info.structure.graph.vertex;
 
 import fr.edu.bp.m1info.structure.design.Graphics;
-import fr.edu.bp.m1info.structure.geometric.ConstantsGeometric;
-import fr.edu.bp.m1info.structure.geometric.Point;
-import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.graph.VertexShapeGraph;
-import fr.edu.bp.m1info.structure.geometric.plane.Message;
-import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.AbstractVertexShape;
 
-/*nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph> */
-public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
+/**
+ * Nous avons une class Vertex<Shape qui herite certain methode de la class VertexShapeGraph>
+ **/
+public class Vertex {
 
-    private Shape vertex;
-    private Message valVertex;
-
-    private Value value;  // Value of Node
+    private AbstractVertexShape vertex;
+    private int value;
+    private int outdegree;
+    private int indegree;
 
     public Vertex() {
-        this.value = (Value) DefaultVertexName.getNextName().toString();
+        this.value = DefaultVertexName.nextNode();
+        this.outdegree = 0;
+        this.indegree = 0;
     }
 
-    public Vertex(Value value) {
+    public Vertex(int value) {
         this.value = value;
     }
 
@@ -69,7 +66,7 @@ public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
      *
      * @return shapeGraph
      */
-    public Shape getVertex() {
+    public AbstractVertexShape getVertex() {
         return vertex;
     }
 
@@ -78,45 +75,62 @@ public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
      *
      * @parameter Shape shapeGraph
      */
-    public void setVertex(Shape vertex) {
+    public void setVertex(AbstractVertexShape vertex) {
         this.vertex = vertex;
     }
 
-    public Value getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(Value value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
-    private void createValue() {
-        if (vertex != null && value != null) {
-            Point point = ((VertexShapeGraph) vertex).centreShape();
-            int less = getLess(value);
-            if (valVertex == null) {
-                valVertex = (Message) ShapePlaneFactory.createShape(Message.class,
-                        point.getX() - less, point.getY() + 5);
-                valVertex.setMessage(value.toString());
-            } else {
-                valVertex.getPoint().setX(point.getX() - less);
-                valVertex.getPoint().setY(point.getY() + 5);
-            }
-        }
-    }
-
-    private int getLess(Value value) {
-        if (value instanceof String) {
-            Integer val = Integer.valueOf(value.toString());
-            return (val < 10 ? 4 : (val < 100) ? 7 : 10);
-        }
-        return 10;
-    }
 
     public void draw(Graphics graphics) {
-        createValue();
         vertex.draw(graphics);
-        if (valVertex != null) valVertex.draw(graphics);
+    }
+
+    public int indegree() {
+        return indegree;
+    }
+
+    public void augmentInDegree() {
+        this.indegree++;
+    }
+
+    public void decreaseInDegree() {
+        this.indegree--;
+    }
+
+    public int outdegree() {
+        return outdegree;
+    }
+
+    public void augmentOutnDegree() {
+        this.outdegree++;
+    }
+
+    public void decreaseOutDegree() {
+        this.outdegree--;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vertex)) return false;
+
+        Vertex vertex = (Vertex) o;
+
+        if (value != vertex.value) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
     }
 
     @Override
@@ -127,24 +141,6 @@ public class Vertex<Value, Shape extends ShapeGeometric & VertexShapeGraph> {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Vertex vertex1 = (Vertex) o;
-
-        if (value != null ? !value.equals(vertex1.value) : vertex1.value != null) return false;
-        if (vertex != null ? !vertex.equals(vertex1.vertex) : vertex1.vertex != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = vertex != null ? vertex.hashCode() : 0;
-        result = 31 * result + (value != null ? value.hashCode() : 0);
-        return result;
-    }
 }
 

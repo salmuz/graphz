@@ -51,7 +51,7 @@ public class Reflection {
       * Return the type generic of the class instantiated.
       *
       * The reason make use of the method Class.getGenericSuperClass() is because
-      * we will retrieve type information from the current caller instance.
+      * we will retrieve type information source the current caller instance.
       * The manner of use:
       *   we always must declare the class with anonymous.
       *   ClassParent<Type> object = new SubTypeParent<Type>() { };
@@ -65,7 +65,7 @@ public class Reflection {
 
         Type superclass = clazz.getGenericSuperclass();
 
-        // to be necessary validate that it's a class anonymous
+        // sink be necessary validate that it's a class anonymous
 
         if(superclass instanceof Class){
           throw new RuntimeException("The class must be anonymous.");

@@ -3,12 +3,8 @@ package fr.edu.bp.m1info.mvp.presenter;
 import fr.edu.bp.m1info.mvp.view.UIMain;
 import fr.edu.bp.m1info.structure.geometric.plane.Circle;
 import fr.edu.bp.m1info.structure.geometric.plane.Line;
-import fr.edu.bp.m1info.structure.geometric.plane.LineArrow;
 import fr.edu.bp.m1info.structure.geometric.plane.Point2D;
-import fr.edu.bp.m1info.structure.graph.DirectedGraph;
-import fr.edu.bp.m1info.structure.graph.GraphNoOrient;
 import fr.edu.bp.m1info.structure.graph.ModelGeometric01;
-import fr.edu.bp.m1info.structure.graph.edge.Arc;
 import fr.edu.bp.m1info.structure.graph.edge.Edge;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.common.SwingUtils;
@@ -34,7 +30,7 @@ import java.awt.event.MouseMotionListener;
  * To change this template use File | Settings | File Templates.
  */
 public class GeometricAction {
-    private UIMain view;
+  /*  private UIMain view;
     private ModelGeometric01Canvas canvasGeo;
     private ModelGeometric01 modeleGeometric01;
     private GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>> canvasGraphe;
@@ -148,7 +144,7 @@ public class GeometricAction {
 
     public GraphCanvas<Edge<Integer, Line>, Vertex<Integer, Circle>> getCanvasGraphe() {
         return canvasGraphe;
-    }
+    }*/
 
     /*
  this.view.getjButton3().addActionListener(

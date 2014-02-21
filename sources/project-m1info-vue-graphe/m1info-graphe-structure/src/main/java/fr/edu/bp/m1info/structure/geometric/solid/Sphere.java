@@ -56,4 +56,8 @@ public class Sphere extends ShapeGeometric{
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public Point centre() {
+        throw new UnsupportedOperationException();
+    }
 }

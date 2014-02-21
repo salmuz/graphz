@@ -39,11 +39,17 @@
  */
 package fr.edu.bp.m1info.structure.geometric;
 
+import fr.edu.bp.m1info.structure.design.Graphics;
+
 /**
  * ici nous avons un interface Arrow qui regroupe tout les ligne
  */
 public interface Arrow  {
+
     public enum PLACE_OF_ARROW {
 		 MIDDLE, END
 	}
+
+    public void draw(Graphics graphics);
+
 }

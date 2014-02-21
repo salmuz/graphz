@@ -40,15 +40,22 @@
  */
 package fr.edu.bp.m1info.swing.events;
 
+
+import fr.edu.bp.m1info.structure.common.ShapeUtils;
+import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.AbstractVertexShape;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.VertexName;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.vertex.VertexShape;
 import fr.edu.bp.m1info.structure.geometric.plane.ShapePlaneFactory;
+import fr.edu.bp.m1info.structure.graph.vertex.DefaultVertexName;
 import fr.edu.bp.m1info.structure.graph.vertex.Vertex;
 import fr.edu.bp.m1info.swing.design.GraphCanvas;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class AddVertexListener implements MouseListener {
+public class AddVertexListener extends MouseAdapter {
 
     private GraphCanvas canvas;
 
@@ -59,23 +66,17 @@ public class AddVertexListener implements MouseListener {
 
     public void mouseClicked(MouseEvent e) {
         Point p = e.getPoint();
-        Vertex  vertex = new Vertex();
-        vertex.setVertex(ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), p.getX(), p.getY()));
-        vertex.getVertex().setColor(Color.ORANGE);
-        vertex.getVertex().setBackground(Color.ORANGE);
+        Vertex vertex = new Vertex();
+        ShapeGeometric sh = ShapePlaneFactory.createShape(canvas.getGraph().getClazzVertexShape(), p.getX(), p.getY());
+        AbstractVertexShape vertexShape = new VertexName(new VertexShape(sh),String.valueOf(vertex.getValue()));
+        vertex.setVertex(vertexShape);
 
-        if(!canvas.getGraph().isVertexSamePlace(vertex)){
+        if(!ShapeUtils.isVertexSamePlace(canvas.getGraph().getVertex(),vertex.getVertex().parentComponent().shape())){
             canvas.getGraph().addVertex(vertex);
             canvas.repaint();
+        }else{
+            DefaultVertexName.previousNode();
         }
     }
-
-    public void mousePressed(MouseEvent e) { }
-
-    public void mouseEntered(MouseEvent e) { }
-
-    public void mouseReleased(MouseEvent e) { }
-
-    public void mouseExited(MouseEvent e) { }
 
 }

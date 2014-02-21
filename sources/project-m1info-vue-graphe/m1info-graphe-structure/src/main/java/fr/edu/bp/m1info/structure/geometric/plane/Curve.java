@@ -42,73 +42,32 @@ package fr.edu.bp.m1info.structure.geometric.plane;
 import fr.edu.bp.m1info.structure.design.Graphics;
 import fr.edu.bp.m1info.structure.geometric.Point;
 import fr.edu.bp.m1info.structure.geometric.ShapeGeometric;
-import fr.edu.bp.m1info.structure.geometric.graph.EdgeShapeGraph;
+import fr.edu.bp.m1info.structure.geometric.graph.shape.EdgeShapeGraph;
+
+import java.awt.*;
 
 /**
  * nous avons une class appelle curve et qui herite certaine methode de la class ShapeGeometric
  */
 public class Curve extends ShapeGeometric implements EdgeShapeGraph{
 
-
-
     private Point start;
     private Point end;
-    private Point firstCurve;
-    private Point secondCurve;
+    private Point control;
+    private double atanCurve;
 
     /**
      * C'est un constructeur
      *
      * @parameter start,end,firstCurve,secondCurve cette methode contient 4 parameter
      */
-    public Curve(Point start, Point end, Point firstCurve, Point secondCurve) {
+    public Curve(Point start, Point end) {
         this.start = start;
         this.end = end;
-        this.firstCurve = firstCurve;
-        this.secondCurve = secondCurve;
-    }
-    /**
-     * cette methode permette de recupére le contenu du variable firstCurve
-     *
-     *  @return elle retourn le point firstCurve
-     *
-     * */
-    public Point getFirstCurve() {
-        return firstCurve;
-    }
-    /**
-     *  cette methode permette de modifier le contenu du variable FirstCurve
-     *
-     *  @parameter FirstCurve
-     */
-    public void setFirstCurve(Point firstCurve) {
-        this.firstCurve = firstCurve;
-    }
-     /**
-      *  cette methode permette de recupére le contenu du variable secondCurve
-      *
-      *  @return elle retourn le point secondCurve
-      */
-    public Point getSecondCurve() {
-        return secondCurve;
+        this.color = Color.BLUE;
+        this.background = Color.BLUE;
     }
 
-    /**
-     *  cette methode permette de modifier le contenu du variable secondCurve
-     *
-     *  @parameter secondCurve
-     */
-    public void setSecondCurve(Point secondCurve) {
-        this.secondCurve = secondCurve;
-    }
-    /**
-     *  cette methode permette de recupére le contenu du variable start
-     *
-     *  @return elle retourn le point start
-     */
-    public Point getStart() {
-        return start;
-    }
     /**
      * cette methode permette de modifier le contenu du variable start
      *
@@ -116,14 +75,6 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
      */
     public void setStart(Point start) {
         this.start = start;
-    }
-    /**
-     * cette methode permette de recupére le contenu du variable end
-     *
-     *  @return elle retourn le point end
-     */
-    public Point getEnd() {
-        return end;
     }
 
     /**
@@ -150,7 +101,7 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
      *
      * @return
      */
-    public Point getPointStart() {
+    public Point from() {
         return this.start;
     }
     /**
@@ -158,11 +109,47 @@ public class Curve extends ShapeGeometric implements EdgeShapeGraph{
      *
      * @return
      */
-    public Point getPointEnd() {
+    public Point to() {
         return this.end;
     }
 
-    public Point geMidPoint() {
-        return null;
+    /**
+     *
+     * @return
+     */
+    public Point centre() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     *
+     * @param atanCurve
+     */
+    public void setAtanCurve(double atanCurve) {
+        this.atanCurve = atanCurve;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public double getAtanCurve() {
+        return atanCurve;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Point getControl() {
+        return control;
+    }
+
+    /**
+     *
+     * @param control
+     */
+    public void setControl(Point control) {
+        this.control = control;
     }
 }
