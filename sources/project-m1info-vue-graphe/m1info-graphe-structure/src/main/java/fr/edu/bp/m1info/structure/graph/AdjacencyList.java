@@ -1,5 +1,5 @@
 /* ==========================================
- * GrapheMultiPlateforme : a free Java graph-theory library
+ * Cross-Platform-GraphZ : a free Java graph-theory library
  * ==========================================
  *
  * salmuz : Carranza Alarcon Yonatan Carlos
