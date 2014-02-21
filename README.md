@@ -1,9 +1,8 @@
-Graphes_Multi_Plateformes
+Cross-platform GraphZ
 =========================
 
-Projet M1 Informatique
+Version 2.0 
+- Branch flow-max-min - Add algorithm of min and max flow network - University Montpellier 2 
 
-Branch flow-max-min
-----------------
-Add algorithm of min and max flow network
-
+Version 1.0
+- Projet M1 Informatique - University Blaise Pascal 
