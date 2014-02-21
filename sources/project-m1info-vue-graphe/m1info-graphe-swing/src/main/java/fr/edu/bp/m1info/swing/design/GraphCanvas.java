@@ -106,12 +106,12 @@ public class GraphCanvas<Edge extends IEdge,Node extends Vertex>
     public void updateView(Node node, Edge edge, Color cnode, Color cedge){
         if(node != null) node.getVertex().parentComponent().shape().setBackground(cnode);
         if(edge != null) edge.getShape().shape().setColor(cedge);
-        //repaint();
-        /*try {
+        repaint();
+        try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }      */
+        }
     }
 
     public void updateView(Graph<Edge, Node> graph) {
